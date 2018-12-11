@@ -1,0 +1,41 @@
+<section>
+  <form #mobileForm="ngForm" [hidden]="localStage !== 0" (ngSubmit) = "localStage = 1">
+    <p>Please enter your mobile number, we will be
+      sending <strong>One Time Password</strong> to the below number.</p>
+
+    <div style="display: flex; align-items: center; ">
+      <ion-select required ngModel name="country_code" value="+91" ok-text="Okay" cancel-text="Dismiss">
+        <ion-select-option value="+91">+91</ion-select-option>
+        <ion-select-option value="+92">+92</ion-select-option>
+      </ion-select>
+      <ion-item  style="flex-grow: 1">
+        <ion-input required ngModel name="mobile_number" type="text" placeholder="Mobile Number"></ion-input>
+      </ion-item>
+    </div>
+
+    <ion-button type="submit" [disabled]="!mobileForm.valid" shape="round" [color]="mobileForm.valid?'primary':'secondary'" expand="full" >
+      Continue
+    </ion-button>
+  </form>
+
+  <form #otpForm="ngForm" [hidden]="!(localStage === 1 || localStage === 2)">
+
+    <p>Please enter the OTP sent to your mobile number <strong>{{mobileForm.value.mobile_number}}</strong></p>
+
+    <ion-item  style="flex-grow: 1; margin: 40px 40px">
+      <ion-input required ngModel name="otp" type="text" placeholder="Mobile Number"></ion-input>
+    </ion-item>
+
+    <p>Didn’t recieve a code? <a href="">Resend OTP</a></p>
+
+    <ion-button *ngIf="localStage===1" (click)="localStage=2" [disabled]="!otpForm.valid" shape="round" [color]="otpForm.valid?'primary':'secondary'" expand="full" >
+      Verify
+    </ion-button>
+
+    <ion-button *ngIf="localStage===2" (click)="onboardingStageChanged$.emit(myEOnboardingStage.FaceId)" [disabled]="!otpForm.valid" shape="round" [color]="otpForm.valid?'primary':'secondary'" expand="full" >
+      Next
+    </ion-button>
+
+  </form>
+
+</section>

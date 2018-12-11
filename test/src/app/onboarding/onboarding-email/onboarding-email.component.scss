@@ -1,0 +1,13 @@
+@import "~src/global";
+.fa-check-circle{
+  font-size: 110px;
+}
+
+.success-msg{
+  margin-bottom: 32px !important;
+  text-align: center;
+}
+
+ion-button{
+  @include theme-button();
+}

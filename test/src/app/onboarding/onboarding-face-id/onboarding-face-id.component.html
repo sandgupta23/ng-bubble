@@ -1,0 +1,9 @@
+<section style="display: flex; flex-direction: column; align-items: center; position: relative">
+    <img style="z-index: 1000; width: 60%; top: 0;" [src]="'assets/img/'+ CAMERA_OVERLAY_IMAGES[localStage]" alt="">
+    <div class="w-100" style="margin-top: 48px">
+        <ion-button (click)="testCam()" class="theme-primary-button" shape="round" expand="full">
+            Capture Image
+        </ion-button>
+    </div>
+    <a style="margin-top: 10px">Cancel</a>
+</section>

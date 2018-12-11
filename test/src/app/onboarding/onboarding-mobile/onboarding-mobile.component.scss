@@ -1,0 +1,9 @@
+@import "~src/global";
+
+ion-button{
+  @include theme-button();
+}
+
+form > *{
+  margin: 40px auto
+}

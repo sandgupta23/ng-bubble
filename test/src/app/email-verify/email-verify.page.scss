@@ -1,0 +1,26 @@
+.container{
+  width: 100vw;
+  height: 100vh;
+  background: #614385;
+  display: flex;
+  flex-direction: column;
+  .logo-box{
+    height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    img{
+      height: (96/160)*100%;
+      position: absolute;
+      bottom: 0;
+      transform: translateY(50%);
+    }
+  }
+
+  .verify-box{
+    background: white;
+    flex-basis: 75%;
+  }
+
+}

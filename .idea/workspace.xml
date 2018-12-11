@@ -2,7 +2,82 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38c4f63b-8e93-4e3a-8514-39f1647f5ddb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/about/about.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/about/about.page.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/about/about.page.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/about/about.page.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/about/about.page.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/app-routing.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/app.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/app.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/app.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/app.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/contact/contact.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/contact/contact.page.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/contact/contact.page.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/contact/contact.page.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/contact/contact.page.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/email-verify/email-verify.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/email-verify/email-verify.page.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/email-verify/email-verify.page.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/email-verify/email-verify.page.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/email-verify/email-verify.page.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/home/home.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/home/home.page.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/home/home.page.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/home/home.page.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/home/home.page.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/onboarding/onboarding-email/onboarding-email.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/onboarding/onboarding-email/onboarding-email.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/onboarding/onboarding-email/onboarding-email.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/onboarding/onboarding-email/onboarding-email.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/onboarding/onboarding-face-id/onboarding-face-id.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/onboarding/onboarding-face-id/onboarding-face-id.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/onboarding/onboarding-face-id/onboarding-face-id.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/onboarding/onboarding-face-id/onboarding-face-id.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/onboarding/onboarding-id-card/onboarding-id-card.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/onboarding/onboarding-id-card/onboarding-id-card.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/onboarding/onboarding-id-card/onboarding-id-card.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/onboarding/onboarding-id-card/onboarding-id-card.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/onboarding/onboarding-mobile/onboarding-mobile.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/onboarding/onboarding-mobile/onboarding-mobile.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/onboarding/onboarding-mobile/onboarding-mobile.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/onboarding/onboarding-mobile/onboarding-mobile.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/onboarding/onboarding.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/onboarding/onboarding.page.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/onboarding/onboarding.page.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/onboarding/onboarding.page.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/onboarding/onboarding.page.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/registration/registration-module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/registration/signup/signup.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/registration/signup/signup.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/registration/signup/signup.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/registration/signup/signup.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/tabs/tabs.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/tabs/tabs.page.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/tabs/tabs.page.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/tabs/tabs.page.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/tabs/tabs.page.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/app/tabs/tabs.router.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/assets/icon/favicon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/assets/img/email@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/assets/img/group-2@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/assets/img/logo.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/assets/img/sms-icon@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/environments/environment.prod.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/environments/environment.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/global.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/karma.conf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/polyfills.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/test.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/theme/variables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/tsconfig.app.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/tsconfig.spec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ng-bubble.js" beforeDir="false" afterPath="$PROJECT_DIR$/ng-bubble.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/client.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/client.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -65,71 +140,94 @@
     <session id="-554932582">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
-          <entry key="project.open.time.0" value="1" />
+          <entry key="project.closed" value="3" />
+          <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="103" />
+          <entry key="js" value="570" />
           <entry key="md" value="1073" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="103" />
+          <entry key="JavaScript" value="570" />
           <entry key="Markdown" value="22" />
           <entry key="PLAIN_TEXT" value="1051" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="gitignore" value="1" />
           <entry key="js" value="1" />
+          <entry key="ts" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JavaScript" value="1" />
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="TypeScript" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts">
+        <counts>
+          <entry key="TypeScriptServerServiceImpl" value="1" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scan.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ng-bubble.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="33" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
+            <state relative-caret-position="134">
+              <caret line="90" column="25" lean-forward="true" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="25" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package-lock.json">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/test/src/app/home/home.page.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="24" lean-forward="true" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+            </state>
+          </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/src/app/home/home.module.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="62" selection-start-line="12" selection-start-column="62" selection-end-line="12" selection-end-column="62" />
+              <folding>
+                <element signature="e#0#45#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Readme.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="264">
-                <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-                <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
-                <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+              <first_editor relative-caret-position="251">
+                <caret line="21" column="3" selection-start-line="21" selection-start-column="3" selection-end-line="21" selection-end-column="3" />
               </first_editor>
               <second_editor />
             </state>
@@ -215,6 +313,8 @@
       <find>scan</find>
       <find>frontend</find>
       <find>match</find>
+      <find>open</find>
+      <find>.com</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -234,8 +334,8 @@
         <option value="$PROJECT_DIR$/template.js" />
         <option value="$PROJECT_DIR$/cute-files.js" />
         <option value="$PROJECT_DIR$/LICENSE" />
-        <option value="$PROJECT_DIR$/ng-bubble.js" />
         <option value="$PROJECT_DIR$/Readme.md" />
+        <option value="$PROJECT_DIR$/ng-bubble.js" />
       </list>
     </option>
   </component>
@@ -270,6 +370,43 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="onboarding" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -299,17 +436,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -319,9 +445,11 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2018.2.6\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\nodebook2\ng-bubble\test" />
       <recent name="D:\nodebook2\cute-files\frontend\assets\js" />
     </key>
   </component>
@@ -338,7 +466,7 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="Unnamed" type="NodeJSConfigurationType" factoryName="Node.js" path-to-js-file="$PROJECT_DIR$/main.js" working-dir="$PROJECT_DIR$">
+    <configuration name="Unnamed" type="NodeJSConfigurationType" factoryName="Node.js" path-to-js-file="ng-bubble.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
   </component>
@@ -357,12 +485,13 @@
       <workItem from="1544371164419" duration="2694000" />
       <workItem from="1544427280359" duration="2343000" />
       <workItem from="1544517701116" duration="1779000" />
-      <workItem from="1544519531185" duration="453000" />
+      <workItem from="1544519531185" duration="2401000" />
+      <workItem from="1544522457040" duration="2486000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28863000" />
+    <option name="totallyTimeSpent" value="33297000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -377,21 +506,22 @@
     <frame x="-7" y="-7" width="1295" height="704" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22734499" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12241653" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="TypeScript" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32867134" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.32517484" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.5174825" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32867134" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.19755244" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.30594406" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -418,18 +548,23 @@
           <line>28</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/ng-bubble.js</url>
+          <line>80</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/ng-bubble.js</url>
+          <line>84</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/index.html" />
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/index.html" />
     <entry file="file://$PROJECT_DIR$/node_modules/content-disposition/index.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -453,17 +588,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ng-bubble.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="33" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package-lock.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
@@ -487,13 +612,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LICENSE">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Readme.md">
       <provider editor-type-id="text-editor">
         <state>
@@ -502,12 +620,51 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="264">
-            <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-            <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
-            <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+          <first_editor relative-caret-position="251">
+            <caret line="21" column="3" selection-start-line="21" selection-start-column="3" selection-end-line="21" selection-end-column="3" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/src/app/home/home.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="62" selection-start-line="12" selection-start-column="62" selection-end-line="12" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/src/app/home/home.page.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="24" lean-forward="true" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LICENSE">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ng-bubble.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="90" column="25" lean-forward="true" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="25" />
         </state>
       </provider>
     </entry>

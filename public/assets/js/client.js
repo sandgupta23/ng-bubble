@@ -16,6 +16,6 @@ function sendNgTag(tag) {
             console.log("success");
         }
     };
-    xhttp.open("GET", `http://localhost:11637/open?file=${tag}`, true);
+    xhttp.open("GET", `http://localhost:11638/open?file=${tag}`, true);
     xhttp.send();
 }

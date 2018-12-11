@@ -77,22 +77,29 @@ app.get('/open', function (req, res) {//path
     folders = [];
     let url_parts = url.parse(req.url, true);
     let file = url_parts.query.file.toLowerCase();
+    let pathToBeOpened;
+    let searchTerm = file.replace('app-', '');
 
-    file = file.replace('app-', '') + '.component.html';
-    console.log(file);
-    let foundItems = searchData(tree.items, file);
-    // console.log(file);
-    // console.log(JSON.stringify(tree.items));
     try {
-        if (!(foundItems && foundItems.files && foundItems.files.length > 0)) throw "asdas";
-        openInVScode(foundItems.files[0].path);
-        res.status(200).json(foundItems.files);
+        let foundItems = searchData(tree.items, searchTerm);
+        if (!(foundItems && foundItems.files && foundItems.files.length > 0)) throw new Error('"no matching files found"');
+        let exactMatchIndex = exactMatchedFileIndex(foundItems, searchTerm);
+        pathToBeOpened = exactMatchIndex !== -1 ? foundItems.files[exactMatchIndex].path : foundItems.files[0].path;
+        openInVScode(pathToBeOpened);
+        res.status(200).json("ng-bubble: success");
     } catch (e) {
-        // console.log(JSON.stringify(searchData));
-        // res.status(500).send("Error opening the the file");
-        res.send(JSON.stringify(searchData));
+        console.error(e);
+        res.status(422).send(e);
     }
 });
+
+
+function exactMatchedFileIndex(foundItems, searchTerm) {
+    // {folders: folders, files: files}
+    let angularSuffix = '.component.html';
+    let ionicSuffix = '.page.html';
+    return foundItems.files.findIndex((file) => file.name === searchTerm + angularSuffix || file.name === searchTerm + ionicSuffix);
+}
 
 function findPathByFileName(fileName) {
     let absolutePathsOfAllHtmlFilesInProvidedDir = htmlsDebug.split(',');
@@ -111,8 +118,11 @@ async function openInVScode(path) {
 function searchData(data, searchTerms) {
 
     for (let d of data) {
-    // data.forEach(function (d) {
+        // data.forEach(function (d) {
         if (d.type === 'folder') {
+            if (d.name === 'onboarding') {
+                console.log("asdas");
+            }
             searchData(d.items, searchTerms);
             // console.log(d.name.toLowerCase());
             if (d.name.toLowerCase().match(searchTerms)) {
@@ -121,7 +131,7 @@ function searchData(data, searchTerms) {
         }
         else if (d.type === 'file') {
             console.log(d.name.toLowerCase(), searchTerms.toLowerCase());
-            if (d.name.toLowerCase() === searchTerms.toLowerCase()) {
+            if (d.name.toLowerCase().match(searchTerms)) {
                 files.push(d);
             }
         }
@@ -137,7 +147,7 @@ async function runAppOnFreePort() {
         inUse = await tcpPortUsed.check(++port, '127.0.0.1');
     }
     writeTemplate(port, ctrl);
-    app.listen(port , function () {
+    app.listen(port, function () {
         console.log('ng-bubble is Running on port ' + port);
         console.log("Please make sure to add following script into your index.html");
         console.log(`

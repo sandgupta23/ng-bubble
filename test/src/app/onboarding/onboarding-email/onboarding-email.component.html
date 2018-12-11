@@ -1,0 +1,25 @@
+<ng-container *ngIf="stage === 0">
+    <section>
+        <p style="margin: 40px auto">
+            We’ve sent an email verification link to <strong>rishita.m@imimobile.com</strong>.
+            Please click on the link to verify your email address.
+        </p>
+        <p> Didn’t recieve an email? <a (click)="stage = 1">Resend Email Verification</a></p>
+    </section>
+</ng-container>
+
+<ng-container *ngIf="stage === 1">
+    <section>
+        <div class="flex-center" style="margin: 48px auto">
+            <i class="fa fa-check-circle text-success"></i>
+        </div>
+
+        <h4 class="success-msg main-title">Email successfully verified</h4>
+
+        <ion-button (click)="onboardingStageChanged$.emit(myEOnboardingStage.Mobile)" color="primary" expand="full"
+                    shape="round">
+            Next
+        </ion-button>
+    </section>
+
+</ng-container>
