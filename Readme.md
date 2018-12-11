@@ -12,9 +12,9 @@ Opens your angular component's source file in vscode, when double clicked on com
 
 
 ### command options
-1. ```--port```: <number> => You can provide any port. Defaults to 11637.
-2. ```--ctrl```: <y or n> => If y, you will require to press y along with double click on component to open it in vscode. Defaults to n.
-3. ```--root```: <string> => You component prefix. Defaults to app
+1. ```--port```: ```<number>``` => You can provide any port. Defaults to 11637.
+2. ```--ctrl```: ```<y or n>``` => If y, you will require to press y along with double click on component to open it in vscode. Defaults to n.
+3. ```--root```: ```<string>``` => You component prefix. Defaults to app
 
 
 
