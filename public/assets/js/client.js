@@ -1,11 +1,13 @@
 
 let startWithAppRegex = new RegExp('^app-','i');
-document.addEventListener('dblclick',($event)=>{
-    
+// document.addEventListener('dblclick',($event)=>{
+document.addEventListener('onmouseover',($event)=>{
+
     let element = $event.target;
     while (!startWithAppRegex.test(element.tagName)){
         element = element.parentElement;
     }
+    element.style.backgroundColor = 'red';
     sendNgTag(element.tagName);
 });
 
@@ -16,6 +18,6 @@ function sendNgTag(tag) {
             console.log("success");
         }
     };
-    xhttp.open("GET", `http://localhost:11638/open?file=${tag}`, true);
+    xhttp.open("GET", `http://localhost:11637/open?file=${tag}`, true);
     xhttp.send();
 }

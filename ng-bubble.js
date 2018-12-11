@@ -23,11 +23,13 @@ program
     .version(pkg.version)
     .option('-p, --port <port>', 'Port on which to listen to (defaults to 11637)', parseInt)
     .option('--ctrl <ctrl>', 'Enable click ctrl press along with doubleclick')
+    .option('--ide <ide>', 'ide to enable. defaults to VS code')
     .parse(process.argv);
 
 
 let port = program.port || 11637;
 let ctrl = program.ctrl || 'n';
+let ide = program.ide || 'vscode';
 if (!(ctrl === 'y' || ctrl === 'yes' || ctrl === 'n' || ctrl === 'no')) {
     // throw "ctrl can only have: y, yes, n, no";
     console.log("ERROR: ctrl can only have: y, yes, n, no");
@@ -59,8 +61,6 @@ app.use('/files', express.static(process.cwd(), {
     index: false,
     setHeaders: function (res, path) {
 
-        // Set header to force files to download
-        // console.log(path);
         res.setHeader('Content-Disposition', contentDisposition(path))
 
     }
@@ -85,7 +85,7 @@ app.get('/open', function (req, res) {//path
         if (!(foundItems && foundItems.files && foundItems.files.length > 0)) throw new Error('"no matching files found"');
         let exactMatchIndex = exactMatchedFileIndex(foundItems, searchTerm);
         pathToBeOpened = exactMatchIndex !== -1 ? foundItems.files[exactMatchIndex].path : foundItems.files[0].path;
-        openInVScode(pathToBeOpened);
+        openInIde(pathToBeOpened);
         res.status(200).json("ng-bubble: success");
     } catch (e) {
         console.error(e);
@@ -111,26 +111,21 @@ function findPathByFileName(fileName) {
     return absolutePathsOfAllHtmlFilesInProvidedDir.find(name => name.includes(fileName));
 }
 
-async function openInVScode(path) {
-    await exec(`code -r ${path}`);
+async function openInIde(path) {
+    let ideCmd = ide === 'ws' || ide === 'webstorm'? 'webstorm.exe': 'code -r';
+    await exec(`${ideCmd} ${path}`);
 }
 
 function searchData(data, searchTerms) {
 
     for (let d of data) {
-        // data.forEach(function (d) {
         if (d.type === 'folder') {
-            if (d.name === 'onboarding') {
-                console.log("asdas");
-            }
             searchData(d.items, searchTerms);
-            // console.log(d.name.toLowerCase());
             if (d.name.toLowerCase().match(searchTerms)) {
                 folders.push(d);
             }
         }
         else if (d.type === 'file') {
-            console.log(d.name.toLowerCase(), searchTerms.toLowerCase());
             if (d.name.toLowerCase().match(searchTerms)) {
                 files.push(d);
             }
