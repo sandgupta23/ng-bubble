@@ -17,6 +17,8 @@ Opens your angular component's source file in vscode, when double clicked on com
 3. ```--root```: ```<string>``` => You component prefix. Defaults to app
 
 
+### Notes
+1. You need to have angular version 2 or above. Angular 1 (Angularjs) is not supported.
 
 ### License
 MIT
