@@ -5,7 +5,7 @@ $body.innerHTML += `
      src="https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/magnifyingglass-512.png" alt="">
 
 
-<div id="ng-bubble-container" style="background-color: rgba(233,84,32,0.29)">
+<div id="ng-bubble-container" class="display-none" style="background-color: rgba(233,84,32,0.29)">
     <main class="ng-bubble-autocomplete">
         <div style="position: relative;">
             <input id="ng-bubble-search" type="text"
@@ -14,7 +14,7 @@ $body.innerHTML += `
                    border-top-left-radius: 8px;
                    border-top-right-radius: 8px;
                    outline: none;
-           border: 1px solid #e95420;
+           border: 1px solid #a3421c;
            font-size: 30px;
            color: white;
             padding-left: 10px; background-color: rgba(233,84,32,0.64)!important">
@@ -30,21 +30,19 @@ $body.innerHTML += `
     </main>
 
 </div>
+`;
 
-`
-
-
+console.log("hello");;
 let startWithAppRegex = new RegExp('^app-', 'i');
 const BACKEND_ROOT = 'http://localhost:11637';
 const BG_HIGHLIGHTED_CLASS = 'bg-highlighted';
 document.addEventListener('dblclick', ($event) => {
-
     let element = $event.target as HTMLElement;
     while (!startWithAppRegex.test(element.tagName)) {
         element = element.parentElement as HTMLElement;
     }
     sendNgTag(element.tagName, false);
-});
+});;
 
 
 function makeGetReq(url:string) {
@@ -188,7 +186,7 @@ $rowWrapper.addEventListener("click", function ($event: Event) {
 
 let $initImg = document.getElementById('init-img') as HTMLImageElement;
 let $ngBubbleContainer = document.getElementById('ng-bubble-container') as HTMLDivElement;
-
+console.log($ngBubbleContainer);
 $ngBubbleContainer.addEventListener('click', ($event) => {
     $event.stopPropagation();
     if ($event.target === $ngBubbleContainer) {

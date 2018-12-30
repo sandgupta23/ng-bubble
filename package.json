@@ -4,13 +4,17 @@
   "description": "Opens your angular component to vscode",
   "main": "ng-bubble.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon lib/src/ng-bubble.js",
+    "build-be": "tsc -w",
+    "git": "git add . && git commit",
+    "postgit": "git push origin master"
   },
   "keywords": [
     "angular",
     "ng",
     "bubble",
-    "vscode"
+    "vscode",
+    "webstorm"
   ],
   "repository": {
     "type": "git",
@@ -33,7 +37,7 @@
   },
   "preferGlobal": true,
   "bin": {
-    "ng-bubble": "ng-bubble.js"
+    "ng-bubble": "lib/src/ng-bubble.js"
   },
   "readmeFilename": "Readme.md",
   "engines": {

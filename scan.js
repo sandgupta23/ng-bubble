@@ -7,8 +7,9 @@ const SCAN_EXCLUDED = [
 	'out-tsc',
 	'dist',
 	'!',
-	'tmp'
-]
+	'tmp',
+	"documentation"
+];
 
 module.exports = function scan(dir, alias){
 
