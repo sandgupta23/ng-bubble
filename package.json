@@ -22,11 +22,14 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@types/express": "^4.16.0",
+    "@types/node": "^10.12.18",
     "commander": "^2.3.0",
     "content-disposition": "^0.3.0",
     "cors": "^2.8.5",
     "express": "^4.9.4",
-    "tcp-port-used": "^1.0.1"
+    "tcp-port-used": "^1.0.1",
+    "typescript": "^3.2.2"
   },
   "preferGlobal": true,
   "bin": {
