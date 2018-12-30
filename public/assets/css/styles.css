@@ -36,3 +36,94 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+/*later*/
+
+
+
+*{
+    box-sizing:border-box;
+    font-family: 'Ubuntu', sans-serif;
+}
+#ng-bubble-container{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    /*align-items: center;*/
+}
+
+.ng-bubble-autocomplete{
+    width: 40%;
+    margin-top: 20vh;
+}
+
+
+.row-wrapper-item{
+    height: 28px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    padding-left: 10px;
+    border-bottom: 1px solid #e95420;
+    border-left: 1px solid #e95420;
+    border-right: 1px solid #e95420;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.34);
+    cursor: pointer;
+}
+
+.row-wrapper-item img{
+    display: none;
+}
+.row-wrapper-item:hover img{
+    display: inline-block;
+}
+
+.row-wrapper-item:nth-child(even){
+    background-color: rgba(233, 84, 32, 0.76);
+    color: white;
+}
+
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #e95420;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    width: 6px;
+}
+
+#row-wrapper{
+    height: 60vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.bg-highlighted{
+    background-color: #e95420 !important;
+    color: white;
+}
+
+.display-none{
+    display: none !important;
+}

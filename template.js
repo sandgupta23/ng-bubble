@@ -28,9 +28,9 @@ function sendNgTag(tag) {
 }
 
 module.exports = function writeTemplate(port, shouldUseMouseClick) {
-    try {
-        fs.writeFileSync(path.join(__dirname, 'public/assets/js/client.js'), getTemplate(port, shouldUseMouseClick));
-    }catch (e) {
-        console.error(e);
-    }
+    // try {
+    //     fs.writeFileSync(path.join(__dirname, 'public/assets/js/client.js'), getTemplate(port, shouldUseMouseClick));
+    // }catch (e) {
+    //     console.error(e);
+    // }
 };

@@ -1,10 +1,11 @@
-#!/usr/bin/env node
+// #!/usr/bin/env node
 
 let path = require('path');
 let cors = require('cors');
 let tcpPortUsed = require('tcp-port-used');
 
 let express = require('express');
+const fs = require('fs');
 let contentDisposition = require('content-disposition');
 let pkg = require(path.join(__dirname, 'package.json'));
 let url = require('url');
@@ -14,6 +15,10 @@ const exec = util.promisify(require('child_process').exec);
 let scan = require('./scan');
 let writeTemplate = require('./template');
 let folders = [], files = [];
+
+let ngBubbleData = JSON.parse(fs.readdirSync('./ng-bubble.json'));
+
+/*find the project*/
 
 // Parse command line options
 
@@ -72,26 +77,56 @@ app.get('/scan', function (req, res) {
     res.send(tree);
 });
 
-app.get('/open', function (req, res) {//path
+
+app.get('/search', function (req, res) {//path
     files = [];
     folders = [];
     let url_parts = url.parse(req.url, true);
     let file = url_parts.query.file.toLowerCase();
     let pathToBeOpened;
-    let searchTerm = file.replace('app-', '');
+    let searchTerm = file;//file.replace('app-', '');
 
     try {
+        let foundItems = searchData(tree.items, searchTerm);
+        // if (!(foundItems && foundItems.files && foundItems.files.length > 0)) throw new Error('"no matching files found"');
+        // let exactMatchIndex = exactMatchedFileIndex(foundItems, searchTerm);
+        // pathToBeOpened = exactMatchIndex !== -1 ? foundItems.files[exactMatchIndex].path : foundItems.files[0].path;
+        // openInIde(pathToBeOpened);
+        res.status(200).json(foundItems);
+    } catch (e) {
+        console.error(e);
+        res.status(422).send(e);
+    }
+});
+
+app.get('/open', async (req, res) => {//path
+    files = [];
+    folders = [];
+    let pathToBeOpened;
+    let url_parts = url.parse(req.url, true);
+    pathToBeOpened = url_parts.query.path;
+    let editor = url_parts.query.editor;
+    if(!pathToBeOpened){
+        /*if there is no path, get filename and create path*/
+        let file = url_parts.query.file.toLowerCase();
+        let isExactSearch = url_parts.query.file.exact;
+        let searchTerm = isExactSearch? file: file.replace('app-', '');
         let foundItems = searchData(tree.items, searchTerm);
         if (!(foundItems && foundItems.files && foundItems.files.length > 0)) throw new Error('"no matching files found"');
         let exactMatchIndex = exactMatchedFileIndex(foundItems, searchTerm);
         pathToBeOpened = exactMatchIndex !== -1 ? foundItems.files[exactMatchIndex].path : foundItems.files[0].path;
-        openInIde(pathToBeOpened);
+    }
+
+    try {
+        await openInIde(pathToBeOpened, editor);
         res.status(200).json("ng-bubble: success");
     } catch (e) {
         console.error(e);
         res.status(422).send(e);
     }
 });
+
+
 
 
 function exactMatchedFileIndex(foundItems, searchTerm) {
@@ -111,8 +146,11 @@ function findPathByFileName(fileName) {
     return absolutePathsOfAllHtmlFilesInProvidedDir.find(name => name.includes(fileName));
 }
 
-async function openInIde(path) {
-    let ideCmd = ide === 'ws' || ide === 'webstorm'? 'webstorm.exe': 'code -r';
+async function openInIde(path, editor) {
+    console.log("opening file:",  path);
+    let ideCmd, currentIde;
+    currentIde = editor ? editor : ide;
+    ideCmd = currentIde === 'ws' || currentIde === 'webstorm'? 'webstorm.exe': 'code -r';
     await exec(`${ideCmd} ${path}`);
 }
 
