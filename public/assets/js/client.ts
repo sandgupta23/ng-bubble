@@ -39,15 +39,15 @@ const BACKEND_ROOT = 'http://localhost:11637';
 const BG_HIGHLIGHTED_CLASS = 'bg-highlighted';
 document.addEventListener('dblclick', ($event) => {
 
-    let element = $event.target;
+    let element = $event.target as HTMLElement;
     while (!startWithAppRegex.test(element.tagName)) {
-        element = element.parentElement;
+        element = element.parentElement as HTMLElement;
     }
-    sendNgTag(element.tagName);
+    sendNgTag(element.tagName, false);
 });
 
 
-function makeGetReq(url) {
+function makeGetReq(url:string) {
     let xhttp = new XMLHttpRequest();
     xhttp.open("GET", `${BACKEND_ROOT}/${url}`, true);
     xhttp.send();
@@ -66,7 +66,7 @@ function makeGetReq(url) {
     })
 }
 
-function sendNgTag(tag, exact) {
+function sendNgTag(tag:string, exact:boolean) {
     let url = `open?file=${tag}&exact=${exact}`;
     makeGetReq(url)
         .then(() => {
@@ -74,7 +74,7 @@ function sendNgTag(tag, exact) {
         })
 }
 
-function sendFilePath(path, editor) {
+function sendFilePath(path:string, editor: string) {
     let url = `open?path=${path}&editor=${editor}`;
     makeGetReq(url)
         .then(() => {
@@ -82,24 +82,24 @@ function sendFilePath(path, editor) {
         })
 }
 
-function getFileNames(searchTerm) {
+function getFileNames(searchTerm:string) {
     new Promise((resolve, reject) => {
 
     })
 }
 
 
-let $search = document.getElementById('ng-bubble-search');
-let $rowWrapper = document.getElementById('row-wrapper');
+let $search = document.getElementById('ng-bubble-search') as HTMLInputElement;
+let $rowWrapper = document.getElementById('row-wrapper') as HTMLDivElement;
 let resultRows = document.getElementsByClassName('row-wrapper-item');
 $search.addEventListener("input", function ($event) {
     let searchTerm = $search.value;
     let url = `search?file=${searchTerm}`;
     makeGetReq(url)
-        .then((val) => {
+        .then((val:any) => {
             let files = val.files;
             let newRowsStr = "";
-            files.forEach((file) => {
+            files.forEach((file:any) => {
                 newRowsStr +=
                     `<div class="row-wrapper-item" style="display: flex; align-content: center" title=${file.path} data-path=${file.path}>
                         <span>${file.name}</span>
@@ -122,12 +122,12 @@ $search.addEventListener("input", function ($event) {
 let highligtedRowCount = -1;
 
 
-function hasClass(element, thatClass) {
+function hasClass(element:HTMLElement, thatClass:string) {
     // var className = " " + className + " ";
     return (" " + element.className + " ").replace(/[\n\t]/g, " ").indexOf(" " + thatClass + " ") > -1
 }
 
-function toggleHighlightRow(index, doHighlight) {
+function toggleHighlightRow(index: number, doHighlight:boolean) {
     try {
         let resultRows = document.getElementsByClassName('row-wrapper-item');
         let ele = resultRows[index];
@@ -141,18 +141,18 @@ function toggleHighlightRow(index, doHighlight) {
     }
 }
 
-$search.addEventListener("keydown", function ($event) {
+$search.addEventListener("keydown", function ($event: KeyboardEvent) {
     console.log($event.keyCode);
     console.log("keydown pressed");
     let resultRows = document.getElementsByClassName('row-wrapper-item');
     toggleHighlightRow(highligtedRowCount, false);
-    if ($event.keyCode == '38') {//up arrow
+    if ($event.keyCode === 38) {//up arrow
         if (highligtedRowCount <= 0) {
             highligtedRowCount = resultRows.length - 1;
         } else {
             highligtedRowCount--;
         }
-    } else if ($event.keyCode == '40') {// down arrow
+    } else if ($event.keyCode === 40) {// down arrow
         if (highligtedRowCount >= resultRows.length - 1) {
             highligtedRowCount = 0;
         } else {
@@ -160,34 +160,34 @@ $search.addEventListener("keydown", function ($event) {
         }
     }
 
-    if ($event.keyCode == '13') {// enter key
-        let searchTerm = resultRows[highligtedRowCount].innerText;
+    if ($event.keyCode === 13) {// enter key
+        let searchTerm = (resultRows[highligtedRowCount] as HTMLDivElement).innerText;
         sendNgTag(searchTerm, true);
     }
     toggleHighlightRow(highligtedRowCount, true);
 });
 
-$rowWrapper.addEventListener("click", function ($event) {
+$rowWrapper.addEventListener("click", function ($event: Event) {
     debugger;
     $event.stopPropagation();
-    let $target = $event.target;
-    let $row;
-    let editor = "";
+    let $target = $event.target as HTMLElement;
+    let $row: HTMLElement;
+    let editor:any = "";
     if (hasClass($target, 'row-wrapper-item')) {
         $row = $target;
     }else {
-        $row = $target.parentElement;
+        $row = $target.parentElement as HTMLElement;
         /*check if editor logos are clicked*/
         if (hasClass($target, 'editor-logo')) {
             editor = $target.getAttribute('data-editor');
         }
     }
-    let path = $row.getAttribute('data-path');
+    let path:any = $row.getAttribute('data-path');
     sendFilePath(path, editor);
 });
 
-let $initImg = document.getElementById('init-img');
-let $ngBubbleContainer = document.getElementById('ng-bubble-container');
+let $initImg = document.getElementById('init-img') as HTMLImageElement;
+let $ngBubbleContainer = document.getElementById('ng-bubble-container') as HTMLDivElement;
 
 $ngBubbleContainer.addEventListener('click', ($event) => {
     $event.stopPropagation();

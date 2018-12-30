@@ -8,7 +8,7 @@ document.addEventListener('dblclick', function ($event) {
     while (!startWithAppRegex.test(element.tagName)) {
         element = element.parentElement;
     }
-    sendNgTag(element.tagName);
+    sendNgTag(element.tagName, false);
 });
 function makeGetReq(url) {
     var xhttp = new XMLHttpRequest();
@@ -96,7 +96,7 @@ $search.addEventListener("keydown", function ($event) {
     console.log("keydown pressed");
     var resultRows = document.getElementsByClassName('row-wrapper-item');
     toggleHighlightRow(highligtedRowCount, false);
-    if ($event.keyCode == '38') { //up arrow
+    if ($event.keyCode === 38) { //up arrow
         if (highligtedRowCount <= 0) {
             highligtedRowCount = resultRows.length - 1;
         }
@@ -104,7 +104,7 @@ $search.addEventListener("keydown", function ($event) {
             highligtedRowCount--;
         }
     }
-    else if ($event.keyCode == '40') { // down arrow
+    else if ($event.keyCode === 40) { // down arrow
         if (highligtedRowCount >= resultRows.length - 1) {
             highligtedRowCount = 0;
         }
@@ -112,7 +112,7 @@ $search.addEventListener("keydown", function ($event) {
             highligtedRowCount++;
         }
     }
-    if ($event.keyCode == '13') { // enter key
+    if ($event.keyCode === 13) { // enter key
         var searchTerm = resultRows[highligtedRowCount].innerText;
         sendNgTag(searchTerm, true);
     }
