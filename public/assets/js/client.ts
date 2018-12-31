@@ -1,9 +1,12 @@
 let $body = document.getElementsByTagName('body')[0];
 
 $body.innerHTML += `
-<img id="init-img" style="width: 40px; cursor: pointer;position: fixed; bottom: 5%; left: 5%; z-index: 1000000000000;"
+<!--<img id="init-img" class="radiate-out-on-hover" style=""-->
+     <!--src="https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/magnifyingglass-512.png" alt="">-->
+<div id="init-img" class="radiate-out-on-hover">
+    <img style="width: 100%; height: 100%"
      src="https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/magnifyingglass-512.png" alt="">
-
+</div>
 
 <div id="ng-bubble-container" class="display-none" style="background-color: rgba(233,84,32,0.29)">
     <main class="ng-bubble-autocomplete">
@@ -119,6 +122,49 @@ $search.addEventListener("input", function ($event) {
 
 let highligtedRowCount = -1;
 
+console.log("helloooooooooooooooooooooooooo")
+
+let $hoveredComponent: HTMLElement;
+let $appenededElement: HTMLElement;
+
+document.addEventListener('mouseover',($event)=>{
+    if(!$event.ctrlKey){
+        return;
+    }
+    let target = $event.target as HTMLElement;
+
+    if(hasClass(target, 'appened-el')){
+        return;
+    }
+    if($hoveredComponent === target){
+        return;
+    }
+
+    /*remove stuff from previously hovered componet*/
+
+    if($hoveredComponent){
+        $hoveredComponent.classList.remove('hovered-parent');
+        $hoveredComponent.removeChild($appenededElement);
+    }
+
+    while (target && !startWithAppRegex.test(target.tagName)){
+        target = target.parentElement as HTMLElement;
+    }
+    $hoveredComponent = target;
+
+    if(!$hoveredComponent) return;
+
+    $hoveredComponent.classList.add('hovered-parent');
+    $appenededElement = document.createElement('SPAN');
+    let textEl = document.createTextNode($hoveredComponent.tagName);
+    $appenededElement.appendChild(textEl);
+
+    $appenededElement.classList.add('appened-el');
+    $hoveredComponent.insertBefore($appenededElement, $hoveredComponent.firstChild);
+
+    // element.innerHTML = `<!--<span style="">${element.tagName}</span>-->` + element.innerHTML;
+});
+
 
 function hasClass(element:HTMLElement, thatClass:string) {
     // var className = " " + className + " ";
@@ -166,7 +212,6 @@ $search.addEventListener("keydown", function ($event: KeyboardEvent) {
 });
 
 $rowWrapper.addEventListener("click", function ($event: Event) {
-    debugger;
     $event.stopPropagation();
     let $target = $event.target as HTMLElement;
     let $row: HTMLElement;

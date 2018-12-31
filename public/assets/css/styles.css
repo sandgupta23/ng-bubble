@@ -8,8 +8,8 @@
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
@@ -40,12 +40,12 @@
 /*later*/
 
 
-
-*{
-    box-sizing:border-box;
+* {
+    box-sizing: border-box;
     font-family: 'Ubuntu', sans-serif;
 }
-#ng-bubble-container{
+
+#ng-bubble-container {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -53,16 +53,17 @@
     left: 0;
     display: flex;
     justify-content: center;
+    z-index: 10000000000000000000000000;
     /*align-items: center;*/
 }
 
-.ng-bubble-autocomplete{
+.ng-bubble-autocomplete {
     width: 40%;
     margin-top: 20vh;
 }
 
 
-.row-wrapper-item{
+.row-wrapper-item {
     height: 28px;
     display: flex;
     align-items: center;
@@ -78,18 +79,18 @@
     cursor: pointer;
 }
 
-.row-wrapper-item img{
+.row-wrapper-item img {
     display: none;
 }
-.row-wrapper-item:hover img{
+
+.row-wrapper-item:hover img {
     display: inline-block;
 }
 
-.row-wrapper-item:nth-child(even){
+.row-wrapper-item:nth-child(even) {
     background-color: rgba(233, 84, 32, 0.76);
     color: white;
 }
-
 
 
 /* width */
@@ -113,17 +114,71 @@
     width: 6px;
 }
 
-#row-wrapper{
+#row-wrapper {
     height: 60vh;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
-.bg-highlighted{
+.bg-highlighted {
     background-color: #e95420 !important;
     color: white;
 }
 
-.display-none{
+.display-none {
     display: none !important;
+}
+
+.hovered-parent {
+    position: relative;
+    /*background-color: rgba(0, 0, 0, 0.09);*/
+}
+
+.appened-el {
+    position: absolute;
+    z-index: 10000000000;
+    background-color: yellow;
+    font-size: 7px;
+}
+
+#init-img {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    position: fixed;
+    bottom: 5%;
+    left: 5%;
+    z-index: 1000000000000;
+}
+
+/*radiate out on hover*/
+.radiate-out-on-hover {
+    /*width: 100px;*/
+    /*height: 100px;*/
+    background-color: transparent !important;
+    cursor: pointer;
+    position: relative;
+}
+
+.radiate-out-on-hover::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -1000;
+}
+
+.radiate-out-on-hover:hover::before {
+    animation: radiate .5s;
+}
+
+.radiate-out-on-hover::before {
+    background: #e95420;
+    border-radius: 50%;
+}
+
+@keyframes radiate {
+    to {
+        transform: scale(1.5);
+        opacity: 0;
+    }
 }

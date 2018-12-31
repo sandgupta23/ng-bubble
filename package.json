@@ -32,7 +32,9 @@
     "content-disposition": "^0.3.0",
     "cors": "^2.8.5",
     "express": "^4.9.4",
+    "inquirer": "^6.2.1",
     "tcp-port-used": "^1.0.1",
+    "terminal-kit": "^1.26.8",
     "typescript": "^3.2.2"
   },
   "preferGlobal": true,

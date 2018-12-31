@@ -1,40 +1,39 @@
 #!/usr/bin/env node
 
+import {runAppOnFreePort} from "./utility";
+import {getLocalConfig, updateLocalConfig} from "./config";
+import {EIdeNames} from "../enums";
+import {ILocalConfig} from "../interfaces";
+import {routesInit} from "./routes";
+
+const inquirer: any = require('inquirer');
+
 const path = require('path');
-let cors = require('cors');
-let tcpPortUsed = require('tcp-port-used');
-import {Request, Response, NextFunction} from 'express'
-
-let express = require('express');
+const cors = require('cors');
+const express = require('express');
 const fs = require('fs');
-let contentDisposition = require('content-disposition');
-let url = require('url');
+
 const util = require('util');
-const exec = util.promisify(require('child_process').exec);
 
-let scan = require('./scan');
-let writeTemplate = require('./template');
+
 let folders: any[] = [], files: any = [];
-
-// let ngBubbleData = JSON.parse(fs.readdirSync('./ng-bubble.json'));
-
-/*find the project*/
-
-// Parse command line options
-
 let program = require('commander');
 
+const localConfig: ILocalConfig = getLocalConfig() || {};
+
 program
-    // .version(pkg.version)
+// .version(pkg.version)
     .option('-p, --port <port>', 'Port on which to listen to (defaults to 11637)', parseInt)
     .option('--ctrl <ctrl>', 'Enable click ctrl press along with doubleclick')
     .option('--ide <ide>', 'ide to enable. defaults to VS code')
+    .option('--options <option>', 'to make ng-bubble as you for options')
     .parse(process.argv);
 
 
 let port = program.port || 11637;
 let ctrl = program.ctrl || 'n';
-let ide = program.ide || 'vscode';
+let options = program.ask;
+let ide_user_input = program.ide || 'vscode';
 if (!(ctrl === 'y' || ctrl === 'yes' || ctrl === 'n' || ctrl === 'no')) {
     // throw "ctrl can only have: y, yes, n, no";
     console.log("ERROR: ctrl can only have: y, yes, n, no");
@@ -42,85 +41,42 @@ if (!(ctrl === 'y' || ctrl === 'yes' || ctrl === 'n' || ctrl === 'no')) {
 }
 ctrl = ctrl === 'y' || ctrl === 'yes';
 
-// Scan the directory in which the script was called. It will
-// add the 'files/' prefix to all files and folders, so that
-// download links point to our /files route
-
-let root = process.cwd();
-// let tree = scan('.', root);
-let tree = scan(root, "");
-// console.log(tree);
-
-
-// Ceate a new express app
-
 let app = express();
 app.use(cors());
-// Serve static files from the public folder
-
 app.use('/', express.static(path.join(__dirname, 'public')));
-// console.log(path.join(__dirname, '/../../public'));;
 
-app.get('/scan', function (req :Request, res: Response) {
-    res.send(tree);
-});
-
-
-app.get('/search', function (req :Request, res: Response) {//path
-    files = [];
-    folders = [];
-    let url_parts = url.parse(req.url, true);
-    let file = url_parts.query.file.toLowerCase();
-    let pathToBeOpened;
-    let searchTerm = file;//file.replace('app-', '');
-
-    try {
-        let foundItems = searchData(tree.items, searchTerm);
-        // if (!(foundItems && foundItems.files && foundItems.files.length > 0)) throw new Error('"no matching files found"');
-        // let exactMatchIndex = exactMatchedFileIndex(foundItems, searchTerm);
-        // pathToBeOpened = exactMatchIndex !== -1 ? foundItems.files[exactMatchIndex].path : foundItems.files[0].path;
-        // openInIde(pathToBeOpened);
-        res.status(200).json(foundItems);
-    } catch (e) {
-        console.error(e);
-        res.status(422).send(e);
+if (!localConfig.inputTaken || options) {
+    let inquirerPromise = inquirer.prompt([{
+        type: 'list',
+        message: 'What ide you want to use?',
+        name: 'ide',
+        choices: ["Webstorm", "VScode"]
+    }, {
+        type: 'list',
+        message: 'Is this an Angular 2+ project?',
+        name: 'isAngular',
+        choices: ["Yes", "No"]
     }
-});
-
-app.get('/open', async (req :Request, res: Response) => {//path
-    files = [];
-    folders = [];
-    let pathToBeOpened;
-    let url_parts = url.parse(req.url, true);
-    pathToBeOpened = url_parts.query.path;
-    let editor = url_parts.query.editor;
-    if (!pathToBeOpened) {
-        /*if there is no path, get filename and create path*/
-        let file = url_parts.query.file.toLowerCase();
-        let isExactSearch = url_parts.query.file.exact;
-        let searchTerm = isExactSearch ? file : file.replace('app-', '');
-        let foundItems = searchData(tree.items, searchTerm);
-        if (!(foundItems && foundItems.files && foundItems.files.length > 0)) throw new Error('"no matching files found"');
-        let exactMatchIndex = exactMatchedFileIndex(foundItems, searchTerm);
-        pathToBeOpened = exactMatchIndex !== -1 ? foundItems.files[exactMatchIndex].path : foundItems.files[0].path;
-    }
-
-    try {
-        await openInIde(pathToBeOpened, editor);
-        res.status(200).json("ng-bubble: success");
-    } catch (e) {
-        console.error(e);
-        res.status(422).send(e);
-    }
-});
-
-
-function exactMatchedFileIndex(foundItems:any, searchTerm:string) {
-    // {folders: folders, files: files}
-    let angularSuffix = '.component.html';
-    let ionicSuffix = '.page.html';
-    return foundItems.files.findIndex((file:any) => file.name === searchTerm + angularSuffix || file.name === searchTerm + ionicSuffix);
+    ]);
+    inquirerPromise.then(async (inquirerOutput: { ide: string, isAngular: string }) => {
+        let isAngular = inquirerOutput.isAngular === 'Yes';
+        let preferredIde:string = inquirerOutput.ide === 'Webstorm' ? EIdeNames.WEBSTORM : EIdeNames.VSCODE;
+        let newLocalConfigData: ILocalConfig = {...localConfig, isAngular, preferredIde, inputTaken: true, };
+        try {
+            await updateLocalConfig(newLocalConfigData);
+        } catch (e) {
+            console.log(e);
+        }
+        console.log("Thanks. If in future you want to change these options, run: ng-bubble --ask");
+        routesInit(app);
+        runAppOnFreePort(app, port, ctrl);
+    });
+} else {
+    console.log(`You marked this as an ${localConfig.isAngular?'Angular':'Non-Angular'} project and choose ${localConfig.preferredIde} as preferred ide`);
+    routesInit(app);
+    runAppOnFreePort(app, port, ctrl);
 }
+
 
 // function findPathByFileName(fileName: string) {
 //     let absolutePathsOfAllHtmlFilesInProvidedDir = htmlsDebug.split(',');
@@ -132,48 +88,4 @@ function exactMatchedFileIndex(foundItems:any, searchTerm:string) {
 //     return absolutePathsOfAllHtmlFilesInProvidedDir.find((name:string) => name.includes(fileName));
 // }
 
-async function openInIde(path:string, editor:string) {
-    console.log("opening file:", path);
-    let ideCmd, currentIde;
-    currentIde = editor ? editor : ide;
-    ideCmd = currentIde === 'ws' || currentIde === 'webstorm' ? 'webstorm.exe' : 'code -r';
-    await exec(`${ideCmd} ${path}`);
-}
-
-function searchData(data:any, searchTerms:string) {
-
-    for (let d of data) {
-        if (d.type === 'folder') {
-            searchData(d.items, searchTerms);
-            if (d.name.toLowerCase().match(searchTerms)) {
-                folders.push(d);
-            }
-        } else if (d.type === 'file') {
-            if (d.name.toLowerCase().match(searchTerms)) {
-                files.push(d);
-            }
-        }
-    }
-    return {folders: folders, files: files};
-}
-
-async function runAppOnFreePort() {
-
-    let inUse = await tcpPortUsed.check(port, '127.0.0.1');
-    while (inUse) {
-        console.log(`Port ${port} is in use, trying ${port + 1}`);
-        inUse = await tcpPortUsed.check(++port, '127.0.0.1');
-    }
-    writeTemplate(port, ctrl);
-    app.listen(port, function () {
-        console.log('ng-bubble is Running on port ' + port);
-        console.log("Please make sure to add following script into your index.html");
-        console.log(`
-        <script async src="http://localhost:${port}/assets/js/client.js"></script>
-    `)
-    });
-
-}
-
-runAppOnFreePort();
 
