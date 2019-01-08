@@ -1,8 +1,11 @@
 import * as path from 'path';
+import * as fs from 'fs';
+import {USER_PROJECT_ROOT} from "./constants";
 const util = require('util');
 const tcpPortUsed = require('tcp-port-used');
 const writeTemplate = require('./template');
 const exec = util.promisify(require('child_process').exec);
+
 
 export function getAngular2JsonPath() {
     return path.join(process.cwd(), "/../../", 'angular-cli.json');
@@ -10,6 +13,12 @@ export function getAngular2JsonPath() {
 
 export function getAngular5JsonPath() {
     return path.join(process.cwd(), "/../../", 'angular.json');
+}
+
+export function createConfigJSonFileIfNotPresent(){
+    let localConfigPath = getLocalConfigFilePath();
+    let isPresent = fs.existsSync(localConfigPath);
+    if(!isPresent) fs.writeFileSync(localConfigPath, "");
 }
 
 export function getLocalConfigFilePath() {

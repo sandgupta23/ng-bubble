@@ -1,7 +1,14 @@
+//import css
+(function () {
+    var styles = document.createElement('link');
+    styles.rel = 'stylesheet';
+    styles.type = 'text/css';
+    styles.media = 'screen';
+    styles.href = 'http://localhost:11637/assets/css/styles.css';
+    document.getElementsByTagName('head')[0].appendChild(styles);
+})();
 var $body = document.getElementsByTagName('body')[0];
 $body.innerHTML += "\n<!--<img id=\"init-img\" class=\"radiate-out-on-hover\" style=\"\"-->\n     <!--src=\"https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/magnifyingglass-512.png\" alt=\"\">-->\n<div id=\"init-img\" class=\"radiate-out-on-hover\">\n    <img style=\"width: 100%; height: 100%\"\n     src=\"https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/magnifyingglass-512.png\" alt=\"\">\n</div>\n\n<div id=\"ng-bubble-container\" class=\"display-none\" style=\"background-color: rgba(233,84,32,0.29)\">\n    <main class=\"ng-bubble-autocomplete\">\n        <div style=\"position: relative;\">\n            <input id=\"ng-bubble-search\" type=\"text\"\n                   autofocus\n                   style=\"height: 44px; width: 100%;\n                   border-top-left-radius: 8px;\n                   border-top-right-radius: 8px;\n                   outline: none;\n           border: 1px solid #a3421c;\n           font-size: 30px;\n           color: white;\n            padding-left: 10px; background-color: rgba(233,84,32,0.64)!important\">\n            <img style=\"position: absolute; right: 3%; height: 70%; transform: translateY(50%); bottom: 50%;\"\n                 src=\"https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/magnifyingglass-512.png\" alt=\"\">\n            <div id=\"row-wrapper\" style=\"position: absolute; top: 100%; left: 0; right: 0\">\n                <div style=\"padding: 7px; border: 1px solid #e95420;\">\n                    <strong style=\"font-size: 13px; color:  #e95420\">Search files and folders</strong>\n                </div>\n            </div>\n        </div>\n\n    </main>\n\n</div>\n";
-console.log("hello");
-;
 var startWithAppRegex = new RegExp('^app-', 'i');
 var BACKEND_ROOT = 'http://localhost:11637';
 var BG_HIGHLIGHTED_CLASS = 'bg-highlighted';
@@ -12,7 +19,6 @@ document.addEventListener('dblclick', function ($event) {
     }
     sendNgTag(element.tagName, false);
 });
-;
 function makeGetReq(url) {
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", BACKEND_ROOT + "/" + url, true);

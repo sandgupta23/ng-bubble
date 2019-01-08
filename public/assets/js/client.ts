@@ -1,3 +1,13 @@
+//import css
+(function(){
+    var styles = document.createElement('link');
+    styles.rel = 'stylesheet';
+    styles.type = 'text/css';
+    styles.media = 'screen';
+    styles.href = 'http://localhost:11637/assets/css/styles.css';
+    document.getElementsByTagName('head')[0].appendChild(styles);
+})();
+
 let $body = document.getElementsByTagName('body')[0];
 
 $body.innerHTML += `
@@ -35,7 +45,6 @@ $body.innerHTML += `
 </div>
 `;
 
-console.log("hello");;
 let startWithAppRegex = new RegExp('^app-', 'i');
 const BACKEND_ROOT = 'http://localhost:11637';
 const BG_HIGHLIGHTED_CLASS = 'bg-highlighted';
@@ -45,7 +54,7 @@ document.addEventListener('dblclick', ($event) => {
         element = element.parentElement as HTMLElement;
     }
     sendNgTag(element.tagName, false);
-});;
+});
 
 
 function makeGetReq(url:string) {

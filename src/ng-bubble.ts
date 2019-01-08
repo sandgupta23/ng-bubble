@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import {runAppOnFreePort} from "./utility";
+import {createConfigJSonFileIfNotPresent, runAppOnFreePort} from "./utility";
 import {getLocalConfig, updateLocalConfig} from "./config";
 import {EIdeNames} from "../enums";
 import {ILocalConfig} from "../interfaces";
@@ -19,7 +19,9 @@ const util = require('util');
 let folders: any[] = [], files: any = [];
 let program = require('commander');
 
+createConfigJSonFileIfNotPresent();
 const localConfig: ILocalConfig = getLocalConfig() || {};
+
 
 program
 // .version(pkg.version)
@@ -28,6 +30,8 @@ program
     .option('--ide <ide>', 'ide to enable. defaults to VS code')
     .option('--options <option>', 'to make ng-bubble as you for options')
     .parse(process.argv);
+
+
 
 
 let port = program.port || 11637;
@@ -43,7 +47,7 @@ ctrl = ctrl === 'y' || ctrl === 'yes';
 
 let app = express();
 app.use(cors());
-app.use('/', express.static(path.join(__dirname, 'public')));
+app.use('/', express.static(path.join(__dirname,'/../../', 'public')));
 
 if (!localConfig.inputTaken || options) {
     let inquirerPromise = inquirer.prompt([{
