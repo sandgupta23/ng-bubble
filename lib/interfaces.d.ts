@@ -16,6 +16,9 @@ export interface ILocalConfig {
     "preferredIde"?: string;
     "history"?: [];
     inputTaken?: boolean;
+    guess: boolean;
+    componentSelector: string;
+    ctrl: boolean;
 }
 export interface IGlobalConfig {
     "currentEditor": "";
@@ -24,4 +27,11 @@ export interface IGlobalConfig {
     "ignore-multi-encounter": true;
     "shortcut-bubble": "";
     "shortcut-search-modal": "";
+}
+export interface IInquirerOutPut {
+    ide: string;
+    isAngular: string;
+    guess: string;
+    componentSelector: string;
+    ctrl: string;
 }

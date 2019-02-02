@@ -1,13 +1,16 @@
+import {getLocalConfig} from "./src/config";
+
 const fs = require('fs');
 var path = require('path');
 function getTemplate(port,shouldUseMouseClick) {
     let shouldUseMouseClickText = 'if (!window.event.ctrlKey) return';
+    let selector = getLocalConfig();
  return     `
-let startWithAppRegex = new RegExp('^app-','i');
+let startWithSelectorRegex = new RegExp('^app-','i');
 document.addEventListener('dblclick',($event)=>{
     ${shouldUseMouseClick?shouldUseMouseClickText:""}
     let element = $event.target;
-    while (!startWithAppRegex.test(element.tagName)){
+    while (!startWithSelectorRegex.test(element.tagName)){
         element = element.parentElement;
     }
     sendNgTag(element.tagName);

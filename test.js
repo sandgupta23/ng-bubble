@@ -1,29 +1,86 @@
-// import {updateLocalConfig} from "./lib/src/config";
-let x = require('./lib/src/config');
-var inquirer = require('inquirer');
-
-let inquirerPromise = inquirer.prompt([{
-    type: 'list',
-    message: 'What ide you want to use?',
-    name: 'truth',
-    choices: ["Webstorm", "VScode"]
-}, {
-    type: 'list',
-    message: 'Is this an Angular 2+ project?',
-    name: 'truth',
-    choices: ["Yes", "no"]
-}
-]);
-
-
-inquirerPromise.then(async (inquirerOutput) => {
-    let isAngular = inquirerOutput.isAngular === 'Yes';
-    // let preferredIde = inquirerOutput.ide === 'Webstorm' ? EIdeNames.WEBSTORM : EIdeNames.VSCODE;
-    let newLocalConfigData = {isAngular:true};
-   try {
-       await x.updateLocalConfig(newLocalConfigData);
-   }catch (e) {
-       console.log(e);
-   }
-    console.log("Thanks. If in future you want to change these options, run: ng-bubble --options");
-});
+// var lineReader = require('readline').createInterface({
+//     input: require('fs').createReadStream('./test.html')
+// });
+//
+// let i = 0;
+// let maxScore = 0;
+// let maxScoreLine = 0;
+//
+// /*read the file line by line =>
+// * remove all extra spaces
+// * 1. look start tag names (MUST have, because tag names aren't dynamically generated) 1xx
+// * 2. look for ids (optional) x1x
+// * 3. look for presence of class names xx1
+// * */
+//
+// // lineReader.on('line', function (line) {
+// //     let regex = /class="(.*)"/g;
+// //     let x = regex.exec(line)[1];
+// //     console.log(x);
+// //     ++i;
+// // });
+//
+//
+// /*read the file line by line =>
+// * remove all extra spaces
+// * 1. look start tag names (MUST have, because tag names aren't dynamically generated) 1xx
+// * 2. look for ids (optional) x1x
+// * 3. look for presence of class names xx1
+// * */
+//
+// function lineToOpen(file, data) {
+//     let lineReader = require('readline').createInterface({
+//         input: require('fs').createReadStream(file)
+//     });
+//
+//     lineReader.on('line', function (line) {
+//         let score = getScore(line, data);
+//         if (score > maxScore) {
+//             maxScore = score;
+//             maxScoreLine = i
+//         }
+//         ++i;
+//     });
+// }
+//
+// // let htmlLine = '<div id="mainbar" class="sandeep kumar gupta" role="main" aria-label="question and answers">';
+// // let data = {
+// //     id: 'mainbar',
+// //     tagName:"div",
+// //     classList : ["kumar", "gupta"]
+// // };
+// // console.log(getScore(htmlLine, data));
+//
+//
+// function getScore(htmlLine, htmlData) {
+//     let scoreStr = tagScore(htmlLine, htmlData.tagName) + "" + idScore(htmlLine, htmlData.id) + "" + classScore(htmlLine, htmlData.classList);
+//     console.log(tagScore(htmlLine, htmlData.tagName));
+//     console.log(idScore(htmlLine, htmlData.id));
+//     console.log(classScore(htmlLine, htmlData.classList));
+//     return Number(scoreStr);
+// }
+//
+// function removeAdditionalSpaces(str) {
+//     return str && str.replace(/\s+/g, ' ').trim();
+// }
+//
+// function tagScore(htmlStr, tag) {
+//     tag = tag.toLowerCase().trim();
+//     return htmlStr.startsWith(`<${tag}`) ? 1 : 0;
+// }
+//
+// function idScore(htmlStr, id) {
+//     id = id.toLowerCase().trim();
+//     return (htmlStr.includes(`id='${id}'`) || htmlStr.includes(`id="${id}"`)) ? 1 : 0;
+// }
+//
+// function classScore(htmlStr, classList) {
+//     let score = 0;
+//     let regex = /class="(.*?)"/g;
+//     let realClassArr = regex.exec(htmlStr)[1].split(" ");
+//     classList.forEach((expectedClassName) => {
+//         let classFound = realClassArr.find((realClass) => realClass === expectedClassName);
+//         if (classFound) ++score;
+//     });
+//     return score;
+// }

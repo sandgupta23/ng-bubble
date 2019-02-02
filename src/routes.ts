@@ -1,13 +1,17 @@
 import {Request, Response} from "express";
 import {exactMatchedFileIndex, openInIde, runAppOnFreePort} from "./utility";
 import * as url from 'url';
+import {ILineFinderData} from "./line-finder";
+import {getLocalConfig} from "./config";
 const scan = require('./scan');
 const root = process.cwd();
+// const root = "D:\\nodebook\\master_bot_plateform\\bot_platform-fe";
 
 let folders: any[] = [], files: any = [];
 
 export function routesInit(app:any) {
-    let ide_user_input = app.locals.ide_user_input;
+    let localConfig = getLocalConfig();
+    let ide_user_input = localConfig && localConfig.preferredIde;
     let tree = scan(root, "");
 
     app.get('/scan', function (req :Request, res: Response) {
@@ -32,24 +36,35 @@ export function routesInit(app:any) {
     app.get('/open', async (req :Request, res: Response) => {//path
         files = [];
         folders = [];
-        let pathToBeOpened;
+        let pathToBeOpened, codeText:string, data: ILineFinderData = {classList:[], id:"", tagName:"", innerText: ""};
         let url_parts = url.parse(req.url, true);
-        pathToBeOpened = url_parts.query.path;
-        let ide_clicked = url_parts.query.editor;
+        let query = url_parts.query;
+        pathToBeOpened = query.path;
+        try {
+            data = query.data && JSON.parse(<string>query.data);
+        }catch (e) {
+            res.status(401).send("can't parse data");
+            console.log("can't parse");
+        }
+        codeText = query.codeText as string;
+        let ide_clicked = query.editor;
         if (!pathToBeOpened) {
             /*if there is no path, get filename and create path*/
-            let file = (url_parts.query.file as string).toLowerCase();
-            let isExactSearch = url_parts.query.exact;
+            let file = (query.file as string).toLowerCase();
+            let isExactSearch = query.exact === "true" ;
             let searchTerm = isExactSearch ? file : file.replace('app-', '');
             let foundItems = searchData(tree.items, searchTerm);
-            if (!(foundItems && foundItems.files && foundItems.files.length > 0)) throw new Error('"no matching files found"');
+            if (!(foundItems && foundItems.files && foundItems.files.length > 0)){
+                res.status(200).json({messgage:"ng-bubble: no matching file found", index: tree.items});
+                return;
+            }
             let exactMatchIndex = exactMatchedFileIndex(foundItems, searchTerm);
             pathToBeOpened = exactMatchIndex !== -1 ? foundItems.files[exactMatchIndex].path : foundItems.files[0].path;
         }
 
         try {
             let currentIde = ide_clicked ? ide_clicked : ide_user_input;
-            await openInIde(pathToBeOpened, currentIde);
+            await openInIde(pathToBeOpened, currentIde, codeText, data);
             res.status(200).json("ng-bubble: success");
         } catch (e) {
             console.error(e);

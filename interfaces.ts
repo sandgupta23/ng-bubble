@@ -20,7 +20,10 @@ export interface ILocalConfig {
     "isAngular"?: boolean,
     "preferredIde"?: string,
     "history"?: [],
-    inputTaken?:boolean
+    inputTaken?: boolean,
+    guess: boolean,
+    componentSelector: string,
+    ctrl:boolean
 }
 
 export interface IGlobalConfig {
@@ -30,4 +33,12 @@ export interface IGlobalConfig {
     "ignore-multi-encounter": true,
     "shortcut-bubble": "",
     "shortcut-search-modal": ""
+}
+
+export interface IInquirerOutPut {
+    ide: string,
+    isAngular: string,
+    guess: string,
+    componentSelector: string,
+    ctrl:string
 }

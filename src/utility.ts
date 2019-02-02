@@ -1,11 +1,12 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import {USER_PROJECT_ROOT} from "./constants";
+import {ILineFinderData, lineToOpen} from "./line-finder";
+import {EIdeNames} from "../enums";
+
 const util = require('util');
 const tcpPortUsed = require('tcp-port-used');
 const writeTemplate = require('./template');
 const exec = util.promisify(require('child_process').exec);
-
 
 export function getAngular2JsonPath() {
     return path.join(process.cwd(), "/../../", 'angular-cli.json');
@@ -15,13 +16,14 @@ export function getAngular5JsonPath() {
     return path.join(process.cwd(), "/../../", 'angular.json');
 }
 
-export function createConfigJSonFileIfNotPresent(){
+export function createConfigJSonFileIfNotPresent() {
     let localConfigPath = getLocalConfigFilePath();
     let isPresent = fs.existsSync(localConfigPath);
-    if(!isPresent) fs.writeFileSync(localConfigPath, "");
+    if (!isPresent) fs.writeFileSync(localConfigPath, "");
 }
 
 export function getLocalConfigFilePath() {
+    // console.log("local config path :", path.join(process.cwd(), 'ng-bubble-local.json') );
     return path.join(process.cwd(), 'ng-bubble-local.json');
 }
 
@@ -29,7 +31,7 @@ export function getGlobalConfigFilePath() {
     return path.join(__dirname, "/../../", 'ng-bubble-global.json');
 }
 
-export async function runAppOnFreePort(app:any, port:number, ctrl:boolean) {
+export async function runAppOnFreePort(app: any, port: number, ctrl: boolean) {
 
     let inUse = await tcpPortUsed.check(port, '127.0.0.1');
     while (inUse) {
@@ -47,16 +49,31 @@ export async function runAppOnFreePort(app:any, port:number, ctrl:boolean) {
 }
 
 
-export async function openInIde(path:string, currentIde: string) {
-    let ideCmd = currentIde === 'ws' || currentIde === 'webstorm' ? 'webstorm.exe' : 'code -r';
-    await exec(`${ideCmd} ${path}`);
+export async function openInIde(path: string, currentIde: EIdeNames, codeText: string, data: ILineFinderData) {
+    let lineNumber;
+    if (data) lineNumber = await lineToOpen(path, data);
+    let ideCmd = currentIde === EIdeNames.WEBSTORM ? 'webstorm.exe' : `code -g`;
+    await exec(`${ideCmd} ${path}:${lineNumber?lineNumber:""}`);
 }
 
-export function exactMatchedFileIndex(foundItems:any, searchTerm:string) {
+
+function getFileContent() {
+
+}
+
+function getLineNumberOfTextInFile(path: string, codeText: string) {
+
+}
+
+export function exactMatchedFileIndex(foundItems: any, searchTerm: string) {
     // {folders: folders, files: files}
     let angularSuffix = '.component.html';
     let ionicSuffix = '.page.html';
-    return foundItems.files.findIndex((file:any) => file.name === searchTerm + angularSuffix || file.name === searchTerm + ionicSuffix);
+    return foundItems.files.findIndex((file: any) => file.name === searchTerm + angularSuffix || file.name === searchTerm + ionicSuffix);
+}
+
+export function areTwoSetsEqual(a: Set<any>, b: Set<any>) {
+    return a.size === b.size && [...a].every(value => b.has(value));
 }
 
 

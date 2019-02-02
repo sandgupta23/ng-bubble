@@ -3,8 +3,9 @@
 import {createConfigJSonFileIfNotPresent, runAppOnFreePort} from "./utility";
 import {getLocalConfig, updateLocalConfig} from "./config";
 import {EIdeNames} from "../enums";
-import {ILocalConfig} from "../interfaces";
+import {IInquirerOutPut, ILocalConfig} from "../interfaces";
 import {routesInit} from "./routes";
+import {inquirerInit} from "./inquirer";
 
 const inquirer: any = require('inquirer');
 
@@ -25,14 +26,13 @@ const localConfig: ILocalConfig = getLocalConfig() || {};
 
 program
 // .version(pkg.version)
+    .option('--ask', 'Ask for options')
     .option('-p, --port <port>', 'Port on which to listen to (defaults to 11637)', parseInt)
-    .option('--ctrl <ctrl>', 'Enable click ctrl press along with doubleclick')
+    .option('--ctrl <ctrl>', 'Enable click ctrl press along with double click')
     .option('--ide <ide>', 'ide to enable. defaults to VS code')
     .option('--options <option>', 'to make ng-bubble as you for options')
+    .option('--options <option>', 'to make ng-bubble as you for options')
     .parse(process.argv);
-
-
-
 
 let port = program.port || 11637;
 let ctrl = program.ctrl || 'n';
@@ -47,49 +47,34 @@ ctrl = ctrl === 'y' || ctrl === 'yes';
 
 let app = express();
 app.use(cors());
-app.use('/', express.static(path.join(__dirname,'/../../', 'public')));
+app.use('/', express.static(path.join(__dirname, '/../../', 'public')));
 
-if (!localConfig.inputTaken || options) {
-    let inquirerPromise = inquirer.prompt([{
-        type: 'list',
-        message: 'What ide you want to use?',
-        name: 'ide',
-        choices: ["Webstorm", "VScode"]
-    }, {
-        type: 'list',
-        message: 'Is this an Angular 2+ project?',
-        name: 'isAngular',
-        choices: ["Yes", "No"]
-    }
-    ]);
-    inquirerPromise.then(async (inquirerOutput: { ide: string, isAngular: string }) => {
-        let isAngular = inquirerOutput.isAngular === 'Yes';
-        let preferredIde:string = inquirerOutput.ide === 'Webstorm' ? EIdeNames.WEBSTORM : EIdeNames.VSCODE;
-        let newLocalConfigData: ILocalConfig = {...localConfig, isAngular, preferredIde, inputTaken: true, };
-        try {
-            await updateLocalConfig(newLocalConfigData);
-        } catch (e) {
-            console.log(e);
-        }
+async function beginInquirer() {
+    if (!localConfig.inputTaken || program.ask) {
+        let inquirerOutput: IInquirerOutPut = await inquirerInit();
+        let preferredIde: string = inquirerOutput.ide;
+        let guess: boolean = inquirerOutput.guess === 'Yes';
+        let ctrl: boolean = inquirerOutput.ctrl === 'Ctrl + Double click';
+        let componentSelector: string = inquirerOutput.componentSelector ? inquirerOutput.componentSelector : 'app-';
+        let newLocalConfigData: ILocalConfig = {
+            ...localConfig,
+            preferredIde,
+            inputTaken: true,
+            guess,
+            componentSelector,
+            ctrl
+
+        };
+        await updateLocalConfig(newLocalConfigData);
         console.log("Thanks. If in future you want to change these options, run: ng-bubble --ask");
         routesInit(app);
-        runAppOnFreePort(app, port, ctrl);
-    });
-} else {
-    console.log(`You marked this as an ${localConfig.isAngular?'Angular':'Non-Angular'} project and choose ${localConfig.preferredIde} as preferred ide`);
-    routesInit(app);
+    } else {
+        console.log(`Your configurations are as follows. To change run ng-bubble --ask.`);
+        let {preferredIde, guess, componentSelector, ctrl} = localConfig;
+        console.log({preferredIde, guess, componentSelector});
+        routesInit(app);
+    }
     runAppOnFreePort(app, port, ctrl);
 }
 
-
-// function findPathByFileName(fileName: string) {
-//     let absolutePathsOfAllHtmlFilesInProvidedDir = htmlsDebug.split(',');
-//     // let fileName = this.constructor.name.replace(/([a-zA-Z])(?=[A-Z])/g, '$1.').toLowerCase();
-//     let fileNameDelimitedArr = fileName.toLowerCase().split('-');
-//     fileName =
-//         fileNameDelimitedArr.slice(0, fileNameDelimitedArr.length).join('-') + '.component.html';
-//     fileName = fileName.replace('app-', '');
-//     return absolutePathsOfAllHtmlFilesInProvidedDir.find((name:string) => name.includes(fileName));
-// }
-
-
+beginInquirer();
