@@ -1,4 +1,5 @@
-import {EIdeNames} from "./enums";
+import {EIdeNames, EWSTypes} from "./enums";
+import {ILineFinderData} from "./src/line-finder";
 
 export interface IFsItem {
     name?: string;
@@ -12,6 +13,8 @@ export interface IFsItemTree {
     files: IFsItem[];
     folders: IFsItem[];
 }
+
+
 
 
 export interface ILocalConfig {
@@ -41,4 +44,11 @@ export interface IInquirerOutPut {
     guess: string,
     componentSelector: string,
     ctrl:string
+}
+
+export interface IWSData {
+    type:EWSTypes,
+    error?:number,
+    errorMessage?:string,
+    payload?:ILineFinderData
 }

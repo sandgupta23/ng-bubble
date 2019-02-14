@@ -1,3 +1,12 @@
+//TODO: duplicate interfaces and enums
+var EWSTypes;
+(function (EWSTypes) {
+    EWSTypes["SEARCH"] = "SEARCH";
+    EWSTypes["open"] = "open";
+    EWSTypes["openByPath"] = "openByPath";
+    EWSTypes["reIndex"] = "reIndex";
+    EWSTypes["ack"] = "ack";
+})(EWSTypes || (EWSTypes = {}));
 (function () {
     var styles = document.createElement('link');
     styles.rel = 'stylesheet';
@@ -5,8 +14,40 @@
     styles.media = 'screen';
     styles.href = 'http://localhost:11637/assets/css/styles.css';
     document.getElementsByTagName('head')[0].appendChild(styles);
+    //
 })();
 (function () {
+    var awaitingResponses = {};
+    var socket = new WebSocket("ws://localhost:11640");
+    socket.onopen = function (event) {
+        console.log("ws started");
+    };
+    socket.onclose = function (event) {
+        console.log(event);
+        // alert('ws closed');
+        setTimeout(function () {
+            location.reload();
+        }, 2000);
+    };
+    socket.onerror;
+    socket.onmessage = function (event) {
+        toggleLoader(false);
+        var data = JSON.parse(event.data);
+        if (data.type === EWSTypes.SEARCH) {
+            var payload = data.payload;
+            var files = payload.files;
+            var newRowsStr_1 = "";
+            files.forEach(function (file) {
+                newRowsStr_1 +=
+                    "<div class=\"row-wrapper-item\" style=\"display: flex; align-content: center\" title=" + file.path + " data-path=" + file.path + ">\n                        <span>" + file.name + "</span>\n                        <img class=\"editor-logo\" data-editor=\"webstorm\" title=\"Open in Webstorm\" style=\"width: 15px; height: 15px; margin-right: 5px; margin-left: auto\" src=\"http://resources.jetbrains.com/storage/products/webstorm/img/meta/webstorm_logo_300x300.png\" alt=\"\">\n                        <img class=\"editor-logo\" data-editor=\"vscode\" title=\"Open in VScode\" style=\"width: 15px; height: 15px; margin-right: 10px\" src=\"https://upload.wikimedia.org/wikipedia/commons/2/2d/Visual_Studio_Code_1.18_icon.svg\" alt=\"\">\n                     </div>";
+            });
+            $rowWrapper.innerHTML = newRowsStr_1;
+        }
+    };
+    function sendMessage(data) {
+        console.log("sendMessage", data);
+        socket.send(JSON.stringify(data));
+    }
     if (window.NG_BUBBLE_IMPORTED) {
         console.error("Error: ng-bubble has been imported more than once");
         return;
@@ -17,24 +58,38 @@
     var BACKEND_ROOT = 'http://localhost:11637';
     var BG_HIGHLIGHTED_CLASS = 'bg-highlighted';
     document.addEventListener('dblclick', function ($event) {
-        debugger;
+        toggleLoader(true);
         var target = $event.target;
-        var element = target;
-        while (!startWithAppRegex.test(element.tagName)) {
-            element = element.parentElement;
-        }
+        var componentNode = findParentComponentElement(target);
+        // while (!startWithAppRegex.test(componentNode.tagName)) {
+        //   componentNode = componentNode.parentElement as HTMLElement;
+        // }
         var codeText = ""; //element.innerHTML;;
-        var data = {
-            tagName: target.tagName,
+        if (!componentNode) {
+            console.log("NG-BUBBLE:: COULDNT FIND COMPONENT");
+        }
+        var payload = {
+            tagName: componentNode && componentNode.tagName || "",
+            targetTagName: target.tagName,
             id: target.id,
             classList: Array.from(target.classList),
             innerText: target.innerText
         };
         console.log(target);
-        sendNgTag(element.tagName, false, codeText, data);
+        sendMessage({ type: EWSTypes.open, payload: payload });
     });
+    function findParentComponentElement(el, parentLevel) {
+        if (parentLevel === void 0) { parentLevel = 1; }
+        var level = 0;
+        while (level !== parentLevel && el.tagName !== 'body') {
+            el = el.parentElement;
+            if (startWithAppRegex.test(el.tagName)) {
+                level++;
+            }
+        }
+        return level === parentLevel ? el : null;
+    }
     function toggleLoader(show) {
-        debugger;
         var image = show ? 'http://localhost:11637/assets/imgs/loader-svg.svg' : 'http://localhost:11637/assets/imgs/ng-bubble-icon.png';
         var logoElements = document.getElementsByClassName('ng-bubble-icon');
         for (var key in logoElements) {
@@ -64,27 +119,27 @@
             };
         });
     }
-    function sendNgTag(tag, exact, codeText, data) {
-        console.log(data);
-        /*TODO: typescript fuck up*/
-        var url = "open?file=" + tag + "&exact=" + exact + "&codeText=" + codeText;
-        // let urlObj = new URL(url);
-        if (data) {
-            var dataStr = JSON.stringify(data);
-            url = "open?file=" + tag + "&exact=" + exact + "&codeText=" + codeText + "&data=" + dataStr;
-        }
-        makeGetReq(url)
-            .then(function () {
-            console.log("success");
-        });
+    function sendNgTag(payload) {
+        // console.log(data);
+        // /*TODO: typescript fuck up*/
+        // let url = `open?file=${tag}&exact=${exact}&codeText=${codeText}`;
+        // // let urlObj = new URL(url);
+        // if (data) {
+        //     let dataStr = JSON.stringify(data);
+        //     url = `open?file=${tag}&exact=${exact}&codeText=${codeText}&data=${dataStr}`;
+        // }
+        // makeGetReq(url)
+        //     .then(() => {
+        //         console.log("success");
+        //     })
     }
-    function sendFilePath(path, editor) {
-        var url = "open?path=" + path + "&editor=" + editor;
-        makeGetReq(url)
-            .then(function () {
-            console.log("success");
-        });
-    }
+    // function sendFilePath(path: string, editor: string) {
+    //     let url = `open?path=${path}&editor=${editor}`;
+    //     makeGetReq(url)
+    //         .then(() => {
+    //             console.log("success");
+    //         })
+    // }
     function getFileNames(searchTerm) {
         new Promise(function (resolve, reject) {
         });
@@ -94,17 +149,22 @@
     var resultRows = document.getElementsByClassName('row-wrapper-item');
     $search.addEventListener("input", function ($event) {
         var searchTerm = $search.value;
-        var url = "search?file=" + searchTerm;
-        makeGetReq(url)
-            .then(function (val) {
-            var files = val.files;
-            var newRowsStr = "";
-            files.forEach(function (file) {
-                newRowsStr +=
-                    "<div class=\"row-wrapper-item\" style=\"display: flex; align-content: center\" title=" + file.path + " data-path=" + file.path + ">\n                        <span>" + file.name + "</span>\n                        <img class=\"editor-logo\" data-editor=\"webstorm\" title=\"Open in Webstorm\" style=\"width: 15px; height: 15px; margin-right: 5px; margin-left: auto\" src=\"http://resources.jetbrains.com/storage/products/webstorm/img/meta/webstorm_logo_300x300.png\" alt=\"\">\n                        <img class=\"editor-logo\" data-editor=\"vscode\" title=\"Open in VScode\" style=\"width: 15px; height: 15px; margin-right: 10px\" src=\"https://upload.wikimedia.org/wikipedia/commons/2/2d/Visual_Studio_Code_1.18_icon.svg\" alt=\"\">\n                     </div>";
-            });
-            $rowWrapper.innerHTML = newRowsStr;
-        });
+        sendMessage({ type: EWSTypes.SEARCH, payload: { file: searchTerm } });
+        // let url = `search?file=${searchTerm}`;
+        // makeGetReq(url)
+        //   .then((val: any) => {
+        //     // let files = val.files;
+        //     // let newRowsStr = "";
+        //     // files.forEach((file: any) => {
+        //     //   newRowsStr +=
+        //     //     `<div class="row-wrapper-item" style="display: flex; align-content: center" title=${file.path} data-path=${file.path}>
+        //     //                 <span>${file.name}</span>
+        //     //                 <img class="editor-logo" data-editor="webstorm" title="Open in Webstorm" style="width: 15px; height: 15px; margin-right: 5px; margin-left: auto" src="http://resources.jetbrains.com/storage/products/webstorm/img/meta/webstorm_logo_300x300.png" alt="">
+        //     //                 <img class="editor-logo" data-editor="vscode" title="Open in VScode" style="width: 15px; height: 15px; margin-right: 10px" src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Visual_Studio_Code_1.18_icon.svg" alt="">
+        //     //              </div>`;
+        //     // });
+        //     // $rowWrapper.innerHTML = newRowsStr;
+        //   });
     });
     // var elem = document.getElementById('ng-bubble-search');
     // elem.addEventListener('keydown', function(e){
@@ -115,8 +175,20 @@
     // });
     var highligtedRowCount = -1;
     console.log("helloooooooooooooooooooooooooo");
-    var $hoveredComponent;
+    var $Component;
+    var $hoveredComponentOriginalInnerHtml;
     var $appenededElement;
+    var $appenededElements = [];
+    function removeChildFromParent($el) {
+        var parent = $el.parentElement;
+        // if(parent) parent.removeChild($el);
+    }
+    function removeChildrenWithClassName(className) {
+        var elements = Array.from(document.getElementsByClassName(className));
+        elements.forEach(function (el) {
+            el.parentNode && el.parentNode.removeChild(el);
+        });
+    }
     document.addEventListener('mouseover', function ($event) {
         if (!$event.ctrlKey) {
             return;
@@ -125,28 +197,176 @@
         if (hasClass(target, 'appened-el')) {
             return;
         }
-        if ($hoveredComponent === target) {
+        if ($Component === target) {
             return;
         }
-        /*remove stuff from previously hovered componet*/
-        if ($hoveredComponent) {
-            $hoveredComponent.classList.remove('hovered-parent');
-            $hoveredComponent.removeChild($appenededElement);
+        /*remove stuff from previously hovered component*/
+        // $appenededElements.forEach(($el)=>{
+        //   removeChildFromParent($el);
+        // });
+        // $appenededElements = [];
+        removeChildrenWithClassName('appened-el');
+        if ($Component) {
+            $Component.classList.remove('hovered-parent');
         }
-        while (target && !startWithAppRegex.test(target.tagName)) {
-            target = target.parentElement;
-        }
-        $hoveredComponent = target;
-        if (!$hoveredComponent)
+        // while (target && !startWithAppRegex.test(target.tagName)) {
+        //   target = target.parentElement as HTMLElement;
+        // }
+        var $parentComponentElement = findParentComponentElement(target, 1);
+        if (!$parentComponentElement)
             return;
-        $hoveredComponent.classList.add('hovered-parent');
-        $appenededElement = document.createElement('SPAN');
-        var textEl = document.createTextNode($hoveredComponent.tagName);
-        $appenededElement.appendChild(textEl);
-        $appenededElement.classList.add('appened-el');
-        $hoveredComponent.insertBefore($appenededElement, $hoveredComponent.firstChild);
-        // element.innerHTML = `<!--<span style="">${element.tagName}</span>-->` + element.innerHTML;
+        $Component = $parentComponentElement;
+        $appenededElement = showComponentMarkerOnComponent($Component);
+        $appenededElements.push($appenededElement);
+        console.log($appenededElements);
+        $Component.classList.add('hovered-parent');
+        // $appenededElement = document.createElement('SPAN');
+        // let textEl = document.createTextNode($hoveredComponent.tagName);
+        // $appenededElement.appendChild(textEl);
+        //
+        // $appenededElement.classList.add('appened-el');
+        // $hoveredComponentOriginalInnerHtml = $Component.innerHTML;
+        $appenededElement = createComponentMarker($Component.tagName);
+        // $hoveredComponent.appendChild($appenededElement);
+        $Component.insertBefore($appenededElement, $Component.firstChild);
+        //     $hoveredComponent.innerHTML = `
+        //             <span class="appened-el">
+        //                    ${$hoveredComponent.tagName}
+        //                    <span class="appened-el-child hide-menu" data-tagName="${$hoveredComponent.tagName}">
+        //                    <ul>
+        //                       <li class="appened-el-child-item" data-item="openHtml">openHtml</li>
+        //                       <li class="appened-el-child-item" data-item="openParent">openParent</li>
+        //                       <li class="appened-el-child-item" data-item="ShowBranch">ShowBranch</li>
+        //                       <li class="appened-el-child-item" data-item="ReIndex">ReIndex</li>
+        //                    </ul>
+        // </span>
+        //             </span>`
+        //       + $hoveredComponent.innerHTML;
     });
+    function showComponentMarkerOnComponent($component) {
+        $component.classList.add('hovered-parent');
+        // $hoveredComponentOriginalInnerHtml = $component.innerHTML;
+        $appenededElement = createComponentMarker($component.tagName);
+        $component.insertBefore($appenededElement, $component.firstChild);
+        return $appenededElement;
+    }
+    function createComponentMarker(hoveredComponentTagName) {
+        hoveredComponentTagName = hoveredComponentTagName.split('-').join('_');
+        // console.log(hoveredComponentTagName);
+        var span0 = document.createElement('SPAN');
+        span0.classList.add('appened-el');
+        span0.appendChild(document.createTextNode(hoveredComponentTagName));
+        var span01 = document.createElement('SPAN');
+        // span01.appendChild(document.createTextNode(hoveredComponentTagName));
+        span01.classList.add('appened-el-child');
+        span01.classList.add('hide-menu');
+        var ul02 = document.createElement('UL');
+        var li21 = document.createElement('li');
+        var li22 = document.createElement('li');
+        var li23 = document.createElement('li');
+        var li24 = document.createElement('li');
+        [li21, li22, li23, li24].forEach(function (el) {
+            el.classList.add('appened-el-child-item');
+        });
+        var openHtml = document.createTextNode('openHtml');
+        var openParent = document.createTextNode('openParent');
+        var ShowBranch = document.createTextNode('ShowBranch');
+        var ReIndex = document.createTextNode('ReIndex');
+        var openHtmlAttr = document.createAttribute('data-item');
+        var openParentAttr = document.createAttribute('data-item');
+        var ShowBranchAttr = document.createAttribute('data-item');
+        var ReIndexAttr = document.createAttribute('data-item');
+        openHtmlAttr.value = 'openHtml';
+        openParentAttr.value = 'openParent';
+        ShowBranchAttr.value = 'ShowBranch';
+        ReIndexAttr.value = 'ReIndex';
+        li21.appendChild(openHtml);
+        li22.appendChild(openParent);
+        li23.appendChild(ShowBranch);
+        li24.appendChild(ReIndex);
+        li21.setAttributeNode(openHtmlAttr);
+        li22.setAttributeNode(openParentAttr);
+        li23.setAttributeNode(ShowBranchAttr);
+        li24.setAttributeNode(ReIndexAttr);
+        ul02.appendChild(li21);
+        ul02.appendChild(li22);
+        ul02.appendChild(li23);
+        ul02.appendChild(li24);
+        span01.appendChild(ul02);
+        span0.appendChild(span01);
+        return span0;
+    }
+    function showBranches(target) {
+        var parent = target, child = target;
+        while (parent) {
+            parent = findParentComponentElement(parent, 1);
+            parent && showComponentMarkerOnComponent(parent);
+        }
+        // while (child){
+        //   child = findParentComponentElement(target, -1);
+        //   child && showComponentMarkerOnComponent(child);
+        // }
+    }
+    function hideAllMenus() {
+        var elements = Array.from(document.getElementsByClassName('appened-el-child'));
+        elements.forEach(function (el) {
+            el.classList.add('hide-menu');
+            el.classList.remove('show-menu');
+        });
+    }
+    document.addEventListener('click', function (e) {
+        var target = e.target;
+        if (!hasClass(target, 'appened-el') && !hasClass(target, 'appened-el-child') && !hasClass(target, 'appened-el-child-item')) {
+            // hideAllMenus();
+            removeChildrenWithClassName('appened-el');
+        }
+        if (hasClass(target, 'appened-el-child')) {
+            createMenu(target);
+            e.stopPropagation();
+        }
+        else if (hasClass(target, 'appened-el-child-item')) {
+            e.stopPropagation();
+            var action = target.getAttribute('data-item');
+            // @ts-ignore
+            var tagName = "";
+            var targetTagName = void 0;
+            var component = findParentComponentElement(target, 1);
+            if (action === 'openTs' || action === "openHtml" || action === "") {
+                if (!component)
+                    return;
+                // let dataTagName: any = target.parentElement.parentElement.getAttribute('data-tagName');
+                // tagName = dataTagName;
+                tagName = component.tagName;
+            }
+            else if (action === 'openParent') {
+                var component_1 = findParentComponentElement(target, 1);
+                if (!component_1)
+                    return;
+                var parentComponent = findParentComponentElement(component_1, 1);
+                if (!parentComponent)
+                    return;
+                tagName = parentComponent.tagName;
+                targetTagName = component_1.tagName;
+            }
+            else if (action === 'ReIndex') {
+                sendMessage({ type: EWSTypes.reIndex });
+                return;
+            }
+            else if (action === 'ShowBranch') {
+                // sendMessage({type: EWSTypes.reIndex});
+                var component_2 = findParentComponentElement(target, 1);
+                component_2 && showBranches(component_2);
+                return;
+            }
+            sendMessage({ type: EWSTypes.open, payload: { tagName: tagName, targetTagName: targetTagName } });
+        }
+    }, false);
+    function createMenu(x) {
+        x.classList.remove('hide-menu');
+    }
+    // Array.from(document.getElementsByClassName("appened-el-child")).forEach(function (element) {
+    //   element.addEventListener('click', createMenu);
+    // });
     function hasClass(element, thatClass) {
         // var className = " " + className + " ";
         return (" " + element.className + " ").replace(/[\n\t]/g, " ").indexOf(" " + thatClass + " ") > -1;
@@ -189,10 +409,20 @@
         }
         if ($event.keyCode === 13) { // enter key
             var searchTerm = resultRows[highligtedRowCount].innerText;
-            sendNgTag(searchTerm, true);
+            var path = getHighlightedRow$().getAttribute('data-path');
+            // sendNgTag(searchTerm, true);
+            sendMessage({
+                type: EWSTypes.openByPath,
+                payload: {
+                    pathToOpen: path
+                }
+            });
         }
         toggleHighlightRow(highligtedRowCount, true);
     });
+    function getHighlightedRow$() {
+        return document.getElementsByClassName('row-wrapper-item')[highligtedRowCount];
+    }
     $rowWrapper.addEventListener("click", function ($event) {
         $event.stopPropagation();
         var $target = $event.target;
@@ -209,7 +439,7 @@
             }
         }
         var path = $row.getAttribute('data-path');
-        sendFilePath(path, editor);
+        sendMessage({ payload: { pathToOpen: path, editor: editor }, type: EWSTypes.openByPath });
     });
     var $initImg = document.getElementById('init-img');
     var $ngBubbleContainer = document.getElementById('ng-bubble-container');
@@ -225,7 +455,6 @@
         toggleSearchBar();
     });
     function toggleSearchBar() {
-        debugger;
         if (hasClass($ngBubbleContainer, 'display-none')) {
             $ngBubbleContainer.classList.remove('display-none');
         }

@@ -48,10 +48,9 @@ export async function runAppOnFreePort(app: any, port: number, ctrl: boolean) {
     });
 }
 
-
-export async function openInIde(path: string, currentIde: EIdeNames, codeText: string, data: ILineFinderData) {
-    let lineNumber;
-    if (data) lineNumber = await lineToOpen(path, data);
+/*todo: redundant arguments*/
+export async function openInIde(path: string, currentIde: EIdeNames, codeText: string, data?: ILineFinderData, lineNumber:number=0) {
+    // if (data) lineNumber = await lineToOpen(path, data);
     let ideCmd = currentIde === EIdeNames.WEBSTORM ? 'webstorm.exe' : `code -g`;
     await exec(`${ideCmd} ${path}:${lineNumber?lineNumber:""}`);
 }

@@ -1,3 +1,5 @@
+import { EWSTypes } from "./enums";
+import { ILineFinderData } from "./src/line-finder";
 export interface IFsItem {
     name?: string;
     type?: string;
@@ -34,4 +36,10 @@ export interface IInquirerOutPut {
     guess: string;
     componentSelector: string;
     ctrl: string;
+}
+export interface IWSData {
+    type: EWSTypes;
+    error?: number;
+    errorMessage?: string;
+    payload?: ILineFinderData;
 }
