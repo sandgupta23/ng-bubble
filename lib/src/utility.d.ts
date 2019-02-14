@@ -6,6 +6,6 @@ export declare function createConfigJSonFileIfNotPresent(): void;
 export declare function getLocalConfigFilePath(): string;
 export declare function getGlobalConfigFilePath(): string;
 export declare function runAppOnFreePort(app: any, port: number, ctrl: boolean): Promise<void>;
-export declare function openInIde(path: string, currentIde: EIdeNames, codeText: string, data: ILineFinderData): Promise<void>;
+export declare function openInIde(path: string, currentIde: EIdeNames, codeText: string, data?: ILineFinderData, lineNumber?: number): Promise<void>;
 export declare function exactMatchedFileIndex(foundItems: any, searchTerm: string): any;
 export declare function areTwoSetsEqual(a: Set<any>, b: Set<any>): boolean;

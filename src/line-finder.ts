@@ -5,111 +5,136 @@
 * 3. look for presence of class names xx1
 * */
 
+import {EIdeNames} from "../enums";
+
 let i = 1;//starts with 1, not 0
 let maxScore = 0;
 let maxScoreLine = 0;
 
 export interface ILineFinderData {
-    id: string,
-    tagName: string,
-    classList: string[],
-    innerText: string
+  id: string,
+  tagName: string,
+  targetTagName:string,
+  codeText: string,
+  classList: string[],
+  innerText: string,
+  editor: EIdeNames,
+  file: string,
+  exact: boolean,
+  path: string,
+  pathToOpen: string,
+  files: object
 }
 
-export function lineToOpen(file: string, data: ILineFinderData) {
-    let lineReader = require('readline').createInterface({
-        input: require('fs').createReadStream(file)
+export function lineToOpen(file: string, data: ILineFinderData): Promise<number> {
+  let lineReader = require('readline').createInterface({
+    input: require('fs').createReadStream(file)
+  });
+  i = 1;
+  maxScoreLine = 1;
+  maxScore = 0;
+  let maxPossibleScore = getMaxPossibleScore(data);
+
+  data = {
+    ...data,
+    targetTagName: data.targetTagName && data.targetTagName.toLowerCase().trim(),
+    innerText: data.innerText && removeAdditionalSpaces(data.innerText),
+  };
+
+  return new Promise((resolve, reject) => {
+    lineReader.on('line', function (line: string) {
+      if (!line) {
+        ++i;
+        return;
+      }
+      line = line.trim();
+      let score = getScore(line, data);
+      if (score > maxScore) {
+        maxScore = score;
+        maxScoreLine = i
+      }
+
+      if (maxScore >= maxPossibleScore) {
+        resolve(maxScoreLine);
+        /*todo: stop reading the line here*/
+        return;
+      }
+      ++i;
     });
-    i = 1;
-    maxScoreLine = 1;
-    maxScore = 0;
-    let maxPossibleScore = getMaxPossibleScore(data);
-
-    data = {
-        ...data,
-        tagName: data.tagName && data.tagName.toLowerCase().trim(),
-        innerText: data.innerText && removeAdditionalSpaces(data.innerText),
-    };
-
-    return new Promise((resolve, reject) => {
-        lineReader.on('line', function (line: string) {
-            if (!line) {
-                ++i;
-                return;
-            }
-            line = line.trim();
-            let score = getScore(line, data);
-            if (score > maxScore) {
-                maxScore = score;
-                maxScoreLine = i
-            }
-
-            if (maxScore >= maxPossibleScore) {
-                resolve(maxScoreLine);
-                /*todo: stop reading the line here*/
-                return;
-            }
-            ++i;
-        });
-        lineReader.on('close', function (line: string) {
-            resolve(maxScoreLine);
-        });
+    lineReader.on('close', function (line: string) {
+      resolve(maxScoreLine);
     });
+  });
 }
 
 function getMaxPossibleScore(data: ILineFinderData) {
-    return Number("1" + (data.id ? 1 : 0) + data.classList.length + (data.innerText ? 1 : 0));
+  if(!data || !data.classList){
+    return 0;
+  }
+  return Number("1" + (data.id ? 1 : 0) + data.classList.length + (data.innerText ? 1 : 0));
 }
 
 function getScore(htmlLine: string, lineFinderData: ILineFinderData) {
-    let scoreStr = tagScore(htmlLine, lineFinderData.tagName)
-        + ""
-        + idScore(htmlLine, lineFinderData.id)
-        + ""
-        + classScore(htmlLine, lineFinderData.classList)
-        + ""
-        + getInnerTextScore(htmlLine, lineFinderData.innerText);
-    console.log(tagScore(htmlLine, lineFinderData.tagName));
-    console.log(idScore(htmlLine, lineFinderData.id));
-    console.log(classScore(htmlLine, lineFinderData.classList));
-    console.log(getInnerTextScore(htmlLine, lineFinderData.innerText));
-    return Number(scoreStr);
+  let scoreStr = tagScore(htmlLine, lineFinderData.targetTagName)
+    + ""
+    + idScore(htmlLine, lineFinderData.id)
+    + ""
+    + classScore(htmlLine, lineFinderData.classList)
+    + ""
+    + getInnerTextScore(htmlLine, lineFinderData.innerText);
+  console.log(tagScore(htmlLine, lineFinderData.targetTagName));
+  console.log(idScore(htmlLine, lineFinderData.id));
+  console.log(classScore(htmlLine, lineFinderData.classList));
+  console.log(getInnerTextScore(htmlLine, lineFinderData.innerText));
+  return Number(scoreStr);
 }
 
 
 function getInnerTextScore(htmlLine: string, innerText: string) {
-    return htmlLine.includes(innerText) ? 1 : 0;
+  if(!htmlLine || !innerText){
+    return 0
+  }
+  return htmlLine.includes(innerText) ? 1 : 0;
 }
 
 function removeAdditionalSpaces(str: string) {
-    return str && str.replace(/\s+/g, ' ').trim();
+  return str && str.replace(/\s+/g, ' ').trim();
 }
 
 function tagScore(htmlStr: string, tag: string) {
-    tag = tag.toLowerCase().trim();
-    return htmlStr.includes(`<${tag}`) ? 1 : 0;
+  if(!htmlStr || !tag){
+    return 0
+  }
+  tag = tag.toLowerCase().trim();
+  return htmlStr.includes(`<${tag}`) ? 1 : 0;
 }
 
 function idScore(htmlStr: string, id: string) {
-    id = id.toLowerCase().trim();
-    return (htmlStr.includes(`id='${id}'`) || htmlStr.includes(`id="${id}"`)) ? 1 : 0;
+  if(!htmlStr || !id){
+    return 0
+  }
+  id = id.toLowerCase().trim();
+  return (htmlStr.includes(`id='${id}'`) || htmlStr.includes(`id="${id}"`)) ? 1 : 0;
 }
 
 function classScore(htmlStr: string, classList: string[]) {
-    let score = 0;
-    let regex = /class="(.*?)"/g;
-    let realClassArr: any;
-    try {
-        let matchedGroup = (<any>regex).exec(htmlStr)[1];
-        if(!matchedGroup) return score;
-        realClassArr = matchedGroup.split(" ");
-    } catch (e) {
-        console.log(e);
-        return score;
-    }
-    classList.forEach((expectedClassName) => {
-        let classFound = realClassArr.find((realClass: string) => realClass === expectedClassName);
-        if (classFound) ++score;
-    });
+  if(!htmlStr || !classList){
+    return 0
+  }
+  let score = 0;
+  let regex = /class="(.*?)"/g;
+  let realClassArr: any;
+  try {
+    let matchedGroup = (<any>regex).exec(htmlStr)[1];
+    if (!matchedGroup) return score;
+    realClassArr = matchedGroup.split(" ");
+  } catch (e) {
+    console.log(e);
     return score;
+  }
+  classList.forEach((expectedClassName) => {
+    let classFound = realClassArr.find((realClass: string) => realClass === expectedClassName);
+    if (classFound) ++score;
+  });
+  return score;
 }
