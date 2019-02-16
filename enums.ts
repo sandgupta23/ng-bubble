@@ -7,6 +7,8 @@ export enum EWSTypes{
     SEARCH='SEARCH',
     open='open',
     openByPath='openByPath',
+    getFileByPath='getFileByPath',
+    setFileByPath='setFileByPath',
     reIndex='reIndex',
     ack='ack',
 }

@@ -75,17 +75,18 @@ function getMaxPossibleScore(data: ILineFinderData) {
 }
 
 function getScore(htmlLine: string, lineFinderData: ILineFinderData) {
-  let scoreStr = tagScore(htmlLine, lineFinderData.targetTagName)
+  let scoreStr =
+    (tagScore(htmlLine, lineFinderData.targetTagName)
+    + getInnerTextScore(htmlLine, lineFinderData.innerText)
+    + idScore(htmlLine, lineFinderData.id))
+
     + ""
-    + idScore(htmlLine, lineFinderData.id)
-    + ""
-    + classScore(htmlLine, lineFinderData.classList)
-    + ""
-    + getInnerTextScore(htmlLine, lineFinderData.innerText);
-  console.log(tagScore(htmlLine, lineFinderData.targetTagName));
-  console.log(idScore(htmlLine, lineFinderData.id));
-  console.log(classScore(htmlLine, lineFinderData.classList));
-  console.log(getInnerTextScore(htmlLine, lineFinderData.innerText));
+    + classScore(htmlLine, lineFinderData.classList);
+
+  // console.log(tagScore(htmlLine, lineFinderData.targetTagName));
+  // console.log(idScore(htmlLine, lineFinderData.id));
+  // console.log(classScore(htmlLine, lineFinderData.classList));
+  // console.log(getInnerTextScore(htmlLine, lineFinderData.innerText));
   return Number(scoreStr);
 }
 

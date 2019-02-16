@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/src/routes.ts" line="74" mnemonic="1" />
+    <bookmark url="file://$PROJECT_DIR$/public/assets/js/client.ts" line="161" mnemonic="2" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="38c4f63b-8e93-4e3a-8514-39f1647f5ddb" name="Default Changelist" comment="" />
+    <list default="true" id="f2cfb048-ce33-455d-bed6-78addd447d99" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/assets/css/codemirror/night.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/js/codemirror/addon/brace-fold.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/js/codemirror/addon/foldcode.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/js/codemirror/addon/foldgutter.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/js/codemirror/addon/markdown-fold.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/enums.ts" beforeDir="false" afterPath="$PROJECT_DIR$/enums.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/enums.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/enums.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/enums.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/enums.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/enums.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/lib/enums.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/line-finder.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/line-finder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/line-finder.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/line-finder.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/routes.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/routes.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/utility.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/utility.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/utility.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/utility.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/utility.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/utility.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/client.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/client.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/client.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/line-finder.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/line-finder.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utility.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility.ts" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -13,11 +42,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/routes.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="62">
-              <caret line="76" column="16" selection-start-line="76" selection-start-column="16" selection-end-line="76" selection-end-column="16" />
+            <state relative-caret-position="273">
+              <caret line="116" column="22" selection-start-line="116" selection-start-column="22" selection-end-line="116" selection-end-column="22" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
@@ -25,78 +54,109 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/assets/js/client.js">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../DEVELOP/bot_platform-fe/src/app/test/test.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1621">
-              <caret line="149" column="19" selection-start-line="149" selection-start-column="19" selection-end-line="149" selection-end-column="19" />
+            <state>
+              <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ng-bubble.ts">
+        <entry file="file://$PROJECT_DIR$/../DEVELOP/bot_platform-fe/src/app/core/bot-detail/bot-sessions/bot-sessions.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="74" column="24" selection-start-line="74" selection-start-column="24" selection-end-line="74" selection-end-column="24" />
+            <state relative-caret-position="238">
+              <caret line="14" column="52" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/scan.ts">
+        <entry file="file://$PROJECT_DIR$/src/ws.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="121">
-              <caret line="14" column="14" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+            <state relative-caret-position="51">
+              <caret line="3" column="43" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/interfaces.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="292">
+              <caret line="52" column="11" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utility.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="278">
+              <caret line="75" column="23" selection-start-line="75" selection-start-column="23" selection-end-line="75" selection-end-column="23" />
               <folding>
-                <element signature="e#0#25#0" expanded="true" />
+                <element signature="e#0#29#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../master_bot_plateform/bot_platform-fe/src/app/core/bot-detail/code-based-bot-detail/code-based-bot-detail.component.html">
+        <entry file="file://$PROJECT_DIR$/src/line-finder.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1207">
-              <caret line="71" column="4" selection-start-line="71" selection-start-column="4" selection-end-line="71" selection-end-column="4" />
+            <state relative-caret-position="52">
+              <caret line="14" column="2" selection-start-line="14" selection-start-column="2" selection-end-line="25" selection-end-column="15" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../master_bot_plateform/bot_platform-fe/src/app/core/buildbot/build-code-based-bot/architecture/integration/integration-option-list/integration-option-list.component.html">
+        <entry file="file://$PROJECT_DIR$/enums.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="45" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
+            <state relative-caret-position="145">
+              <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+              <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../master_bot_plateform/bot_platform-fe/src/app/core/core-wrapper.component.html">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../master_bot_plateform/bot_platform-fe/angular.json">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/assets/js/client.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1629">
-              <caret line="227" selection-start-line="227" selection-end-line="227" />
+            <state relative-caret-position="155">
+              <caret line="489" column="32" selection-start-line="489" selection-start-column="32" selection-end-line="489" selection-end-column="32" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#1;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#1;n#div#0;n#div#2;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#textarea#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#main#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#0;n#main#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#main#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../master_bot_plateform/bot_platform-fe/src/app/core/buildbot/build-code-based-bot/architecture/pipeline/pipeline.component.html">
+        <entry file="file://$PROJECT_DIR$/../DEVELOP/bot_platform-fe/angular.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="32" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
+            <state relative-caret-position="255">
+              <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -113,36 +173,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>tagNa</find>
-      <find>trim</find>
-      <find>test.html</find>
-      <find>dblc</find>
-      <find>getSc</find>
-      <find>db</find>
-      <find>show</find>
-      <find>.css</find>
-      <find>ng-bubble-icon</find>
-      <find>consol</find>
-      <find>openInIde</find>
-      <find>openIn</find>
-      <find>newLocalConfigData</find>
-      <find>updateLocalConfig(</find>
-      <find>update</find>
-      <find>[1]</find>
-      <find>conso</find>
+      <find>Search files and folders</find>
+      <find>text</find>
+      <find>input</find>
+      <find>margin</find>
+      <find>rgba(233,84,32,0.29)</find>
+      <find>row-wrapper-item</find>
+      <find>.row-wrapper-item</find>
+      <find>nth</find>
+      <find>#ccc</find>
+      <find>hig</find>
+      <find>fa-sea</find>
       <find>init-img</find>
-      <find>$initImg</find>
-      <find>startWithAppRegex</find>
-      <find>build</find>
-      <find>st end with hy</find>
-      <find>dbl</find>
-      <find>ctrl</find>
-      <find>master</find>
-      <find>port</find>
-      <find>fs</find>
-      <find>--port</find>
-      <find>rea</find>
-      <find>.exec</find>
+      <find>background-color: rgb(51, 51, 51);</find>
+      <find>white</find>
+      <find>row</find>
+      <find>getFIlecon</find>
+      <find>fs.rea</find>
+      <find>enter</find>
+      <find>ack</find>
+      <find>ack</find>
+      <find>open</find>
+      <find>get</find>
+      <find>sock</find>
+      <find>handleOpenRequest</find>
+      <find>fa fa-save</find>
+      <find>init</find>
+      <find>codemi</find>
+      <find>getFileByPath</find>
+      <find>getFile</find>
+      <find>handleGetFileByPathRequest</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -151,7 +211,7 @@
     </replaceStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="D:" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="move-to-websockets" />
@@ -181,11 +241,9 @@
         <option value="$PROJECT_DIR$/lib/src/ng-bubble.js" />
         <option value="$PROJECT_DIR$/scan.js" />
         <option value="$PROJECT_DIR$/public/assets/js/client.js" />
-        <option value="$PROJECT_DIR$/public/assets/css/styles.css" />
         <option value="$PROJECT_DIR$/../bot_platform-fe/documentation/components/BuildbotWrapperComponent.html" />
         <option value="$PROJECT_DIR$/lib/ng-bubble.js" />
         <option value="$PROJECT_DIR$/lib/config.js" />
-        <option value="$PROJECT_DIR$/enums.ts" />
         <option value="$PROJECT_DIR$/lib/enums.js.map" />
         <option value="$PROJECT_DIR$/ng-bubble-local.json" />
         <option value="$PROJECT_DIR$/src/constants.ts" />
@@ -194,19 +252,26 @@
         <option value="$PROJECT_DIR$/test.js" />
         <option value="$PROJECT_DIR$/lib/src/line-finder.js" />
         <option value="$PROJECT_DIR$/src/config.ts" />
-        <option value="$PROJECT_DIR$/src/line-finder.ts" />
         <option value="$PROJECT_DIR$/src/file-reader.ts" />
-        <option value="$PROJECT_DIR$/src/utility.ts" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/template.js" />
         <option value="$PROJECT_DIR$/interfaces.ts" />
         <option value="$PROJECT_DIR$/src/ng-bubble.ts" />
         <option value="$PROJECT_DIR$/public/assets/index.html" />
-        <option value="$PROJECT_DIR$/public/assets/js/client.ts" />
         <option value="$PROJECT_DIR$/src/template.ts" />
-        <option value="$PROJECT_DIR$/src/routes.ts" />
         <option value="$PROJECT_DIR$/src/inquirer.ts" />
         <option value="D:/.gitignore" />
+        <option value="$PROJECT_DIR$/src/line-finder.ts" />
+        <option value="$PROJECT_DIR$/public/assets/css/codemirror/night.css" />
+        <option value="$PROJECT_DIR$/public/assets/css/codemirror/addon/foldcode.js" />
+        <option value="$PROJECT_DIR$/public/assets/css/codemirror/addon/brace-fold.js" />
+        <option value="$PROJECT_DIR$/public/assets/css/codemirror/addon/foldgutter.js" />
+        <option value="$PROJECT_DIR$/public/assets/css/codemirror/addon/markdown-fold.js" />
+        <option value="$PROJECT_DIR$/public/assets/css/styles.css" />
+        <option value="$PROJECT_DIR$/public/assets/js/client.ts" />
+        <option value="$PROJECT_DIR$/src/utility.ts" />
+        <option value="$PROJECT_DIR$/enums.ts" />
+        <option value="$PROJECT_DIR$/src/routes.ts" />
       </list>
     </option>
   </component>
@@ -214,8 +279,8 @@
     <servers />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="544" />
-    <option name="width" value="981" />
+    <option name="x" value="-11" />
+    <option name="width" value="980" />
     <option name="height" value="1044" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -244,6 +309,13 @@
               <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="line-finder.js" type="620a8d5e:NestingTreeNode" />
             </path>
             <path>
               <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
@@ -293,7 +365,39 @@
               <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+              <item name="codemirror" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="imgs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="codemirror" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="codemirror" type="462c0819:PsiDirectoryNode" />
+              <item name="addon" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
@@ -307,6 +411,16 @@
               <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
               <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="enums.ts" type="620a8d5e:NestingTreeNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="interfaces.ts" type="620a8d5e:NestingTreeNode" />
             </path>
           </expand>
           <select />
@@ -345,17 +459,18 @@
     <property name="ts.external.directory.path" value="D:\nodebook\ng-bubble\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\nodebook\ng-bubble\public\assets\js\codemirror" />
+      <recent name="D:\nodebook\ng-bubble\src" />
+      <recent name="D:\nodebook\ng-bubble" />
+      <recent name="D:\nodebook\ng-bubble\public\assets" />
+      <recent name="D:\nodebook2\ng-bubble\public\assets\css" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\nodebook\ng-bubble\src" />
       <recent name="D:\nodebook\ng-bubble" />
       <recent name="D:\nodebook2\ng-bubble\test" />
       <recent name="D:\nodebook2\cute-files\frontend\assets\js" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\nodebook\ng-bubble\src" />
-      <recent name="D:\nodebook\ng-bubble" />
-      <recent name="D:\nodebook\ng-bubble\public\assets" />
-      <recent name="D:\nodebook2\ng-bubble\public\assets\css" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -414,7 +529,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="158576000" />
+    <option name="totallyTimeSpent" value="202984000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -429,21 +544,21 @@
     <frame x="-7" y="-7" width="1295" height="704" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49717513" visible="true" weight="0.16057234" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49717513" visible="true" weight="0.23847377" />
       <window_info id="Structure" order="1" sideWeight="0.50282484" side_tool="true" weight="0.19077902" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32867134" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32867134" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49920508" weight="0.64685315" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49920508" visible="true" weight="0.23601398" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32828283" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5007949" side_tool="true" weight="0.27272728" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49920508" visible="true" weight="0.3146853" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49920508" weight="0.4125874" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="12" weight="0.32867134" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -482,56 +597,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://D:/Readme.md" />
-    <entry file="file://$PROJECT_DIR$/lib/ng-bubble.d.ts" />
-    <entry file="file://D:/ng-bubble.js" />
-    <entry file="file://D:/node_modules/@types/express/index.d.ts" />
-    <entry file="file://D:/lib/src/config.js" />
-    <entry file="file://D:/lib/src/config.d.ts" />
-    <entry file="file://$PROJECT_DIR$/lib/ng-bubble.js" />
-    <entry file="file://D:/lib/enums.js.map" />
-    <entry file="file://D:/lib/enums.js" />
-    <entry file="file://D:/node_modules/@types/node/index.d.ts" />
-    <entry file="file://D:/ng-bubble-global.json" />
-    <entry file="file://D:/lib/src/ng-bubble.js" />
-    <entry file="file://D:/test.html" />
-    <entry file="file://D:/node_modules/typescript/lib/tsserverlibrary.d.ts" />
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es2015.core.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="447" column="4" selection-start-line="447" selection-start-column="4" selection-end-line="447" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/javascript/nodejs/10.14.2/core-modules/internal/fs/streams.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="114" column="11" selection-start-line="114" selection-start-column="11" selection-end-line="114" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/javascript/nodejs/10.14.2/core-modules/fs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="140" column="46" selection-start-line="140" selection-start-column="46" selection-end-line="140" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/lib/src/file-reader.js" />
-    <entry file="file://D:/test.js" />
-    <entry file="file://D:/lib/src/ng-bubble-local.json" />
-    <entry file="file://D:/lib/src/line-finder.js" />
-    <entry file="file://D:/public/assets/imgs/ng-bubble-icon.png" />
-    <entry file="file://D:/public/assets/imgs/loader-svg.svg" />
-    <entry file="file://D:/node_modules/commander/typings/index.d.ts" />
-    <entry file="file://D:/enums.ts" />
-    <entry file="file://$PROJECT_DIR$/ng-bubble-local1.json" />
-    <entry file="file://D:/ng-bubble-local.json" />
-    <entry file="file://D:/public/assets/css/styles.css" />
-    <entry file="file://D:/src/scan.ts" />
-    <entry file="file://D:/template.js" />
-    <entry file="file://D:/src/line-finder.ts" />
-    <entry file="file://D:/interfaces.ts" />
     <entry file="file://D:/public/assets/index.html" />
     <entry file="file://D:/public/assets/js/client.ts" />
     <entry file="file://D:/lib/src/routes.js" />
@@ -551,5 +616,257 @@
     <entry file="file://D:/src/routes.ts" />
     <entry file="file://D:/package.json" />
     <entry file="file://D:/.gitignore" />
+    <entry file="file://$PROJECT_DIR$/public/assets/imgs/loader-svg.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1033">
+          <caret line="527" column="29" selection-start-line="527" selection-start-column="29" selection-end-line="527" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/src/line-finder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="107" column="7" lean-forward="true" selection-start-line="107" selection-start-column="7" selection-end-line="107" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/imgs/ng-bubble-icon.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ng-bubble.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="74" column="24" selection-start-line="74" selection-start-column="24" selection-end-line="74" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../master_bot_plateform/bot_platform-fe/src/app/core/core-wrapper.component.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../master_bot_plateform/bot_platform-fe/angular.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scan.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="51" column="31" lean-forward="true" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../master_bot_plateform/bot_platform-fe/src/app/core/buildbot/build-code-based-bot/architecture/pipeline/pipeline.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="32" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/css/codemirror/night.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/js/codemirror/addon/brace-fold.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="104" column="3" selection-start-line="104" selection-start-column="3" selection-end-line="104" selection-end-column="3" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/js/codemirror/addon/foldcode.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1588">
+          <caret line="144" column="14" lean-forward="true" selection-start-line="144" selection-start-column="14" selection-end-line="144" selection-end-column="14" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/js/codemirror/addon/foldgutter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="135" column="16" lean-forward="true" selection-start-line="135" selection-start-column="16" selection-end-line="135" selection-end-column="16" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/js/codemirror/addon/markdown-fold.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="46" column="5" lean-forward="true" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="40" lean-forward="true" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../DEVELOP/bot_platform-fe/src/app/core/bot-detail/code-based-bot-detail/code-based-bot-detail.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="117" column="35" lean-forward="true" selection-start-line="117" selection-start-column="35" selection-end-line="117" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../DEVELOP/bot_platform-fe/src/app/core/view-bots/view-bots.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../DEVELOP/bot_platform-fe/build-script.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/css/styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="308" column="24" selection-start-line="308" selection-start-column="24" selection-end-line="308" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../DEVELOP/bot_platform-fe/src/app/auth/login/login.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#style#0;n#p#0;n#div#0;n#div#1;n#div#0;n#section#2;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/js/client.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/file-reader.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="389">
+          <caret line="26" column="1" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/line-finder.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="14" column="2" selection-start-line="14" selection-start-column="2" selection-end-line="25" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../DEVELOP/bot_platform-fe/angular.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ws.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="43" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interfaces.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="52" column="11" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../DEVELOP/bot_platform-fe/src/app/core/bot-detail/bot-sessions/bot-sessions.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="52" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/js/client.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="489" column="32" selection-start-line="489" selection-start-column="32" selection-end-line="489" selection-end-column="32" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#1;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#1;n#div#0;n#div#2;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#textarea#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#main#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#main#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#main#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utility.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="75" column="23" selection-start-line="75" selection-start-column="23" selection-end-line="75" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enums.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+          <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="116" column="22" selection-start-line="116" selection-start-column="22" selection-end-line="116" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../DEVELOP/bot_platform-fe/src/app/test/test.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

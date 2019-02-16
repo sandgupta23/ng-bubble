@@ -1,3 +1,10 @@
+/*TODO:
+* 1. remove hoverd-parent class from component as a part of cleanup
+* 2. use ng-probe to find parent component
+* 3. use ng-probe to display component variables
+* 4. use ng-probe to edit component variables
+* */
+
 /*TODO: this should not be needed*/
 interface IWSData {
   type: EWSTypes,
@@ -11,6 +18,8 @@ enum EWSTypes {
   SEARCH = 'SEARCH',
   open = 'open',
   openByPath = 'openByPath',
+  getFileByPath = 'getFileByPath',
+  setFileByPath = 'setFileByPath',
   reIndex = 'reIndex',
   ack = 'ack',
 }
@@ -27,7 +36,8 @@ interface ILineFinderData {
   action?: string,
 }
 
-
+declare let ng: any;
+declare let CodeMirror: any;
 (function () {
   var styles = document.createElement('link');
   styles.rel = 'stylesheet';
@@ -39,7 +49,6 @@ interface ILineFinderData {
 })();
 
 (function () {
-
   let awaitingResponses = {};
   let socket = new WebSocket("ws://localhost:11640");
   socket.onopen = function (event) {
@@ -58,10 +67,10 @@ interface ILineFinderData {
     toggleLoader(false);
     let data: IWSData = JSON.parse(event.data);
 
-
+    let payload: any = data.payload;
+    debugger;
     if (data.type === EWSTypes.SEARCH) {
 
-      let payload: any = data.payload;
       let files = payload.files;
       let newRowsStr = "";
       files.forEach((file: any) => {
@@ -73,11 +82,14 @@ interface ILineFinderData {
                      </div>`;
       });
       $rowWrapper.innerHTML = newRowsStr;
+    } else if (data.type === EWSTypes.getFileByPath) {
+      let fileData = payload.file;
+      setCodeStrInCodeMirror(fileData);
     }
-
   };
 
   function sendMessage(data: IWSData) {
+    toggleLoader(true);
     console.log("sendMessage", data);
     socket.send(JSON.stringify(data));
   }
@@ -90,42 +102,129 @@ interface ILineFinderData {
   let $body = document.getElementsByTagName('body')[0];
 
   $body.innerHTML += `
-<!--<img id="init-img" class="radiate-out-on-hover" style=""-->
-     <!--src="https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/magnifyingglass-512.png" alt="">-->
-<div id="init-img" class="radiate-out-on-hover ">
-    <img class="ng-bubble-icon" style="width: 100%; height: 100%"
-     src="http://localhost:11637/assets/imgs/ng-bubble-icon.png" alt="">
-</div>
+<img id="init-img" class="radiate-out-on-hover" style=""
+     src="https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/magnifyingglass-512.png" alt="">
+     <button id="button1">button1</button>
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+     <link rel="stylesheet" href="http://localhost:11637/assets/css/codemirror/night.css">
+     <link rel="stylesheet" href="http://localhost:11637/assets/css/codemirror/night.css">
+     <script src="http://localhost:11637/assets/js/codemirror/addon/brace-fold.js"></script>
+     <script src="http://localhost:11637/assets/js/codemirror/addon/foldcode.js"></script>
+     <script src="http://localhost:11637/assets/js/codemirror/addon/foldgutter.js"></script>
+     <script src="http://localhost:11637/assets/js/codemirror/addon/markdown-fold.js"></script>
+     
+<!--<div id="init-img" class="radiate-out-on-hover ">-->
+    <!--<img class="ng-bubble-icon" style="width: 100%; height: 100%"-->
+     <!--src="http://localhost:11637/assets/imgs/ng-bubble-icon.png" alt="">-->
+<!--</div>-->
 
-<div id="ng-bubble-container" class="display-none" style="background-color: rgba(233,84,32,0.29)">
+<div style="height: 30vw; width: 30vw; background-color: rgb(51, 51, 51); color: #ccc; 
+position: fixed; right: 0;bottom: 0; z-index:100000000000000; display: flex;flex-direction: column;
+">
+ 
+  <div id="ng-bubble-editor-controls-1" style="display: flex; justify-content: flex-end; height: 40px; align-items: flex-end; padding-bottom: 5px; background-color: rgb(60, 60, 60)"> 
+  <i style="font-size: 12px;
+    margin-left: 10px; color: #cccccc">app.component.html</i>
+  <select id="ng-bubble-editor-controls-select"></select>
+  <span style="margin-left: auto" "></span>
+    <i class="fa fa-expand" style="margin-right: 10px"></i>
+    <i class="fa fa-window-minimize" style="margin-right: 10px"></i>
+    <!--<span>📝</span>-->
+    <!--<span id="ng-bubble-editor-controls-1-name" style="margin-left: auto"></span>-->
+  </div>
+  
+  <!--<div id="ng-bubble-editor-controls-2" style="display: flex; justify-content: flex-end">-->
+    <!--<span>🔄</span>-->
+    <!--<span>⬅️</span>-->
+    <!--<span>➡️</span>-->
+    <!--<span>⬆️</span>-->
+    <!--<span style="margin-right: auto">⬇️</span>-->
+    <!---->
+    <!--<select id="ng-bubble-editor-controls-select">-->
+      <!---->
+    <!--</select>-->
+    <!---->
+    <!---->
+    <!--<span title="Save changes" style="margin-right: 10px">💾</span>-->
+    <!--<span title="Minimize">🗕</span>-->
+  <!--</div>-->
+  <div style="display: flex;width: 100%;height: 100%; flex-grow: 1; position: relative">
+    <div style="flex-basis: 40px; flex-shrink: 0; display: flex;  flex-direction: column; align-items: center">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Visual_Studio_Code_1.18_icon.svg" class="vs-code-grey"></img>
+    <i class="fa fa-search"></i>
+    <i id="save-editor" class="fa fa-save"></i>
+    <i class="fa fa-repeat" style="font-size: 13px !important;"></i>
+    <i class="fa fa-angle-left"></i>
+    <i class="fa fa-angle-right"></i>
+    <i class="fa fa-angle-down"></i>
+    <i class="fa fa-angle-up"></i>
+</div>
+    <textarea style="height: 100%; flex-grow: 1; background-color: black; border: 1px solid black" id="ng-bubble-editor"></textarea>
+    <div id="ng-bubble-container" class="display-none">
     <main class="ng-bubble-autocomplete">
         <div style="position: relative;">
             <input id="ng-bubble-search" type="text"
+            placeholder="Search files and folders"
                    autofocus
-                   style="height: 44px; width: 100%;
-                   border-top-left-radius: 8px;
-                   border-top-right-radius: 8px;
+                   style="height: 30px; width: 100%;
                    outline: none;
-           border: 1px solid #a3421c;
-           font-size: 30px;
+           border: 1px solid transparent;
+           font-size: 11px;
            color: white;
-            padding-left: 10px; background-color: rgba(233,84,32,0.64)!important">
-            <img class="ng-bubble-icon"
-                 style="position: absolute; right: 3%; height: 70%; transform: translateY(50%); bottom: 50%; max-height: 100px"
-                 src="http://localhost:11637/assets/imgs/ng-bubble-icon.png" alt="">
+            padding-left: 10px; background-color: rgba(60, 60, 60, 0.90)!important">
+            <!--<img class="ng-bubble-icon"-->
+                 <!--style="position: absolute; right: 3%; height: 70%; transform: translateY(50%); bottom: 50%; max-height: 100px"-->
+                 <!--src="http://localhost:11637/assets/imgs/ng-bubble-icon.png" alt="">-->
             <div id="row-wrapper" style="position: absolute; top: 100%; left: 0; right: 0">
-                <div style="padding: 7px; border: 1px solid #e95420;">
-                    <strong style="font-size: 13px; color:  #e95420">Search files and folders</strong>
-                </div>
+                <!--<div style="padding: 7px; border: 1px solid #e95420;">-->
+                    <!--<strong style="font-size: 11px; color:  #ccc">Search files and folders</strong>-->
+                <!--</div>-->
             </div>
         </div>
 
     </main>
 
 </div>
+  </div>
+</div>
+
+
+<!--<div id="ng-bubble-container" class="display-none" style="background-color: rgba(233,84,32,0.29)">-->
+    <!--<main class="ng-bubble-autocomplete">-->
+        <!--<div style="position: relative;">-->
+            <!--<input id="ng-bubble-search" type="text"-->
+                   <!--autofocus-->
+                   <!--style="height: 44px; width: 100%;-->
+                   <!--border-top-left-radius: 8px;-->
+                   <!--border-top-right-radius: 8px;-->
+                   <!--outline: none;-->
+           <!--border: 1px solid #a3421c;-->
+           <!--font-size: 30px;-->
+           <!--color: white;-->
+            <!--padding-left: 10px; background-color: rgba(233,84,32,0.64)!important">-->
+            <!--<img class="ng-bubble-icon"-->
+                 <!--style="position: absolute; right: 3%; height: 70%; transform: translateY(50%); bottom: 50%; max-height: 100px"-->
+                 <!--src="http://localhost:11637/assets/imgs/ng-bubble-icon.png" alt="">-->
+            <!--<div id="row-wrapper" style="position: absolute; top: 100%; left: 0; right: 0">-->
+                <!--<div style="padding: 7px; border: 1px solid #e95420;">-->
+                    <!--<strong style="font-size: 13px; color:  #e95420">Search files and folders</strong>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+    <!--</main>-->
+
+<!--</div>-->
 `;
 
-
+  // let x:HTMLElement|null = document.getElementById('button1');
+  //  // x.click = ()=>console.log(ng);
+  // if(x){
+  //   x.addEventListener('click', ()=>{
+  //     console.log(ng);
+  //   })
+  // }
+  let componentInstanceInCodeMirror: object;
   let startWithAppRegex = new RegExp('^app-', 'i');
   const BACKEND_ROOT = 'http://localhost:11637';
   const BG_HIGHLIGHTED_CLASS = 'bg-highlighted';
@@ -134,9 +233,14 @@ interface ILineFinderData {
     toggleLoader(true);
     let target = $event.target as HTMLElement;
     let componentNode: HTMLElement | null = findParentComponentElement(target);
-    // while (!startWithAppRegex.test(componentNode.tagName)) {
-    //   componentNode = componentNode.parentElement as HTMLElement;
-    // }
+    if (componentNode) {
+      let componentInstance = getComponentInstanceFromComponentNode(componentNode);
+      let codeStr = stringify1(componentInstance);
+      addOptionsToCodemirrorSelect(componentInstance);
+      setCodeStrInCodeMirror(codeStr);
+      componentInstanceInCodeMirror = componentInstance;
+      initSelect();
+    }
     let codeText = "";//element.innerHTML;;
     if (!componentNode) {
       console.log("NG-BUBBLE:: COULDNT FIND COMPONENT");
@@ -156,6 +260,9 @@ interface ILineFinderData {
     let level = 0;
     while (level !== parentLevel && el.tagName !== 'body') {
       el = el.parentElement as HTMLElement;
+      if (!el) {
+        break;
+      }
       if (startWithAppRegex.test(el.tagName)) {
         level++;
       }
@@ -285,6 +392,7 @@ interface ILineFinderData {
       return;
     }
     let target = $event.target as HTMLElement;
+    console.log(target);
 
     if (hasClass(target, 'appened-el')) {
       return;
@@ -304,7 +412,6 @@ interface ILineFinderData {
 
     if ($Component) {
       $Component.classList.remove('hovered-parent');
-
     }
 
     // while (target && !startWithAppRegex.test(target.tagName)) {
@@ -315,8 +422,8 @@ interface ILineFinderData {
     if (!$parentComponentElement) return;
     $Component = $parentComponentElement;
     $appenededElement = showComponentMarkerOnComponent($Component);
-    $appenededElements.push($appenededElement);
-    console.log($appenededElements);
+    // $appenededElements.push($appenededElement);
+    // console.log($appenededElements);
 
     $Component.classList.add('hovered-parent');
     // $appenededElement = document.createElement('SPAN');
@@ -350,9 +457,42 @@ interface ILineFinderData {
     // $hoveredComponentOriginalInnerHtml = $component.innerHTML;
     $appenededElement = createComponentMarker($component.tagName);
     $component.insertBefore($appenededElement, $component.firstChild);
+    // console.log('creating marker on component:', $component, $appenededElement);
     return $appenededElement;
   }
 
+  var codemirror: any;
+  setTimeout(() => {
+    codemirror = CodeMirror.fromTextArea(document.getElementById('ng-bubble-editor'), {
+      lineNumbers: true,
+      lineWrapping: true,
+      theme: 'night',
+      rtlMoveVisually: false,
+      direction: 'ltr',
+      moveInputWithCursor: false,
+      extraKeys: {
+        'Ctrl-Q': function (codemirror: any) {
+          codemirror.foldCode(codemirror.getCursor());
+        },
+        "Ctrl-Space": "autocomplete",
+      },
+      foldGutter: true,
+      gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
+    });
+
+    let saveEditorButton$ = <HTMLElement>document.getElementById('save-editor');
+    saveEditorButton$.addEventListener('click', () => {
+      debugger;
+      let fileContent = codemirror.getValue()
+      sendMessage({
+        type: EWSTypes.setFileByPath, payload: {
+          file: fileContent,
+          pathToOpen: pathToOpen
+        }
+      });
+    });
+
+  }, 3000);
 
   function createComponentMarker(hoveredComponentTagName: string) {
     hoveredComponentTagName = hoveredComponentTagName.split('-').join('_');
@@ -371,7 +511,8 @@ interface ILineFinderData {
     let li22 = document.createElement('li');
     let li23 = document.createElement('li');
     let li24 = document.createElement('li');
-    [li21, li22, li23, li24].forEach((el) => {
+    let li25 = document.createElement('li');
+    [li21, li22, li23, li24, li25].forEach((el) => {
       el.classList.add('appened-el-child-item');
     });
 
@@ -379,31 +520,37 @@ interface ILineFinderData {
     let openParent = document.createTextNode('openParent');
     let ShowBranch = document.createTextNode('ShowBranch');
     let ReIndex = document.createTextNode('ReIndex');
+    let displayProps = document.createTextNode('displayProps');
 
     let openHtmlAttr = document.createAttribute('data-item');
     let openParentAttr = document.createAttribute('data-item');
     let ShowBranchAttr = document.createAttribute('data-item');
     let ReIndexAttr = document.createAttribute('data-item');
-
+    let displayPropsAttr = document.createAttribute('data-item');
+    //
     openHtmlAttr.value = 'openHtml';
     openParentAttr.value = 'openParent';
     ShowBranchAttr.value = 'ShowBranch';
     ReIndexAttr.value = 'ReIndex';
+    displayPropsAttr.value = 'displayProps';
 
     li21.appendChild(openHtml);
     li22.appendChild(openParent);
     li23.appendChild(ShowBranch);
     li24.appendChild(ReIndex);
+    li25.appendChild(displayProps);
 
     li21.setAttributeNode(openHtmlAttr);
     li22.setAttributeNode(openParentAttr);
     li23.setAttributeNode(ShowBranchAttr);
     li24.setAttributeNode(ReIndexAttr);
+    li25.setAttributeNode(displayPropsAttr);
 
     ul02.appendChild(li21);
     ul02.appendChild(li22);
     ul02.appendChild(li23);
     ul02.appendChild(li24);
+    ul02.appendChild(li25);
 
     span01.appendChild(ul02);
     span0.appendChild(span01);
@@ -426,7 +573,7 @@ interface ILineFinderData {
 
   function hideAllMenus() {
     let elements = Array.from(document.getElementsByClassName('appened-el-child'));
-    elements.forEach((el)=>{
+    elements.forEach((el) => {
       el.classList.add('hide-menu');
       el.classList.remove('show-menu');
     })
@@ -469,11 +616,93 @@ interface ILineFinderData {
         let component = findParentComponentElement(target, 1);
         component && showBranches(component);
         return;
+      } else if (action === 'displayProps') {
+
+        let componentNode: HTMLElement | null = findParentComponentElement(target);
+        if (componentNode) {
+          let componentInstance = getComponentInstanceFromComponentNode(componentNode);
+          let codeStr = stringify1(componentInstance);
+          addOptionsToCodemirrorSelect(componentInstance);
+          setCodeStrInCodeMirror(codeStr);
+          componentInstanceInCodeMirror = componentInstance;
+          initSelect();
+        }
+
+        return;
       }
 
       sendMessage({type: EWSTypes.open, payload: {tagName: tagName, targetTagName}});
     }
   }, false);
+
+
+  function getComponentInstanceFromComponentNode(component: HTMLElement) {
+    return ng.probe(component).componentInstance;
+  }
+
+  var SELECT_INIT = false;
+
+  function initSelect() {
+    let select = <HTMLSelectElement>document.getElementById('ng-bubble-editor-controls-select');
+    if (!select) return;
+    if (!SELECT_INIT) {
+      select.addEventListener('change', (event: any) => {
+        SELECT_INIT = true;
+        debugger;
+        let key = select.value;
+        let keys: string[];
+        keys = !key || key === 'All' ? [] : [key];
+        let codeStr = stringify1(componentInstanceInCodeMirror, keys);
+        setCodeStrInCodeMirror(codeStr);
+      });
+    }
+  }
+
+  function addOptionsToCodemirrorSelect(componentInstance: object) {
+    let select = document.getElementById('ng-bubble-editor-controls-select');
+    if (!select) return;
+    let str = `<option value="All">All</option>`;
+    Object.keys(componentInstance).forEach((key) => {
+      str += `<option value="${key}">${key}</option>`;
+    });
+    select.innerHTML = str;
+    select.addEventListener('change', () => {
+      // select.value
+    });
+  }
+
+  function setCodeStrInCodeMirror(codeStr: string) {
+    let editor = document.getElementById('ng-bubble-editor');
+    if (editor) {
+      codemirror.getDoc().setValue(codeStr);
+      codemirror.operation(function () {
+        for (var l = codemirror.firstLine(); l <= codemirror.lastLine(); ++l)
+          if (l > 1) {
+            codemirror.foldCode({line: l, ch: 0}, null, "fold");
+          }
+      });
+    }
+  }
+
+
+  /*TODO:check if any key is circular, improve it*/
+  function stringify1(obj: any, keys?: string[]) {
+    let newObj: any = {};
+    let keysToStringify: string[] = (Array.isArray(keys) && keys.length > 0 && keys) || Object.keys(obj);
+    keysToStringify.forEach((key) => {
+      if (typeof obj[key] !== "object") {
+        newObj[key] = obj[key]
+      } else {
+        try {
+          JSON.stringify(obj[key]);
+          newObj[key] = obj[key]
+        } catch (e) {
+          newObj[key] = '[NG BUBBLE ::: CIRCULAR_OBJECT]'
+        }
+      }
+    });
+    return JSON.stringify(newObj, null, "\t");
+  }
 
   function createMenu(x: HTMLElement) {
     x.classList.remove('hide-menu');
@@ -525,18 +754,19 @@ interface ILineFinderData {
     if ($event.keyCode === 13) {// enter key
 
       let searchTerm = (resultRows[highligtedRowCount] as HTMLDivElement).innerText;
-      let path: any = getHighlightedRow$().getAttribute('data-path');
+      pathToOpen = <string>getHighlightedRow$().getAttribute('data-path');
       // sendNgTag(searchTerm, true);
       sendMessage({
-        type: EWSTypes.openByPath,
+        type: EWSTypes.getFileByPath,
         payload: {
-          pathToOpen: path
+          pathToOpen: pathToOpen
         }
       });
     }
     toggleHighlightRow(highligtedRowCount, true);
   });
 
+  var pathToOpen: string;
 
   function getHighlightedRow$() {
     return document.getElementsByClassName('row-wrapper-item')[highligtedRowCount]
@@ -575,6 +805,7 @@ interface ILineFinderData {
   $initImg.addEventListener('click', () => {
     toggleSearchBar();
   });
+
 
   function toggleSearchBar() {
 

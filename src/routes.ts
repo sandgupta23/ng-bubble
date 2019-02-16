@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import {exactMatchedFileIndex, openInIde} from "./utility";
+import {exactMatchedFileIndex, getFileContent, openInIde, setFileContent} from "./utility";
 import {ILineFinderData, lineToOpen} from "./line-finder";
 import {getLocalConfig} from "./config";
 import {sendData} from "./ws";
@@ -7,8 +7,8 @@ import {EIdeNames, EWSTypes} from "../enums";
 import {IWSData} from "../interfaces";
 
 const scan = require('./scan');
-const root = process.cwd();
-// const root = "D:\\nodebook\\master_bot_plateform\\bot_platform-fe";
+// const root = process.cwd();
+const root = "D:\\nodebook\\DEVELOP\\bot_platform-fe";
 const Server = require('ws').Server;
 
 let folders: any[] = [], files: any = [];
@@ -31,6 +31,10 @@ export function routesInit(app: any) {
         handleSearchRequest(ws, <ILineFinderData>data.payload);
       } else if (data.type === EWSTypes.openByPath) {
         handleOpenByPathRequest(ws, <ILineFinderData>data.payload);
+      } else if (data.type === EWSTypes.getFileByPath) {
+        handleGetFileByPathRequest(ws, <ILineFinderData>data.payload);
+      } else if (data.type === EWSTypes.setFileByPath) {
+        handleSetFileByPathRequest(ws, <ILineFinderData>data.payload);
       } else if (data.type === EWSTypes.reIndex) {
         handleReIndexRequest(ws);
       }
@@ -46,7 +50,7 @@ export function routesInit(app: any) {
     res.send(tree);
   });
 
-  function rightClickHandler(data:{}) {
+  function rightClickHandler(data: {}) {
 
   }
 
@@ -87,7 +91,7 @@ export function routesInit(app: any) {
 
     try {
 
-      let lineToOpenInIde:number = (await lineToOpen(pathToBeOpened, payload))||0;
+      let lineToOpenInIde: number = (await lineToOpen(pathToBeOpened, payload)) || 0;
       let currentIde = ide_clicked ? ide_clicked : ide_user_input;
       await openInIde(pathToBeOpened, currentIde, codeText, payload, lineToOpenInIde);
       sendData(ws, {error: 200, type: EWSTypes.ack});
@@ -102,10 +106,24 @@ export function routesInit(app: any) {
     sendData(ws, {type: EWSTypes.openByPath, error: 200});
   }
 
-  async function handleReIndexRequest(ws:any) {
+  async function handleGetFileByPathRequest(ws: any, payload: ILineFinderData) {
+    /*TODO: should have used ajax here*/
+    let data:string = await getFileContent(payload.pathToOpen);
+    sendData(ws,<any>{type:EWSTypes.getFileByPath,payload:{file:data}});
+  }
+
+  async function handleSetFileByPathRequest(ws: any, payload: ILineFinderData) {
+    /*TODO: should have used ajax here*/
+    let data:string = await setFileContent(payload.pathToOpen, payload.file);
+    sendData(ws,<any>{type:EWSTypes.getFileByPath,payload:{file:data}});
+  }
+
+  async function handleReIndexRequest(ws: any) {
     // await openInIde(payload.pathToOpen, payload.editor || ide_user_input, "");
     tree = scan(root, "");
-    sendData(ws, {type: EWSTypes.ack, error: 200});
+    setTimeout(() => {
+      sendData(ws, {type: EWSTypes.ack, error: 200});
+    }, 2000);
   }
 
   function handleSearchRequest(ws: any, payload: ILineFinderData) {
@@ -123,7 +141,7 @@ export function routesInit(app: any) {
           files: foundItems.files,
           file: "",
           tagName: "",
-          targetTagName:"",
+          targetTagName: "",
           innerText: "",
           id: "",
           classList: [],

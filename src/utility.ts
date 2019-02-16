@@ -7,6 +7,8 @@ const util = require('util');
 const tcpPortUsed = require('tcp-port-used');
 const writeTemplate = require('./template');
 const exec = util.promisify(require('child_process').exec);
+const readFile = util.promisify(require('fs').readFile);
+const writeFile = util.promisify(require('fs').writeFile);
 
 export function getAngular2JsonPath() {
     return path.join(process.cwd(), "/../../", 'angular-cli.json');
@@ -56,8 +58,24 @@ export async function openInIde(path: string, currentIde: EIdeNames, codeText: s
 }
 
 
-function getFileContent() {
-
+export async function getFileContent(path:string) {
+    let fileContent;
+    try {
+        fileContent = await readFile(path);
+        return fileContent.toString();
+    }catch (e) {
+        console.log(e);
+    }
+    return fileContent;
+}
+export async function setFileContent(path:string, data:string) {
+    let fileContent;
+    try {
+        return await writeFile(path, data);
+    }catch (e) {
+        console.log(e);
+    }
+    return null;
 }
 
 function getLineNumberOfTextInFile(path: string, codeText: string) {
