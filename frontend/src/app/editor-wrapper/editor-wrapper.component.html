@@ -1,0 +1,14 @@
+<div class="app-editor-wrapper">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+  <app-editor-header
+    [componentFiles]="componentFiles"
+    [componentKeys]="componentKeys"
+    [headerForm]="headerForm"
+  ></app-editor-header>
+
+  <div class="app-editor-wrapper-body">
+    <app-editor-sidebar (sidebarAction$)="sidebarActionHandler()"></app-editor-sidebar>
+    <app-editor [codeText]="codeText"></app-editor>
+  </div>
+</div>

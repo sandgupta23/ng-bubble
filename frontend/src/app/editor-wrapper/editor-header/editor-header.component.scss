@@ -1,0 +1,62 @@
+.app-editor-wrapper-header {
+  display: flex;
+  justify-content: flex-end;
+  height: 40px;
+  align-items: flex-end;
+  padding-bottom: 5px;
+  background-color: rgb(60, 60, 60);
+
+
+
+  .app-editor-wrapper-header__name {
+    font-size: 12px;
+    margin-left: 10px;
+    color: #cccccc;
+  }
+
+  .app-editor-wrapper-header__keys {
+    cursor: pointer;
+    margin-right: 10px;
+    /*width: 100px;*/
+    max-width: 200px;
+    padding-left: 5px;
+    font-size: 11px;
+    color: #ccc;
+    background-color: rgb(60, 60, 60);
+    border: 1px solid transparent;
+    outline: none !important;
+    /*height: 34px;*/
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  #window-maximize {
+    margin-left: auto;
+  }
+
+  #window-maximize, #window-minimize {
+    margin-right: 10px
+  }
+  select {
+    cursor: pointer;
+    margin-right: 10px;
+    /*width: 100px;*/
+    max-width: 200px;
+    padding-left: 5px;
+    font-size: 11px;
+    color: #ccc;
+    background-color: rgb(60, 60, 60);
+    border: 1px solid transparent;
+    outline: none !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-style: italic;
+    font-weight: 400;
+  }
+  select::-ms-expand {
+    display: none; /* remove default arrow in IE 10 and 11 */
+  }
+
+}

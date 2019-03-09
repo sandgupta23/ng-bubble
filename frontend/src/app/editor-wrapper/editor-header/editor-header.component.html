@@ -1,0 +1,11 @@
+<form [formGroup]="headerForm" id="ng-bubble-editor-controls-1"
+     class="app-editor-wrapper-header">
+  <select id="app-editor-wrapper-header__files">
+    <option *ngFor="let files of componentFiles"><i>{{files}}</i></option>
+  </select>
+  <select id="app-editor-wrapper-header__keys">
+    <option></option>
+  </select>
+  <i id="window-maximize" class=" fa fa-expand"></i>
+  <i id="window-minimize" class=" fa fa-window-minimize"></i>
+</form>

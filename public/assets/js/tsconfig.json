@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
     "target": "es2015",
-    "module": "commonjs",
     "declaration": true,
-    "outDir": "./lib",
+    "outDir": "./",
     "strict": true,
     "sourceMap": true,
     "lib": [
@@ -12,9 +11,9 @@
     ]
   },
   "include": [
-    "backend/**/*"
+    "./**/*"
   ],
   "exclude": [
-    "backend/**/*.spec.*"
+    "src/**/*.spec.*"
   ]
 }

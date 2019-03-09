@@ -1,0 +1,36 @@
+.app-editor-wrapper {
+  width: 30vw;
+  min-width: 400px;
+  background-color: rgb(51, 51, 51);
+  color: #ccc;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 1000000;/*todo: create scss var*/
+  display: flex;
+  flex-direction: column;
+
+
+
+  .app-editor-wrapper-body {
+    display: flex;
+    width: 100%;
+    flex-grow: 1;
+    position: relative;
+    height: 40vh;
+
+    app-editor-sidebar {
+      width: 40px;
+      display: flex
+    }
+
+    app-editor {
+      width: 100%;
+    }
+  }
+
+}
+
+
+
+
