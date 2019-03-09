@@ -1,5 +1,5 @@
 import {EIdeNames, EWSTypes} from "./enums";
-import {ILineFinderData} from "./backend/line-finder";
+import {ILineFinderData} from "./src/line-finder";
 
 export interface IFsItem {
     name?: string;
