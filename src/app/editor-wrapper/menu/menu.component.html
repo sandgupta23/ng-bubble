@@ -1,0 +1,16 @@
+<div class="menu-wrapper"
+     (clickOutside)="showTooltip$.emit(false)"
+     (click)="action$.emit($event);$event.stopPropagation()"
+     [ngStyle]="{'top': top,left:left}">
+  <div (click)="showMenu = true" class="menu-wrapper__title">
+    <span>{{_coords.componentName}}</span>
+    <i  class="fa fa-ellipsis-v"></i>
+  </div>
+  <ul class="menu" *ngIf="showMenu" (click)="showMenu = false">
+    <li class="menu__item menu__item-name">{{_coords.componentName}}</li>
+    <li class="menu__item menu__item-html">Open html</li>
+    <li class="menu__item menu__item-ts">Open TS</li>
+    <li class="menu__item menu__item-data">Display Data</li>
+    <!--<li class="menu__item menu__item-ide">Open Parent in IDE</li>-->
+  </ul>
+</div>

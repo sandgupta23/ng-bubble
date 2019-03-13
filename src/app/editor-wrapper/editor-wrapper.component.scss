@@ -1,17 +1,15 @@
 .app-editor-wrapper {
-  width: 30vw;
-  min-width: 400px;
+  //width: 30vw;
+  //min-width: 400px;
   background-color: rgb(51, 51, 51);
   color: #ccc;
   position: fixed;
-  right: 0;
-  bottom: 0;
-  z-index: 1000000;/*todo: create scss var*/
+  //right: 0;
+  //bottom: 0;
+  z-index: 1000000; /*todo: create scss var*/
   display: flex;
   flex-direction: column;
-
-
-
+  overflow: hidden;/*TODO: hack*/
   .app-editor-wrapper-body {
     display: flex;
     width: 100%;
@@ -21,7 +19,8 @@
 
     app-editor-sidebar {
       width: 40px;
-      display: flex
+      display: flex;
+      flex-shrink: 0;
     }
 
     app-editor {
@@ -29,8 +28,22 @@
     }
   }
 
+  app-file-search-panel {
+    position: absolute;
+    top: 5px;
+    left: 45px;
+    right: 5px;
+    z-index: 10000;
+    overflow-x: hidden;/*TODO: this is a hack*/
+    //display: flex;
+    //justify-content: center;
+  }
+
 }
 
-
-
+app-menu{
+  position: fixed;
+  top: 200vh;
+  left: 200vw;
+}
 

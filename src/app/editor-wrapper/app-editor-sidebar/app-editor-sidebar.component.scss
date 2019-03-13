@@ -9,8 +9,13 @@
   flex-direction: column;
   align-items: center;
 
-  .fa-repeat {
-    font-size: 13px !important;
+
+  .fa {
+    font-size: 16px !important;
+    /*font-weight: bold;*/
+    margin-top: 15px;
+    color: #ffffff9e;
+    cursor: pointer;
   }
 
   .vs-code-grey {
@@ -18,14 +23,12 @@
     filter: grayscale(50%);
     height: 24px;
     margin-top: 15px;
+    cursor: pointer;
   }
 
+  .fa-repeat {
+    font-size: 13px !important;
 
-  .fa {
-    font-size: 16px !important;
-    /*font-weight: bold;*/
-    margin-top: 15px;
-    color: #ffffff9e;
   }
 }
 

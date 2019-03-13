@@ -1166,7 +1166,7 @@
 	}
 
 	// The DOM events that CodeMirror handles can be overridden by
-	// registering a (non-DOM) handler on the editor for the event name,
+	// registering a (non-DOM) handler on the editor for the event fileName,
 	// and preventDefault-ing the event in that handler.
 	function signalDOMEvent(cm, e, override) {
 		if (typeof e == "string")
@@ -1304,7 +1304,7 @@
 		return badZoomedRects = Math.abs(normal.left - fromRange.left) > 1
 	}
 
-	// Known modes, by name and by MIME
+	// Known modes, by fileName and by MIME
 	var modes = {}, mimeModes = {};
 
 	// Extra arguments are stored as the mode's dependencies, which is
@@ -1320,7 +1320,7 @@
 		mimeModes[mime] = spec;
 	}
 
-	// Given a MIME type, a {name, ...options} config object, or a name
+	// Given a MIME type, a {fileName, ...options} config object, or a fileName
 	// string, return a mode config object.
 	function resolveMode(spec) {
 		if (typeof spec == "string" && mimeModes.hasOwnProperty(spec)) {
@@ -2147,7 +2147,7 @@
 	// state or simply not expect any other events to happen.
 	// signalLater looks whether there are any handlers, and schedules
 	// them to be executed when the last operation ends, or, if no
-	// operation is active, when a timeout fires.
+	// operation is activeTab, when a timeout fires.
 	function signalLater(emitter, type /*, values...*/) {
 		var arr = getHandlers(emitter, type);
 		if (!arr.length) { return }
@@ -3126,7 +3126,7 @@
 			if (top < 0) { top = 0; }
 			top = Math.round(top);
 			bottom = Math.round(bottom);
-			fragment.appendChild(elt("div", null, "CodeMirror-selected", ("position: absolute; left: " + left + "px;\n                             top: " + top + "px; width: " + (width == null ? rightSide - left : width) + "px;\n                             height: " + (bottom - top) + "px")));
+			fragment.appendChild(elt("div", null, "CodeMirror-selectedRow", ("position: absolute; left: " + left + "px;\n                             top: " + top + "px; width: " + (width == null ? rightSide - left : width) + "px;\n                             height: " + (bottom - top) + "px")));
 		}
 
 		function drawForLine(line, fromArg, toArg) {
@@ -4874,7 +4874,7 @@
 	// Called whenever the selection changes, sets the new selection as
 	// the pending selection in the history, and pushes the old pending
 	// selection into the 'done' array when it was significantly
-	// different (in number of selected ranges, emptiness, or time).
+	// different (in number of selectedRow ranges, emptiness, or time).
 	function addSelectionToHistory(doc, sel, opId, options) {
 		var hist = doc.history, origin = options && options.origin;
 
@@ -6517,7 +6517,7 @@
 			};
 			for (var i = 0; i < n; ++i) { loadFile(files[i], i); }
 		} else { // Normal drop
-			// Don't do a replace if the drop happened inside of the selected text.
+			// Don't do a replace if the drop happened inside of the selectedRow text.
 			if (cm.state.draggingText && cm.doc.sel.contains(pos) > -1) {
 				cm.state.draggingText(e);
 				// Ensure the editor is re-focused
@@ -6606,7 +6606,7 @@
 		globalsRegistered = true;
 	}
 	function registerGlobalHandlers() {
-		// When the window resizes, we need to refresh active editors.
+		// When the window resizes, we need to refresh activeTab editors.
 		var resizeTimer;
 		on(window, "resize", function () {
 			if (resizeTimer == null) { resizeTimer = setTimeout(function () {
@@ -6699,7 +6699,7 @@
 			else if (/^a(lt)?$/i.test(mod)) { alt = true; }
 			else if (/^(c|ctrl|control)$/i.test(mod)) { ctrl = true; }
 			else if (/^s(hift)?$/i.test(mod)) { shift = true; }
-			else { throw new Error("Unrecognized modifier name: " + mod) }
+			else { throw new Error("Unrecognized modifier fileName: " + mod) }
 		}
 		if (alt) { name = "Alt-" + name; }
 		if (ctrl) { name = "Ctrl-" + name; }
@@ -6773,7 +6773,7 @@
 		return name
 	}
 
-	// Look up the name of a key as indicated by an event object.
+	// Look up the fileName of a key as indicated by an event object.
 	function keyName(event, noShift) {
 		if (presto && event.keyCode == 34 && event["char"]) { return false }
 		var name = keyNames[event.keyCode];
@@ -7116,7 +7116,7 @@
 			|| lookupKey(name, cm.options.keyMap, handle, cm)
 	}
 
-	// Note that, despite the name, this function is also used to check
+	// Note that, despite the fileName, this function is also used to check
 	// for bound mouse clicks.
 
 	var stopSeq = new Delayed;
@@ -7161,7 +7161,7 @@
 		if (!name) { return false }
 
 		if (e.shiftKey && !cm.state.keySeq) {
-			// First try to resolve full name (including 'Shift-'). Failing
+			// First try to resolve full fileName (including 'Shift-'). Failing
 			// that, see if there is a cursor-motion command (starting with
 			// 'go') bound to the keyname without 'Shift-'.
 			return dispatchKey(cm, "Shift-" + name, e, function (b) { return doHandleBinding(cm, b, true); })
@@ -9372,7 +9372,7 @@
 	};
 
 	// Reset the input to correspond to the selection (or to be empty,
-	// when not typing and nothing is selected)
+	// when not typing and nothing is selectedRow)
 	TextareaInput.prototype.reset = function (typing) {
 		if (this.contextMenuPending || this.composing) { return }
 		var cm = this.cm;
@@ -9434,9 +9434,9 @@
 	};
 
 	// Read input from the textarea, and update the document to match.
-	// When something is selected, it is present in the textarea, and
-	// selected (unless it is huge, in which case a placeholder is
-	// used). When nothing is selected, the cursor sits after previously
+	// When something is selectedRow, it is present in the textarea, and
+	// selectedRow (unless it is huge, in which case a placeholder is
+	// used). When nothing is selectedRow, the cursor sits after previously
 	// seen text (can be empty), which is stored in prevInput (we must
 	// not reset the textarea when typing, because that breaks IME).
 	TextareaInput.prototype.poll = function () {
@@ -9528,7 +9528,7 @@
 
 		// Select-all will be greyed out if there's nothing to select, so
 		// this adds a zero-width space so that we can later check whether
-		// it got selected.
+		// it got selectedRow.
 		function prepareSelectAllHack() {
 			if (te.selectionStart != null) {
 				var selected = cm.somethingSelected();

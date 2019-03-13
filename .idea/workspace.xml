@@ -5,123 +5,51 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2cfb048-ce33-455d-bed6-78addd447d99" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/enums.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/enums.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/line-finder.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/line-finder.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/ng-bubble.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/ng-bubble.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client1.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/config.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/config.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/constants.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/constants.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/constants.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/file-reader.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/file-reader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/file-reader.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/inquirer.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/inquirer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/inquirer.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/line-finder.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/line-finder.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/line-finder.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/ng-bubble.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/ng-bubble.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/ng-bubble.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/routes.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/routes.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/routes.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/scan.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/scan.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/scan.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/config.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/config.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/constants.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/constants.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/constants.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/file-reader.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/file-reader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/file-reader.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/inquirer.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/inquirer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/inquirer.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/line-finder.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/line-finder.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/line-finder.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/ng-bubble.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/ng-bubble.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/ng-bubble.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/routes.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/routes.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/routes.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/scan.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/scan.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/scan.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/template.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/template.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/template.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/utility.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/utility.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/utility.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/ws.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/ws.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/src/ws.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/template.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/template.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/template.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/utility.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/utility.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/utility.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/ws.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/ws.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/backend/ws.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/enums.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/enums.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/enums.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/interfaces.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/interfaces.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/interfaces.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/config.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/config.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/constants.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/constants.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/constants.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/file-reader.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/file-reader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/file-reader.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/inquirer.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/inquirer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/inquirer.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/line-finder.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/line-finder.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/line-finder.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/ng-bubble.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/ng-bubble.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/ng-bubble.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/routes.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/routes.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/routes.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/scan.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/scan.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/scan.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/template.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/template.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/template.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/utility.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/utility.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/utility.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/ws.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/ws.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/ws.js.map" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/client.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/client.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/editor-wrapper/file-search-panel/file-search-panel.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/editor-wrapper/file-search-panel/file-search-panel.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/editor-wrapper/file-search-panel/file-search-panel.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/editor-wrapper/file-search-panel/file-search-panel.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/editor-wrapper/file-search-panel/image-by-extension.pipe.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/editor-wrapper/file-search-panel/image-by-extension.pipe.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/editor-wrapper/menu/menu.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/editor-wrapper/menu/menu.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/editor-wrapper/menu/menu.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/editor-wrapper/menu/menu.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/enum.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/event.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/get-object-key.pipe.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/get-object-key.pipe.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/interface.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/json-parse.pipe.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/json-parse.pipe.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/test/test.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/test/test.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/test/test.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/test/test.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/ui-state.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/ui-state.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/js/client.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/client.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/js/client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/client.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/app-editor-sidebar/app-editor-sidebar.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/app-editor-sidebar/app-editor-sidebar.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/app-editor-sidebar/app-editor-sidebar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/app-editor-sidebar/app-editor-sidebar.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/app-editor/app-editor.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/app-editor/app-editor.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/app-editor/app-editor.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/app-editor/app-editor.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/app-editor/app-editor.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/editor-header/editor-header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/editor-header/editor-header.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/editor-header/editor-header.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/editor-header/editor-header.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/editor-header/editor-header.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/editor-header/editor-header.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/store.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/store.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utility.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utility.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/js/codemirror.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/js/codemirror.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -137,90 +65,106 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/assets/js/client.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="167">
+              <caret line="120" column="26" lean-forward="true" selection-start-line="120" selection-start-column="26" selection-end-line="120" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/client.service.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="97">
+              <caret line="155" column="42" selection-start-line="155" selection-start-column="32" selection-end-line="155" selection-end-column="42" />
+              <folding>
+                <element signature="e#781#819#0" expanded="true" />
+                <element signature="e#1156#1279#0" />
+                <element signature="n#EEditorInput#0" />
+                <element signature="n#!!block;n#IWSData#0" />
+                <element signature="n#EWSTypes#0" />
+                <element signature="n#!!block;n#ILineFinderData#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/backend/src/routes.ts">
+        <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="67" column="26" lean-forward="true" selection-start-line="67" selection-start-column="26" selection-end-line="67" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/src/scan.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="16" lean-forward="true" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+            <state relative-caret-position="221">
+              <caret line="42" column="2" selection-start-line="42" selection-start-column="2" selection-end-line="42" selection-end-column="2" />
               <folding>
-                <element signature="e#0#25#0" expanded="true" />
+                <element signature="e#0#137#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/src/template.ts">
+        <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/editor-header/editor-header.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="25" lean-forward="true" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+            <state relative-caret-position="34">
+              <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/src/config.ts">
+        <entry file="file://$PROJECT_DIR$/src/app/utility.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="24" column="13" lean-forward="true" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+            <state relative-caret-position="156">
+              <caret line="125" column="9" selection-start-line="125" selection-start-column="9" selection-end-line="125" selection-end-column="9" />
               <folding>
-                <element signature="e#0#25#0" expanded="true" />
+                <element signature="e#251#722#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/src/ws.ts">
+        <entry file="file://$PROJECT_DIR$/src/app/store.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+            <state relative-caret-position="164">
+              <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/src/constants.ts">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/src/file-reader.ts">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/src/line-finder.ts">
+        <entry file="file://$PROJECT_DIR$/angular.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="31" column="39" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
+            <state relative-caret-position="306">
+              <caret line="93" column="10" selection-start-line="93" selection-start-column="10" selection-end-line="93" selection-end-column="10" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/src/ng-bubble.ts">
+        <entry file="file://$PROJECT_DIR$/src/app/test/test.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+            <state relative-caret-position="148">
+              <caret line="10" column="20" lean-forward="true" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/src/inquirer.ts">
+        <entry file="file://$PROJECT_DIR$/src/app/app.module.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+            <state relative-caret-position="197">
+              <caret line="37" column="26" lean-forward="true" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="174">
+              <caret line="42" column="28" lean-forward="true" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -238,25 +182,10 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>regex</find>
-      <find>file</find>
-      <find>Ifile</find>
-      <find>send</find>
-      <find>getDoc</find>
-      <find>getDo</find>
-      <find>setCodeStrInCodeMirror</find>
-      <find>getFileByPath</find>
-      <find>fileData</find>
-      <find>handlesea</find>
-      <find>getFileTrigger$</find>
-      <find>trigger</find>
-      <find>getfileby</find>
-      <find>onmess</find>
       <find>.files</find>
       <find>expres</find>
       <find>hover</find>
       <find>$hoveredComponent</find>
-      <find>static</find>
       <find>searc</find>
       <find>Open html</find>
       <find>ng.pro</find>
@@ -268,6 +197,21 @@
       <find>searchda</find>
       <find>searchData</find>
       <find>searchDa</find>
+      <find>selected</find>
+      <find>init</find>
+      <find>fa-repeat</find>
+      <find>$selectedComponentNode</find>
+      <find>emit</find>
+      <find>static</find>
+      <find>removeComponentPrefix</find>
+      <find>openInIde$</find>
+      <find>tagToFileName</find>
+      <find>sidebar</find>
+      <find>sideBaseClasses</find>
+      <find>getClickedSideBarIcon</find>
+      <find>.foldCode</find>
+      <find>foldCode</find>
+      <find>this.patchForm</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -287,9 +231,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scan.js" />
-        <option value="$PROJECT_DIR$/public/assets/js/client.js" />
-        <option value="$PROJECT_DIR$/../bot_platform-fe/documentation/components/BuildbotWrapperComponent.html" />
         <option value="$PROJECT_DIR$/lib/ng-bubble.js" />
         <option value="$PROJECT_DIR$/lib/config.js" />
         <option value="$PROJECT_DIR$/lib/enums.js.map" />
@@ -330,7 +271,6 @@
         <option value="$PROJECT_DIR$/client.ts" />
         <option value="$PROJECT_DIR$/public/assets/js/client1.js" />
         <option value="$PROJECT_DIR$/backend/src/config.ts" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/public/assets/index.html" />
         <option value="$PROJECT_DIR$/backend/src/ng-bubble.ts" />
         <option value="$PROJECT_DIR$/public/assets/js/client.ts" />
@@ -338,6 +278,10 @@
         <option value="$PROJECT_DIR$/backend/src/line-finder.ts" />
         <option value="$PROJECT_DIR$/backend/enums.ts" />
         <option value="$PROJECT_DIR$/backend/src/routes.ts" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src/app/client.service.ts" />
+        <option value="$PROJECT_DIR$/src/app/utility.service.ts" />
+        <option value="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.ts" />
       </list>
     </option>
   </component>
@@ -365,17 +309,6 @@
             <path>
               <item name="ng-bubble" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="backend" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="backend" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="ng-bubble" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -419,23 +352,14 @@
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="editor-wrapper" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="app-editor" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="editor-wrapper" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="app-editor-sidebar" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="editor-wrapper" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="editor-header" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -474,19 +398,19 @@
     <property name="ts.external.directory.path" value="D:\nodebook\ng-bubble\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\nodebook\ng-bubble\public\assets\js" />
-      <recent name="D:\nodebook\ng-bubble" />
-      <recent name="D:\nodebook\ng-bubble\backend\src" />
-      <recent name="D:\nodebook\ng-bubble\frontend" />
-      <recent name="D:\nodebook\ng-bubble\src" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\nodebook\ng-bubble\backend" />
       <recent name="D:\nodebook\ng-bubble\public\assets\js\codemirror" />
       <recent name="D:\nodebook\ng-bubble\src" />
       <recent name="D:\nodebook\ng-bubble" />
       <recent name="D:\nodebook\ng-bubble\public\assets" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\nodebook\ng-bubble" />
+      <recent name="D:\nodebook\ng-bubble\public\assets\js" />
+      <recent name="D:\nodebook\ng-bubble\backend\src" />
+      <recent name="D:\nodebook\ng-bubble\frontend" />
+      <recent name="D:\nodebook\ng-bubble\src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -553,12 +477,12 @@
       <workItem from="1552069137724" duration="1756000" />
       <workItem from="1552119877274" duration="5968000" />
       <workItem from="1552139249038" duration="47554000" />
-      <workItem from="1552475150443" duration="3403000" />
+      <workItem from="1552475150443" duration="8186000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="295731000" />
+    <option name="totallyTimeSpent" value="300514000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -573,10 +497,10 @@
     <frame x="-7" y="-7" width="1295" height="704" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4953846" visible="true" weight="0.10810811" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49570817" visible="true" weight="0.20667727" />
       <window_info id="Structure" order="1" sideWeight="0.50593823" side_tool="true" weight="0.10810811" />
       <window_info id="npm" order="2" sideWeight="0.50337076" side_tool="true" weight="0.21621622" />
-      <window_info id="Favorites" order="3" sideWeight="0.50461537" side_tool="true" visible="true" weight="0.10810811" />
+      <window_info id="Favorites" order="3" sideWeight="0.50535333" side_tool="true" weight="0.10810811" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32867134" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.23076923" />
@@ -587,7 +511,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5007949" side_tool="true" weight="0.27272728" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49920508" visible="true" weight="0.4318182" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49920508" visible="true" weight="0.08916084" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="12" weight="0.32867134" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -646,61 +570,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/@types/node/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="180" column="14" selection-start-line="180" selection-start-column="14" selection-end-line="180" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/app.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="42" selection-start-line="42" selection-end-line="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/enums.js.map">
-      <provider editor-type-id="sourcemapFileViewerProvider" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret column="567" selection-start-column="567" selection-end-column="567" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/angular.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="93" column="10" lean-forward="true" selection-start-line="93" selection-start-column="10" selection-end-line="93" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/LICENSE">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/ng-bubble.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/package-lock.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/favicon.ico">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -799,13 +668,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="30" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -890,13 +752,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/js/client.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="120" column="26" lean-forward="true" selection-start-line="120" selection-start-column="26" selection-end-line="120" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/src/utility.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -944,14 +799,14 @@
     <entry file="file://$PROJECT_DIR$/backend/src/template.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
-          <caret line="16" column="25" lean-forward="true" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+          <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/src/scan.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
-          <caret line="19" column="16" lean-forward="true" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+          <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
@@ -967,8 +822,92 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/src/routes.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="67" column="26" lean-forward="true" selection-start-line="67" selection-start-column="26" selection-end-line="67" selection-end-column="26" />
+        <state relative-caret-position="286">
+          <caret line="72" column="24" selection-start-line="72" selection-start-column="24" selection-end-line="72" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/angular.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="93" column="10" selection-start-line="93" selection-start-column="10" selection-end-line="93" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="42" column="28" lean-forward="true" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/test/test.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="10" column="20" lean-forward="true" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="37" column="26" lean-forward="true" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/js/client.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="120" column="26" lean-forward="true" selection-start-line="120" selection-start-column="26" selection-end-line="120" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/client.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="155" column="42" selection-start-line="155" selection-start-column="32" selection-end-line="155" selection-end-column="42" />
+          <folding>
+            <element signature="e#781#819#0" expanded="true" />
+            <element signature="e#1156#1279#0" />
+            <element signature="n#EEditorInput#0" />
+            <element signature="n#!!block;n#IWSData#0" />
+            <element signature="n#EWSTypes#0" />
+            <element signature="n#!!block;n#ILineFinderData#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/store.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/editor-header/editor-header.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/utility.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="125" column="9" selection-start-line="125" selection-start-column="9" selection-end-line="125" selection-end-column="9" />
+          <folding>
+            <element signature="e#251#722#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="42" column="2" selection-start-line="42" selection-start-column="2" selection-end-line="42" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#137#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

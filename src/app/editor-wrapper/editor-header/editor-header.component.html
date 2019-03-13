@@ -1,11 +1,21 @@
 <form [formGroup]="headerForm" id="ng-bubble-editor-controls-1"
-     class="app-editor-wrapper-header">
-  <select id="app-editor-wrapper-header__files">
-    <option *ngFor="let files of componentFiles"><i>{{files}}</i></option>
+     class="app-editor-wrapper-header" (click)="action$.emit($event)">
+
+  <i class="fa fa-file" style="font-size: 13px" title="File Mode"></i>
+  <select class="app-editor-wrapper-header__files" [ngClass]="{'activeTab':activeTab === myEHeaderFormDataKeys.fileName}" formControlName="fileName">
+    <option *ngFor="let file of componentFiles" [value]="file.name"><i>{{file.name}}</i></option>
   </select>
-  <select id="app-editor-wrapper-header__keys">
-    <option></option>
-  </select>
-  <i id="window-maximize" class=" fa fa-expand"></i>
-  <i id="window-minimize" class=" fa fa-window-minimize"></i>
+
+  <ng-container *ngIf="componentKeys?.length > 0">
+    <i class="fa fa-code" title="Component Mode"></i>
+    <select class="app-editor-wrapper-header__keys" formControlName="key" [ngClass]="{'activeTab':activeTab === myEHeaderFormDataKeys.key}">
+      <option *ngFor="let key of componentKeys" [value]="key"><i>{{key}}</i></option>
+    </select>
+  </ng-container>
+
+  <span style="margin-left: auto"></span>
+  <i id="window-maximize" style="transform: rotate(90deg); margin-right: 10px" class="fa fa-expand" *ngIf="!expand"></i>
+  <i class="fa fa-compress" style="transform: rotate(90deg);margin-right: 10px" *ngIf="expand"></i>
+  <i id="window-minimize" *ngIf="!minimize" class=" fa fa-window-minimize"></i>
+  <i *ngIf="minimize" class="fa fa-window-maximize"></i>
 </form>

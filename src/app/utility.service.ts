@@ -1,7 +1,41 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 
+import jc from 'json-cycle';
+import {storeKeys} from './store.service';
+import {IHeaderFormData} from "./editor-wrapper/editor-wrapper.component";
+import {EHeaderFormDataKeys} from "./editor-wrapper/editor-header/editor-header.component";
+
 declare const CodeMirror: any;
+
+const COMPONENT_SELECTOR = 'app';
+
+export const sideBaseClasses = [
+  "vs-code-grey",
+  'fa-search',
+  'fa-save',
+  'fa-repeat',
+  'fa-terminal',
+  'fa-angle-left',
+  'fa-angle-right',
+  'fa-angle-down',
+  'fa-angle-up',
+  'fa-expand',
+  'fa-compress',
+  'fa-window-minimize',
+  'fa-window-maximize',
+  'app-editor-wrapper-header__keys',
+  'app-editor-wrapper-header__files',
+  'fa-angle-double-right',
+  'fa-angle-double-down',
+  'fa-file',
+  'fa-code',
+  'menu__item-html',
+  'menu__item-ts',
+  'menu__item-data',
+  'menu__item-ide',
+];
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +46,20 @@ export class UtilityService {
 
   getHeaderForm() {
     return this.formBuilder.group({
-      first_message: [""],
-      error_message: [""],
+      fileName: [''],
+      key: [''],
+    });
+  }
+
+  getSearchForm() {
+    return this.formBuilder.group({
+      keyword: [''],
     });
   }
 
 
   static codeMirrorInit(editorTextArea){
-    return CodeMirror.fromTextArea(editorTextArea, {
+    let codemirror =  CodeMirror.fromTextArea(editorTextArea, {
       lineNumbers: true,
       lineWrapping: true,
       theme: 'night',
@@ -35,5 +75,95 @@ export class UtilityService {
       foldGutter: true,
       gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
     });
+     codemirror.setOption("extraKeys", {
+      "Ctrl-Y": cm => {
+        codemirror.operation(function () {
+          for (var l = codemirror.firstLine(); l <= codemirror.lastLine(); ++l)
+            if (l > 1) {
+              codemirror.foldCode({line: l, ch: 0}, null, 'fold');
+            }
+        });
+        // CodeMirror.commands.foldAll(cm)
+      },
+      "Ctrl-I": cm => {
+        CodeMirror.commands.unfoldAll(cm)
+      },
+    });
+
+    return codemirror;
   }
+
+  static hasClass(target:HTMLElement, className):boolean{
+    return target.classList.contains(className);
+  }
+
+  static extractStoreData(obj){
+
+    let x = storeKeys.reduce((total, key)=>{
+      return {...total, [key]: obj[key]};
+    },{});
+    return x;
+  }
+
+
+
+
+  /*
+  * jsonStringifyCyclic: parse cyclic json
+  * Example:
+  *  var a = {name:"john doe"};
+  *  a.self = a; //Now a is cycle JSON.
+  *  Result: "{"name":"john doe","self":{"$ref":"$"}}"
+  * */
+  static jsonStringifyCyclic(obj){
+    return  JSON.stringify(jc.decycle(obj));
+  }
+
+  static unfoldCode(codemirror){
+    CodeMirror.commands.unfoldAll(codemirror)
+  }
+
+  static foldCode(codemirror){
+    for (var l = codemirror.firstLine(); l <= codemirror.lastLine(); ++l)
+      if (l > 1) {
+        codemirror.foldCode({line: l, ch: 0}, null, 'fold');
+      }
+  }
+
+  static getClickedSideBarIcon(clickEvent: Event) {
+    let target = clickEvent.target;
+    for (let className of sideBaseClasses) {
+      if (UtilityService.hasClass(<HTMLElement>target, className)) {
+        return className;
+      }
+    }
+  }
+
+  /**
+   * getCodeText: get code text based on the changed form data, after user interaction with header form data.
+   * oldData: old Header data
+   * newData: Header form data after user interaction
+   * */
+  static getCodeText(headerData: IHeaderFormData, componentObj: object): string {
+    let key = Object.keys(headerData)[0];
+    let codeText: any;
+    let val = headerData[key];
+    if (!val || val === 'All') {
+      codeText = componentObj;
+    } else {
+      codeText = {[val]: componentObj[val]};
+    }
+    return codeText;
+  }
+
+  static getChangedKey(obj1: object, obj2: object): EHeaderFormDataKeys[] {
+    let keysChanged = [];
+    for (let key of Object.keys(obj1)) {
+      if (obj1[key] !== obj2[key]) {
+        keysChanged.push(key);
+      }
+    }
+    return keysChanged;
+  }
+
 }

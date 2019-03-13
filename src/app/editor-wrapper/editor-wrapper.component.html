@@ -1,14 +1,44 @@
-<div class="app-editor-wrapper">
-  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+<!--TODO: click-->
+<app-menu *ngIf="showTooltip"
+          [coords]="_coords"
+          (dblclick)="$event.stopPropagation()"
+          (mouseover)="$event.stopPropagation()"
+          (action$)="sidebarActionHandler($event)"
+          (showTooltip$)="showTooltip = $event"></app-menu>
+
+<div class="app-editor-wrapper"
+     (dblclick)="$event.stopPropagation()" [ngStyle]="{'top': top,left:left, right:right, bottom:bottom}" *ngIf="!minimize">
+
+  <!--<i>{{codeData|json}}</i>-->
+
 
   <app-editor-header
-    [componentFiles]="componentFiles"
-    [componentKeys]="componentKeys"
+    [componentFiles]="_componentfiles"
+    [componentKeys]="keyOptions"
     [headerForm]="headerForm"
-  ></app-editor-header>
+    [minimize]="minimize"
+    [expand]="expand"
+    [activeTab]="activeHeaderTab"
+    (action$)="sidebarActionHandler($event)"
+    (headerDataChanged$)="headerDataChangedHandler($event)"></app-editor-header>
 
-  <div class="app-editor-wrapper-body">
-    <app-editor-sidebar (sidebarAction$)="sidebarActionHandler()"></app-editor-sidebar>
-    <app-editor [codeText]="codeText"></app-editor>
+  <div class="app-editor-wrapper-body" style="position: relative;" *ngIf="!minimize">
+    <app-editor-sidebar (action$)="sidebarActionHandler($event)"
+                        [config]="config"
+                        [shouldFoldCode]="shouldFoldCode"
+                        [activeHeaderTab]="activeHeaderTab"></app-editor-sidebar>
+    <app-editor [codeText]="codeData" [shouldFoldCode]="shouldFoldCode"></app-editor>
+    <app-file-search-panel
+      (showSearchPanel$)="showSearchPanel=$event"
+      *ngIf="showSearchPanel"
+      (getFileTrigger$)="getFileTriggerHandler($event)"
+      (searchEvent$)="searchTrigger$.emit($event);"></app-file-search-panel>
   </div>
+</div>
+
+<div *ngIf="minimize"
+     style="background-color: rgb(60, 60, 60); position: fixed; padding: 10px; cursor: pointer; bottom: 0; right: 10px"
+     (click)="minimize = false"
+>
+  <i class="fa fa-window-maximize" style="color: white"></i>
 </div>
