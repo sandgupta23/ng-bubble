@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as util from 'util'
 
 const readFileAsync = util.promisify(fs.readFile);
-const writeFileAsync = util.promisify(fs.writeFile);
+const writeFileAsync = util.promisify(fs.writeFile);;
 
 /*detect if its an angular project*/
 import {IGlobalConfig, ILocalConfig} from "../interfaces";

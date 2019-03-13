@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node lib/backend/ng-bubble.js",
+    "start": "nodemon lib/src/ng-bubble.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",

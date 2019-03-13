@@ -14,6 +14,7 @@ let maxScoreLine = 0;
 export interface ILineFinderData {
   id: string,
   tagName: string,
+  searchTerm?: string,
   targetTagName:string,
   codeText: string,
   classList: string[],
@@ -22,6 +23,7 @@ export interface ILineFinderData {
   file: string,
   exact: boolean,
   path: string,
+  ext: string,
   pathToOpen: string,
   files: object
 }

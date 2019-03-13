@@ -4,14 +4,16 @@ import {ILineFinderData, lineToOpen} from "./line-finder";
 import {getLocalConfig} from "./config";
 import {sendData} from "./ws";
 import {EIdeNames, EWSTypes} from "../enums";
-import {IWSData} from "../interfaces";
+import {IFsItem, IWSData} from "../interfaces";
 
 const scan = require('./scan');
 // const root = process.cwd();
-const root = "D:\\nodebook\\DEVELOP\\bot_platform-fe";
+const root = "D:\\nodebook\\ng-bubble-elements";
 const Server = require('ws').Server;
 
 let folders: any[] = [], files: any = [];
+
+export let SEARCH_CACHE: { [index: string]: any } = {};
 
 export function routesInit(app: any) {
 
@@ -25,10 +27,11 @@ export function routesInit(app: any) {
       console.log(message);
       let data: IWSData = JSON.parse(message);
 
+      console.log(EWSTypes.COMPONENT_FILE_SEARCH);
       if (data.type === EWSTypes.open) {
         handleOpenRequest(ws, <ILineFinderData>data.payload);
-      } else if (data.type === EWSTypes.SEARCH) {
-        handleSearchRequest(ws, <ILineFinderData>data.payload);
+      } else if (data.type === EWSTypes.SEARCH || data.type === EWSTypes.COMPONENT_FILE_SEARCH) {
+        handleSearchRequest(ws, <ILineFinderData>data.payload, data.type);
       } else if (data.type === EWSTypes.openByPath) {
         handleOpenByPathRequest(ws, <ILineFinderData>data.payload);
       } else if (data.type === EWSTypes.getFileByPath) {
@@ -37,6 +40,8 @@ export function routesInit(app: any) {
         handleSetFileByPathRequest(ws, <ILineFinderData>data.payload);
       } else if (data.type === EWSTypes.reIndex) {
         handleReIndexRequest(ws);
+      } else if (data.type === EWSTypes.getConfig) {
+        handleConfigRequest(ws);
       }
     });
   });
@@ -63,7 +68,8 @@ export function routesInit(app: any) {
           folders.push(d);
         }
       } else if (d.type === 'file') {
-        if (d.name.toLowerCase().match(searchTerms)) {
+        // if (d.name.toLowerCase().match(searchTerms)) {
+        if (d.name.replace(/\W/g, '').toLowerCase().includes(searchTerms.toLowerCase())) {
           files.push(d);
         }
       }
@@ -71,16 +77,23 @@ export function routesInit(app: any) {
     return {folders: folders, files: files};
   }
 
+  async function handleConfigRequest(ws: any) {
+    sendData(ws, {payload: localConfig, type: EWSTypes.getConfig});
+  }
+
+
   async function handleOpenRequest(ws: any, payload: ILineFinderData) {
     files = [];
     folders = [];
     let pathToBeOpened, codeText;
-    pathToBeOpened = payload.path;
+    pathToBeOpened = payload.pathToOpen;
     codeText = payload.codeText;
     let ide_clicked = payload.editor;
-    if (!pathToBeOpened) {
-      let searchTerm = payload.tagName && payload.tagName.toLowerCase().replace('app-', '');
-      let foundItems = searchData(tree.items, searchTerm);
+    if (!pathToBeOpened && payload.searchTerm) {
+      let searchTerm = payload.searchTerm; //.toLowerCase().replace('app-', '');
+
+      let foundItems = SEARCH_CACHE[searchTerm] || searchData(tree.items, searchTerm);
+      if(!SEARCH_CACHE[searchTerm]) SEARCH_CACHE[searchTerm] = foundItems;
       if (!(foundItems && foundItems.files && foundItems.files.length > 0)) {
         sendData(ws, {error: 401, errorMessage: "ng-bubble: no matching file found", type: EWSTypes.open});
         return;
@@ -90,7 +103,6 @@ export function routesInit(app: any) {
     }
 
     try {
-
       let lineToOpenInIde: number = (await lineToOpen(pathToBeOpened, payload)) || 0;
       let currentIde = ide_clicked ? ide_clicked : ide_user_input;
       await openInIde(pathToBeOpened, currentIde, codeText, payload, lineToOpenInIde);
@@ -108,14 +120,15 @@ export function routesInit(app: any) {
 
   async function handleGetFileByPathRequest(ws: any, payload: ILineFinderData) {
     /*TODO: should have used ajax here*/
-    let data:string = await getFileContent(payload.pathToOpen);
-    sendData(ws,<any>{type:EWSTypes.getFileByPath,payload:{file:data}});
+    /*TODO: pathToOpen => unfortunate name really*/
+    let data: string = await getFileContent(payload.pathToOpen);
+    sendData(ws, <any>{type: EWSTypes.getFileByPath, payload: {file: data}});
   }
 
   async function handleSetFileByPathRequest(ws: any, payload: ILineFinderData) {
     /*TODO: should have used ajax here*/
-    let data:string = await setFileContent(payload.pathToOpen, payload.file);
-    sendData(ws,<any>{type:EWSTypes.getFileByPath,payload:{file:data}});
+    let data: string = await setFileContent(payload.pathToOpen, payload.file);
+    sendData(ws, <any>{type: EWSTypes.getFileByPath, payload: {file: data}});
   }
 
   async function handleReIndexRequest(ws: any) {
@@ -126,7 +139,7 @@ export function routesInit(app: any) {
     }, 2000);
   }
 
-  function handleSearchRequest(ws: any, payload: ILineFinderData) {
+  function handleSearchRequest(ws: any, payload: ILineFinderData, type: EWSTypes) {
     files = [];
     folders = [];
     let file = (payload.file as string).toLowerCase();
@@ -136,7 +149,7 @@ export function routesInit(app: any) {
       /*todo: just to avoid ts error*/
       sendData(ws, {
         error: 200,
-        type: EWSTypes.SEARCH,
+        type: type,
         payload: {
           files: foundItems.files,
           file: "",
@@ -150,6 +163,8 @@ export function routesInit(app: any) {
           exact: false,
           path: "",
           pathToOpen: "",
+          searchTerm: "",
+          ext: ""
 
         }
       });
