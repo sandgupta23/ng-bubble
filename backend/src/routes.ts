@@ -7,8 +7,9 @@ import {EIdeNames, EWSTypes} from "../enums";
 import {IFsItem, IWSData} from "../interfaces";
 
 const scan = require('./scan');
-// const root = process.cwd();
-const root = "D:\\nodebook\\ng-bubble-elements";
+const path = require('path');
+const root = path.join(__dirname, '../../');
+// const root = "D:\\nodebook\\ng-bubble-elements";
 const Server = require('ws').Server;
 
 let folders: any[] = [], files: any = [];
@@ -27,7 +28,7 @@ export function routesInit(app: any) {
       console.log(message);
       let data: IWSData = JSON.parse(message);
 
-      console.log(EWSTypes.COMPONENT_FILE_SEARCH);
+      // console.log(EWSTypes.COMPONENT_FILE_SEARCH);
       if (data.type === EWSTypes.open) {
         handleOpenRequest(ws, <ILineFinderData>data.payload);
       } else if (data.type === EWSTypes.SEARCH || data.type === EWSTypes.COMPONENT_FILE_SEARCH) {
@@ -69,7 +70,7 @@ export function routesInit(app: any) {
         }
       } else if (d.type === 'file') {
         // if (d.name.toLowerCase().match(searchTerms)) {
-        if (d.name.replace(/\W/g, '').toLowerCase().includes(searchTerms.toLowerCase())) {
+        if (d.name.replace(/\W/g, '').toLowerCase().includes(searchTerms.replace(/\W/g, '').toLowerCase())) {
           files.push(d);
         }
       }

@@ -14,11 +14,12 @@
 * 8. issues with clickoutside
 * 9. make search more flexible: done
 * 10. up, down and enter in search panel: DONE
+* 14. create ignore fields: DONE
 *
 * 4. code review and documentation
-* 11. Sync two tabs
 * 12. implement for react as well
 * 13. Bug: Reloading on search
+* 11. Sync two tabs
 *
 *
 */
@@ -81,15 +82,32 @@ declare let CodeMirror: any;
 
 export class ClientService {
   static init = function () {
+
+    function rootInitialization(){
+      $selectedComponent = <HTMLElement>getRootEl(possibleRootTags);
+      $hoveredComponent = $selectedComponent;
+      selectedComponent = getComponentDataInstanceFromNode($selectedComponent).componentInstance;
+      selectedElXpath = $selectedComponent && getXPathByElement($selectedComponent);
+    }
+
+    function stateInitialization(){
+      let selectedElXpath = state.selectedElXpath;
+      selectedElXpath = $selectedComponent && getXPathByElement($selectedComponent);
+      $hoveredComponent = $selectedComponent = <HTMLElement>getElementByXpath(selectedElXpath);
+      selectedComponent = getComponentDataInstanceFromNode($selectedComponent).componentInstance;
+    }
+
+    console.log(document);
     const BACKEND_ROOT = 'http://localhost:11637';
     /*TODO: do we need saperate $hoveredComponent and $selectedComponentNode?*/
     /*
     * When the app starts for the first time, root component data will be shown
     * */
-    let $selectedComponent = <HTMLElement>getRootEl(possibleRootTags);
-    let $hoveredComponent: HTMLElement = $selectedComponent;
-    let selectedComponent = getComponentDataInstanceFromNode($selectedComponent).componentInstance;
-    let selectedElXpath = $selectedComponent && getXPathByElement($selectedComponent);
+    let $selectedComponent: HTMLElement;
+    let selectedElXpath: string | any;
+    let selectedComponent: Object;
+    let $hoveredComponent: HTMLElement;
+
 
     let LOCAL_CONFIG: ILocalConfig; /*backend configurations selection made by user with ng-bubble command*/
 
@@ -102,6 +120,12 @@ export class ClientService {
     socket.onopen = function (event) {
       console.log('NG:BUBBLE: Connection successful!');
       sendMessage({type: EWSTypes.getConfig});
+      debugger
+      if(!state || !state.selectedElXpath){/*if no state is saved in local storage, open root components*/
+        rootInitialization();
+      }else {
+        stateInitialization();
+      }
       emitHoveredComponentData($hoveredComponent);
       emitSelectedComponentFiles($selectedComponent);
     };
@@ -155,8 +179,8 @@ export class ClientService {
     });
     $editorEl.addEventListener('openInIde$', (event: CustomEvent) => {
       let data = event.detail;
-      if (data.tagName && data.ext)
-        data.searchTerm = tagToFileName(data.tagName, data.ext);
+      // if (data.tagName && data.ext)
+      //   data.searchTerm = tagToFileName(data.tagName, data.ext);
       openComponentFileInIde(data);
     });
     $editorEl.addEventListener('getSelectedComponentFiles$', (event: CustomEvent) => {
@@ -204,7 +228,7 @@ export class ClientService {
         searchTerm: componentName,
         file: componentName
       };
-      debugger;
+
 
       if (target$) {
         payload = {
@@ -297,10 +321,11 @@ export class ClientService {
     * The purpose here is to show the menu, by finding the component parent
     * */
     document.addEventListener('mouseover', ($event) => {
-      if (!$event.ctrlKey) {
+      if (!$event.shiftKey) {
         return;
       }
       let target = $event.target as HTMLElement;
+      console.log(target);
       let $component: HTMLElement = getComponentDataInstanceFromNode(<HTMLElement>$event.target).componentNode;
       $hoveredComponent = $component;
       if (!$component) return;
@@ -364,7 +389,13 @@ export class ClientService {
     * getComponentDataInstanceFromNode: get parent component of any html element
     * */
     function getComponentDataInstanceFromNode($el: HTMLElement): { componentInstance: object, componentNode: HTMLElement } {
+      console.log("getComponentDataInstanceFromNode");
+      console.log($el);
+      console.log(ng);
       let probeData = ng.probe($el);
+      if(!probeData){
+        throw "NG:BUBBLE::Could not found related component";
+      }
       let componentInstance = probeData.componentInstance;
       let componentNode = probeData.parent && probeData.parent.nativeElement;
       if (!componentInstance && !componentNode) {
@@ -438,7 +469,6 @@ export class ClientService {
     }
 
     function getRootEl(possibleTags: string[]) {
-      debugger;
       for (let tag of possibleTags) {
         let elements = document.getElementsByTagName(tag);
         if (elements && elements[0]) {

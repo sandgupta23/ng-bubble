@@ -105,6 +105,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   constructor(private utilityService: UtilityService) {}
 
   ngOnInit() {
+    console.log("editor-wrapper.component.ts");
     StoreService.init();
     let store = StoreService.getStoreValue();
     this.initializeComponent(store);
@@ -229,11 +230,12 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
         break;
       }
       case 'menu__item-html' : {
-        this.openInIde(this._coords.tagName, 'html');
+        this.openInIde(this._coords.componentName, 'html');
         break;
       }
       case 'menu__item-ts' : {
-        this.openInIde(this._coords.tagName, 'ts');
+        debugger;
+        this.openInIde(this._coords.componentName, 'ts');
         break;
       }
       case 'menu__item-data' : {
@@ -250,8 +252,9 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
 
   }
 
-  openInIde(tag: string, ext: string) {
-    this.openInIde$.emit({tagName: tag, ext});
+  openInIde(componentName: string, ext: string) {
+    // this.openInIde$.emit({tagName: tag, ext});
+    this.openInIde$.emit({searchTerm: componentName+ext});
   }
 
 
@@ -292,7 +295,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   patchForm(form:FormGroup, obj: IHeaderFormData) {
     form.patchValue(obj);
   }
-
+  //
   logCurrentData() {
     this.log$.emit({key: this.headerFormData.key, clone: this.componentObj});
   }

@@ -9,5 +9,6 @@ import {UtilityService} from './utility.service';
 export class AppComponent {
   title = 'ng-bubble-elements';
   constructor(){
+    console.log("AppComponent");
   }
 }

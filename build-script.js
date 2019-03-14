@@ -10,9 +10,9 @@ const concat = require('concat');
 		'./dist/ng-bubble-elements/main.js',
 	];
 
-	await fs.ensureDir('elements')
+	await fs.ensureDir('public/assets/js')
 
-	await concat(files, 'elements/user-poll.js')
+	await concat(files, 'public/assets/js/user-poll.js')
 	console.info('Elements created successfully!')
 
 })()

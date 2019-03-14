@@ -1,13 +1,17 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import {getLocalConfig} from "./config";
 
-const SCAN_EXCLUDED = [
+const SCAN_EXCLUDED :string[] = [
 	'.',
 	'node_modules',
 	'out-tsc',
 	'dist',
 	'!',
-	'tmp'
+	'tmp',
+	'dist',
+	'lib',
+	'.git',
 ];
 
 module.exports = function scan(dir:any, alias:string){
@@ -31,13 +35,15 @@ function walk(dir:any, prefix:any):any{
 	if(!fs.existsSync(dir)){
 		return [];
 	}
+	let localConfig = getLocalConfig();
+	let SCAN_EXCLUDED_COMBINED:string[] = (localConfig && localConfig.SCAN_EXCLUDED) || [];
+	SCAN_EXCLUDED_COMBINED = [...SCAN_EXCLUDED_COMBINED, ...SCAN_EXCLUDED];
 
 	return fs.readdirSync(dir).filter(function(f:any){
 		let x = SCAN_EXCLUDED.findIndex((e)=>{
            return e===f || e===f[0]
 		}) === -1;
         return x;
-
 	}).map(function(f:any){
 
 		var p = (dir + '/' + f).replace('./', ''),
