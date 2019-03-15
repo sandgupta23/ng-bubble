@@ -18,6 +18,7 @@ import 'codemirror/addon/search/jump-to-line.js';
 import 'codemirror/addon/dialog/dialog.js';
 import 'codemirror/addon/dialog/dialog.js';
 import 'codemirror/mode/python/python.js';
+import {INgProbeData} from "./client.service";
 
 const COMPONENT_SELECTOR = 'app';
 
@@ -53,7 +54,8 @@ export const sideBaseClasses = [
 })
 export class UtilityService {
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) {
+  }
 
   getHeaderForm() {
     return this.formBuilder.group({
@@ -69,8 +71,8 @@ export class UtilityService {
   }
 
 
-  static codeMirrorInit(editorTextArea){
-    let codemirror =  CodeMirror.fromTextArea(editorTextArea, {
+  static codeMirrorInit(editorTextArea) {
+    let codemirror = CodeMirror.fromTextArea(editorTextArea, {
       lineNumbers: true,
       lineWrapping: true,
       theme: 'night',
@@ -84,7 +86,7 @@ export class UtilityService {
         'Ctrl-Space': 'autocomplete',
       },
       foldGutter: true,
-      gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
+      gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
     });
     //  codemirror.setOption("extraKeys", {
     //   "Ctrl-Y": cm => {
@@ -104,19 +106,17 @@ export class UtilityService {
     return codemirror;
   }
 
-  static hasClass(target:HTMLElement, className):boolean{
+  static hasClass(target: HTMLElement, className): boolean {
     return target.classList.contains(className);
   }
 
-  static extractStoreData(obj){
+  static extractStoreData(obj) {
 
-    let x = storeKeys.reduce((total, key)=>{
+    let x = storeKeys.reduce((total, key) => {
       return {...total, [key]: obj[key]};
-    },{});
+    }, {});
     return x;
   }
-
-
 
 
   /*
@@ -126,26 +126,40 @@ export class UtilityService {
   *  a.self = a; //Now a is cycle JSON.
   *  Result: "{"name":"john doe","self":{"$ref":"$"}}"
   * */
-  static jsonStringifyCyclic(obj){
+  static jsonStringifyCyclic(obj, level=3) {
     /*TODO: move to web worker*/
-    // return  JSON.stringify(jc.decycle(obj));
-    console.log("================prune============");
-    return  jsonPrune(obj,3);
+    console.log("JSON PRUNE, level: ", level);
+    return jsonPrune(obj, level);
   }
 
-  static unfoldCode(codemirror){
+  static unfoldCode(codemirror) {
     CodeMirror.commands.unfoldAll(codemirror)
   }
 
-  static foldCode(codemirror){
+  static foldCode(codemirror) {
     console.log("folding code take1");
     /*TODO: */
-    setTimeout(()=>{/*computation heavy task*/
+    setTimeout(() => {/*computation heavy task*/
       for (var l = codemirror.firstLine(); l <= codemirror.lastLine(); ++l)
         if (l > 1) {
           codemirror.foldCode({line: l, ch: 0}, null, 'fold');
         }
     })
+  }
+
+  static getComponentWithoutInjectedMembers(ngProbeData: INgProbeData) {
+    let injector = ngProbeData.injector;
+    let componentInstance = ngProbeData.componentInstance;
+    let providers:any[] = injector['view']['root']['ngModule']['_providers'];
+    let x = Object.keys(componentInstance).reduce((total, key) => {
+      let val = componentInstance[key];
+      if (typeof val !== "object" || !providers.find(e => e === val)) {
+        return {...total, [key]: componentInstance[key]}
+      }
+      return total;
+    }, {});
+    console.log(x);
+    return x;
   }
 
   static getClickedSideBarIcon(clickEvent: Event) {

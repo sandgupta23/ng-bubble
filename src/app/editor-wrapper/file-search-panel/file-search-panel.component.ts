@@ -34,9 +34,9 @@ export class FileSearchPanelComponent implements OnInit {
 
       this.searchEvent$.emit(formData.keyword);
     });
-    EventService.searchResultsFinish$.subscribe((files: string) => {
+    EventService.searchResultsFinish$.subscribe((files: IFileData[]) => {
       //console.log(files);
-      this.files = JSON.parse(files);
+      this.files = files;
     });
   }
 

@@ -4,28 +4,32 @@ import {UtilityService} from '../../utility.service';
 
 @Component({
   selector: 'app-editor',
-  template: `<textarea #textEditorPlaceholder>This is a test</textarea>`,
+  template: `<textarea #textEditorPlaceholder></textarea>`,
   styleUrls: ['./app-editor.component.scss']
 })
 export class AppEditorComponent implements OnInit, AfterViewInit {
 
   @ViewChild('textEditorPlaceholder') textEditorPlaceholder: ElementRef;
 
+  @Input() level = 3;
   @Input() set codeText(val: string) {
-    this._codeText = this.stringifyInput(val);
-    this.setValueInCodeMirror(this.codemirror, this._codeText);
+    setTimeout(()=>{
+      this._codeText = this.stringifyInput(val, this.level);
+      this.setValueInCodeMirror(this.codemirror, this._codeText);
+    })
   }
 
-  stringifyInput(val: any): string {
+  stringifyInput(val: any, level:number): string {
 
     if (val === null) return 'UNDEFINED_VALUE';/*undef*/
     if (val === '') return 'EPMTY_STRING';/*undef*/
     if (val === undefined) return 'UNDEFINED_VALUE';/*undef*/
-    return typeof val === 'function' || typeof val === 'object' ? JSON.stringify(val, null, '\t') : val;//val.toString();
+    return typeof val === 'function' || typeof val === 'object' ? JSON.stringify(JSON.parse(UtilityService.jsonStringifyCyclic(val, this.level)),null, '\t') : val;//val.toString();
   }
 
 
   _codeText: string;
+  //
 
   codemirror;
 

@@ -6,7 +6,6 @@
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/backend/lib" />
       <excludeFolder url="file://$MODULE_DIR$/elements" />
-      <excludeFolder url="file://$MODULE_DIR$/lib" />
       <excludeFolder url="file://$MODULE_DIR$/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/public/assets/js" />
       <excludeFolder url="file://$MODULE_DIR$/src/assets/js" />

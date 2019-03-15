@@ -55,23 +55,26 @@ app.get('/', function(req:any, res:any) {
 });
 
 async function beginInquirer() {
-    if (!localConfig.inputTaken || program.ask) {
-        let inquirerOutput: IInquirerOutPut = await inquirerInit();
-        let preferredIde: string = inquirerOutput.ide;
-        let guess: boolean = inquirerOutput.guess === 'Yes';
-        let ctrl: boolean = inquirerOutput.ctrl === 'Ctrl + Double click';
-        let componentSelector: string = inquirerOutput.componentSelector ? inquirerOutput.componentSelector : 'app-';
-        let newLocalConfigData: ILocalConfig = {
-            ...localConfig,
-            preferredIde,
-            inputTaken: true,
-            guess,
-            componentSelector,
-            ctrl
-
-        };
+    // if (!localConfig.inputTaken || program.ask) {
+    if (true) {
+        let inquirerOutput: ILocalConfig = await inquirerInit();
+        // console.log(inquirerOutput);
+        // let preferredIde: string = inquirerOutput.ide;
+        // let guess: boolean = inquirerOutput.guess === 'Yes';
+        // let ctrl: boolean = inquirerOutput.ctrl === 'Ctrl + Double click';
+        // let componentSelector: string = inquirerOutput.componentSelector ? inquirerOutput.componentSelector : 'app-';
+        let newLocalConfigData: ILocalConfig = inquirerOutput;
+        // let newLocalConfigData: ILocalConfig = {
+        //     ...localConfig,
+        //     preferredIde,
+        //     inputTaken: true,
+        //     // guess,
+        //     componentSelector,
+        //     ctrl
+        //
+        // };
         await updateLocalConfig(newLocalConfigData);
-        console.log("Thanks. If in future you want to change these options, run: ng-bubble --ask");
+        console.log("\n Thanks. If in future you want to change these options, run: ng-bubble --ask");
         routesInit(app);
     } else {
         console.log(`Your configurations are as follows. To change run ng-bubble --ask.`);

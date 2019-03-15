@@ -14,7 +14,7 @@ import {sideBaseClasses, UtilityService} from '../utility.service';
 import {FormGroup} from '@angular/forms';
 import {EventService} from '../event.service';
 import {IFileData} from './file-search-panel/file-search-panel.component';
-import {ClientService} from '../client.service';
+import {ClientService, INgProbeData} from '../client.service';
 import {AppEditorComponent} from './app-editor/app-editor.component';
 import {StoreService} from '../store.service';
 import {ILocalConfig, IStore} from '../interface';
@@ -41,16 +41,18 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   @Output() log$ = new EventEmitter();
   @Output() openInIde$ = new EventEmitter();
 
-  @Input() set componentfiles(val: string) {
-    this._componentfiles = JSON.parse(val);
+  @Input() test = "great" ;
+  @Input() componentfiles = (val: IFileData[]) => {
+
+    this._componentfiles = val;
     if (Array.isArray(this._componentfiles) && this._componentfiles.length > 0 && !this._componentfiles.find((key) => key === this.headerForm.value['fileName'])) {
       setTimeout(() => this.patchForm(this.headerForm,{fileName: this._componentfiles[0].name}));
     }
   }
 
-  @Input() set componentstr(val: string) {
-    this._componentstr = val;
-    this.componentObj = JSON.parse(this._componentstr) || {};
+  @Input() componentstr = (ngProbeData: INgProbeData) => {
+    // this._componentstr = val;
+    this.componentObj = UtilityService.getComponentWithoutInjectedMembers(ngProbeData) || {};
     let activeComponentKey = this.headerForm.value['key'];
     this.keyOptions = ['All', ...Object.keys(this.componentObj)];
     let isActiveComponentKeyPresent = this.keyOptions.findIndex((key) => key === activeComponentKey) !== -1;
@@ -62,20 +64,20 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     }
   }
 
-  @Input() set coords(coordsStr) {
+  @Input() coords = (coordsStr) => {
     //console.log(coordsStr);
-    let coords = JSON.parse(coordsStr);
+    let coords = coordsStr;
     let top = coords.top + 'px';
     let left = coords.left + 'px';
     this._coords = {...coords, left, top};
     this.showTooltip = true;
   }
 
-  @Input() set searchfiles(val: string) {
+  @Input() searchfiles = (val: string) => {
     EventService.searchResultsFinish$.emit(val);
   }
 
-  @Input() set filecontent(val: string) {
+  @Input() filecontent = (val: string) => {
     if (val && this.activeHeaderTab === EHeaderFormDataKeys.fileName) this.codeData = val;
   }
 
@@ -234,7 +236,6 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
         break;
       }
       case 'menu__item-ts' : {
-        debugger;
         this.openInIde(this._coords.componentName, 'ts');
         break;
       }

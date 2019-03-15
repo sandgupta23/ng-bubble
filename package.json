@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "nodemon lib/src/ng-bubble.js",
+    "start": "nodemon lib/backend/src/ng-bubble.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -83,7 +83,7 @@
   },
   "preferGlobal": true,
   "bin": {
-    "ng-bubble": "lib/src/ng-bubble.js"
+    "ng-bubble": "lib/backend/src/ng-bubble.js"
   },
   "readmeFilename": "Readme.md",
   "engines": {

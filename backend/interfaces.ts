@@ -1,5 +1,6 @@
 import {EIdeNames, EWSTypes} from "./enums";
 import {ILineFinderData} from "./src/line-finder";
+import {EFramework} from "../enum";
 
 export interface IFsItem {
     name?: string;
@@ -22,11 +23,13 @@ export interface ILocalConfig {
     "webstorm"?: number,
     "isAngular"?: boolean,
     "preferredIde"?: string,
+    framework?:EFramework,
     "history"?: [],
     inputTaken?: boolean,
-    guess: boolean,
-    componentSelector: string,
-    ctrl:boolean
+    guess?: boolean,
+    componentSelector?: string,
+    ctrl?:boolean,
+    angularPrefix?:string,
 }
 
 export interface IGlobalConfig {

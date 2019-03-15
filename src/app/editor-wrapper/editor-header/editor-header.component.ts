@@ -17,12 +17,12 @@ export class EditorHeaderComponent implements OnInit {
   @Input() componentFiles: IFileData[];
   @Input() componentKeys: string[];
   @Input() headerForm: FormGroup;
-  @Output() headerDataChanged$ = new EventEmitter();
-  @Output() action$ = new EventEmitter();
   @Input() minimize = false;
   @Input() expand = false;
-
   @Input() activeTab:EHeaderFormDataKeys;
+
+  @Output() headerDataChanged$ = new EventEmitter();
+  @Output() action$ = new EventEmitter();
   myEHeaderFormDataKeys = EHeaderFormDataKeys;
   constructor() { }
 

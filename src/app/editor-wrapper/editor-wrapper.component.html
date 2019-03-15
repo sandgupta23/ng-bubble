@@ -27,7 +27,7 @@
                         [config]="config"
                         [shouldFoldCode]="shouldFoldCode"
                         [activeHeaderTab]="activeHeaderTab"></app-editor-sidebar>
-    <app-editor [codeText]="codeData" [shouldFoldCode]="shouldFoldCode"></app-editor>
+    <app-editor [level]="headerFormData.key==='All'?3:6" [codeText]="codeData" [shouldFoldCode]="shouldFoldCode"></app-editor>
     <app-file-search-panel
       (showSearchPanel$)="showSearchPanel=$event"
       *ngIf="showSearchPanel"
