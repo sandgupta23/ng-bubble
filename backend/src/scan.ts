@@ -9,7 +9,6 @@ const SCAN_EXCLUDED :string[] = [
 	'dist',
 	'!',
 	'tmp',
-	'dist',
 	'lib',
 	'.git',
 ];

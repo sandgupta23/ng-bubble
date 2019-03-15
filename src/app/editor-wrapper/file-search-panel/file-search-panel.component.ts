@@ -35,7 +35,7 @@ export class FileSearchPanelComponent implements OnInit {
       this.searchEvent$.emit(formData.keyword);
     });
     EventService.searchResultsFinish$.subscribe((files: string) => {
-      console.log(files);
+      //console.log(files);
       this.files = JSON.parse(files);
     });
   }
@@ -59,7 +59,7 @@ export class FileSearchPanelComponent implements OnInit {
       this.getFileTrigger$.emit(this.files[this.selectedRow]);
       this.showSearchPanel$.emit(false);
     }
-    console.log(event);
+    //console.log(event);
   }
 
   inputClickHandler(){

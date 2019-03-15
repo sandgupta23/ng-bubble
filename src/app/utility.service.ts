@@ -2,11 +2,22 @@ import {Injectable} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 
 import jc from 'json-cycle';
+import jsonPrune from 'json-prune';
 import {storeKeys} from './store.service';
 import {IHeaderFormData} from "./editor-wrapper/editor-wrapper.component";
 import {EHeaderFormDataKeys} from "./editor-wrapper/editor-header/editor-header.component";
 
-declare const CodeMirror: any;
+import * as CodeMirror from 'codemirror';
+import 'codemirror/addon/fold/foldcode.js';
+import 'codemirror/addon/fold/foldgutter.js';
+import 'codemirror/addon/fold/indent-fold.js';
+import 'codemirror/addon/fold/comment-fold.js';
+import 'codemirror/addon/search/search.js';
+import 'codemirror/addon/search/searchcursor.js';
+import 'codemirror/addon/search/jump-to-line.js';
+import 'codemirror/addon/dialog/dialog.js';
+import 'codemirror/addon/dialog/dialog.js';
+import 'codemirror/mode/python/python.js';
 
 const COMPONENT_SELECTOR = 'app';
 
@@ -75,20 +86,20 @@ export class UtilityService {
       foldGutter: true,
       gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
     });
-     codemirror.setOption("extraKeys", {
-      "Ctrl-Y": cm => {
-        codemirror.operation(function () {
-          for (var l = codemirror.firstLine(); l <= codemirror.lastLine(); ++l)
-            if (l > 1) {
-              codemirror.foldCode({line: l, ch: 0}, null, 'fold');
-            }
-        });
-        // CodeMirror.commands.foldAll(cm)
-      },
-      "Ctrl-I": cm => {
-        CodeMirror.commands.unfoldAll(cm)
-      },
-    });
+    //  codemirror.setOption("extraKeys", {
+    //   "Ctrl-Y": cm => {
+    //     codemirror.operation(function () {
+    //       for (var l = codemirror.firstLine(); l <= codemirror.lastLine(); ++l)
+    //         if (l > 1) {
+    //           codemirror.foldCode({line: l, ch: 0}, null, 'fold');
+    //         }
+    //     });
+    //     // CodeMirror.commands.foldAll(cm)
+    //   },
+    //   "Ctrl-I": cm => {
+    //     CodeMirror.commands.unfoldAll(cm)
+    //   },
+    // });
 
     return codemirror;
   }
@@ -116,7 +127,10 @@ export class UtilityService {
   *  Result: "{"name":"john doe","self":{"$ref":"$"}}"
   * */
   static jsonStringifyCyclic(obj){
-    return  JSON.stringify(jc.decycle(obj));
+    /*TODO: move to web worker*/
+    // return  JSON.stringify(jc.decycle(obj));
+    console.log("================prune============");
+    return  jsonPrune(obj,3);
   }
 
   static unfoldCode(codemirror){
@@ -124,10 +138,14 @@ export class UtilityService {
   }
 
   static foldCode(codemirror){
-    for (var l = codemirror.firstLine(); l <= codemirror.lastLine(); ++l)
-      if (l > 1) {
-        codemirror.foldCode({line: l, ch: 0}, null, 'fold');
-      }
+    console.log("folding code take1");
+    /*TODO: */
+    setTimeout(()=>{/*computation heavy task*/
+      for (var l = codemirror.firstLine(); l <= codemirror.lastLine(); ++l)
+        if (l > 1) {
+          codemirror.foldCode({line: l, ch: 0}, null, 'fold');
+        }
+    })
   }
 
   static getClickedSideBarIcon(clickEvent: Event) {

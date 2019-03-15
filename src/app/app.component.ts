@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import {UtilityService} from './utility.service';
+// import { Component } from '@angular/core';
+// import {UtilityService} from './utility.service';
+//
+import {ServerService} from "./server.service";
 
 @Component({
   selector: 'app-root',
@@ -8,7 +10,9 @@ import {UtilityService} from './utility.service';
 })
 export class AppComponent {
   title = 'ng-bubble-elements';
-  constructor(){
-    console.log("AppComponent");
+  @Input() set input1(val){
+
+  }
+  constructor(private serverService:ServerService, private activetedRoute: ActivetedRoute){
   }
 }

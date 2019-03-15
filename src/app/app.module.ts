@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {CUSTOM_ELEMENTS_SCHEMA, Injector, NgModule} from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+// import { AppComponent } from './app.component';
 import { EditorWrapperComponent } from './editor-wrapper/editor-wrapper.component';
 import { AppEditorComponent } from './editor-wrapper/app-editor/app-editor.component';
 import { AppEditorSidebarComponent } from './editor-wrapper/app-editor-sidebar/app-editor-sidebar.component';
@@ -19,7 +19,7 @@ import { MenuComponent } from './editor-wrapper/menu/menu.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    // AppComponent,
     EditorWrapperComponent,
     AppEditorComponent,
     AppEditorSidebarComponent,
@@ -48,16 +48,18 @@ import { MenuComponent } from './editor-wrapper/menu/menu.component';
     CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  // bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(private injector: Injector){
-      const el = createCustomElement(EditorWrapperComponent, { injector: this.injector });
-      customElements.define('user-poll', el);
+      // const el = createCustomElement(EditorWrapperComponent, { injector: this.injector });
+      // customElements.define('user-poll', el);
   }
-  // ngDoBootstrap() {
+  ngDoBootstrap() {
   //   const el = createCustomElement(EditorWrapperComponent, { injector: this.injector });
   //   customElements.define('user-poll', el);
-  // }
+    const el = createCustomElement(EditorWrapperComponent, { injector: this.injector });
+    customElements.define('user-poll', el);
+  }
 
 }

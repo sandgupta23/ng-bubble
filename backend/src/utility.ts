@@ -37,7 +37,7 @@ export async function runAppOnFreePort(app: any, port: number, ctrl: boolean) {
 
     let inUse = await tcpPortUsed.check(port, '127.0.0.1');
     while (inUse) {
-        console.log(`Port ${port} is in use, trying ${port + 1}`);
+        //console.log(`Port ${port} is in use, trying ${port + 1}`);
         inUse = await tcpPortUsed.check(++port, '127.0.0.1');
     }
     writeTemplate(port, ctrl);

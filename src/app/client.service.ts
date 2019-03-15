@@ -25,6 +25,7 @@
 */
 
 import {EEditor_EVENTS} from './enum';
+import jsonPrune from 'json-prune';
 import jc from 'json-cycle';
 import {ILocalConfig} from './interface';
 
@@ -97,7 +98,7 @@ export class ClientService {
       selectedComponent = getComponentDataInstanceFromNode($selectedComponent).componentInstance;
     }
 
-    console.log(document);
+    ////console.log(document);
     const BACKEND_ROOT = 'http://localhost:11637';
     /*TODO: do we need saperate $hoveredComponent and $selectedComponentNode?*/
     /*
@@ -118,7 +119,7 @@ export class ClientService {
 
     let socket = new WebSocket('ws://localhost:11640');
     socket.onopen = function (event) {
-      console.log('NG:BUBBLE: Connection successful!');
+      ////console.log('NG:BUBBLE: Connection successful!');
       sendMessage({type: EWSTypes.getConfig});
       debugger
       if(!state || !state.selectedElXpath){/*if no state is saved in local storage, open root components*/
@@ -130,7 +131,7 @@ export class ClientService {
       emitSelectedComponentFiles($selectedComponent);
     };
     socket.onclose = function (event) {
-      console.log(event);
+      ////console.log(event);
       setTimeout(() => {
         location.reload();
       }, 5000);/*TODO: a better way of doing this?*/
@@ -161,7 +162,7 @@ export class ClientService {
     };
 
     function sendMessage(data: IWSData) {
-      console.log('sendMessage', data);
+      ////console.log('sendMessage', data);
       socket.send(JSON.stringify(data));
     }
 
@@ -215,7 +216,7 @@ export class ClientService {
     function emitSelectedComponentFiles($hoveredComponent) {
       let componentInstance = getComponentDataInstanceFromNode($hoveredComponent).componentInstance;
       selectedComponent = componentInstance;
-      setEditorAttribute(EEditorInput.componentstr, JSON.stringify(componentInstance));
+      setEditorAttribute(EEditorInput.componentstr, jsonStringifyCyclic(componentInstance));
       let payload = createLineFinderPayload(componentInstance, null);
       sendMessage({type: EWSTypes.COMPONENT_FILE_SEARCH, payload});
     }
@@ -261,13 +262,13 @@ export class ClientService {
       let key = event.detail.key;
       let clone = event.detail.clone;
       if (!selectedComponent) {
-        console.log('NG:BUBBLE:: IMPORTANT! This is a clone. Please select a component to get the real reference', clone);
+        //console.log('NG:BUBBLE:: IMPORTANT! This is a clone. Please select a component to get the real reference', clone);
         return;
       }
       if (!key || key == 'All') {
-        console.log('NG:BUBBLE:: ', selectedComponent);
+        //console.log('NG:BUBBLE:: ', selectedComponent);
       } else {
-        console.log('NG:BUBBLE:: ', selectedComponent[key]);
+        //console.log('NG:BUBBLE:: ', selectedComponent[key]);
       }
     });
 
@@ -311,7 +312,7 @@ export class ClientService {
           sendMessage({type: EWSTypes.COMPONENT_FILE_SEARCH, payload});
         }
       } else {
-        console.log('NG-BUBBLE:: COULDNT FIND COMPONENT');
+        //console.log('NG-BUBBLE:: COULDNT FIND COMPONENT');
       }
 
     });
@@ -325,14 +326,14 @@ export class ClientService {
         return;
       }
       let target = $event.target as HTMLElement;
-      console.log(target);
+      ////console.log(target);
       let $component: HTMLElement = getComponentDataInstanceFromNode(<HTMLElement>$event.target).componentNode;
       $hoveredComponent = $component;
       if (!$component) return;
-      // console.log($component);
+      // //console.log($component);
       // let top = $component.offsetTop;
       // let left = $component.offsetWidth;
-      console.log($component.getBoundingClientRect());
+      ////console.log($component.getBoundingClientRect());
       let rect = $component.getBoundingClientRect();
       let x = {
         left: rect.left,
@@ -340,7 +341,7 @@ export class ClientService {
         componentName: getComponentDataInstanceFromNode($component).componentInstance.constructor.name,
         tagName: $component.tagName
       };
-      console.log(x);
+      ////console.log(x);
       return setEditorAttribute(EEditorInput.coords, JSON.stringify(x));
     });
 
@@ -389,9 +390,9 @@ export class ClientService {
     * getComponentDataInstanceFromNode: get parent component of any html element
     * */
     function getComponentDataInstanceFromNode($el: HTMLElement): { componentInstance: object, componentNode: HTMLElement } {
-      console.log("getComponentDataInstanceFromNode");
-      console.log($el);
-      console.log(ng);
+      ////console.log("getComponentDataInstanceFromNode");
+      ////console.log($el);
+      ////console.log(ng);
       let probeData = ng.probe($el);
       if(!probeData){
         throw "NG:BUBBLE::Could not found related component";
@@ -425,8 +426,15 @@ export class ClientService {
     * jsonStringifyCyclic:
     * Stringify cyclic JSON
     * */
-    function jsonStringifyCyclic(obj):string {
-      return JSON.stringify(jc.decycle(obj));
+    // function jsonStringifyCyclic(obj):string {
+    //   return JSON.stringify(jc.decycle(obj));
+    // }
+
+    function jsonStringifyCyclic(obj){
+      /*TODO: move to web worker*/
+      // return  JSON.stringify(jc.decycle(obj));
+      console.log("================prune============");
+      return  jsonPrune(obj,5);
     }
 
     /*

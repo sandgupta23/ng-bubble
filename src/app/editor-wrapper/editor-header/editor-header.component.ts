@@ -36,7 +36,7 @@ export class EditorHeaderComponent implements OnInit {
     })
   }
   log(){
-      console.log(this.headerForm);
+      //console.log(this.headerForm);
   }
 
 }

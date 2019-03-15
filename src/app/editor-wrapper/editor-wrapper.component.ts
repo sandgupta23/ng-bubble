@@ -63,7 +63,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   }
 
   @Input() set coords(coordsStr) {
-    console.log(coordsStr);
+    //console.log(coordsStr);
     let coords = JSON.parse(coordsStr);
     let top = coords.top + 'px';
     let left = coords.left + 'px';

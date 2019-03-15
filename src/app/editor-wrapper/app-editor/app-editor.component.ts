@@ -39,16 +39,20 @@ export class AppEditorComponent implements OnInit, AfterViewInit {
     const editorTextArea = this.textEditorPlaceholder.nativeElement;
     setTimeout(() => {
       this.codemirror = UtilityService.codeMirrorInit(editorTextArea);
+      /*
+      TODO: undo the comment
       console.log(this.codemirror);
       this._codeText = this.stringifyInput(this._codeText);
-      console.log(this._codeText);
+      // console.log(this._codeText);
       this.setValueInCodeMirror(this.codemirror, this._codeText);
+      */
     });
   }
 
   @Input() shouldFoldCode = true;
 
   setValueInCodeMirror(codemirror, codeText: string) {
+    console.log("setValueInCodeMirror");
     if (!codemirror) {
       // codemirror.setValue('undefined value');
       return;

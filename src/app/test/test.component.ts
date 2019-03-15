@@ -12,9 +12,9 @@ export class TestComponent implements OnInit {
 
   ngOnInit() {
   }
-  
+
   hello(){
-    console.log("great!");
+    //console.log("great!");
   }
 
 }
