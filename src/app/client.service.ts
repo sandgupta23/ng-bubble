@@ -176,7 +176,7 @@ export class ClientService {
     if ((<any>window).NG_BUBBLE_IMPORTED) {
       console.error('Error: ng-bubble has been imported more than once');
     }
-    let $editorEl = document.getElementsByTagName('user-poll')[0];
+    let $editorEl = document.getElementsByTagName('js-bubble')[0];
     $editorEl.addEventListener('searchTrigger$', (event: CustomEvent) => {
       let keyword = event.detail;
       sendMessage({type: EWSTypes.SEARCH, payload: {file: keyword}});
@@ -424,6 +424,7 @@ export class ClientService {
       ////console.log($el);
       ////console.log(ng);
       let probeData = ng.probe($el);
+      console.log($el);
       if (!probeData) {
         throw "NG:BUBBLE::Could not found related component";
       }
@@ -483,7 +484,7 @@ export class ClientService {
     * https://stackoverflow.com/questions/2631820/how-do-i-ensure-saved-click-coordinates-can-be-reloaed-to-the-same-place-even-i/2631931#2631931
     * */
     function getXPathByElement(element) {
-      debugger;
+
 
       if (element.id !== '')
         return 'id("' + element.id + '")';

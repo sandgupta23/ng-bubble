@@ -16,10 +16,11 @@ import { ImageByExtensionPipe } from './editor-wrapper/file-search-panel/image-b
 import {ClickOutsideModule} from 'ng-click-outside';
 import { TestComponent } from './test/test.component';
 import { MenuComponent } from './editor-wrapper/menu/menu.component';
+import {AppComponent} from "./app.component";
 
 @NgModule({
   declarations: [
-    // AppComponent,
+    AppComponent,
     EditorWrapperComponent,
     AppEditorComponent,
     AppEditorSidebarComponent,
@@ -48,18 +49,19 @@ import { MenuComponent } from './editor-wrapper/menu/menu.component';
     CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [],
-  // bootstrap: [AppComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(private injector: Injector){
-      // const el = createCustomElement(EditorWrapperComponent, { injector: this.injector });
-      // customElements.define('user-poll', el);
+      const el = createCustomElement(EditorWrapperComponent, { injector: this.injector });
+      customElements.define('js-bubble', el);
   }
   ngDoBootstrap() {
   //   const el = createCustomElement(EditorWrapperComponent, { injector: this.injector });
-  //   customElements.define('user-poll', el);
-    const el = createCustomElement(EditorWrapperComponent, { injector: this.injector });
-    customElements.define('user-poll', el);
+  //   customElements.define('js-bubble', el);
+  //   const el = createCustomElement(EditorWrapperComponent, { injector: this.injector });
+  //   customElements.define('js-bubble', el);
   }
 
 }
+//

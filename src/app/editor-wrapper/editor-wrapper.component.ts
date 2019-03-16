@@ -8,16 +8,17 @@ import {
   Output,
   QueryList,
   ViewChild,
-  ViewChildren
+  ViewChildren,
+  ViewEncapsulation
 } from '@angular/core';
-import {sideBaseClasses, UtilityService} from '../utility.service';
+import {UtilityService} from '../utility.service';
 import {FormGroup} from '@angular/forms';
 import {EventService} from '../event.service';
 import {IFileData} from './file-search-panel/file-search-panel.component';
 import {ClientService, INgProbeData} from '../client.service';
 import {AppEditorComponent} from './app-editor/app-editor.component';
 import {StoreService} from '../store.service';
-import {ILocalConfig, IStore} from '../interface';
+import {IStore} from '../interface';
 import {EHeaderFormDataKeys} from './editor-header/editor-header.component';
 
 
@@ -29,7 +30,8 @@ export interface IHeaderFormData {
 @Component({
   selector: 'app-editor-wrapper',
   templateUrl: './editor-wrapper.component.html',
-  styleUrls: ['./editor-wrapper.component.scss']
+  styleUrls: ['./editor-wrapper.component.scss'],
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
 
@@ -70,6 +72,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     let top = coords.top + 'px';
     let left = coords.left + 'px';
     this._coords = {...coords, left, top};
+    debugger;
     this.showTooltip = true;
   }
 

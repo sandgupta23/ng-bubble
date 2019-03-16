@@ -48,7 +48,7 @@ export class StoreService {
   }
 
   static setInLocalStorage(state:IStore){
-    debugger;
+
     let oldState = JSON.parse(localStorage.getItem("NG_BUBBLE_STATE"))||{};
     localStorage.setItem('NG_BUBBLE_STATE', JSON.stringify({...oldState, ...state}));
   }
