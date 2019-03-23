@@ -1,18 +1,20 @@
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
 <!--TODO: click-->
-<app-menu *ngIf="showTooltip"
+<jsb-menu *ngIf="showTooltip"
           [coords]="_coords"
           (dblclick)="$event.stopPropagation()"
           (mouseover)="$event.stopPropagation()"
           (action$)="sidebarActionHandler($event)"
-          (showTooltip$)="showTooltip = $event"></app-menu>
+          (showTooltip$)="showTooltip = $event"></jsb-menu>
 
-<div class="app-editor-wrapper"
+<div class="jsb-editor-wrapper"
      (dblclick)="$event.stopPropagation()" [ngStyle]="{'top': top,left:left, right:right, bottom:bottom}" *ngIf="!minimize">
 
   <!--<i>{{codeData|json}}</i>-->
 
 
-  <app-editor-header
+  <jsb-editor-header
     [componentFiles]="_componentfiles"
     [componentKeys]="keyOptions"
     [headerForm]="headerForm"
@@ -20,19 +22,19 @@
     [expand]="expand"
     [activeTab]="activeHeaderTab"
     (action$)="sidebarActionHandler($event)"
-    (headerDataChanged$)="headerDataChangedHandler($event)"></app-editor-header>
+    (headerDataChanged$)="headerDataChangedHandler($event)"></jsb-editor-header>
 
-  <div class="app-editor-wrapper-body" style="position: relative;" *ngIf="!minimize">
-    <app-editor-sidebar (action$)="sidebarActionHandler($event)"
+  <div class="jsb-editor-wrapper-body" style="position: relative;" *ngIf="!minimize">
+    <jsb-editor-sidebar (action$)="sidebarActionHandler($event)"
                         [config]="config"
                         [shouldFoldCode]="shouldFoldCode"
-                        [activeHeaderTab]="activeHeaderTab"></app-editor-sidebar>
-    <app-editor [codeText]="codeData" [shouldFoldCode]="shouldFoldCode"></app-editor>
-    <app-file-search-panel
+                        [activeHeaderTab]="activeHeaderTab"></jsb-editor-sidebar>
+    <jsb-editor [level]="headerFormData.key==='All'?3:6" [codeText]="codeData" [shouldFoldCode]="shouldFoldCode"></jsb-editor>
+    <jsb-file-search-panel
       (showSearchPanel$)="showSearchPanel=$event"
       *ngIf="showSearchPanel"
       (getFileTrigger$)="getFileTriggerHandler($event)"
-      (searchEvent$)="searchTrigger$.emit($event);"></app-file-search-panel>
+      (searchEvent$)="searchTrigger$.emit($event);"></jsb-file-search-panel>
   </div>
 </div>
 
@@ -42,3 +44,4 @@
 >
   <i class="fa fa-window-maximize" style="color: white"></i>
 </div>
+<div>this is editor</div>

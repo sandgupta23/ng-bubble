@@ -1,4 +1,12 @@
-.app-editor-wrapper {
+$fa-font-path: "../../../node_modules/font-awesome/fonts";
+@import "../../../node_modules/font-awesome/scss/font-awesome.scss";
+
+:host{
+  position: fixed;
+  z-index: 10000000000000000;
+}
+
+.jsb-editor-wrapper {
   //width: 30vw;
   //min-width: 400px;
   background-color: rgb(51, 51, 51);
@@ -10,25 +18,25 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;/*TODO: hack*/
-  .app-editor-wrapper-body {
+  .jsb-editor-wrapper-body {
     display: flex;
     width: 100%;
     flex-grow: 1;
     position: relative;
     height: 40vh;
 
-    app-editor-sidebar {
+    jsb-editor-sidebar {
       width: 40px;
       display: flex;
       flex-shrink: 0;
     }
 
-    app-editor {
+    jsb-editor {
       width: 100%;
     }
   }
 
-  app-file-search-panel {
+  jsb-file-search-panel {
     position: absolute;
     top: 5px;
     left: 45px;
@@ -41,7 +49,7 @@
 
 }
 
-app-menu{
+jsb-menu{
   position: fixed;
   top: 200vh;
   left: 200vw;

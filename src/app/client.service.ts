@@ -12,7 +12,7 @@
 * 6. implement ctrl + click
 * 7. implement refresh in side bar: not done for files
 * 8. issues with clickoutside
-* 9. make search more flexible: done
+* 9. make is editor search more flexible: done
 * 10. up, down and enter in search panel: DONE
 * 14. create ignore fields: DONE
 *
@@ -20,11 +20,23 @@
 * 12. implement for react as well
 * 13. Bug: Reloading on search
 * 11. Sync two tabs
-*
+* 15. show loading icon
+* 16. row hover color should not be same as selected color
+* 17. Upon reloading no data is fetched=> we need to wait for app to be initialized OR retry after 2 sec interval for 30 sec
+* 18. IMPORTANT: REMOVE ZONE.JS: this maybe causing side effect of 17.
+* 19. Put options icon in side base => 1. angular/react 2.whether to show all components or just custom component
+* 20. doubleclick is not working
+* 21. HeaderComponent is matching analysis header component
+* 22. find is not working
+* 23. cant click on search
+* 24. save keywork for search
+* 25. make search more flexible
+* 26. base href problem while running code in ngx-admin
 *
 */
 
 import {EEditor_EVENTS} from './enum';
+import jsonPrune from 'json-prune';
 import jc from 'json-cycle';
 import {ILocalConfig} from './interface';
 
@@ -52,6 +64,13 @@ interface IWSData {
 }
 
 //TODO: duplicate interfaces and enums
+
+export interface INgProbeData {
+  componentInstance: object,
+  componentNode: HTMLElement,
+  injector?: object
+}
+
 enum EWSTypes {
   SEARCH = 'SEARCH',
   COMPONENT_FILE_SEARCH = 'COMPONENT_FILE_SEARCH',
@@ -83,21 +102,21 @@ declare let CodeMirror: any;
 export class ClientService {
   static init = function () {
 
-    function rootInitialization(){
+    function rootInitialization() {
       $selectedComponent = <HTMLElement>getRootEl(possibleRootTags);
       $hoveredComponent = $selectedComponent;
       selectedComponent = getComponentDataInstanceFromNode($selectedComponent).componentInstance;
-      selectedElXpath = $selectedComponent && getXPathByElement($selectedComponent);
+      // selectedElXpath = $selectedComponent && getXPathByElement($selectedComponent);
     }
 
-    function stateInitialization(){
+    function stateInitialization() {
       let selectedElXpath = state.selectedElXpath;
-      selectedElXpath = $selectedComponent && getXPathByElement($selectedComponent);
+      // selectedElXpath = $selectedComponent && getXPathByElement($selectedComponent);
       $hoveredComponent = $selectedComponent = <HTMLElement>getElementByXpath(selectedElXpath);
       selectedComponent = getComponentDataInstanceFromNode($selectedComponent).componentInstance;
     }
 
-    console.log(document);
+    ////console.log(document);
     const BACKEND_ROOT = 'http://localhost:11637';
     /*TODO: do we need saperate $hoveredComponent and $selectedComponentNode?*/
     /*
@@ -118,21 +137,21 @@ export class ClientService {
 
     let socket = new WebSocket('ws://localhost:11640');
     socket.onopen = function (event) {
-      console.log('NG:BUBBLE: Connection successful!');
+      ////console.log('NG:BUBBLE: Connection successful!');
       sendMessage({type: EWSTypes.getConfig});
-      debugger
-      if(!state || !state.selectedElXpath){/*if no state is saved in local storage, open root components*/
+
+      if (!state || !state.selectedElXpath) {/*if no state is saved in local storage, open root components*/
         rootInitialization();
-      }else {
+      } else {
         stateInitialization();
       }
       emitHoveredComponentData($hoveredComponent);
       emitSelectedComponentFiles($selectedComponent);
     };
     socket.onclose = function (event) {
-      console.log(event);
+      ////console.log(event);
       setTimeout(() => {
-        location.reload();
+        // location.reload();
       }, 5000);/*TODO: a better way of doing this?*/
     };
 
@@ -143,11 +162,11 @@ export class ClientService {
       let payload: any = data.payload;
       if (data.type === EWSTypes.SEARCH) {
         let files = payload.files || [];
-        setEditorAttribute(EEditorInput.searchfiles, JSON.stringify(files));
+        setEditorAttribute(EEditorInput.searchfiles, files);
       }
       if (data.type === EWSTypes.COMPONENT_FILE_SEARCH) {
         let files = payload.files || [];
-        setEditorAttribute(EEditorInput.componentfiles, JSON.stringify(files));
+        setEditorAttribute(EEditorInput.componentfiles, files);
       }
       if (data.type === EWSTypes.getFileByPath) {
         /*TODO: unfortunate key naming here*/
@@ -161,14 +180,14 @@ export class ClientService {
     };
 
     function sendMessage(data: IWSData) {
-      console.log('sendMessage', data);
+      ////console.log('sendMessage', data);
       socket.send(JSON.stringify(data));
     }
 
     if ((<any>window).NG_BUBBLE_IMPORTED) {
       console.error('Error: ng-bubble has been imported more than once');
     }
-    let $editorEl = document.getElementsByTagName('user-poll')[0];
+    let $editorEl = document.getElementsByTagName('js-bubble')[0];
     $editorEl.addEventListener('searchTrigger$', (event: CustomEvent) => {
       let keyword = event.detail;
       sendMessage({type: EWSTypes.SEARCH, payload: {file: keyword}});
@@ -196,26 +215,35 @@ export class ClientService {
     $editorEl.addEventListener('getHoveredComponentData$', (event: CustomEvent) => {
 
       let $selectedComponentNode: any = $hoveredComponent || (selectedElXpath && getElementByXpath(selectedElXpath));
-      if ($selectedComponentNode) {
-        emitSelectedComponentFiles($selectedComponentNode);
-        // let componentInstance = getComponentDataInstanceFromNode($selectedComponentNode).componentInstance;
-        // selectedComponent = componentInstance;
-        // let codeStr = stringify1(componentInstance);
-        // $editorEl.setAttribute(EEditorInput.componentstr, codeStr);
+      if (!$selectedComponentNode) return;
+      emitSelectedComponentFiles($selectedComponentNode);
+      /*
+      * Only if no selectedElXpath is present, initiate it. This is because hovered components have
+      * lower priority.
+      * */
+      if (!selectedElXpath) {
+        let componentXPath = getXPathByElement($selectedComponentNode);
+        selectedElXpath = componentXPath;
+        setState({selectedElXpath: componentXPath});
       }
+
+
     });
 
     function emitHoveredComponentData(component: object) {
-      let componentInstance = getComponentDataInstanceFromNode($selectedComponent).componentInstance;
-      selectedComponent = componentInstance;
-      let codeStr = stringify1(componentInstance);
-      $editorEl.setAttribute(EEditorInput.componentstr, codeStr);
+      let ngProbeData: INgProbeData = getComponentDataInstanceFromNode($selectedComponent);
+      selectedComponent = ngProbeData.componentInstance;
+      // let codeStr = stringify1(componentInstance);
+      // $editorEl.setAttribute(EEditorInput.componentstr, codeStr);
+      setEditorAttribute(EEditorInput.componentstr, ngProbeData);
+
     }
 
-    function emitSelectedComponentFiles($hoveredComponent) {
-      let componentInstance = getComponentDataInstanceFromNode($hoveredComponent).componentInstance;
+    function emitSelectedComponentFiles($selectedComponent) {
+      let ngProbeData: INgProbeData = getComponentDataInstanceFromNode($selectedComponent);
+      let componentInstance = ngProbeData.componentInstance;
       selectedComponent = componentInstance;
-      setEditorAttribute(EEditorInput.componentstr, JSON.stringify(componentInstance));
+      setEditorAttribute(EEditorInput.componentstr, ngProbeData);
       let payload = createLineFinderPayload(componentInstance, null);
       sendMessage({type: EWSTypes.COMPONENT_FILE_SEARCH, payload});
     }
@@ -261,13 +289,13 @@ export class ClientService {
       let key = event.detail.key;
       let clone = event.detail.clone;
       if (!selectedComponent) {
-        console.log('NG:BUBBLE:: IMPORTANT! This is a clone. Please select a component to get the real reference', clone);
+        //console.log('NG:BUBBLE:: IMPORTANT! This is a clone. Please select a component to get the real reference', clone);
         return;
       }
       if (!key || key == 'All') {
-        console.log('NG:BUBBLE:: ', selectedComponent);
+        //console.log('NG:BUBBLE:: ', selectedComponent);
       } else {
-        console.log('NG:BUBBLE:: ', selectedComponent[key]);
+        //console.log('NG:BUBBLE:: ', selectedComponent[key]);
       }
     });
 
@@ -283,21 +311,24 @@ export class ClientService {
       });
     });
 
+    function setState(data: object = {}) {
+      let stateStr: any = localStorage.getItem('NG_BUBBLE_STATE');
+      let state = JSON.parse(stateStr);
+      localStorage.setItem('NG_BUBBLE_STATE', jsonStringifyCyclic({...state, ...data}));
+    }
+
     document.addEventListener('dblclick', ($event) => {
       let target = $event.target as HTMLElement;
-      let componentData = getComponentDataInstanceFromNode(target);
-      let $componentNode: HTMLElement | null = componentData.componentNode;
-      let componentInstance = componentData.componentInstance;
+      let ngProbeData = getComponentDataInstanceFromNode(target);
+      let $componentNode: HTMLElement | null = ngProbeData.componentNode;
+      let componentInstance = ngProbeData.componentInstance;
       let componentXPath = getXPathByElement($componentNode);
       if ($componentNode) {
         selectedComponent = componentInstance;
         $selectedComponent = $componentNode;
         selectedElXpath = componentXPath;
-        let codeStr = stringify1(componentInstance);
-        let stateStr: any = localStorage.getItem('NG_BUBBLE_STATE');
-        let state = JSON.parse(stateStr);
-        state.selectedElXpath = componentXPath;
-        localStorage.setItem('NG_BUBBLE_STATE', JSON.stringify(state));
+        setState({selectedElXpath: componentXPath});
+
         let payload = createLineFinderPayload(componentInstance, target);
 
         /**
@@ -307,11 +338,11 @@ export class ClientService {
         if (($event.ctrlKey && LOCAL_CONFIG.ctrl) || !($event.ctrlKey || LOCAL_CONFIG.ctrl)) {
           openComponentFileInIde(payload);
         } else {
-          $editorEl.setAttribute(EEditorInput.componentstr, codeStr);
+          setEditorAttribute(EEditorInput.componentstr, ngProbeData);
           sendMessage({type: EWSTypes.COMPONENT_FILE_SEARCH, payload});
         }
       } else {
-        console.log('NG-BUBBLE:: COULDNT FIND COMPONENT');
+        //console.log('NG-BUBBLE:: COULDNT FIND COMPONENT');
       }
 
     });
@@ -325,14 +356,14 @@ export class ClientService {
         return;
       }
       let target = $event.target as HTMLElement;
-      console.log(target);
+      ////console.log(target);
       let $component: HTMLElement = getComponentDataInstanceFromNode(<HTMLElement>$event.target).componentNode;
       $hoveredComponent = $component;
       if (!$component) return;
-      // console.log($component);
+      // //console.log($component);
       // let top = $component.offsetTop;
       // let left = $component.offsetWidth;
-      console.log($component.getBoundingClientRect());
+      ////console.log($component.getBoundingClientRect());
       let rect = $component.getBoundingClientRect();
       let x = {
         left: rect.left,
@@ -340,8 +371,8 @@ export class ClientService {
         componentName: getComponentDataInstanceFromNode($component).componentInstance.constructor.name,
         tagName: $component.tagName
       };
-      console.log(x);
-      return setEditorAttribute(EEditorInput.coords, JSON.stringify(x));
+      ////console.log(x);
+      return setEditorAttribute(EEditorInput.coords, x);
     });
 
     function openComponentFileInIde(payload: ILineFinderData) {
@@ -357,7 +388,18 @@ export class ClientService {
     }
 
     function setEditorAttribute(key: EEditorInput, value: any) {
-      $editorEl.setAttribute(key, value);
+      // $editorEl.setAttribute(key, value);
+      try {
+        let editorMember = $editorEl[key];
+        if (typeof editorMember === "function") {
+          editorMember(value);
+        } else {
+          $editorEl[key] = value;
+        }
+
+      } catch (e) {
+        console.log(e, key, value);
+      }
     }
 
     function removeChildFromParent($el: HTMLElement) {
@@ -388,22 +430,25 @@ export class ClientService {
     /*
     * getComponentDataInstanceFromNode: get parent component of any html element
     * */
-    function getComponentDataInstanceFromNode($el: HTMLElement): { componentInstance: object, componentNode: HTMLElement } {
-      console.log("getComponentDataInstanceFromNode");
-      console.log($el);
-      console.log(ng);
+    function getComponentDataInstanceFromNode($el: HTMLElement): INgProbeData {
+      ////console.log("getComponentDataInstanceFromNode");
+      ////console.log($el);
+      ////console.log(ng);
       let probeData = ng.probe($el);
-      if(!probeData){
+      console.log($el);
+      if (!probeData) {
         throw "NG:BUBBLE::Could not found related component";
       }
       let componentInstance = probeData.componentInstance;
       let componentNode = probeData.parent && probeData.parent.nativeElement;
-      if (!componentInstance && !componentNode) {
+      let injector = probeData.injector;
+      if (!componentInstance) {
         return null;
       }
       return {
         componentInstance,
-        componentNode
+        componentNode,
+        injector
       };
     }
 
@@ -425,15 +470,22 @@ export class ClientService {
     * jsonStringifyCyclic:
     * Stringify cyclic JSON
     * */
-    function jsonStringifyCyclic(obj):string {
-      return JSON.stringify(jc.decycle(obj));
+    // function jsonStringifyCyclic(obj):string {
+    //   return JSON.stringify(jc.decycle(obj));
+    // }
+
+    function jsonStringifyCyclic(obj) {
+      /*TODO: move to web worker*/
+      // return  JSON.stringify(jc.decycle(obj));
+      console.log("================prune============");
+      return jsonPrune(obj, 5);
     }
 
     /*
     * hasClass:
     * Check if some html element has a given class
     * */
-    function hasClass(element: HTMLElement, thatClass: string):boolean {
+    function hasClass(element: HTMLElement, thatClass: string): boolean {
       return (' ' + element.className + ' ').replace(/[\n\t]/g, ' ').indexOf(' ' + thatClass + ' ') > -1;
     }
 
@@ -443,6 +495,7 @@ export class ClientService {
     * https://stackoverflow.com/questions/2631820/how-do-i-ensure-saved-click-coordinates-can-be-reloaed-to-the-same-place-even-i/2631931#2631931
     * */
     function getXPathByElement(element) {
+
 
       if (element.id !== '')
         return 'id("' + element.id + '")';

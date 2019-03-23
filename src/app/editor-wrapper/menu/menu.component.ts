@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-menu',
+  selector: 'jsb-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })

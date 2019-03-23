@@ -11,7 +11,7 @@ export interface IFileData {
 }
 
 @Component({
-  selector: 'app-file-search-panel',
+  selector: 'jsb-file-search-panel',
   templateUrl: './file-search-panel.component.html',
   styleUrls: ['./file-search-panel.component.scss']
 })
@@ -34,9 +34,9 @@ export class FileSearchPanelComponent implements OnInit {
 
       this.searchEvent$.emit(formData.keyword);
     });
-    EventService.searchResultsFinish$.subscribe((files: string) => {
-      console.log(files);
-      this.files = JSON.parse(files);
+    EventService.searchResultsFinish$.subscribe((files: IFileData[]) => {
+      //console.log(files);
+      this.files = files;
     });
   }
 
@@ -59,7 +59,7 @@ export class FileSearchPanelComponent implements OnInit {
       this.getFileTrigger$.emit(this.files[this.selectedRow]);
       this.showSearchPanel$.emit(false);
     }
-    console.log(event);
+    //console.log(event);
   }
 
   inputClickHandler(){

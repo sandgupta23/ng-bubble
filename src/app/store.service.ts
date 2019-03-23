@@ -7,8 +7,8 @@ import {IStore} from './interface';
  * */
 export const storeKeys = [
   'minimize',
-  '_componentfiles',
-  '_componentstr',
+  // '_componentfiles',
+  // '_componentstr',
   'showSearchPanel',
   'top',
   'left',
@@ -16,10 +16,10 @@ export const storeKeys = [
   'bottom',
   'height',
   'width',
-  'componentObj',
+  // 'componentObj',
   'keyOptions',
   'myObject',
-  'codeData',
+  // 'codeData',
   'headerFormData',
   'activeHeaderTab',
   'expand',
@@ -40,10 +40,15 @@ export class StoreService {
 
   static patchStore(state:IStore = {}){
     StoreService.store = {...StoreService.store, ...state};
-    this.setInLocalStorage(StoreService.store);
+    try{
+      this.setInLocalStorage(StoreService.store);
+    }catch (e) {
+      console.log("error trying to save=>", state);
+    }
   }
 
   static setInLocalStorage(state:IStore){
+
     let oldState = JSON.parse(localStorage.getItem("NG_BUBBLE_STATE"))||{};
     localStorage.setItem('NG_BUBBLE_STATE', JSON.stringify({...oldState, ...state}));
   }
