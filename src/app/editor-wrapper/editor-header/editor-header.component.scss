@@ -1,4 +1,4 @@
-.app-editor-wrapper-header {
+.jsb-editor-wrapper-header {
   display: flex;
   justify-content: flex-end;
   height: 25px;
@@ -9,13 +9,13 @@
 
 
 
-  .app-editor-wrapper-header__name {
+  .jsb-editor-wrapper-header__name {
     font-size: 12px;
     margin-left: 10px;
     color: #cccccc;
   }
 
-  .app-editor-wrapper-header__keys {
+  .jsb-editor-wrapper-header__keys {
     cursor: pointer;
     margin-right: 10px;
     /*width: 100px;*/

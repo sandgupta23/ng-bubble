@@ -8,7 +8,7 @@ export enum EHeaderFormDataKeys {
 }
 
 @Component({
-  selector: 'app-editor-header',
+  selector: 'jsb-editor-header',
   templateUrl: './editor-header.component.html',
   styleUrls: ['./editor-header.component.scss']
 })

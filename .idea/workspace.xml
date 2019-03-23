@@ -7,20 +7,22 @@
   <component name="ChangeListManager">
     <list default="true" id="f2cfb048-ce33-455d-bed6-78addd447d99" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build-script.js" beforeDir="false" afterPath="$PROJECT_DIR$/build-script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/client.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/client.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/app-editor-sidebar/app-editor-sidebar.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/app-editor-sidebar/app-editor-sidebar.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/app-editor-sidebar/app-editor-sidebar.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/app-editor-sidebar/app-editor-sidebar.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/app-editor-sidebar/app-editor-sidebar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/app-editor-sidebar/app-editor-sidebar.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/app-editor/app-editor.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/app-editor/app-editor.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/app-editor/app-editor.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/app-editor/app-editor.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/editor-header/editor-header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/editor-header/editor-header.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/editor-header/editor-header.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/editor-header/editor-header.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/editor-header/editor-header.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/editor-header/editor-header.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/store.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/store.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/file-search-panel/file-search-panel.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/file-search-panel/file-search-panel.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/menu/menu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/menu/menu.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/test/test.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/test/test.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utility.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utility.service.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -64,10 +66,31 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="205">
+              <caret line="79" column="48" lean-forward="true" selection-start-line="79" selection-start-column="48" selection-end-line="79" selection-end-column="48" />
+              <folding>
+                <element signature="e#0#180#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/editor-header/editor-header.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="8" column="50" lean-forward="true" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="50" />
+            <state relative-caret-position="255">
+              <caret line="13" column="17" lean-forward="true" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/angular.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="244">
+              <caret line="17" column="9" lean-forward="true" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -94,32 +117,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node_modules/@angular/core/src/metadata/directives.d.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="276" column="4" selection-start-line="276" selection-start-column="4" selection-end-line="276" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/menu/menu.component.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
               <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/app.module.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="58" column="19" lean-forward="true" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#58#0" expanded="true" />
-                <element signature="e#242#325#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -146,7 +147,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>localsto</find>
       <find>selectedElXpath</find>
       <find>This is a test</find>
       <find>stri</find>
@@ -174,8 +174,9 @@
       <find>ngStyle</find>
       <find>_coords</find>
       <find>AppComponent</find>
-      <find>coor</find>
       <find>user-poll</find>
+      <find>coor</find>
+      <find>app-</find>
     </findStrings>
     <replaceStrings>
       <replace>req :Request, res: Response</replace>
@@ -183,8 +184,9 @@
       <replace>searchTrigger$</replace>
       <replace>//console.log</replace>
       <replace />
-      <replace>CodeMirror__ngbubble</replace>
       <replace>js-bubble</replace>
+      <replace>CodeMirror__ngbubble</replace>
+      <replace>jsb-</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -240,7 +242,6 @@
         <option value="$PROJECT_DIR$/backend/src/inquirer.ts" />
         <option value="$PROJECT_DIR$/backend/src/ng-bubble.ts" />
         <option value="$PROJECT_DIR$/src/app/client.service.ts" />
-        <option value="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.ts" />
         <option value="$PROJECT_DIR$/src/index.html" />
         <option value="$PROJECT_DIR$/src/app/app.component.ts" />
         <option value="$PROJECT_DIR$/src/app/app.module.ts" />
@@ -249,6 +250,7 @@
         <option value="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.html" />
         <option value="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.scss" />
         <option value="$PROJECT_DIR$/src/app/editor-wrapper/app-editor-sidebar/app-editor-sidebar.component.scss" />
+        <option value="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.ts" />
       </list>
     </option>
   </component>
@@ -315,6 +317,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="editor-wrapper" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="editor-wrapper" type="462c0819:PsiDirectoryNode" />
+              <item name="editor-header" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -417,12 +427,12 @@
       <workItem from="1552119877274" duration="5968000" />
       <workItem from="1552139249038" duration="47554000" />
       <workItem from="1552475150443" duration="8186000" />
-      <workItem from="1552579462911" duration="44180000" />
+      <workItem from="1552579462911" duration="44655000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="361336000" />
+    <option name="totallyTimeSpent" value="361811000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -437,7 +447,7 @@
     <frame x="-7" y="-7" width="1295" height="704" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49322492" visible="true" weight="0.2209857" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49322492" visible="true" weight="0.2209857" />
       <window_info id="Structure" order="1" sideWeight="0.5067751" side_tool="true" weight="0.21780604" />
       <window_info id="npm" order="2" sideWeight="0.50337076" side_tool="true" weight="0.21621622" />
       <window_info id="Favorites" order="3" sideWeight="0.50535333" side_tool="true" weight="0.10810811" />
@@ -451,7 +461,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5007949" side_tool="true" weight="0.27272728" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49920508" visible="true" weight="0.3986014" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49920508" visible="true" weight="0.3653846" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="12" weight="0.32867134" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -680,17 +690,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/angular.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="144" column="1" selection-start-line="144" selection-start-column="1" selection-end-line="144" selection-end-column="1" />
-          <folding>
-            <element signature="n#!!block;n#ng-bubble-elements#0;n#!!block;n#projects#0;n#!!top" />
-            <element signature="n#!!block;n#ng-bubble-elements-e2e#0;n#!!block;n#projects#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/enum.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -789,16 +788,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="76" column="3" lean-forward="true" selection-start-line="76" selection-start-column="3" selection-end-line="76" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#180#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -848,13 +837,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -876,10 +858,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/angular.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="17" column="9" lean-forward="true" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/editor-header/editor-header.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="8" column="50" lean-forward="true" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="50" />
+        <state relative-caret-position="255">
+          <caret line="13" column="17" lean-forward="true" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="79" column="48" lean-forward="true" selection-start-line="79" selection-start-column="48" selection-end-line="79" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#180#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

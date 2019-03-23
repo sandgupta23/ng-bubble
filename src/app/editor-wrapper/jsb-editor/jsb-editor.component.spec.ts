@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AppEditorSidebarComponent } from './app-editor-sidebar.component';
+import { AppEditorComponent } from './jsb-editor.component';
 
-describe('AppEditorSidebarComponent', () => {
-  let component: AppEditorSidebarComponent;
-  let fixture: ComponentFixture<AppEditorSidebarComponent>;
+describe('AppEditorComponent', () => {
+  let component: AppEditorComponent;
+  let fixture: ComponentFixture<AppEditorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AppEditorSidebarComponent ]
+      declarations: [ AppEditorComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AppEditorSidebarComponent);
+    fixture = TestBed.createComponent(AppEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

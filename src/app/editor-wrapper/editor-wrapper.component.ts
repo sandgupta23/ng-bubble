@@ -16,7 +16,7 @@ import {FormGroup} from '@angular/forms';
 import {EventService} from '../event.service';
 import {IFileData} from './file-search-panel/file-search-panel.component';
 import {ClientService, INgProbeData} from '../client.service';
-import {AppEditorComponent} from './app-editor/app-editor.component';
+import {JsbEditorComponent} from './jsb-editor/jsb-editor.component';
 import {StoreService} from '../store.service';
 import {IStore} from '../interface';
 import {EHeaderFormDataKeys} from './editor-header/editor-header.component';
@@ -28,7 +28,7 @@ export interface IHeaderFormData {
 }
 
 @Component({
-  selector: 'app-editor-wrapper',
+  selector: 'jsb-editor-wrapper',
   templateUrl: './editor-wrapper.component.html',
   styleUrls: ['./editor-wrapper.component.scss'],
   encapsulation: ViewEncapsulation.ShadowDom
@@ -85,7 +85,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   }
 
   @Input() config;
-  @ViewChild(AppEditorComponent) appEditorComponent: AppEditorComponent;
+  @ViewChild(JsbEditorComponent) appEditorComponent: JsbEditorComponent;
   @ViewChildren('menu') menu: QueryList<any>;
 
   minimize = false;

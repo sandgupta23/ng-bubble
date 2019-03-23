@@ -3,7 +3,7 @@ import {EHeaderFormDataKeys} from '../editor-header/editor-header.component';
 import {ILocalConfig} from '../../interface';
 
 @Component({
-  selector: 'app-editor-sidebar',
+  selector: 'jsb-editor-sidebar',
   template: `
     <div class="editor-body-sidebar" (click)="action$.emit($event)">
       <img class="vs-code-grey" 
@@ -17,9 +17,9 @@ import {ILocalConfig} from '../../interface';
       <i class="fa fa-save" *ngIf="activeHeaderTab === myEHeaderFormDataKeys.fileName" id="save-editor"></i>
     </div>
   `,
-  styleUrls: ['./app-editor-sidebar.component.scss']
+  styleUrls: ['./jsb-editor-sidebar.component.scss']
 })
-export class AppEditorSidebarComponent implements OnInit {
+export class JsbEditorSidebarComponent implements OnInit {
 
   myEHeaderFormDataKeys = EHeaderFormDataKeys;
   @Output() action$ = new EventEmitter();

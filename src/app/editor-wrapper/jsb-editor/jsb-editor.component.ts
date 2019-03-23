@@ -3,11 +3,11 @@ import {UtilityService} from '../../utility.service';
 
 
 @Component({
-  selector: 'app-editor',
+  selector: 'jsb-editor',
   template: `<textarea #textEditorPlaceholder></textarea>`,
-  styleUrls: ['./app-editor.component.scss']
+  styleUrls: ['./jsb-editor.component.scss']
 })
-export class AppEditorComponent implements OnInit, AfterViewInit {
+export class JsbEditorComponent implements OnInit, AfterViewInit {
 
   @ViewChild('textEditorPlaceholder') textEditorPlaceholder: ElementRef;
 

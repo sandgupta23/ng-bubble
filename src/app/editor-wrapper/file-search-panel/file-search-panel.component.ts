@@ -11,7 +11,7 @@ export interface IFileData {
 }
 
 @Component({
-  selector: 'app-file-search-panel',
+  selector: 'jsb-file-search-panel',
   templateUrl: './file-search-panel.component.html',
   styleUrls: ['./file-search-panel.component.scss']
 })
