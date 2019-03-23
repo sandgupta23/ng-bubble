@@ -48,11 +48,12 @@ ctrl = ctrl === 'y' || ctrl === 'yes';
 let app = express();
 app.use(cors());
 
-console.log(path.join(__dirname, '/../../', 'public'));
-app.use('/', express.static(path.join(__dirname, '/../../', 'public')));
-app.get('/', function(req:any, res:any) {
-    res.sendFile(path.join(__dirname, '/../../', 'public', 'assets', 'index.html'));
-});
+const PUBLIC_DIR_PATH = path.join(__dirname, '/../../../', 'public');
+console.log(PUBLIC_DIR_PATH);
+app.use('/', express.static(PUBLIC_DIR_PATH));
+// app.get('/', function(req:any, res:any) {
+//     res.sendFile(path.join(__dirname, '/../../', 'public', 'assets', 'index.html'));
+// });
 
 async function beginInquirer() {
     // if (!localConfig.inputTaken || program.ask) {

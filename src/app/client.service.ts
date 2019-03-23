@@ -20,7 +20,18 @@
 * 12. implement for react as well
 * 13. Bug: Reloading on search
 * 11. Sync two tabs
-*
+* 15. show loading icon
+* 16. row hover color should not be same as selected color
+* 17. Upon reloading no data is fetched=> we need to wait for app to be initialized OR retry after 2 sec interval for 30 sec
+* 18. IMPORTANT: REMOVE ZONE.JS: this maybe causing side effect of 17.
+* 19. Put options icon in side base => 1. angular/react 2.whether to show all components or just custom component
+* 20. doubleclick is not working
+* 21. HeaderComponent is matching analysis header component
+* 22. find is not working
+* 23. cant click on search
+* 24. save keywork for search
+* 25. make search more flexible
+* 26. base href problem while running code in ngx-admin
 *
 */
 
@@ -140,7 +151,7 @@ export class ClientService {
     socket.onclose = function (event) {
       ////console.log(event);
       setTimeout(() => {
-        location.reload();
+        // location.reload();
       }, 5000);/*TODO: a better way of doing this?*/
     };
 

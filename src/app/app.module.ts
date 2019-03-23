@@ -4,8 +4,7 @@ import {CUSTOM_ELEMENTS_SCHEMA, Injector, NgModule} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 // import { AppComponent } from './app.component';
 import { EditorWrapperComponent } from './editor-wrapper/editor-wrapper.component';
-import { AppEditorComponent } from './editor-wrapper/jsb-editor/jsb-editor.component';
-import { AppEditorSidebarComponent } from './editor-wrapper/jsb-editor-sidebar/jsb-editor-sidebar.component';
+import { JsbEditorComponent } from './editor-wrapper/jsb-editor/jsb-editor.component';
 import { EditorHeaderComponent } from './editor-wrapper/editor-header/editor-header.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {createCustomElement} from '@angular/elements';
@@ -17,13 +16,14 @@ import {ClickOutsideModule} from 'ng-click-outside';
 import { TestComponent } from './test/test.component';
 import { MenuComponent } from './editor-wrapper/menu/menu.component';
 import {AppComponent} from "./app.component";
+import {JsbEditorSidebarComponent} from "./editor-wrapper/jsb-editor-sidebar/jsb-editor-sidebar.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     EditorWrapperComponent,
-    AppEditorComponent,
-    AppEditorSidebarComponent,
+    JsbEditorComponent,
+    JsbEditorSidebarComponent,
     EditorHeaderComponent,
     JsonParsePipe,
     GetObjectKeyPipe,
@@ -34,8 +34,8 @@ import {AppComponent} from "./app.component";
   ],
   entryComponents:[
     EditorWrapperComponent,
-    AppEditorComponent,
-    AppEditorSidebarComponent,
+    JsbEditorComponent,
+    JsbEditorSidebarComponent,
     EditorHeaderComponent,
   ],
   imports: [
@@ -49,7 +49,7 @@ import {AppComponent} from "./app.component";
     CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  // bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(private injector: Injector){
