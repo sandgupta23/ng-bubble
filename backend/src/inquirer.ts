@@ -1,38 +1,73 @@
 import {EIdeNames} from "../enums";
+import {
+  getAngularConfig,
+  checkIfVscode,
+  checkIfWebstorm,
+  getAngular2Prefix,
+  getAngular5Projects
+} from "./utility";
+import {ILocalConfig} from "../interfaces";
+import {EFramework} from "../../enum";
+import * as fs from 'fs';
+
 const inquirer: any = require('inquirer');
 
-export function inquirerInit() {
-    return inquirer.prompt([{
-        type: 'list',
-        message: 'What ide you want to use?',
-        name: 'ide',
-        choices: [EIdeNames.WEBSTORM, EIdeNames.VSCODE]
-    }, {
-        type: 'list',
-        message: 'Shortcut for opening component in IDE',
-        name: 'ctrl',
-        choices: ["Double click", "Ctrl + Double click"]
-    }, {
-        type: 'list',
-        message: 'Experimental: Should ng-bubble try to guess html markup location while opening html file?',
-        name: 'guess',
-        choices: ["Yes", "No"]
-    }, {
-        type: 'input',
-        message: 'What is your component selector root? Default is app-.',
-        name: 'componentSelector',
+export async function inquirerInit() {
 
-        validate: (value: string) => {
-            if (!value || !(value.trim())) {
-                return true; //we will use default, if nothing is provided: app-
-            }
-            if (value.endsWith("-")) {
-                return true;
-            } else {
-                return `Error: Provided:${value}. Must end with hyphen (-). Example: app-`
-            }
-        }
+  let answerObj: ILocalConfig = {};
+  let angularConfigDetails = getAngularConfig();
+  if (angularConfigDetails) answerObj.framework = EFramework.ANGULAR;
+  else {
+    answerObj.framework = (await inquirer.prompt([{
+      type: 'list',
+      message: 'Please select your framework.',
+      name: 'framework',
+      choices: [EFramework.ANGULAR, EFramework.REACT]
+    }])).framework
+  }
+
+  console.log('angularConfigDetails', angularConfigDetails);
+  /*if its angular project, detect or ask for component prefix*/
+  if (angularConfigDetails) {
+    let config:any = JSON.parse(fs.readFileSync(angularConfigDetails.path).toString());
+    if (angularConfigDetails.version >= 5) {
+      let projectName: string = config['defaultProject'];
+      if (!projectName) {
+        let projects: string[] = getAngular5Projects(config);
+        projectName = (await inquirer.prompt([{
+          type: 'list',
+          message: 'Please select your Project.',
+          name: 'projectName',
+          choices: projects
+        }])).projectName;
+      }
+      answerObj.angularPrefix = config['projects'][projectName].prefix;
+    } else {
+      answerObj.angularPrefix = getAngular2Prefix(config);
     }
-    ]);
+  }else {
+    answerObj.angularPrefix = (await inquirer.prompt([{
+      type: 'input',
+      message: 'What is your component selector prefix (default = app).',
+      name: 'angularPrefix',
+    }])).angularPrefix;
+  }
 
-};
+
+  /*try to figure out IDE else prompt if not sure*/
+  let isVscode = checkIfVscode();
+  let isWebstorm = checkIfWebstorm();
+  if (isVscode && isWebstorm || (!isVscode && !isWebstorm)) {
+    answerObj.preferredIde =  (await inquirer.prompt([{
+      type: 'list',
+      message: 'Please select your IDE.',
+      name: 'preferredIde',
+      choices: [EIdeNames.WEBSTORM, EIdeNames.VSCODE]
+    }])).preferredIde
+  } else {
+    answerObj.preferredIde = isVscode ? EIdeNames.VSCODE : EIdeNames.WEBSTORM;
+  }
+
+  return answerObj;
+
+}

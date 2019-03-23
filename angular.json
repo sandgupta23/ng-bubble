@@ -34,18 +34,7 @@
             ],
             "scripts": [{
                 "input": "node_modules/document-register-element/build/document-register-element.js"
-              },
-              "node_modules/codemirror/lib/codemirror.js",
-              "node_modules/codemirror/addon/fold/foldcode.js",
-              "node_modules/codemirror/addon/fold/foldgutter.js",
-              "node_modules/codemirror/addon/fold/indent-fold.js",
-              "node_modules/codemirror/addon/fold/comment-fold.js",
-              "node_modules/codemirror/addon/search/search.js",
-              "node_modules/codemirror/addon/search/searchcursor.js",
-              "node_modules/codemirror/addon/search/jump-to-line.js",
-              "node_modules/codemirror/addon/dialog/dialog.js",
-              "node_modules/codemirror/addon/dialog/dialog.js",
-              "node_modules/codemirror/mode/python/python.js"
+              }
             ]
           },
           "configurations": {

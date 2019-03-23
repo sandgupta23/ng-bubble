@@ -48,30 +48,34 @@ ctrl = ctrl === 'y' || ctrl === 'yes';
 let app = express();
 app.use(cors());
 
-console.log(path.join(__dirname, '/../../', 'public'));
-app.use('/', express.static(path.join(__dirname, '/../../', 'public')));
-app.get('/', function(req:any, res:any) {
-    res.sendFile(path.join(__dirname, '/../../', 'public', 'assets', 'index.html'));
-});
+const PUBLIC_DIR_PATH = path.join(__dirname, '/../../../', 'public');
+console.log(PUBLIC_DIR_PATH);
+app.use('/', express.static(PUBLIC_DIR_PATH));
+// app.get('/', function(req:any, res:any) {
+//     res.sendFile(path.join(__dirname, '/../../', 'public', 'assets', 'index.html'));
+// });
 
 async function beginInquirer() {
-    if (!localConfig.inputTaken || program.ask) {
-        let inquirerOutput: IInquirerOutPut = await inquirerInit();
-        let preferredIde: string = inquirerOutput.ide;
-        let guess: boolean = inquirerOutput.guess === 'Yes';
-        let ctrl: boolean = inquirerOutput.ctrl === 'Ctrl + Double click';
-        let componentSelector: string = inquirerOutput.componentSelector ? inquirerOutput.componentSelector : 'app-';
-        let newLocalConfigData: ILocalConfig = {
-            ...localConfig,
-            preferredIde,
-            inputTaken: true,
-            guess,
-            componentSelector,
-            ctrl
-
-        };
+    // if (!localConfig.inputTaken || program.ask) {
+    if (true) {
+        let inquirerOutput: ILocalConfig = await inquirerInit();
+        // console.log(inquirerOutput);
+        // let preferredIde: string = inquirerOutput.ide;
+        // let guess: boolean = inquirerOutput.guess === 'Yes';
+        // let ctrl: boolean = inquirerOutput.ctrl === 'Ctrl + Double click';
+        // let componentSelector: string = inquirerOutput.componentSelector ? inquirerOutput.componentSelector : 'app-';
+        let newLocalConfigData: ILocalConfig = inquirerOutput;
+        // let newLocalConfigData: ILocalConfig = {
+        //     ...localConfig,
+        //     preferredIde,
+        //     inputTaken: true,
+        //     // guess,
+        //     componentSelector,
+        //     ctrl
+        //
+        // };
         await updateLocalConfig(newLocalConfigData);
-        console.log("Thanks. If in future you want to change these options, run: ng-bubble --ask");
+        console.log("\n Thanks. If in future you want to change these options, run: ng-bubble --ask");
         routesInit(app);
     } else {
         console.log(`Your configurations are as follows. To change run ng-bubble --ask.`);

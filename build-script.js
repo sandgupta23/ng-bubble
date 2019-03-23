@@ -12,7 +12,7 @@ const concat = require('concat');
 
 	await fs.ensureDir('public/assets/js')
 
-	await concat(files, 'public/assets/js/user-poll.js')
+	await concat(files, 'public/assets/js/js-bubble.js')
 	console.info('Elements created successfully!')
 
 })()

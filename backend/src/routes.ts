@@ -8,8 +8,11 @@ import {IFsItem, IWSData} from "../interfaces";
 
 const scan = require('./scan');
 const path = require('path');
-const root = path.join(__dirname, '../../');
-// const root = "D:\\nodebook\\ng-bubble-elements";
+// const root = path.join(__dirname, '../../');
+const root = "D:\\nodebook\\DEVELOP\\bot_platform-fe";
+console.log("ROOT=>>>>>>>>>>>>>>>>>> ", root);
+console.log("__dirname ", __dirname);
+console.log("process.cwd(); ", process.cwd());
 const Server = require('ws').Server;
 
 let folders: any[] = [], files: any = [];
