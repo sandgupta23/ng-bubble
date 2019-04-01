@@ -1,5 +1,5 @@
 import {
-  AfterViewInit,
+  AfterViewInit, ChangeDetectorRef,
   Component,
   DoCheck,
   EventEmitter,
@@ -34,7 +34,7 @@ export interface IHeaderFormData {
   encapsulation: ViewEncapsulation.ShadowDom
 })
 export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
-
+  obj;
   @Output() file_save_start$ = new EventEmitter();
   @Output() searchTrigger$ = new EventEmitter();
   @Output() getFileTrigger$ = new EventEmitter();
@@ -54,7 +54,11 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
 
   @Input() componentstr = (ngProbeData: INgProbeData) => {
     // this._componentstr = val;
-    this.componentObj = UtilityService.getComponentWithoutInjectedMembers(ngProbeData) || {};
+    // this.componentObj = UtilityService.getComponentWithoutInjectedMembers(ngProbeData) || {};
+    this.componentObj = ngProbeData.componentInstance;
+    //.constructor.prototype.ngDoCheck
+    this.addDoCheckHook(ngProbeData.componentInstance);
+    console.log('====>',this.componentObj);
     let activeComponentKey = this.headerForm.value['key'];
     this.keyOptions = ['All', ...Object.keys(this.componentObj)];
     let isActiveComponentKeyPresent = this.keyOptions.findIndex((key) => key === activeComponentKey) !== -1;
@@ -72,7 +76,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     let top = coords.top + 'px';
     let left = coords.left + 'px';
     this._coords = {...coords, left, top};
-    debugger;
+
     this.showTooltip = true;
   }
 
@@ -105,9 +109,10 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   keyOptions = ['All'];
   myObject = Object;
   codeData: any = 'hello from wrapper';
+  path: any = '';
   headerForm: FormGroup;
   headerFormData: IHeaderFormData = {};
-  constructor(private utilityService: UtilityService) {}
+  constructor(private utilityService: UtilityService, private changeDetectorRef:ChangeDetectorRef) {}
 
   ngOnInit() {
     console.log("editor-wrapper.component.ts");
@@ -302,6 +307,26 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   //
   logCurrentData() {
     this.log$.emit({key: this.headerFormData.key, clone: this.componentObj});
+  }
+
+  addDoCheckHook(component){
+    let ngDoCheck = component.constructor.prototype.ngDoCheck;
+    if(ngDoCheck && !ngDoCheck.__NGBUBBLE_HOOK__){
+      component.constructor.prototype.ngDoCheck = this.ngDoCheckHook(component.constructor.prototype.ngDoCheck);
+    }
+  }
+
+  ngDoCheckHook(originalNgDoCheck:Function){
+    let self = this;
+    return function () {
+      self.codeData = {...self.componentObj};
+      // console.log(self.codeData);
+      // self.changeDetectorRef.detectChanges();
+      // self.getHoveredComponentData$.emit();/*TODO: what about selected component via dblclick?*/
+      // self.codeData = self.componentObj;
+      // this.__NGBUBBLE_HOOK__ = true;
+      originalNgDoCheck && originalNgDoCheck();/*TODO: ng do check with arguments?*/
+    }
   }
 
 }

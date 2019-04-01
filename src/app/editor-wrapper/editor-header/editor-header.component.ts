@@ -14,15 +14,23 @@ export enum EHeaderFormDataKeys {
 })
 export class EditorHeaderComponent implements OnInit {
 
+  subpaths:string[] = [];
+
   @Input() componentFiles: IFileData[];
   @Input() componentKeys: string[];
   @Input() headerForm: FormGroup;
   @Input() minimize = false;
   @Input() expand = false;
   @Input() activeTab:EHeaderFormDataKeys;
+  @Input() set path(val:string){
+    debugger;
+    if(!val) this.subpaths = [];
+    this.subpaths = val.split(' ');
+  }
 
   @Output() headerDataChanged$ = new EventEmitter();
   @Output() action$ = new EventEmitter();
+  @Output() path$ = new EventEmitter();
   myEHeaderFormDataKeys = EHeaderFormDataKeys;
   constructor() { }
 
@@ -37,6 +45,12 @@ export class EditorHeaderComponent implements OnInit {
   }
   log(){
       //console.log(this.headerForm);
+  }
+
+  sendPath(index){
+    debugger;
+    this.subpaths = this.subpaths.slice(0, index+1);
+    this.path$.emit(this.subpaths.join(" "))
   }
 
 }

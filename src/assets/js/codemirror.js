@@ -6614,7 +6614,7 @@
 				forEachCodeMirror(onResize);
 			}, 100); }
 		});
-		// When the window loses focus, we want to show the editor as blurred
+		// When the window loses focus, we want to shouldFoldCode the editor as blurred
 		on(window, "blur", function () { return forEachCodeMirror(onBlur); });
 	}
 	// Called when the window resizes

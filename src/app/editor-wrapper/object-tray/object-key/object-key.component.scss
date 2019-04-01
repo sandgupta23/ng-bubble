@@ -1,0 +1,29 @@
+ul{
+  *{
+    color: rgb(111, 179, 210);
+  };
+}
+
+
+$triangle-length : 4px;
+.triangle-right{
+  width: 0;
+  height: 0;
+  border-top: $triangle-length solid transparent;
+  border-bottom: $triangle-length solid transparent;
+  border-left: $triangle-length *1.5 solid rgb(111, 179, 210);
+}
+
+.triangle-down{
+  width: 0;
+  height: 0;
+  border-left: $triangle-length solid transparent;
+  border-right: $triangle-length solid transparent;
+  border-top: $triangle-length *1.5 solid rgb(111, 179, 210);
+}
+
+.pin{
+  &:hover{
+    text-decoration: underline;
+  }
+}

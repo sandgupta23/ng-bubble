@@ -1,0 +1,18 @@
+<ng-container *ngIf="(obj|dataType) === 'object'; else log">
+  <ng-container *ngIf="(obj|objectByPath:path)||{} as obj_temp">
+    <app-object-key (pin$)="finalPrint($event)"
+                    *ngFor="let key of myObject.keys(obj_temp)"
+                    [key]="key"
+                    [shouldFoldCode]="shouldFoldCode"
+                    [obj]="obj_temp|objectByPath"
+                    [val]="obj_temp[key]" ></app-object-key>
+  </ng-container>
+
+</ng-container>
+
+
+<ng-template #log>
+  <pre>
+    {{obj}}
+  </pre>
+</ng-template>

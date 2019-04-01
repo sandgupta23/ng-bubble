@@ -9,16 +9,16 @@
           (showTooltip$)="showTooltip = $event"></jsb-menu>
 
 <div class="jsb-editor-wrapper"
-     (dblclick)="$event.stopPropagation()" [ngStyle]="{'top': top,left:left, right:right, bottom:bottom}" *ngIf="!minimize">
-
-  <!--<i>{{codeData|json}}</i>-->
-
+     (dblclick)="$event.stopPropagation()" [ngStyle]="{'top': top,left:left, right:right, bottom:bottom}"
+     *ngIf="!minimize">
 
   <jsb-editor-header
     [componentFiles]="_componentfiles"
     [componentKeys]="keyOptions"
     [headerForm]="headerForm"
     [minimize]="minimize"
+    [path]="path"
+    (path$)="path = $event"
     [expand]="expand"
     [activeTab]="activeHeaderTab"
     (action$)="sidebarActionHandler($event)"
@@ -29,7 +29,20 @@
                         [config]="config"
                         [shouldFoldCode]="shouldFoldCode"
                         [activeHeaderTab]="activeHeaderTab"></jsb-editor-sidebar>
-    <jsb-editor [level]="headerFormData.key==='All'?3:6" [codeText]="codeData" [shouldFoldCode]="shouldFoldCode"></jsb-editor>
+    <app-object-tray
+      *ngIf="!headerForm.get('showMode').value"
+      [obj]="codeData"
+      (path$)="path=$event"
+      [path]="path"
+      [shouldFoldCode]="!shouldFoldCode"
+      style="width: 100%; height: 100%; background-color: rgb(42, 47, 58);overflow-y: scroll">
+    </app-object-tray>
+    <!--<i>{{codeData|json}}</i>-->
+    <!--<app-js-console-->
+    <!--style="width: 100%; height: 100%; background-color: rgb(42, 47, 58);overflow-y: scroll"></app-js-console>-->
+    <jsb-editor *ngIf="headerForm.get('showMode').value"
+                [level]="headerFormData.key==='All'?3:6" [codeText]="codeData"
+                [shouldFoldCode]="shouldFoldCode"></jsb-editor>
     <jsb-file-search-panel
       (showSearchPanel$)="showSearchPanel=$event"
       *ngIf="showSearchPanel"

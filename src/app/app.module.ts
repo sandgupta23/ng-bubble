@@ -17,6 +17,12 @@ import { TestComponent } from './test/test.component';
 import { MenuComponent } from './editor-wrapper/menu/menu.component';
 import {AppComponent} from "./app.component";
 import {JsbEditorSidebarComponent} from "./editor-wrapper/jsb-editor-sidebar/jsb-editor-sidebar.component";
+import { ObjectTrayComponent } from './editor-wrapper/object-tray/object-tray.component';
+import { ObjectKeyComponent } from './editor-wrapper/object-tray/object-key/object-key.component';
+import { ObjectDetailComponent } from './editor-wrapper/object-tray/object-detail/object-detail.component';
+import { ObjectByPathPipe } from './object-by-path.pipe';
+import { JsConsoleComponent } from './editor-wrapper/js-console/js-console.component';
+import { DataTypePipe } from './data-type.pipe';
 
 @NgModule({
   declarations: [
@@ -31,6 +37,12 @@ import {JsbEditorSidebarComponent} from "./editor-wrapper/jsb-editor-sidebar/jsb
     ImageByExtensionPipe,
     TestComponent,
     MenuComponent,
+    ObjectTrayComponent,
+    ObjectKeyComponent,
+    ObjectDetailComponent,
+    ObjectByPathPipe,
+    JsConsoleComponent,
+    DataTypePipe,
   ],
   entryComponents:[
     EditorWrapperComponent,
@@ -49,7 +61,7 @@ import {JsbEditorSidebarComponent} from "./editor-wrapper/jsb-editor-sidebar/jsb
     CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [],
-  // bootstrap: [AppComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(private injector: Injector){

@@ -18,7 +18,7 @@ export interface IStore {
 export interface ILocalConfig {
   'preferredIde': string;//'WEBSTORM' || "VSCODE";
   'inputTaken': boolean;
-  'guess': true;
-  'componentSelector': 'app-';
-  'ctrl': false;
+  'guess': boolean;
+  'componentSelector': string;
+  'ctrl': boolean;
 }

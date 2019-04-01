@@ -1,0 +1,23 @@
+<ul style="padding-left: 10px; margin: 5px 0">
+  <li style="list-style-type: none;">
+    <div (click)="shouldFoldCode=!shouldFoldCode" style="display: flex; align-items: center; cursor: pointer">
+      <div style="flex-shrink: 0;align-self: center;display: flex;align-items: center;">
+        <i class="fa " style="margin-right: 5px" [ngClass]="{'fa-caret-down': shouldFoldCode, 'fa-caret-right': !shouldFoldCode}"></i>
+        <span style="font-size: 13px; color: greenyellow">{{key}}</span>
+        <a *ngIf="type === 'object'" class="pin" (click)="trigger(key, $event);" style="font-size: 9px; margin-left: 3px;">(pin)</a>
+        <span style="margin-left: 3px; font-size: 9px">:</span>
+        <i *ngIf="!shouldFoldCode" style="margin-left: 10px;font-size: 12px; margin-top: 0px">{{obj[key]|json}}</i>
+      </div>
+    </div>
+    <ng-container *ngIf="shouldFoldCode && obj && type === 'object'">
+      <app-object-key style="margin-top: 5px; display: block; border-left: 1px solid rgb(111, 179, 210)"
+                      (pin$)="test($event)"
+                      [shouldFoldCode]="shouldFoldCode"
+                      *ngFor="let key_temp of keys" [key]="key_temp" [obj]="obj[key]"
+                      [val]="obj[key][key_temp]"></app-object-key>
+    </ng-container>
+    <ng-container *ngIf="shouldFoldCode && obj && type !== 'object'">
+      <i style="margin-left: 14px;font-size: 12px; margin-top: 5px">{{obj[key]}}</i>
+    </ng-container>
+  </li>
+</ul>

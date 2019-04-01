@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, DoCheck, OnChanges, SimpleChanges} from '@angular/core';
 import {UtilityService} from './utility.service';
 
 @Component({
@@ -6,9 +6,36 @@ import {UtilityService} from './utility.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements DoCheck{
   title = 'ng-bubble-elements';
-  constructor(){
-    console.log("AppComponent");
+  val = 0;
+  obj = {
+    // name:"Sandeep Gupta",
+    address: {
+      country: {
+        state: {
+          city: {
+            name: 'ghaziabad',
+            landMark: 'Near Mango tree',
+            pincode: 201009
+          },
+          alias: 'UP',
+          name: 'Uttar Pradesh'
+        }
+      }
+    }
+  };
+
+  constructor() {
+    console.log(this);
   }
+
+  ngDoCheck(): void {
+    console.log(this);
+  }
+
+
+
+
+
 }

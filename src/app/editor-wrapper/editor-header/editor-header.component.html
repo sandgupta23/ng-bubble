@@ -13,7 +13,20 @@
     </select>
   </ng-container>
 
+
+    <div style="font-size: 12px; margin-right: 5px; cursor: pointer"
+       *ngFor="let subpath of subpaths; let i = index;let last = last;"
+       (click)="sendPath(i)">
+      {{subpath}}
+      <i (click)="$event.stopPropagation()" *ngIf="!last" style="font-size: 8px; vertical-align: middle; cursor: default">></i>
+    </div>
+
+
   <span style="margin-left: auto"></span>
+  <label class="switch" style="margin-right: 10px">
+    <input type="checkbox" checked formControlName="showMode">
+    <span class="slider round"></span>
+  </label>
   <i id="window-maximize" style="transform: rotate(90deg); margin-right: 10px" class="fa fa-expand" *ngIf="!expand"></i>
   <i class="fa fa-compress" style="transform: rotate(90deg);margin-right: 10px" *ngIf="expand"></i>
   <i id="window-minimize" *ngIf="!minimize" class=" fa fa-window-minimize"></i>

@@ -4,8 +4,8 @@ import {FormBuilder} from '@angular/forms';
 import jc from 'json-cycle';
 import jsonPrune from 'json-prune';
 import {storeKeys} from './store.service';
-import {IHeaderFormData} from "./editor-wrapper/editor-wrapper.component";
-import {EHeaderFormDataKeys} from "./editor-wrapper/editor-header/editor-header.component";
+import {IHeaderFormData} from './editor-wrapper/editor-wrapper.component';
+import {EHeaderFormDataKeys} from './editor-wrapper/editor-header/editor-header.component';
 
 import * as CodeMirror from 'codemirror';
 import 'codemirror/addon/fold/foldcode.js';
@@ -18,12 +18,12 @@ import 'codemirror/addon/search/jump-to-line.js';
 import 'codemirror/addon/dialog/dialog.js';
 import 'codemirror/addon/dialog/dialog.js';
 import 'codemirror/mode/python/python.js';
-import {INgProbeData} from "./client.service";
+import {INgProbeData} from './client.service';
 
 const COMPONENT_SELECTOR = 'app';
 
 export const sideBaseClasses = [
-  "vs-code-grey",
+  'vs-code-grey',
   'fa-search',
   'fa-save',
   'fa-repeat',
@@ -61,6 +61,7 @@ export class UtilityService {
     return this.formBuilder.group({
       fileName: [''],
       key: [''],
+      showMode: [false],
     });
   }
 
@@ -126,35 +127,35 @@ export class UtilityService {
   *  a.self = a; //Now a is cycle JSON.
   *  Result: "{"name":"john doe","self":{"$ref":"$"}}"
   * */
-  static jsonStringifyCyclic(obj, level=3) {
+  static jsonStringifyCyclic(obj, level = 3) {
     /*TODO: move to web worker*/
-    console.log("JSON PRUNE, level: ", level);
+    console.log('JSON PRUNE, level: ', level);
     return jsonPrune(obj, level);
   }
 
   static unfoldCode(codemirror) {
-    CodeMirror.commands.unfoldAll(codemirror)
+    CodeMirror.commands.unfoldAll(codemirror);
   }
 
   static foldCode(codemirror) {
-    console.log("folding code take1");
+    console.log('folding code take1');
     /*TODO: */
     setTimeout(() => {/*computation heavy task*/
       for (var l = codemirror.firstLine(); l <= codemirror.lastLine(); ++l)
         if (l > 1) {
           codemirror.foldCode({line: l, ch: 0}, null, 'fold');
         }
-    })
+    });
   }
 
   static getComponentWithoutInjectedMembers(ngProbeData: INgProbeData) {
     let injector = ngProbeData.injector;
     let componentInstance = ngProbeData.componentInstance;
-    let providers:any[] = injector['view']['root']['ngModule']['_providers'];
+    let providers: any[] = injector['view']['root']['ngModule']['_providers'];
     let x = Object.keys(componentInstance).reduce((total, key) => {
       let val = componentInstance[key];
-      if (typeof val !== "object" || !providers.find(e => e === val)) {
-        return {...total, [key]: componentInstance[key]}
+      if (typeof val !== 'object' || !providers.find(e => e === val)) {
+        return {...total, [key]: componentInstance[key]};
       }
       return total;
     }, {});
@@ -196,6 +197,24 @@ export class UtilityService {
       }
     }
     return keysChanged;
+  }
+
+  /**
+   * getChildObjectByPath: get a subtree by path in a bigger tree (object)
+   * example:
+   * path = "address country" //saperated by space
+   * returned obj["address"]["country"]
+   * */
+  static getChildObjectByPath(obj, path) {
+    if(!path || !obj){
+      return obj;
+    }
+    let pathSplit = path.split(' ');
+    console.log(obj);
+    for (var i = 0; i < pathSplit.length; i++) {
+      obj = obj[pathSplit[i]];
+    }
+    return obj;
   }
 
 }

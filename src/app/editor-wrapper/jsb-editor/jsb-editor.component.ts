@@ -43,13 +43,11 @@ export class JsbEditorComponent implements OnInit, AfterViewInit {
     const editorTextArea = this.textEditorPlaceholder.nativeElement;
     setTimeout(() => {
       this.codemirror = UtilityService.codeMirrorInit(editorTextArea);
-      /*
-      TODO: undo the comment
+
       console.log(this.codemirror);
-      this._codeText = this.stringifyInput(this._codeText);
+      this._codeText = this.stringifyInput(this._codeText, this.level);
       // console.log(this._codeText);
       this.setValueInCodeMirror(this.codemirror, this._codeText);
-      */
     });
   }
 
