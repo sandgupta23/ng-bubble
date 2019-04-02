@@ -12,7 +12,8 @@ export interface IStore {
   minimize?: boolean;
   expand?: boolean;
   editorDisplayState?: EEditorDisplayState,
-  codeText?: string
+  codeText?: string,
+  selectedElXpath?:string
 }
 
 export interface ILocalConfig {

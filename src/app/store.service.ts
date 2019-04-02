@@ -23,7 +23,9 @@ export const storeKeys = [
   'headerFormData',
   'activeHeaderTab',
   'expand',
-  "shouldFoldCode"
+  "shouldFoldCode",
+  'path',
+  'editorMode'
 ];
 
 @Injectable({
@@ -39,7 +41,9 @@ export class StoreService {
   private static store: IStore = {};
 
   static patchStore(state:IStore = {}){
+    debugger;
     StoreService.store = {...StoreService.store, ...state};
+    delete StoreService.store.selectedElXpath;/*todo*/
     try{
       this.setInLocalStorage(StoreService.store);
     }catch (e) {

@@ -7,7 +7,6 @@ import {UtilityService} from './utility.service';
 export class ObjectByPathPipe implements PipeTransform {
 
   transform(obj: object, path: string): any {
-
     return UtilityService.getChildObjectByPath(obj, path);
   }
 }

@@ -111,9 +111,12 @@ export class ClientService {
 
     function stateInitialization() {
       let selectedElXpath = state.selectedElXpath;
+      // let hoveredElXpath = state.hoveredElXpath;//
       // selectedElXpath = $selectedComponent && getXPathByElement($selectedComponent);
-      $hoveredComponent = $selectedComponent = <HTMLElement>getElementByXpath(selectedElXpath);
+      $selectedComponent = <HTMLElement>getElementByXpath(selectedElXpath);
+      // $hoveredComponent = <HTMLElement>getElementByXpath(hoveredElXpath);
       selectedComponent = getComponentDataInstanceFromNode($selectedComponent).componentInstance;
+      // hoveredComponent = getComponentDataInstanceFromNode($hoveredComponent).componentInstance;
     }
 
     ////console.log(document);
@@ -124,7 +127,9 @@ export class ClientService {
     * */
     let $selectedComponent: HTMLElement;
     let selectedElXpath: string | any;
+    let hoveredElXpath: string | any;
     let selectedComponent: Object;
+    let hoveredComponent: Object;
     let $hoveredComponent: HTMLElement;
 
 
@@ -133,13 +138,14 @@ export class ClientService {
       preferredIde: 'WEBSTORM',
       guess: false,
       inputTaken: false,
-      componentSelector:'app'
+      componentSelector: 'app'
     };
 
     /*state initialization from localstorage*/
     let stateStr: any = localStorage.getItem('NG_BUBBLE_STATE');
     let state = stateStr && JSON.parse(stateStr);
     selectedElXpath = state && state.selectedElXpath;
+    hoveredElXpath = state && state.hoveredElXpath;
 
     let socket = new WebSocket('ws://localhost:11640');
     socket.onopen = function (event) {
@@ -151,7 +157,8 @@ export class ClientService {
       } else {
         stateInitialization();
       }
-      emitHoveredComponentData($hoveredComponent);
+
+      // emitHoveredComponentData($hoveredComponent);
       emitSelectedComponentFiles($selectedComponent);
     };
     socket.onclose = function (event) {
@@ -227,11 +234,11 @@ export class ClientService {
       * Only if no selectedElXpath is present, initiate it. This is because hovered components have
       * lower priority.
       * */
-      if (!selectedElXpath) {
-        let componentXPath = getXPathByElement($selectedComponentNode);
-        selectedElXpath = componentXPath;
-        setState({selectedElXpath: componentXPath});
-      }
+
+      let componentXPath = getXPathByElement($selectedComponentNode);
+      selectedElXpath = componentXPath;
+
+      setState({selectedElXpath: componentXPath});
 
 
     });
@@ -277,7 +284,7 @@ export class ClientService {
     }
 
     function camelCaseToDotCase(camel: string) {
-      return camel.replace(/[A-Z]/g, m => " " + m.toLowerCase());
+      return camel.replace(/[A-Z]/g, m => ' ' + m.toLowerCase());
     }
 
     function tagToFileName(tag: string, ext: string = '') {
@@ -320,7 +327,8 @@ export class ClientService {
     function setState(data: object = {}) {
       let stateStr: any = localStorage.getItem('NG_BUBBLE_STATE');
       let state = JSON.parse(stateStr);
-      localStorage.setItem('NG_BUBBLE_STATE', jsonStringifyCyclic({...state, ...data}));
+      let x = jsonStringifyCyclic({...state, ...data});
+      localStorage.setItem('NG_BUBBLE_STATE', x);
     }
 
     document.addEventListener('dblclick', ($event) => {
@@ -361,12 +369,19 @@ export class ClientService {
       if (!$event.shiftKey) {
         return;
       }
-      debugger;
+
       let target = $event.target as HTMLElement;
       ////console.log(target);
       let $component: HTMLElement = getComponentDataInstanceFromNode(<HTMLElement>$event.target).componentNode;
       $hoveredComponent = $component;
       if (!$component) return;
+
+      let componentXPath = getXPathByElement($component);
+
+
+      hoveredElXpath = componentXPath;
+      // setState({hoveredElXpath: componentXPath, selectedElXpath:""});
+
       // //console.log($component);
       // let top = $component.offsetTop;
       // let left = $component.offsetWidth;
@@ -398,7 +413,7 @@ export class ClientService {
       // $editorEl.setAttribute(key, value);
       try {
         let editorMember = $editorEl[key];
-        if (typeof editorMember === "function") {
+        if (typeof editorMember === 'function') {
           editorMember(value);
         } else {
           $editorEl[key] = value;
@@ -444,7 +459,7 @@ export class ClientService {
       let probeData = ng.probe($el);
       console.log($el);
       if (!probeData) {
-        throw "NG:BUBBLE::Could not found related component";
+        throw 'NG:BUBBLE::Could not found related component';
       }
       let componentInstance = probeData.componentInstance;
       let componentNode = probeData.parent && probeData.parent.nativeElement;
@@ -484,7 +499,7 @@ export class ClientService {
     function jsonStringifyCyclic(obj) {
       /*TODO: move to web worker*/
       // return  JSON.stringify(jc.decycle(obj));
-      console.log("================prune============");
+      console.log('================prune============');
       return jsonPrune(obj, 5);
     }
 
@@ -525,7 +540,13 @@ export class ClientService {
      * https://stackoverflow.com/questions/10596417/is-there-a-way-to-get-element-by-xpath-using-javascript-in-selenium-webdriver
      * */
     function getElementByXpath(path) {
-      return document.evaluate('html/' + path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      let node: Node;
+      try {
+        node = document.evaluate('html/' + path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      } catch (e) {
+        console.log(e);
+      }
+      return node;
     }
 
     function getRootEl(possibleTags: string[]) {

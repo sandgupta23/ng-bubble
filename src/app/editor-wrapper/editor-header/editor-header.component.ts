@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {IFileData} from '../file-search-panel/file-search-panel.component';
 
 export enum EHeaderFormDataKeys {
   key="key",
   fileName="fileName",
+  editorMode="editorMode",
 }
 
 @Component({
@@ -23,7 +24,7 @@ export class EditorHeaderComponent implements OnInit {
   @Input() expand = false;
   @Input() activeTab:EHeaderFormDataKeys;
   @Input() set path(val:string){
-    debugger;
+
     if(!val) this.subpaths = [];
     this.subpaths = val.split(' ');
   }
@@ -32,7 +33,7 @@ export class EditorHeaderComponent implements OnInit {
   @Output() action$ = new EventEmitter();
   @Output() path$ = new EventEmitter();
   myEHeaderFormDataKeys = EHeaderFormDataKeys;
-  constructor() { }
+  constructor(private changeDetectorRef:ChangeDetectorRef) { };
 
   ngOnInit() {
     /*todo: do this in parent component*/
@@ -42,13 +43,17 @@ export class EditorHeaderComponent implements OnInit {
     this.headerForm.get('fileName').valueChanges.subscribe((value)=>{
       this.headerDataChanged$.emit({fileName:value});
     })
+    this.changeDetectorRef.detectChanges();
   }
   log(){
       //console.log(this.headerForm);
   }
 
   sendPath(index){
-    debugger;
+
+    if(index === -1){
+      this.path$.emit('');
+    }
     this.subpaths = this.subpaths.slice(0, index+1);
     this.path$.emit(this.subpaths.join(" "))
   }

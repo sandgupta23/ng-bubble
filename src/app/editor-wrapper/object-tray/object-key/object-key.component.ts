@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {UtilityService} from '../../../utility.service';
 
 @Component({
   selector: 'app-object-key',
@@ -14,13 +15,19 @@ export class ObjectKeyComponent implements OnInit {
   @Input() shouldFoldCode:boolean;
   type;
   keys:string[];
-  constructor() { }
+  constructor(private utilityService: UtilityService, private changeDetectorRef:ChangeDetectorRef) {}
 
   ngOnInit() {
     this.type = typeof this.val;
     if(this.type === 'object'){
       this.keys = Object.keys(this.val);
     }
+  }
+
+  shouldFoldCodeHandler(){
+    this.shouldFoldCode=!this.shouldFoldCode;
+    this.changeDetectorRef.detectChanges();
+
   }
 
   test(key:string){

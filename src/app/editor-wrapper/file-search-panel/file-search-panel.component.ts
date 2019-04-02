@@ -1,7 +1,8 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {UtilityService} from '../../utility.service';
 import {FormGroup} from '@angular/forms';
 import {EventService} from '../../event.service';
+import {Subscription} from 'rxjs';
 
 export interface IFileData {
   'name': string,
@@ -15,7 +16,7 @@ export interface IFileData {
   templateUrl: './file-search-panel.component.html',
   styleUrls: ['./file-search-panel.component.scss']
 })
-export class FileSearchPanelComponent implements OnInit {
+export class FileSearchPanelComponent implements OnInit, OnDestroy {
 
   searchForm: FormGroup;
   @Output() searchEvent$ = new EventEmitter<string>();
@@ -24,9 +25,10 @@ export class FileSearchPanelComponent implements OnInit {
   @Output() getFileTrigger$ = new EventEmitter<IFileData>();
   files: IFileData[];
   selectedRow = 0;
+  searchResultsFinishSub:Subscription;
 
-  constructor(private utilityService: UtilityService) {
-  }
+  constructor(private utilityService: UtilityService, private changeDetectorRef:ChangeDetectorRef) {}
+
 
   ngOnInit() {
     this.searchForm = this.utilityService.getSearchForm();
@@ -34,9 +36,10 @@ export class FileSearchPanelComponent implements OnInit {
 
       this.searchEvent$.emit(formData.keyword);
     });
-    EventService.searchResultsFinish$.subscribe((files: IFileData[]) => {
+    this.searchResultsFinishSub = EventService.searchResultsFinish$.subscribe((files: IFileData[]) => {
       //console.log(files);
       this.files = files;
+      this.changeDetectorRef.detectChanges();
     });
   }
 
@@ -64,6 +67,14 @@ export class FileSearchPanelComponent implements OnInit {
 
   inputClickHandler(){
 
+  }
+
+  ngOnDestroy(): void {
+    try {
+      this.searchResultsFinishSub.unsubscribe();
+    }catch (e) {
+      console.log(e);
+    }
   }
 
 

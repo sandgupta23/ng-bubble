@@ -1,6 +1,6 @@
 <ul style="padding-left: 10px; margin: 5px 0">
   <li style="list-style-type: none;">
-    <div (click)="shouldFoldCode=!shouldFoldCode" style="display: flex; align-items: center; cursor: pointer">
+    <div (click)="shouldFoldCodeHandler()" style="display: flex; align-items: center; cursor: pointer">
       <div style="flex-shrink: 0;align-self: center;display: flex;align-items: center;">
         <i class="fa " style="margin-right: 5px" [ngClass]="{'fa-caret-down': shouldFoldCode, 'fa-caret-right': !shouldFoldCode}"></i>
         <span style="font-size: 13px; color: greenyellow">{{key}}</span>
@@ -10,7 +10,7 @@
       </div>
     </div>
     <ng-container *ngIf="shouldFoldCode && obj && type === 'object'">
-      <app-object-key style="margin-top: 5px; display: block; border-left: 1px solid rgb(111, 179, 210)"
+      <app-object-key style="margin-top: 5px; display: block; border-left: 1px solid rgb(111, 179, 210); cursor: pointer"
                       (pin$)="test($event)"
                       [shouldFoldCode]="shouldFoldCode"
                       *ngFor="let key_temp of keys" [key]="key_temp" [obj]="obj[key]"

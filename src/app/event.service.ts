@@ -7,5 +7,6 @@ export class EventService {
 
   constructor() { }
   static searchResultsFinish$ = new EventEmitter();
+  static foldCodeInCodemirror$ = new EventEmitter<boolean>();
 
 }

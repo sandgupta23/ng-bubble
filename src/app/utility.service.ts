@@ -61,7 +61,7 @@ export class UtilityService {
     return this.formBuilder.group({
       fileName: [''],
       key: [''],
-      showMode: [false],
+      editorMode: [false],
     });
   }
 
@@ -206,7 +206,7 @@ export class UtilityService {
    * returned obj["address"]["country"]
    * */
   static getChildObjectByPath(obj, path) {
-    if(!path || !obj){
+    if(!path || !obj || typeof obj !== 'object'){
       return obj;
     }
     let pathSplit = path.split(' ');

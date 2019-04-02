@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {UtilityService} from '../../utility.service';
+import {EventService} from '../../event.service';
 
 
 @Component({
@@ -37,6 +38,13 @@ export class JsbEditorComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    EventService.foldCodeInCodemirror$.subscribe((shouldFoldCode)=>{
+      if(shouldFoldCode){
+        UtilityService.foldCode(this.codemirror);
+      }else {
+        UtilityService.unfoldCode(this.codemirror);
+      }
+    })
   }
 
   ngAfterViewInit(): void {
@@ -61,7 +69,10 @@ export class JsbEditorComponent implements OnInit, AfterViewInit {
     }
     codemirror.setValue(codeText);
     codemirror.operation(() => {
-      if (this.shouldFoldCode) UtilityService.foldCode(codemirror);
+      setTimeout(()=>{
+
+        if (this.shouldFoldCode) UtilityService.foldCode(codemirror);
+      })
     });
   }
 

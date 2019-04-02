@@ -4,7 +4,7 @@
                     *ngFor="let key of myObject.keys(obj_temp)"
                     [key]="key"
                     [shouldFoldCode]="shouldFoldCode"
-                    [obj]="obj_temp|objectByPath"
+                    [obj]="obj_temp"
                     [val]="obj_temp[key]" ></app-object-key>
   </ng-container>
 

@@ -28,6 +28,7 @@ export function routesInit(app: any) {
   const server = new Server({port: 11640});
   server.on('connection', (ws: any) => {
     ws.on('message', (message: string) => {
+
       console.log(message);
       let data: IWSData = JSON.parse(message);
 
@@ -63,13 +64,20 @@ export function routesInit(app: any) {
 
   }
 
-  function searchData(data: any, searchTerms: string) {
+  function searchData(data: any, searchTerms: string, exact:boolean) {
     /*TODO: make it a pure function*/
     for (let d of data) {
       if (d.type === 'folder') {
-        searchData(d.items, searchTerms);
-        if (d.name.toLowerCase().match(searchTerms)) {
-          folders.push(d);
+        searchData(d.items, searchTerms, exact);
+
+        if(exact){
+          if (d.name.toLowerCase().includes(searchTerms.toLowerCase())) {
+            folders.push(d);
+          }
+        }else {
+          if (d.name.toLowerCase().match(searchTerms.toLowerCase())) {
+            folders.push(d);
+          }
         }
       } else if (d.type === 'file') {
         // if (d.name.toLowerCase().match(searchTerms)) {
@@ -149,7 +157,7 @@ export function routesInit(app: any) {
     let file = (payload.file as string).toLowerCase();
     let pathToBeOpened;
     try {
-      let foundItems = searchData(tree.items, file);
+      let foundItems = searchData(tree.items, file, false);
       /*todo: just to avoid ts error*/
       sendData(ws, {
         error: 200,

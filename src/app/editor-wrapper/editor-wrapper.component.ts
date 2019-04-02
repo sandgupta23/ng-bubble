@@ -1,5 +1,6 @@
 import {
-  AfterViewInit, ChangeDetectorRef,
+  AfterViewInit,
+  ChangeDetectorRef,
   Component,
   DoCheck,
   EventEmitter,
@@ -24,7 +25,8 @@ import {EHeaderFormDataKeys} from './editor-header/editor-header.component';
 
 export interface IHeaderFormData {
   fileName?: string,
-  key?: string
+  key?: string,
+  editorMode?: string,
 }
 
 @Component({
@@ -34,7 +36,7 @@ export interface IHeaderFormData {
   encapsulation: ViewEncapsulation.ShadowDom
 })
 export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
-  obj;
+  obj;editorMode;
   @Output() file_save_start$ = new EventEmitter();
   @Output() searchTrigger$ = new EventEmitter();
   @Output() getFileTrigger$ = new EventEmitter();
@@ -52,10 +54,14 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     }
   }
 
-  @Input() componentstr = (ngProbeData: INgProbeData) => {
+  @Input() componentstr = (ngProbeData: INgProbeData, isInit:boolean=false) => {
+    debugger;
     // this._componentstr = val;
     // this.componentObj = UtilityService.getComponentWithoutInjectedMembers(ngProbeData) || {};
     this.componentObj = ngProbeData.componentInstance;
+    if(!isInit){
+      this.path = "";
+    }
     //.constructor.prototype.ngDoCheck
     this.addDoCheckHook(ngProbeData.componentInstance);
     console.log('====>',this.componentObj);
@@ -68,6 +74,8 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     } else {
       this.codeData = {[activeComponentKey]: this.componentObj [activeComponentKey]};
     }
+    StoreService.patchStore(UtilityService.extractStoreData(this));//TODO: bad!
+    this.changeDetectorRef.detectChanges();
   }
 
   @Input() coords = (coordsStr) => {
@@ -78,15 +86,20 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     this._coords = {...coords, left, top};
 
     this.showTooltip = true;
+    StoreService.patchStore(UtilityService.extractStoreData(this));//TODO: bad!
+    this.changeDetectorRef.detectChanges();
   }
 
   @Input() searchfiles = (val: string) => {
     EventService.searchResultsFinish$.emit(val);
-  }
+  };
 
   @Input() filecontent = (val: string) => {
-    if (val && this.activeHeaderTab === EHeaderFormDataKeys.fileName) this.codeData = val;
-  }
+
+    this.fileData = val;
+    // this.headerForm.patchValue({editorMode:true});
+    this.changeDetectorRef.detectChanges();
+  };
 
   @Input() config;
   @ViewChild(JsbEditorComponent) appEditorComponent: JsbEditorComponent;
@@ -104,31 +117,39 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   right = '0';
   bottom = '0';
   activeHeaderTab: EHeaderFormDataKeys = null;
+  myEHeaderFormDataKeys = EHeaderFormDataKeys;
   shouldFoldCode = true;
   componentObj: object = {};
   keyOptions = ['All'];
   myObject = Object;
-  codeData: any = 'hello from wrapper';
+  codeData: any = 'Loading...';
+  fileData: any = 'Loading...';
   path: any = '';
   headerForm: FormGroup;
   headerFormData: IHeaderFormData = {};
   constructor(private utilityService: UtilityService, private changeDetectorRef:ChangeDetectorRef) {}
 
   ngOnInit() {
-    console.log("editor-wrapper.component.ts");
+
     StoreService.init();
     let store = StoreService.getStoreValue();
     this.initializeComponent(store);
     this.headerForm = this.utilityService.getHeaderForm();
+
     this.patchForm(this.headerForm, this.headerFormData);
     this.headerForm.valueChanges.subscribe((value) => {
-      let changedKeys = <EHeaderFormDataKeys[]>UtilityService.getChangedKey(value, this.headerFormData);
-      if (!(changedKeys.length == 0 || changedKeys.length > 2)) {
-        this.activeHeaderTab = changedKeys[0];
-      }
+      // let changedKeys = <EHeaderFormDataKeys[]>UtilityService.getChangedKey(value, this.headerFormData);
+      //
+      // if (changedKeys[0]!==EHeaderFormDataKeys.editorMode && !(changedKeys.length == 0 || changedKeys.length > 2)) {
+      //   this.activeHeaderTab = changedKeys[0];
+      // }
       this.headerFormData = value;
-    });
+      this.editorMode = this.headerFormData.editorMode;
 
+      StoreService.patchStore(UtilityService.extractStoreData(this));
+      this.changeDetectorRef.detectChanges();
+    });
+    this.changeDetectorRef.detectChanges();
   }
 
   headerDataChangedHandler(headerData: IHeaderFormData) {
@@ -139,6 +160,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
       let filePath = this._componentfiles.find((file) => file.name === fileName).path;
       this.getFileTrigger$.emit(filePath);
     }
+    this.changeDetectorRef.detectChanges();
   }
 
   getFilePathByName(componentfiles: IFileData[], fileName) {
@@ -146,6 +168,12 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   }
 
   sidebarActionHandler(clickEvent: Event) {
+
+    setTimeout(()=>{
+      this.changeDetectorRef.detectChanges();
+      StoreService.patchStore(UtilityService.extractStoreData(this));
+    });
+
     let className = UtilityService.getClickedSideBarIcon(clickEvent);
     switch (className) {
       case 'vs-code-grey' : {
@@ -207,12 +235,12 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
       }
       case 'fa-angle-double-right' : {
         this.shouldFoldCode = false;
-        UtilityService.unfoldCode(this.appEditorComponent.codemirror);
+        EventService.foldCodeInCodemirror$.emit(this.shouldFoldCode);
         break;
       }
       case 'fa-angle-double-down' : {
         this.shouldFoldCode = true;
-        UtilityService.foldCode(this.appEditorComponent.codemirror);
+        EventService.foldCodeInCodemirror$.emit(this.shouldFoldCode);
         break;
       }
       case 'fa-file' : {
@@ -258,7 +286,6 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
         break;
       }
     }
-
   }
 
   openInIde(componentName: string, ext: string) {
@@ -282,14 +309,13 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     }, 1000);
   }
 
-  ngDoCheck(): void {
-    StoreService.patchStore(UtilityService.extractStoreData(this));
-  }
 
   initializeComponent(store: IStore) {
     Object.keys(store).forEach((key) => {
       if (typeof store[key] !== 'function') {
-        this[key] = store[key];
+        if(key !== 'selectedElXpath' && key !== 'hoveredElXpath'){/*TODO: use array*/
+          this[key] = store[key];
+        }
       }
     });
   }
@@ -299,6 +325,16 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     this._componentfiles = [fileData];
     this.keyOptions = [];
     this.patchForm(this.headerForm, {fileName: fileData.name});
+    this.changeDetectorRef.detectChanges();
+  }
+
+  pathChangedHandler($event){
+    this.path=$event;
+    /*for some reason following detection doesnt trigger ngDoCheck
+    * So patching store manually
+    * */
+    StoreService.patchStore(UtilityService.extractStoreData(this));
+    this.changeDetectorRef.detectChanges();
   }
 
   patchForm(form:FormGroup, obj: IHeaderFormData) {
@@ -307,6 +343,10 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   //
   logCurrentData() {
     this.log$.emit({key: this.headerFormData.key, clone: this.componentObj});
+  }
+
+  ngDoCheck(): void {
+    StoreService.patchStore(UtilityService.extractStoreData(this));
   }
 
   addDoCheckHook(component){
