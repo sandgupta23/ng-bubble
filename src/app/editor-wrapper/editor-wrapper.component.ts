@@ -16,11 +16,12 @@ import {UtilityService} from '../utility.service';
 import {FormGroup} from '@angular/forms';
 import {EventService} from '../event.service';
 import {IFileData} from './file-search-panel/file-search-panel.component';
-import {ClientService, INgProbeData} from '../client.service';
+import {ClientService,} from '../client/client.service';
 import {JsbEditorComponent} from './jsb-editor/jsb-editor.component';
 import {StoreService} from '../store.service';
 import {IStore} from '../interface';
 import {EHeaderFormDataKeys} from './editor-header/editor-header.component';
+import {INgProbeData} from '../client/interface';
 
 
 export interface IHeaderFormData {

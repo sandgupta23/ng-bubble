@@ -18,7 +18,7 @@ import 'codemirror/addon/search/jump-to-line.js';
 import 'codemirror/addon/dialog/dialog.js';
 import 'codemirror/addon/dialog/dialog.js';
 import 'codemirror/mode/python/python.js';
-import {INgProbeData} from './client.service';
+import {INgProbeData} from './client/interface';
 
 const COMPONENT_SELECTOR = 'app';
 
