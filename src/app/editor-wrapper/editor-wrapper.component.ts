@@ -37,7 +37,9 @@ export interface IHeaderFormData {
   encapsulation: ViewEncapsulation.ShadowDom
 })
 export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
-  obj;editorMode;
+  obj;
+  editorMode;
+  _status:{connection:boolean};
   @Output() file_save_start$ = new EventEmitter();
   @Output() searchTrigger$ = new EventEmitter();
   @Output() getFileTrigger$ = new EventEmitter();
@@ -46,7 +48,12 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   @Output() log$ = new EventEmitter();
   @Output() openInIde$ = new EventEmitter();
 
-  @Input() test = "great" ;
+  @Input() set status(status:{connection:boolean}){
+    this._status = status;
+    if(!status.connection){
+      this.fileData = 'No connection with server. Please restart server using command `ng-bubble` in project root';
+    }
+  };
   @Input() componentfiles = (val: IFileData[]) => {
 
     this._componentfiles = val;
@@ -56,7 +63,6 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   }
 
   @Input() componentstr = (ngProbeData: INgProbeData, isInit:boolean=false) => {
-    debugger;
     // this._componentstr = val;
     // this.componentObj = UtilityService.getComponentWithoutInjectedMembers(ngProbeData) || {};
     this.componentObj = ngProbeData.componentInstance;

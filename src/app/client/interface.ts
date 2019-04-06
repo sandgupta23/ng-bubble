@@ -42,8 +42,9 @@ export enum EEditorInput {
   config = 'config',
   componentstr = 'componentstr',
   searchfiles = 'searchfiles',
-  coords = 'coords'
-}
+  coords = 'coords',
+  status = 'status',
+};
 
 /*TODO: this should not be needed*/
 export interface IWSData {

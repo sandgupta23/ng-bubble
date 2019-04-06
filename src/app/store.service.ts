@@ -41,7 +41,6 @@ export class StoreService {
   private static store: IStore = {};
 
   static patchStore(state:IStore = {}){
-    debugger;
     StoreService.store = {...StoreService.store, ...state};
     delete StoreService.store.selectedElXpath;/*todo*/
     try{
