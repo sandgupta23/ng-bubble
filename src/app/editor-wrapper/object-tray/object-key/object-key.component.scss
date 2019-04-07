@@ -1,29 +1,50 @@
-ul{
-  *{
-    color: rgb(111, 179, 210);
-  };
+@import "../../../../common";
+
+ul {
+  * {
+    color: $color-object-trey-values;
+  }
+;
 }
 
 
-$triangle-length : 4px;
-.triangle-right{
+$triangle-length: 4px;
+.triangle-right { /*todo: make it DRY*/
   width: 0;
   height: 0;
   border-top: $triangle-length solid transparent;
   border-bottom: $triangle-length solid transparent;
-  border-left: $triangle-length *1.5 solid rgb(111, 179, 210);
+  border-left: $triangle-length *1.5 solid $color-object-trey-values;
 }
 
-.triangle-down{
+.triangle-down {
   width: 0;
   height: 0;
   border-left: $triangle-length solid transparent;
   border-right: $triangle-length solid transparent;
-  border-top: $triangle-length *1.5 solid rgb(111, 179, 210);
+  border-top: $triangle-length *1.5 solid $color-object-trey-values;
 }
 
-.pin{
-  &:hover{
+.pin {
+  &:hover {
     text-decoration: underline;
+  }
+}
+
+.objectkeywrapper {
+  padding-left: 10px;
+  margin: 5px 0;
+
+  li {
+    list-style-type: none;
+
+    .code-fold-handler {
+      display: flex;
+      align-items: center;
+      cursor: pointer
+    }
+    .fa{
+      font-size: 10px;
+    }
   }
 }

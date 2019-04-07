@@ -1,3 +1,5 @@
+@import "../../../common";
+
 textarea{
   width: 100%;
   opacity: 0;
@@ -6,11 +8,11 @@ textarea{
 #ng-bubble-editor {
   height: 100%;
   flex-grow: 1;
-  background-color: black;
-  border: 1px solid black
+  background-color: $color-pitch-black;
+  border: 1px solid $color-pitch-black;
 }
 
-
+/*TODO: use css imports instead*/
 ::ng-deep{
   /* You can add global styles to this file, and also import other style files */
 

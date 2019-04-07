@@ -25,7 +25,13 @@ export class JsbEditorComponent implements OnInit, AfterViewInit {
     if (val === null) return 'UNDEFINED_VALUE';/*undef*/
     if (val === '') return 'EPMTY_STRING';/*undef*/
     if (val === undefined) return 'UNDEFINED_VALUE';/*undef*/
-    return typeof val === 'function' || typeof val === 'object' ? JSON.stringify(JSON.parse(UtilityService.jsonStringifyCyclic(val, this.level)),null, '\t') : val;//val.toString();
+    let output;
+    try {
+      output=  typeof val === 'function' || typeof val === 'object' ? JSON.stringify(JSON.parse(UtilityService.jsonStringifyCyclic(val, this.level)),null, '\t') : val;//val.toString();
+    }catch (e) {
+      console.log('custom error:stringifyInput ', val, output);
+    }
+    return output;
   }
 
 

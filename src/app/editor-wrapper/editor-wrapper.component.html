@@ -9,7 +9,9 @@
           (showTooltip$)="showTooltip = $event"></jsb-menu>
 
 <div class="jsb-editor-wrapper"
-     (dblclick)="$event.stopPropagation()" [ngStyle]="{'top': top,left:left, right:right, bottom:bottom}"
+     (dblclick)="$event.stopPropagation()"
+     (scroll)="$event.stopPropagation()"
+     [ngStyle]="{'top': top,left:left, right:right, bottom:bottom}"
      *ngIf="!minimize">
 
   <jsb-editor-header
@@ -24,42 +26,60 @@
     (action$)="sidebarActionHandler($event)"
     (headerDataChanged$)="headerDataChangedHandler($event)"></jsb-editor-header>
 
-  <div class="jsb-editor-wrapper-body" style="position: relative;" *ngIf="!minimize">
+  <div class="jsb-editor-wrapper-body" *ngIf="!minimize">
 
 
     <jsb-editor-sidebar (action$)="sidebarActionHandler($event)"
                         [config]="config"
                         [shouldFoldCode]="shouldFoldCode"
                         [activeHeaderTab]="activeHeaderTab"></jsb-editor-sidebar>
-
-    <jsb-editor
-      style="border-right: 3px solid #aaa; flex-grow: 0; flex-shrink: 0; flex-basis: 50%; max-width: 50%"
-      [level]="headerFormData.key==='All'?3:6"
-      [codeText]="fileData"
-      [shouldFoldCode]="shouldFoldCode"></jsb-editor>
-
+<i style="position: fixed; top: 0">{{length}}</i>
+    <div #editor1 id="test2" #mark (click)="test(mark)"
+         mwlResizable
+         class="no-scroll-bar"
+         [enableGhostResize]="true"
+         [resizeEdges]="{bottom: true, right: true, top: true, left: true}"
+         (resizeEnd)="onResizeEnd($event, editor1)"
+         [resizeCursorPrecision]="5"
+         style="display: flex; width: 50%">
+      <jsb-editor
+        id="test1"
+        style="flex-grow: 1"
+        [level]="headerFormData.key==='All'?3:6"
+        [codeText]="fileData"
+        [shouldFoldCode]="shouldFoldCode"></jsb-editor>
+      <div class="resizer-bar">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+    </div>
     <app-object-tray
       *ngIf="!headerForm.get('editorMode').value"
       [obj]="codeData"
       (path$)="pathChangedHandler($event);"
       [path]="path"
       [shouldFoldCode]="!shouldFoldCode"
-      style="width: 100%; height: 100%; background-color: #0a001f;overflow-y: scroll;flex-grow: 0; flex-shrink: 0">
+      style="background-color: #0a001f;overflow-y: scroll;flex-grow: 1; flex-shrink: 1; flex-basis: 0">
     </app-object-tray>
     <!--<i>{{codeData|json}}</i>-->
     <!--<app-js-console-->
     <!--style="width: 100%; height: 100%; background-color: rgb(42, 47, 58);overflow-y: scroll"></app-js-console>-->
     <jsb-editor *ngIf="headerForm.get('editorMode').value"
-                style="flex-grow: 0; flex-shrink: 0"
+                style="flex-grow: 1; flex-shrink: 1; flex-basis: 0  "
                 [level]="headerFormData.key==='All'?3:6"
                 [codeText]="codeData|objectByPath:path"
                 [shouldFoldCode]="shouldFoldCode"></jsb-editor>
 
-    <jsb-file-search-panel
-      (showSearchPanel$)="showSearchPanel=$event"
-      *ngIf="showSearchPanel"
-      (getFileTrigger$)="getFileTriggerHandler($event)"
-      (searchEvent$)="searchTrigger$.emit($event);"></jsb-file-search-panel>
+    <div [hidden]="!showSearchPanel">
+      <div class="file-search-panel" (click)="test()">
+        <!--<i>showSearchPanel: {{showSearchPanel}}</i>-->
+        <jsb-file-search-panel
+          (click)="$event.stopPropagation()"
+          (showSearchPanel$)="showSearchPanel=$event"
+
+          (getFileTrigger$)="getFileTriggerHandler($event)"
+          (searchEvent$)="searchTrigger$.emit($event);"></jsb-file-search-panel>
+      </div>
+    </div>
   </div>
 </div>
 

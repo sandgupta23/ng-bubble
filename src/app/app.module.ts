@@ -23,6 +23,7 @@ import { ObjectDetailComponent } from './editor-wrapper/object-tray/object-detai
 import { ObjectByPathPipe } from './object-by-path.pipe';
 import { JsConsoleComponent } from './editor-wrapper/js-console/js-console.component';
 import { DataTypePipe } from './data-type.pipe';
+import {ResizableModule} from 'angular-resizable-element';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { DataTypePipe } from './data-type.pipe';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    ClickOutsideModule
+    ClickOutsideModule,
+    ResizableModule
   ],
   providers: [],
   // bootstrap: [AppComponent]

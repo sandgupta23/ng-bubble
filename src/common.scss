@@ -1,7 +1,43 @@
+//@import "../node_modules/codemirror/lib/codemirror.css"; TODO: this import throws error
 
-
+$z-too-high:10000000000000000; /*its over 9000!!!*/
 $z-editor-wrapper:1;
+$z-resizer-bar:3;
+$z-file-search-panel:4;
+
+/*colors*/
+$color-pitch-black: rgb(51, 51, 51);
+$color-pitch-black-light: rgb(51, 75, 51);
+$color-grey-secondary: #ccc;
+$color-object-trey-values: rgb(111, 179, 210);
+
 
 *{
-  font-size: 30px !important;
+  /* width */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
+.no-scroll-bar{
+  *{
+    ::-webkit-scrollbar {
+      width: 0px !important;
+    }
+  }
 }

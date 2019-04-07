@@ -23,7 +23,7 @@ export class ObjectKeyComponent implements OnInit {
       try {
         this.keys = Object.keys(this.val);
       }catch (e) {
-        console.error('custom error:', e, this.val);
+        console.error('custom error:', e, 'this.val:', this.val, 'this.key', this.key, 'this.obj', this.obj);
       }
     }
   }

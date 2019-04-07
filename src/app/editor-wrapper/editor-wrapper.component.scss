@@ -1,24 +1,23 @@
 $fa-font-path: "../../../node_modules/font-awesome/fonts";
 @import "../../../node_modules/font-awesome/scss/font-awesome.scss";
+@import "../../common.scss";
 
-:host{
+:host {
   position: fixed;
-  z-index: 10000000000000000;
+  z-index: $z-too-high;
+  all: initial;
 }
 
 .jsb-editor-wrapper {
-  //width: 30vw;
-  //min-width: 400px;
-  background-color: rgb(51, 51, 51);
-  color: #ccc;
+  background-color: $color-pitch-black;
+  color: $color-grey-secondary;
   position: fixed;
-  //right: 0;
-  //bottom: 0;
-  z-index: 1000000; /*todo: create scss var*/
+  z-index: $z-editor-wrapper;
   display: flex;
   flex-direction: column;
-  overflow: hidden;/*TODO: hack*/
+  overflow: hidden; /*TODO: hack*/
   .jsb-editor-wrapper-body {
+    background-color: black;
     display: flex;
     width: 100%;
     flex-grow: 1;
@@ -29,6 +28,7 @@ $fa-font-path: "../../../node_modules/font-awesome/fonts";
       width: 40px;
       display: flex;
       flex-shrink: 0;
+      background-color: #333;
     }
 
     jsb-editor {
@@ -36,22 +36,63 @@ $fa-font-path: "../../../node_modules/font-awesome/fonts";
     }
   }
 
-  jsb-file-search-panel {
+  .file-search-panel {
     position: absolute;
     top: 5px;
     left: 45px;
     right: 5px;
-    z-index: 10000;
-    overflow-x: hidden;/*TODO: this is a hack*/
-    //display: flex;
-    //justify-content: center;
+    bottom: 0;
+    //background-color: #ffffff30;
+    z-index: $z-file-search-panel;
+    overflow-x: hidden; /*TODO: this is a hack*/
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items:flex-start;
+    jsb-file-search-panel{
+      width: 80%;
+      max-width: 400px;
+    }
   }
 
 }
 
-jsb-menu{
+jsb-menu {
   position: fixed;
   top: 200vh;
   left: 200vw;
+  z-index: $z-too-high;
 }
 
+
+.resizer-bar {
+  width: 2px;
+  min-width: 2px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #aaa;
+  &:hover{
+    background-color: white;
+  }
+  z-index: $z-resizer-bar;
+
+  i {
+    color: black;
+    font-size: 20px
+  }
+}
+
+//#test2::after{
+//  content: 'hello';
+//}
+
+::ng-deep{
+  .file-editor{
+    *::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

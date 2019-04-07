@@ -1,7 +1,9 @@
+@import "../../../common";
+
 .menu-wrapper {
-  color: #ccc;
+  color: $color-grey-secondary;
   position: fixed;
-  z-index: 900000000000; /*its over 9000!!!*/
+  z-index: $z-too-high;
 
   .fa {
     padding: 4px;
@@ -9,7 +11,7 @@
 
   .menu-wrapper__title {
     display: inline-block;
-    background-color: rgb(51, 51, 51);;
+    background-color: $color-pitch-black;
     font-size: 9px !important;
     padding-left: 4px
   }
@@ -23,13 +25,13 @@
       font-size: 10px;
       padding: 5px 10px;
       cursor: pointer;
-      background-color: rgb(51, 51, 51);
+      background-color: $color-pitch-black;
       &:hover {
-        background-color: rgb(51, 75, 51);
+        background-color: $color-pitch-black-light;
       }
       &:first-child{
         cursor: default;
-        background-color: rgb(51, 51, 51)!important; /*override: dont change on hover*/
+        background-color: $color-pitch-black!important; /*override: dont change on hover*/
       }
     }
 

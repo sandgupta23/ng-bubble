@@ -53,6 +53,7 @@
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^10.12.18",
+    "angular-resizable-element": "^3.2.4",
     "codelyzer": "^4.5.0",
     "codemirror": "^5.39.2",
     "concat": "^1.0.3",

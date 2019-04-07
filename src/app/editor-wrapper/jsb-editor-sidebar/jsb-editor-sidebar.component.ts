@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {EHeaderFormDataKeys} from '../editor-header/editor-header.component';
 import {ILocalConfig} from '../../interface';
 
@@ -17,7 +17,7 @@ import {ILocalConfig} from '../../interface';
       <i class="fa fa-save" *ngIf="activeHeaderTab === myEHeaderFormDataKeys.fileName" id="save-editor"></i>
     </div>
   `,
-  styleUrls: ['./jsb-editor-sidebar.component.scss']
+  styleUrls: ['./jsb-editor-sidebar.component.scss'],
 })
 export class JsbEditorSidebarComponent implements OnInit {
 

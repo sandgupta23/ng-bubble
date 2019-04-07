@@ -173,7 +173,14 @@ export class Helper {
     /*TODO: move to web worker*/
     // return  JSON.stringify(jc.decycle(obj));
     console.log('================prune============');
-    return jsonPrune(obj, 5);
+    let output;
+      try {
+        output = jsonPrune(obj, 5);
+      }catch (e) {
+        output = {};
+        console.log(e);
+      }
+      return output;
   }
 
   static removeChildFromParent($el: HTMLElement) {
