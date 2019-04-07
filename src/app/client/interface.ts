@@ -33,6 +33,16 @@
 * 25. make search more flexible
 * 26. base href problem while running code in ngx-admin
 *
+*
+* 1. Implement resizer
+* 2. make font size 11px in both, make font family same as well
+* 3. Make cursor on All normal
+* 4. Implement save button
+* 5. Implement loader
+* 6. Make min width: 300px
+* 7. make scrollbar size small
+* 8. minimizing bug
+*
 */
 
 

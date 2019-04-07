@@ -6,7 +6,7 @@
         <span style="font-size: 13px; color: greenyellow">{{key}}</span>
         <a *ngIf="type === 'object'" class="pin" (click)="trigger(key, $event);" style="font-size: 9px; margin-left: 3px;">(pin)</a>
         <span style="margin-left: 3px; font-size: 9px">:</span>
-        <i *ngIf="!shouldFoldCode" style="margin-left: 10px;font-size: 12px; margin-top: 0px">{{obj[key]|json}}</i>
+        <i *ngIf="!shouldFoldCode" style="margin-left: 10px;font-size: 10px; margin-top: 0px">{{obj[key]|json}}</i>
       </div>
     </div>
     <ng-container *ngIf="shouldFoldCode && obj && type === 'object'">
