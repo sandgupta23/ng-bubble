@@ -61,18 +61,18 @@ import { DataTypePipe } from './data-type.pipe';
     ClickOutsideModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  // bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(private injector: Injector){
-      const el = createCustomElement(EditorWrapperComponent, { injector: this.injector });
-      customElements.define('js-bubble', el);
+      // const el = createCustomElement(EditorWrapperComponent, { injector: this.injector });
+      // customElements.define('js-bubble', el);
   }
   ngDoBootstrap() {
-  //   const el = createCustomElement(EditorWrapperComponent, { injector: this.injector });
-  //   customElements.define('js-bubble', el);
-  //   const el = createCustomElement(EditorWrapperComponent, { injector: this.injector });
-  //   customElements.define('js-bubble', el);
+    const el = createCustomElement(EditorWrapperComponent, { injector: this.injector });
+    customElements.define('js-bubble', el);
+    // const el = createCustomElement(EditorWrapperComponent, { injector: this.injector });
+    // customElements.define('js-bubble', el);
   }
 
 }

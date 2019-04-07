@@ -43,7 +43,8 @@ export class Helper {
     let probeData = ng.probe($el);
     console.log($el);
     if (!probeData) {
-      throw 'NG:BUBBLE::Could not found related component';
+      console.error('NG:BUBBLE::Could not found related component') ;
+      return;
     }
     let componentInstance = probeData.componentInstance;
     let componentNode = probeData.parent && probeData.parent.nativeElement;

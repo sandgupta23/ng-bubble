@@ -9,9 +9,10 @@ export class ClientService {
 
   private static readonly $editorEl: Element = document.getElementsByTagName('js-bubble')[0];
   static init = function () {
+    console.log('ClientService init');
     NgBubbleSocket.init(
-      ClientService.websocketInit,
-      ClientService.websocketOnMessafeCB,
+      ClientService.websocketInitCB,
+      ClientService.websocketOnMessageCB,
       ClientService.websocketOnErrorCB);
 
     /*TODO: use document.ready*/
@@ -32,13 +33,25 @@ export class ClientService {
 
   }
 
-  static emitSelectedComponentFiles($selectedComponent) {
-    let ngProbeData: INgProbeData = Helper.getComponentDataInstanceFromNode($selectedComponent);
-    let componentInstance = ngProbeData.componentInstance;
-    NgBubbleDom.selectedComponent = componentInstance;
-    ClientService.setEditorAttribute(EEditorInput.componentstr, ngProbeData);
-    let payload = Helper.createLineFinderPayload(componentInstance, null);
-    NgBubbleSocket.sendMessage({type: EWSTypes.COMPONENT_FILE_SEARCH, payload});
+
+  /*
+  * emitSelectedComponentFiles:
+  * For selected component, send ng probe data and respective files to frontend
+  * */
+  static emitSelectedComponentData($selectedComponent) {
+    if(!$selectedComponent){
+      return;
+    }
+    try {
+      let ngProbeData: INgProbeData = Helper.getComponentDataInstanceFromNode($selectedComponent);
+      let componentInstance = ngProbeData.componentInstance;
+      NgBubbleDom.selectedComponent = componentInstance;
+      ClientService.setEditorAttribute(EEditorInput.componentstr, ngProbeData);
+      let payload = Helper.createLineFinderPayload(componentInstance, null);
+      NgBubbleSocket.sendMessage({type: EWSTypes.COMPONENT_FILE_SEARCH, payload});
+    }catch (e) {
+      console.error(e);
+    }
   }
 
   static openComponentFileInIde(payload: ILineFinderData) {
@@ -61,7 +74,7 @@ export class ClientService {
   }
 
 
-  static eventInit(){
+  static eventInit() {
     ClientService.$editorEl.addEventListener('log$', (event: CustomEvent) => {
       let key = event.detail.key;
       let clone = event.detail.clone;
@@ -103,7 +116,7 @@ export class ClientService {
       ClientService.openComponentFileInIde(data);
     });
     ClientService.$editorEl.addEventListener('getSelectedComponentFiles$', (event: CustomEvent) => {
-      ClientService.emitSelectedComponentFiles(NgBubbleDom.$hoveredComponent);
+      ClientService.emitSelectedComponentData(NgBubbleDom.$hoveredComponent);
       // if ($hoveredComponent) {
       //   let componentInstance = Helper.getComponentDataInstanceFromNode($hoveredComponent).componentInstance;
       //   selectedComponent = componentInstance;
@@ -116,7 +129,7 @@ export class ClientService {
 
       let $selectedComponentNode: any = NgBubbleDom.$hoveredComponent || (NgBubbleDom.selectedElXpath && Helper.getElementByXpath(NgBubbleDom.selectedElXpath));
       if (!$selectedComponentNode) return;
-      ClientService.emitSelectedComponentFiles($selectedComponentNode);
+      ClientService.emitSelectedComponentData($selectedComponentNode);
       /*
       * Only if no selectedElXpath is present, initiate it. This is because hovered components have
       * lower priority.
@@ -164,10 +177,12 @@ export class ClientService {
     * mouseover: will be triggered when any element on the host application will be hovered.
     * The purpose here is to shouldFoldCode the menu, by finding the component parent
     * */
+    console.log('before: mouseover');
     document.addEventListener('mouseover', ($event) => {
       if (!$event.shiftKey) {
         return;
       }
+      console.log($event);
 
       let target = $event.target as HTMLElement;
       ////console.log(target);
@@ -192,12 +207,17 @@ export class ClientService {
   }
 
 
-  static websocketInit = ()=>{
-    ClientService.emitSelectedComponentFiles(NgBubbleDom.$selectedComponent);
+  /*
+  * websocketInitCB: When websocket successfully connects, send select component file to editor
+  * and get configuration from server
+  * */
+  static websocketInitCB = () => {
+    ClientService.emitSelectedComponentData(NgBubbleDom.$selectedComponent);
     NgBubbleSocket.sendMessage({type: EWSTypes.getConfig});
   };
-  static websocketOnMessafeCB = function (event) {
-    if(!event) return;
+
+  static websocketOnMessageCB = function (event) {
+    if (!event) return;
     let data: IWSData = JSON.parse(event.data);
     let payload: any = data.payload;
     if (data.type === EWSTypes.SEARCH) {
@@ -218,9 +238,9 @@ export class ClientService {
       ClientService.setEditorAttribute(EEditorInput.config, payload);
     }
 
-  }
-  static websocketOnErrorCB = (err)=> {
-    ClientService.setEditorAttribute(EEditorInput.status  , {connection:false});
+  };
+  static websocketOnErrorCB = (err) => {
+    ClientService.setEditorAttribute(EEditorInput.status, {connection: false});
   };
 
 

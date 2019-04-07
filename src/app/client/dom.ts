@@ -13,13 +13,20 @@ export class NgBubbleDom {
   static $hoveredComponent: HTMLElement;
   private static state;
 
-  static init(){
+  static init() {
     /*state initialization from localstorage*/
     let stateStr: any = localStorage.getItem('NG_BUBBLE_STATE');
-    let state = this.state = stateStr && JSON.parse(stateStr);
-    this.selectedElXpath = state && state.selectedElXpath;
-    this.hoveredElXpath = state && state.hoveredElXpath;
-    console.log(state.selectedElXpath);
+    let state;
+    if (stateStr) {
+      try {
+        state = this.state = stateStr && JSON.parse(stateStr);
+        this.selectedElXpath = state && state.selectedElXpath;
+        this.hoveredElXpath = state && state.hoveredElXpath;
+      } catch (e) {
+        state = this.state = {};
+      }
+    }
+
     if (!state || !state.selectedElXpath) {/*if no state is saved in local storage, open root components*/
       this.rootInitialization();
     } else {
@@ -29,8 +36,11 @@ export class NgBubbleDom {
 
   static rootInitialization() {
     this.$selectedComponent = <HTMLElement>Helper.getRootEl(NgBubbleConstant.possibleRootTags);
-    this.$hoveredComponent = this.$selectedComponent;
-    this.selectedComponent = Helper.getComponentDataInstanceFromNode(this.$selectedComponent).componentInstance;
+    if (this.$selectedComponent) {
+      this.$hoveredComponent = this.$selectedComponent;
+      let componentData = Helper.getComponentDataInstanceFromNode(this.$selectedComponent);
+      this.selectedComponent = componentData ? componentData.componentInstance : null;
+    }
     // selectedElXpath = $selectedComponent && getXPathByElement($selectedComponent);
   }
 
@@ -39,8 +49,10 @@ export class NgBubbleDom {
     // let hoveredElXpath = state.hoveredElXpath;//
     // selectedElXpath = $selectedComponent && getXPathByElement($selectedComponent);
     this.$selectedComponent = <HTMLElement>Helper.getElementByXpath(selectedElXpath);
+    // this.selectedComponent = Helper.getComponentDataInstanceFromNode(this.$selectedComponent).componentInstance;
+    let componentData = Helper.getComponentDataInstanceFromNode(this.$selectedComponent);
+    this.selectedComponent = componentData ? componentData.componentInstance : null;
     // $hoveredComponent = <HTMLElement>getElementByXpath(hoveredElXpath);
-    this.selectedComponent = Helper.getComponentDataInstanceFromNode(this.$selectedComponent).componentInstance;
     // hoveredComponent = Helper.getComponentDataInstanceFromNode($hoveredComponent).componentInstance;
   }
 }

@@ -186,7 +186,7 @@ export class UtilityService {
     } else {
       codeText = {[val]: componentObj[val]};
     }
-    return codeText;
+    return JSON.parse(this.jsonStringifyCyclic(codeText));
   }
 
   static getChangedKey(obj1: object, obj2: object): EHeaderFormDataKeys[] {

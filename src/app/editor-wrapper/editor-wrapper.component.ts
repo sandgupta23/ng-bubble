@@ -305,7 +305,9 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     setTimeout(() => {/*TODO: hack. @output events dont work without settimeout*/
       console.log(this.menu);
       try {
-        ClientService.init();
+        window.onload = function () {
+          ClientService.init();
+        };
 
         if (this.activeHeaderTab === EHeaderFormDataKeys.key) {
           this.getHoveredComponentData$.emit();
@@ -372,7 +374,8 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
       // self.getHoveredComponentData$.emit();/*TODO: what about selected component via dblclick?*/
       // self.codeData = self.componentObj;
       // this.__NGBUBBLE_HOOK__ = true;
-      originalNgDoCheck && originalNgDoCheck();/*TODO: ng do check with arguments?*/
+
+      /**/ originalNgDoCheck && originalNgDoCheck();/*TODO: ng do check with arguments?*/
     }
   }
 

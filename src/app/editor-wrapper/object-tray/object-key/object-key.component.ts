@@ -20,7 +20,11 @@ export class ObjectKeyComponent implements OnInit {
   ngOnInit() {
     this.type = typeof this.val;
     if(this.type === 'object'){
-      this.keys = Object.keys(this.val);
+      try {
+        this.keys = Object.keys(this.val);
+      }catch (e) {
+        console.error('custom error:', e, this.val);
+      }
     }
   }
 

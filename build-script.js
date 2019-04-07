@@ -10,7 +10,11 @@ const concat = require('concat');
 		'./dist/ng-bubble-elements/main.js',
 	];
 
-	await fs.ensureDir('public/assets/js')
+	try {
+		await fs.ensureDir('public/assets/js')
+	}catch (e) {
+		console.log("couldn't find files");
+	}
 
 	await concat(files, 'public/assets/js/js-bubble.js')
 	console.info('Elements created successfully!')
