@@ -734,6 +734,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     setTimeout(() => {/*TODO: hack. @output events dont work without settimeout*/
       console.log(this.menu);
       try {
+        ClientService.init();
         window.onload = function () {
           ClientService.init();
         };
@@ -808,13 +809,16 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     }
   }
 
-  @ViewChild('editor1', {read: ElementRef}) editor1:ElementRef;
+  // @ViewChild('editorLeft', {read: ElementRef}) editor1:ElementRef;
   length = 0;
-  onResizeEnd($event, el){
-    console.log(this);
-    console.log($event);
-    el.style.width = `${Math.abs($event.rectangle.right - $event.rectangle.left)}px`;
-    this.length = Math.abs($event.rectangle.right - $event.rectangle.left);
+  onResizeEnd($event, editorLeft, editorRight, editorWrapperBody:HTMLElement){
+    let left = Math.abs($event.rectangle.right - $event.rectangle.left);
+    let total:number = Number(editorWrapperBody.getBoundingClientRect().width);
+    editorLeft.style.width = `${left}px`;
+    editorRight.style.width = `${total-left}px`;
+    console.log(editorRight);
+    console.log(editorRight.style.width);
+
     this.changeDetectorRef.detectChanges();
     // let editor = document.getElementById('test2');
     // editor.style.left = `${event.rectangle.left}px`;

@@ -26,20 +26,22 @@
     (action$)="sidebarActionHandler($event)"
     (headerDataChanged$)="headerDataChangedHandler($event)"></jsb-editor-header>
 
-  <div class="jsb-editor-wrapper-body" *ngIf="!minimize">
+  <div class="jsb-editor-wrapper-body" #editorWrapperBody *ngIf="!minimize">
 
-
+    <!--START: side bar-->
     <jsb-editor-sidebar (action$)="sidebarActionHandler($event)"
                         [config]="config"
                         [shouldFoldCode]="shouldFoldCode"
                         [activeHeaderTab]="activeHeaderTab"></jsb-editor-sidebar>
-<i style="position: fixed; top: 0">{{length}}</i>
-    <div #editor1 id="test2" #mark (click)="test(mark)"
+    <!--END: side bar-->
+
+    <!--START: left editor-->
+    <div #editorLeft
          mwlResizable
          class="no-scroll-bar"
          [enableGhostResize]="true"
          [resizeEdges]="{bottom: true, right: true, top: true, left: true}"
-         (resizeEnd)="onResizeEnd($event, editor1)"
+         (resizeEnd)="onResizeEnd($event, editorLeft, editorRight, editorWrapperBody)"
          [resizeCursorPrecision]="5"
          style="display: flex; width: 50%">
       <jsb-editor
@@ -52,22 +54,25 @@
         <i class="fa fa-ellipsis-v"></i>
       </div>
     </div>
-    <app-object-tray
-      *ngIf="!headerForm.get('editorMode').value"
-      [obj]="codeData"
-      (path$)="pathChangedHandler($event);"
-      [path]="path"
-      [shouldFoldCode]="!shouldFoldCode"
-      style="background-color: #0a001f;overflow-y: scroll;flex-grow: 1; flex-shrink: 1; flex-basis: 0">
-    </app-object-tray>
-    <!--<i>{{codeData|json}}</i>-->
-    <!--<app-js-console-->
-    <!--style="width: 100%; height: 100%; background-color: rgb(42, 47, 58);overflow-y: scroll"></app-js-console>-->
-    <jsb-editor *ngIf="headerForm.get('editorMode').value"
-                style="flex-grow: 1; flex-shrink: 1; flex-basis: 0  "
-                [level]="headerFormData.key==='All'?3:6"
-                [codeText]="codeData|objectByPath:path"
-                [shouldFoldCode]="shouldFoldCode"></jsb-editor>
+    <!--END: left editor-->
+
+    <!--START: right editor/trey-->
+    <div #editorRight style="background-color: #0a001f;overflow-y: scroll;width: 50%">
+      <app-object-tray
+        *ngIf="!headerForm.get('editorMode').value"
+        [obj]="codeData"
+        (path$)="pathChangedHandler($event);"
+        [path]="path"
+        [shouldFoldCode]="true"
+        >
+        <!--TODO: keeping should fold code always, true -->
+      </app-object-tray>
+      <jsb-editor *ngIf="headerForm.get('editorMode').value"
+                  [level]="headerFormData.key==='All'?3:6"
+                  [codeText]="codeData|objectByPath:path"
+                  [shouldFoldCode]="shouldFoldCode"></jsb-editor>
+    </div>
+    <!--END: right editor/trey-->
 
     <div [hidden]="!showSearchPanel">
       <div class="file-search-panel" (click)="test()">

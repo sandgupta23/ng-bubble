@@ -28,7 +28,7 @@ export class ObjectKeyComponent implements OnInit {
     }
   }
 
-  shouldFoldCodeHandler(){
+  toggleFoldCodeFlag(){
     this.shouldFoldCode=!this.shouldFoldCode;
     this.changeDetectorRef.detectChanges();
 

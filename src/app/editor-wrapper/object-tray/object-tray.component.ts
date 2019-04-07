@@ -19,6 +19,7 @@ export class ObjectTrayComponent implements OnInit {
   @Output() path$ = new EventEmitter();
   ngOnInit() {
     // this.keys = this.obj && Object.keys(this.obj)
+    console.log("ObjectTrayComponent:", this.obj);
   }
 
   finalPrint(path){

@@ -1,10 +1,10 @@
 <ul class="objectkeywrapper">
   <li>
-    <div class="code-fold-handler" (click)="shouldFoldCodeHandler()" style="">
+    <div class="code-fold-handler" (click)="toggleFoldCodeFlag()" style="">
       <div style="flex-shrink: 0;align-self: center;display: flex;align-items: center;">
         <i class="fa" style="margin-right: 5px"
            [ngClass]="{'fa-caret-down': shouldFoldCode, 'fa-caret-right': !shouldFoldCode}"></i>
-        <span style="font-size: 13px; color: greenyellow">{{key}}</span>
+        <span style="font-size: 11px; color: greenyellow">{{key}}</span>
         <a *ngIf="type === 'object'" class="pin" (click)="trigger(key, $event);"
            style="font-size: 9px; margin-left: 3px;">(pin)</a>
         <span style="margin-left: 3px; font-size: 9px">:</span>
@@ -13,7 +13,7 @@
     </div>
     <ng-container *ngIf="shouldFoldCode && obj && type === 'object'">
       <ng-container *ngFor="let key_temp of keys">
-          <app-object-key
+        <app-object-key
           *ngIf="obj && obj[key] && obj[key][key_temp]"
           style="margin-top: 5px; display: block; border-left: 1px solid rgb(111, 179, 210); cursor: pointer"
           (pin$)="test($event)"
