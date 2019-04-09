@@ -96,3 +96,34 @@ jsb-menu {
     }
   }
 }
+
+
+//::ng-deep{
+  .jsb-json-viewer{
+    margin-left: 10px;
+    display: block;
+    *{
+      font-size: 10px;
+    }
+    .segment-key{
+      color: greenyellow !important;
+    }
+    .toggler{
+      margin-top: 1px !important;
+    }
+  }
+//}
+
+
+/*replace the content value with the
+corresponding value from the list below*/
+
+
+
+.animation-slide-right{
+  right: -20% !important;
+  &:hover{
+    right: 0% !important;
+    transition: 0.3s;
+  }
+}

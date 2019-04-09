@@ -39,6 +39,8 @@ export interface IHeaderFormData {
 export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   obj;
   editorMode;
+  testObj = {name:'sandeep', place:{city:{landmark:{name:"up"}}}};
+  keySearchKeyword:string;
   _status:{connection:boolean};
   @Output() file_save_start$ = new EventEmitter();
   @Output() searchTrigger$ = new EventEmitter();
@@ -129,6 +131,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   componentObj: object = {};
   keyOptions = ['All'];
   myObject = Object;
+  circular = {hello:this.circular};
   codeData: any = {
     "dialogRefWrapper": {
       "ref": null
@@ -809,6 +812,11 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     }
   }
 
+  hideSearchPanel(){
+    this.showSearchPanel = false;
+    this.changeDetectorRef.detectChanges();
+  }
+
   // @ViewChild('editorLeft', {read: ElementRef}) editor1:ElementRef;
   length = 0;
   onResizeEnd($event, editorLeft, editorRight, editorWrapperBody:HTMLElement){
@@ -824,9 +832,9 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     // editor.style.left = `${event.rectangle.left}px`;
   }
   test(el){
-    console.log(el);
-    this.showSearchPanel = false;
+
     this.changeDetectorRef.detectChanges();
   }
+
 
 }

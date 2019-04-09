@@ -1,6 +1,6 @@
 import {ILineFinderData, INgProbeData} from './interface';
 import jsonPrune from 'json-prune';
-declare let ng: any;
+// declare let ng: any;
 export class Helper {
   static camelCaseToDotCase(camel: string) {
     return camel.replace(/[A-Z]/g, m => ' ' + m.toLowerCase());
@@ -40,7 +40,7 @@ export class Helper {
     ////console.log("getComponentDataInstanceFromNode");
     ////console.log($el);
     ////console.log(ng);
-    let probeData = ng.probe($el);
+    let probeData = (<any>window).ng.probe($el);
     console.log($el);
     if (!probeData) {
       console.error('NG:BUBBLE::Could not found related component') ;

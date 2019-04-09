@@ -1,8 +1,9 @@
 <form [formGroup]="searchForm" class="ng-bubble-autocomplete">
-  <input
+  <span class="ngb-input-search"><input
+    class="ngb-input"
     (keydown)="changeSelectedRow($event)"
     id="ng-bubble-search" autocomplete="off"
-    formControlName="keyword" type="text" placeholder="Search project files" autofocus>
+    formControlName="keyword" type="text" placeholder="Search project files" autofocus></span>
   <div id="row-wrapper" style="position: absolute; top: 100%; left: 0; right: 0">
   </div>
 </form>

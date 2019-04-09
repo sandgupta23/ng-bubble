@@ -71,6 +71,7 @@
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
     "ng-click-outside": "^4.0.0",
+    "ngx-json-viewer": "^2.4.0",
     "protractor": "~5.4.0",
     "rxjs": "~6.3.3",
     "ts-node": "~7.0.0",

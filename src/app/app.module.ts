@@ -24,6 +24,8 @@ import { ObjectByPathPipe } from './object-by-path.pipe';
 import { JsConsoleComponent } from './editor-wrapper/js-console/js-console.component';
 import { DataTypePipe } from './data-type.pipe';
 import {ResizableModule} from 'angular-resizable-element';
+import {NgxJsonViewerModule} from 'ngx-json-viewer';
+import { ObjectByProbablePathPipe } from './object-by-probable-path.pipe';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import {ResizableModule} from 'angular-resizable-element';
     ObjectByPathPipe,
     JsConsoleComponent,
     DataTypePipe,
+    ObjectByProbablePathPipe,
   ],
   entryComponents:[
     EditorWrapperComponent,
@@ -60,7 +63,8 @@ import {ResizableModule} from 'angular-resizable-element';
     FormsModule,
     ReactiveFormsModule,
     ClickOutsideModule,
-    ResizableModule
+    ResizableModule,
+    NgxJsonViewerModule
   ],
   providers: [],
   // bootstrap: [AppComponent]
