@@ -12,7 +12,7 @@ $fa-font-path: "../../../node_modules/font-awesome/fonts";
   background-color: $color-pitch-black;
   color: $color-grey-secondary;
   position: fixed;
-  z-index: $z-editor-wrapper;
+  z-index: $z-too-high;
   display: flex;
   flex-direction: column;
   overflow: hidden; /*TODO: hack*/
