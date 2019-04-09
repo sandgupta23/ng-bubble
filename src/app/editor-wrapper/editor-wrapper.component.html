@@ -38,6 +38,8 @@
     <!--START: side bar-->
     <jsb-editor-sidebar (action$)="sidebarActionHandler($event)"
                         [config]="config"
+                        [isLoading]="isLoading"
+                        [isConnected]="_status?.connection"
                         [shouldFoldCode]="shouldFoldCode"
                         [activeHeaderTab]="activeHeaderTab"></jsb-editor-sidebar>
     <!--END: side bar-->

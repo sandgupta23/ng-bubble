@@ -39,7 +39,7 @@ export class ClientService {
   * For selected component, send ng probe data and respective files to frontend
   * */
   static emitSelectedComponentData($selectedComponent) {
-    if(!$selectedComponent){
+    if (!$selectedComponent) {
       return;
     }
     try {
@@ -48,14 +48,14 @@ export class ClientService {
       NgBubbleDom.selectedComponent = componentInstance;
       ClientService.setEditorAttribute(EEditorInput.componentstr, ngProbeData);
       let payload = Helper.createLineFinderPayload(componentInstance, null);
-      NgBubbleSocket.sendMessage({type: EWSTypes.COMPONENT_FILE_SEARCH, payload});
-    }catch (e) {
+      ClientService.sendMessageToServer({type: EWSTypes.COMPONENT_FILE_SEARCH, payload});
+    } catch (e) {
       console.error(e);
     }
   }
 
   static openComponentFileInIde(payload: ILineFinderData) {
-    NgBubbleSocket.sendMessage({type: EWSTypes.open, payload});
+    ClientService.sendMessageToServer({type: EWSTypes.open, payload});
   }
 
   static setEditorAttribute(key: EEditorInput, value: any) {
@@ -93,7 +93,7 @@ export class ClientService {
 
       let fileContent = event.detail.fileContent;
       let pathToOpen = event.detail.pathToOpen;
-      NgBubbleSocket.sendMessage({
+      ClientService.sendMessageToServer({
         type: EWSTypes.setFileByPath, payload: {
           file: fileContent,
           pathToOpen: pathToOpen
@@ -103,11 +103,11 @@ export class ClientService {
 
     ClientService.$editorEl.addEventListener('searchTrigger$', (event: CustomEvent) => {
       let keyword = event.detail;
-      NgBubbleSocket.sendMessage({type: EWSTypes.SEARCH, payload: {file: keyword}});
+      ClientService.sendMessageToServer({type: EWSTypes.SEARCH, payload: {file: keyword}});
     });
     ClientService.$editorEl.addEventListener('getFileTrigger$', (event: CustomEvent) => {
       let keyword = event.detail;
-      NgBubbleSocket.sendMessage({type: EWSTypes.getFileByPath, payload: {pathToOpen: keyword}});
+      ClientService.sendMessageToServer({type: EWSTypes.getFileByPath, payload: {pathToOpen: keyword}});
     });
     ClientService.$editorEl.addEventListener('openInIde$', (event: CustomEvent) => {
       let data = event.detail;
@@ -122,7 +122,7 @@ export class ClientService {
       //   selectedComponent = componentInstance;
       //   ClientService.setEditorAttribute(EEditorInput.componentstr, JSON.stringify(componentInstance));
       //   let payload = createLineFinderPayload(componentInstance, null);
-      //   NgBubbleSocket.sendMessage({type: EWSTypes.COMPONENT_FILE_SEARCH, payload});
+      //   ClientService.sendMessageToServer({type: EWSTypes.COMPONENT_FILE_SEARCH, payload});
       // }
     });
     ClientService.$editorEl.addEventListener('getHoveredComponentData$', (event: CustomEvent) => {
@@ -165,7 +165,7 @@ export class ClientService {
           ClientService.openComponentFileInIde(payload);
         } else {
           ClientService.setEditorAttribute(EEditorInput.componentstr, ngProbeData);
-          NgBubbleSocket.sendMessage({type: EWSTypes.COMPONENT_FILE_SEARCH, payload});
+          ClientService.sendMessageToServer({type: EWSTypes.COMPONENT_FILE_SEARCH, payload});
         }
       } else {
         //console.log('NG-BUBBLE:: COULDNT FIND COMPONENT');
@@ -213,10 +213,17 @@ export class ClientService {
   * */
   static websocketInitCB = () => {
     ClientService.emitSelectedComponentData(NgBubbleDom.$selectedComponent);
-    NgBubbleSocket.sendMessage({type: EWSTypes.getConfig});
+    ClientService.setEditorAttribute(EEditorInput.isLoading, false);
+    ClientService.sendMessageToServer({type: EWSTypes.getConfig});
   };
 
+  static sendMessageToServer(data: { type: EWSTypes }) {
+    ClientService.setEditorAttribute(EEditorInput.isLoading, true);
+    NgBubbleSocket.sendMessage(data);
+  }
+
   static websocketOnMessageCB = function (event) {
+    ClientService.setEditorAttribute(EEditorInput.isLoading, false);
     if (!event) return;
     let data: IWSData = JSON.parse(event.data);
     let payload: any = data.payload;
@@ -240,6 +247,7 @@ export class ClientService {
 
   };
   static websocketOnErrorCB = (err) => {
+    ClientService.setEditorAttribute(EEditorInput.isLoading, false);
     ClientService.setEditorAttribute(EEditorInput.status, {connection: false});
   };
 

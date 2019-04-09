@@ -56,8 +56,8 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
       this.fileData = 'No connection with server. Please restart server using command `ng-bubble` in project root';
     }
   };
+  @Input() isLoading = true;
   @Input() componentfiles = (val: IFileData[]) => {
-
     this._componentfiles = val;
     if (Array.isArray(this._componentfiles) && this._componentfiles.length > 0 && !this._componentfiles.find((key) => key === this.headerForm.value['fileName'])) {
       setTimeout(() => this.patchForm(this.headerForm,{fileName: this._componentfiles[0].name}));

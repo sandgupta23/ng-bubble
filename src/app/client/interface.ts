@@ -54,6 +54,7 @@ export enum EEditorInput {
   searchfiles = 'searchfiles',
   coords = 'coords',
   status = 'status',
+  isLoading = 'isLoading',
 };
 
 /*TODO: this should not be needed*/

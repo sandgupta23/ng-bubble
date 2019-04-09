@@ -6,27 +6,6 @@
     <option *ngFor="let file of componentFiles" [value]="file.name"><i>{{file.name}}</i></option>
   </select>
 
-  <ng-container *ngIf="componentKeys?.length > 0">
-    <i class="fa fa-code" title="Component Mode"></i>
-    <!--<select class="jsb-editor-wrapper-header__keys" formControlName="key" [ngClass]="{'activeTab':activeTab === myEHeaderFormDataKeys.key}">-->
-      <!--<option *ngFor="let key of componentKeys" [value]="key"><i>{{key}}</i></option>-->
-    <!--</select>-->
-  </ng-container>
-
-
-
-    <span style="font-size: 12px; margin-right: 5px; cursor: pointer" (click)="sendPath(-1)">
-      All
-      <i *ngIf="subpaths?.length>0 && subpaths[0]" style="font-size: 8px; vertical-align: middle; cursor: default">></i>
-    </span>
-    <div style="font-size: 12px; margin-right: 5px; cursor: pointer"
-       *ngFor="let subpath of subpaths; let i = index;let last = last;"
-       (click)="sendPath(i)">
-      {{subpath}}
-      <i (click)="$event.stopPropagation()" *ngIf="!last" style="font-size: 8px; vertical-align: middle; cursor: default">></i>
-    </div>
-
-
   <span style="margin-left: auto"></span>
   <label class="switch" style="margin-right: 10px">
     <input type="checkbox" checked formControlName="editorMode">
