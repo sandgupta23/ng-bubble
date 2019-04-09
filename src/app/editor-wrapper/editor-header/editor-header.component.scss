@@ -7,9 +7,6 @@
   padding: 0 10px;
   align-items: flex-end;
   padding-bottom: 5px;
-  background-color: rgb(60, 60, 60);
-
-
 
   .jsb-editor-wrapper-header__name {
     font-size: 12px;
@@ -54,7 +51,7 @@
     //padding-left: 5px;
     font-size: 11px;
     color: $color-grey-secondary;;
-    background-color: rgb(60, 60, 60);
+    background-color: transparent;
     border: 1px solid transparent;
     outline: none !important;
     -webkit-appearance: none;
@@ -70,9 +67,9 @@
 }
 
 
-.activeTab{
-  font-weight: 700 !important;
-}
+//.activeTab{
+//  font-weight: 700 !important;
+//}
 
 
 /*slider: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_switch*/

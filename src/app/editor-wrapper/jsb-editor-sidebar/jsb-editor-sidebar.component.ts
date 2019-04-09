@@ -22,7 +22,7 @@ import {ILocalConfig} from '../../interface';
       <i class="fa fa-angle-double-right" title="Unfold code" *ngIf="shouldFoldCode"></i>
       <i class="fa fa-angle-double-down" title="Fold code" *ngIf="!shouldFoldCode"></i>
       <i class="fa fa-terminal" title="Log in console" *ngIf="activeHeaderTab === myEHeaderFormDataKeys.key"></i>
-      <i class="fa fa-save" *ngIf="activeHeaderTab === myEHeaderFormDataKeys.fileName" id="save-editor"></i>
+      <!--<i class="fa fa-save" id="save-editor"></i>-->
     </div>
   `,
   styleUrls: ['./jsb-editor-sidebar.component.scss'],

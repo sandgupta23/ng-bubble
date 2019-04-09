@@ -8,6 +8,7 @@ import {NgBubbleConstant} from './constant';
 export class ClientService {
 
   private static readonly $editorEl: Element = document.getElementsByTagName('js-bubble')[0];
+  private static isConnected = false;
   static init = function () {
     console.log('ClientService init');
     NgBubbleSocket.init(
@@ -207,6 +208,14 @@ export class ClientService {
   }
 
 
+
+
+  static sendMessageToServer(data: { type: EWSTypes, payload?:ILineFinderData }) {
+    ClientService.setEditorAttribute(EEditorInput.isLoading, true);
+    NgBubbleSocket.sendMessage(data);
+  }
+
+
   /*
   * websocketInitCB: When websocket successfully connects, send select component file to editor
   * and get configuration from server
@@ -214,15 +223,12 @@ export class ClientService {
   static websocketInitCB = () => {
     ClientService.emitSelectedComponentData(NgBubbleDom.$selectedComponent);
     ClientService.setEditorAttribute(EEditorInput.isLoading, false);
+    ClientService.setEditorAttribute(EEditorInput.status, {connection: true});
     ClientService.sendMessageToServer({type: EWSTypes.getConfig});
   };
 
-  static sendMessageToServer(data: { type: EWSTypes }) {
-    ClientService.setEditorAttribute(EEditorInput.isLoading, true);
-    NgBubbleSocket.sendMessage(data);
-  }
-
   static websocketOnMessageCB = function (event) {
+    ClientService.setEditorAttribute(EEditorInput.isLoading, false);
     ClientService.setEditorAttribute(EEditorInput.isLoading, false);
     if (!event) return;
     let data: IWSData = JSON.parse(event.data);

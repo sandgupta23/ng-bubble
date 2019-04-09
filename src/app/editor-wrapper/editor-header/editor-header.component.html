@@ -1,10 +1,13 @@
 <form [formGroup]="headerForm" id="ng-bubble-editor-controls-1"
-     class="jsb-editor-wrapper-header" (click)="action$.emit($event)">
+      class="jsb-editor-wrapper-header" (click)="action$.emit($event)">
 
-  <i class="fa fa-file" style="font-size: 13px" title="File Mode"></i>
-  <select class="jsb-editor-wrapper-header__files" [ngClass]="{'activeTab':activeTab === myEHeaderFormDataKeys.fileName}" formControlName="fileName">
-    <option *ngFor="let file of componentFiles" [value]="file.name"><i>{{file.name}}</i></option>
-  </select>
+  <ng-container *ngIf="componentFiles && componentFiles.length >=1">
+    <i class="fa fa-file" style="font-size: 13px" title="File Mode"></i>
+    <select class="jsb-editor-wrapper-header__files"
+            [ngClass]="{'activeTab':activeTab === myEHeaderFormDataKeys.fileName}" formControlName="fileName">
+      <option *ngFor="let file of componentFiles" [value]="file.name"><i>{{file.name}}</i></option>
+    </select>
+  </ng-container>
 
   <span style="margin-left: auto"></span>
   <label class="switch" style="margin-right: 10px">

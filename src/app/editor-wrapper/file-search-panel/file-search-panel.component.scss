@@ -1,5 +1,9 @@
 @import "../../../common";
 
+:host {
+  overflow: hidden; /*todo: hack...this is to hide extra length of the rows*/
+}
+
 
 .row-wrapper-item {
   height: 28px;
@@ -7,55 +11,36 @@
   align-items: center;
   font-size: 11px;
   padding-left: 10px;
-  /*border-bottom: 1px solid #e95420;*/
-  /*border-left: 1px solid #e95420;*/
-  /*border-right: 1px solid #e95420;*/
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
   background-color: rgb(60, 60, 60);
   cursor: pointer;
 
+  img {
+    width: 16px;
+    max-height: 16px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+
+  &:hover {
+    background-color: black !important;
+  }
+
+  &:nth-child(even) {
+    background-color: rgba(60, 60, 60, 0.90);
+  }
+
 }
 
-.ng-bubble-autocomplete{
-  overflow: hidden;/*TODO: hack; if remove there is some overflow on x and y direction*/
+.ng-bubble-autocomplete {
+  overflow: hidden; /*TODO: hack; if remove there is some overflow on x and y direction*/
   position: relative;
-  //width: 90%;
-  //max-width: 500px;
-  //input{
-  //  height: 30px; width: 100%;
-  //  outline: none;
-  //  border: 1px solid transparent;
-  //  font-size: 11px;
-  //  color: white;
-  //  padding-left: 10px;
-  //  background-color: rgba(60, 60, 60, 0.90)!important;
-  //  ::placeholder{
-  //    padding-left: 50px;
-  //    margin-left: 50px;
-  //  }
-  //}
 
 }
 
-.row-wrapper-item img {
-  //display: none;
-  width: 16px;
-  max-height: 16px;
-  border-radius: 50%;
-  margin-right: 5px;
-}
 
-.row-wrapper-item:hover{
-  //display: inline-block;
+.highlighted-row {
   background-color: black !important;
-}
-
-.row-wrapper-item:nth-child(even) {
-  background-color: rgba(60, 60, 60, 0.90) ;
-  /*color: white;*/
-}
-.highlighted-row{
-  background-color: black!important;
 }

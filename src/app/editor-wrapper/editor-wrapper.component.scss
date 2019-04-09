@@ -144,3 +144,20 @@ corresponding value from the list below*/
     transition: 0.3s;
   }
 }
+
+.minimize-placeholder {
+  background-color: rgb(60, 60, 60);
+  position: fixed;
+  padding: 5px;
+  cursor: pointer;
+  bottom: 0;
+  right: 10px;
+  i {
+    display: block;
+    width: 24px;
+    height: 18px;
+    border: 1px solid white;
+    border-top: 12px solid white;
+    border-radius: 3px;
+  }
+}

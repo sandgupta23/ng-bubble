@@ -39,9 +39,9 @@ export interface IHeaderFormData {
 export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   obj;
   editorMode;
-  testObj = {name:'sandeep', place:{city:{landmark:{name:"up"}}}};
-  keySearchKeyword:string;
-  _status:{connection:boolean};
+  testObj = {name: 'sandeep', place: {city: {landmark: {name: 'up'}}}};
+  keySearchKeyword: string;
+  _status: { connection: boolean };
   @Output() file_save_start$ = new EventEmitter();
   @Output() searchTrigger$ = new EventEmitter();
   @Output() getFileTrigger$ = new EventEmitter();
@@ -50,30 +50,31 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   @Output() log$ = new EventEmitter();
   @Output() openInIde$ = new EventEmitter();
 
-  @Input() set status(status:{connection:boolean}){
+  @Input() set status(status: { connection: boolean }) {
     this._status = status;
-    if(!status.connection){
+    if (!status.connection) {
       this.fileData = 'No connection with server. Please restart server using command `ng-bubble` in project root';
     }
   };
+
   @Input() isLoading = true;
   @Input() componentfiles = (val: IFileData[]) => {
     this._componentfiles = val;
     if (Array.isArray(this._componentfiles) && this._componentfiles.length > 0 && !this._componentfiles.find((key) => key === this.headerForm.value['fileName'])) {
-      setTimeout(() => this.patchForm(this.headerForm,{fileName: this._componentfiles[0].name}));
+      setTimeout(() => this.patchForm(this.headerForm, {fileName: this._componentfiles[0].name}));
     }
-  }
+  };
 
-  @Input() componentstr = (ngProbeData: INgProbeData, isInit:boolean=false) => {
+  @Input() componentstr = (ngProbeData: INgProbeData, isInit: boolean = false) => {
     // this._componentstr = val;
     // this.componentObj = UtilityService.getComponentWithoutInjectedMembers(ngProbeData) || {};
     this.componentObj = ngProbeData.componentInstance;
-    if(!isInit){
-      this.path = "";
+    if (!isInit) {
+      this.path = '';
     }
     //.constructor.prototype.ngDoCheck
     this.addDoCheckHook(ngProbeData.componentInstance);
-    console.log('====>',this.componentObj);
+    console.log('====>', this.componentObj);
     let activeComponentKey = this.headerForm.value['key'];
     this.keyOptions = ['All', ...Object.keys(this.componentObj)];
     let isActiveComponentKeyPresent = this.keyOptions.findIndex((key) => key === activeComponentKey) !== -1;
@@ -85,7 +86,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     }
     StoreService.patchStore(UtilityService.extractStoreData(this));//TODO: bad!
     this.changeDetectorRef.detectChanges();
-  }
+  };
 
   @Input() coords = (coordsStr) => {
     //console.log(coordsStr);
@@ -97,7 +98,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     this.showTooltip = true;
     StoreService.patchStore(UtilityService.extractStoreData(this));//TODO: bad!
     this.changeDetectorRef.detectChanges();
-  }
+  };
 
   @Input() searchfiles = (val: string) => {
     EventService.searchResultsFinish$.emit(val);
@@ -131,440 +132,15 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   componentObj: object = {};
   keyOptions = ['All'];
   myObject = Object;
-  circular = {hello:this.circular};
-  codeData: any = {
-    "dialogRefWrapper": {
-      "ref": null
-    },
-    "utilityService": {
-      "router": {
-        "urlSerializer": "-pruned-",
-        "rootContexts": "-pruned-",
-        "location": "-pruned-",
-        "config": "-pruned-",
-        "lastSuccessfulNavigation": "-pruned-",
-        "currentNavigation": null,
-        "navigationId": 1,
-        "isNgZoneEnabled": true,
-        "events": "-pruned-",
-        "navigated": true,
-        "lastSuccessfulId": 1,
-        "hooks": "-pruned-",
-        "urlHandlingStrategy": "-pruned-",
-        "routeReuseStrategy": "-pruned-",
-        "onSameUrlNavigation": "ignore",
-        "paramsInheritanceStrategy": "emptyOnly",
-        "urlUpdateStrategy": "deferred",
-        "relativeLinkResolution": "legacy",
-        "ngModule": "-pruned-",
-        "console": "-pruned-",
-        "currentUrlTree": "-pruned-",
-        "rawUrlTree": "-pruned-",
-        "browserUrlTree": "-pruned-",
-        "configLoader": "-pruned-",
-        "routerState": "-pruned-",
-        "transitions": "-pruned-",
-        "navigations": "-pruned-",
-        "locationSubscription": "-pruned-"
-      },
-      "snackBar": {
-        "_overlay": "-pruned-",
-        "_live": "-pruned-",
-        "_injector": "-pruned-",
-        "_breakpointObserver": "-pruned-",
-        "_parentSnackBar": null,
-        "_defaultConfig": "-pruned-",
-        "_snackBarRefAtThisLevel": null
-      },
-      "activatedRoute": {
-        "url": "-pruned-",
-        "params": "-pruned-",
-        "queryParams": "-pruned-",
-        "fragment": "-pruned-",
-        "data": "-pruned-",
-        "outlet": "primary",
-        "_futureSnapshot": "-pruned-",
-        "snapshot": "-pruned-",
-        "_routerState": "-pruned-"
-      },
-      "formBuilder": {},
-      "storeVariableService": {
-        "store": "-pruned-",
-        "storeState": "-pruned-"
-      },
-      "refreshCodeEditor$": {
-        "_isScalar": false,
-        "observers": "-pruned-",
-        "closed": false,
-        "isStopped": false,
-        "hasError": false,
-        "thrownError": null,
-        "__isAsync": false
-      },
-      "RANDOM_IMAGE_URLS": [
-        "https://robohash.org/StarDroid.png",
-        "https://cdn-images-1.medium.com/max/327/1*paQ7E6f2VyTKXHpR-aViFg.png",
-        "https://robohash.org/SmartDroid.png",
-        "https://robohash.org/SilverDroid.png",
-        "https://robohash.org/IntelliBot.png",
-        "https://robohash.org/SmartBot.png",
-        "https://robohash.org/SilverDroid.png",
-        "https://robohash.org/SilverDroid.png"
-      ],
-      "masterIntegration_IntegrationKeyDisplayNameMap": null
-    },
-    "chatService": {
-      "store": {
-        "_ngZone": "-pruned-",
-        "_stateStream": "-pruned-",
-        "_internalStateOperations": "-pruned-"
-      },
-      "serverService": {
-        "httpClient": "-pruned-",
-        "utilityService": "-pruned-",
-        "store": "-pruned-",
-        "router": "-pruned-",
-        "permissionService": "-pruned-",
-        "constantsService": "-pruned-",
-        "X_AXIS_TOKEN": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoidXNlciIsImlkIjo0fQ.Q4zn6_iHYH4zc4WL0WUeRAFPCXqwdEzAmxv7KwO35J0",
-        "AUTH_TOKEN": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoidXNlciIsImlkIjoxMDQxNywidXNlcl9pZCI6NCwiZW50ZXJwcmlzZV9pZCI6NCwicm9sZV9pZCI6Mn0.Fq49y5alu8Iz5VNF6dS2XeStAoBPU2JJHESCI2sI30E",
-        "isLoggedIn": false,
-        "__loggeduser$__selector": "-pruned-",
-        "__app$__selector": "-pruned-",
-        "roleName": "Admin",
-        "roleInfo": "-pruned-"
-      },
-      "utilityService": "-pruned-",
-      "constantsService": {
-        "NEW_BOT_VERSION_TEMPLATE": "-pruned-",
-        "BACKEND_URL": "https://dev.imibot.ai/",
-        "BACKEND_URL_LOGIN": "https://dev.imibot.ai/api/v1/user/login/",
-        "BACKEND_URL_ENTERPRISE_USERS": "https://dev.imibot.ai/users/enterprise/",
-        "BACKEND_USER_UPDATE_URL": "https://dev.imibot.ai/user/",
-        "BACKEND_USER_CODE_BASED_BOT_LIST": "https://dev.imibot.ai/integrations",
-        "BACKEND_USER_PIPELINE_BASED_BOT_LIST": "https://dev.imibot.ai/api/v1/bot/",
-        "CHANNEL_LIST": "-pruned-",
-        "TIME_GRANULARITY_LIST": "-pruned-",
-        "DATE_PICKER_CONFIG": "-pruned-",
-        "LOCALSTORAGE_APP_STATE": "LOCALSTORAGE_APP_STATE",
-        "LOCALSTORAGE_LAST_STATE_UPDATED": "LOCALSTORAGE_LAST_STATE_UPDATED",
-        "HANDSON_TABLE_BOT_TESTING_colHeaders": "-pruned-",
-        "HANDSON_TABLE_BOT_TESTING_columns": "-pruned-",
-        "HANDSON_TABLE_KNOWLEDGE_BASE_SETTING": "-pruned-",
-        "HANDSON_TABLE_KNOWLEDGE_BASE_colHeaders": "-pruned-",
-        "HANDSON_TABLE_KNOWLEDGE_BASE_columns": "-pruned-",
-        "SMART_TABLE_REPORT_TABLE_DATA_META_DICT_TEMPLATE": "-pruned-",
-        "SMART_TABLE_REPORT_HISTORY_TABLE_DATA_META_DICT_TEMPLATE": "-pruned-",
-        "HIGHCHART_THEMEVALUE_ANALYTICS_PERFORMANCE_SESSION_WISE": "-pruned-",
-        "HIGHCHART_THEMEVALUE_ANALYTICS_PERFORMANCE_TEMPLATE_KEY_AND_FLOW_TRIGGERED": "-pruned-",
-        "SMART_TABLE_ENTERPRISE_NER_TABLE_DATA_META_DICT_TEMPLATE": "-pruned-",
-        "SMART_TABLE_BOT_KNOWLEDGE_BASE_NER_TABLE_DATA_META_DICT_TEMPLATE": "-pruned-",
-        "SMART_TABLE_SESSION_TABLE_DATA_META_DICT_TEMPLATE": "-pruned-",
-        "SMART_TABLE_ENTERPISE_USERS_SETTING": "-pruned-",
-        "SMART_TABLE_SERVICE_KEY_EXPIRED": "-pruned-",
-        "SMART_TABLE_SERVICE_KEY_ACTIVE": "-pruned-",
-        "SMART_TABLE_USER_DICT_TEMPLATE": "-pruned-",
-        "SMART_TABLE_CONSUMER_TABLE_DATA_META_DICT_TEMPLATE": "-pruned-",
-        "__app$__selector": "-pruned-",
-        "__loggeduser$__selector": "-pruned-",
-        "appState": "-pruned-",
-        "loggedUser": "-pruned-",
-        "allowedPermissionIdsToCurrentRole": "-pruned-"
-      }
-    },
-    "activatedRoute": {
-      "url": {
-        "_isScalar": false,
-        "observers": "-pruned-",
-        "closed": false,
-        "isStopped": false,
-        "hasError": false,
-        "thrownError": null,
-        "_value": "-pruned-"
-      },
-      "params": {
-        "_isScalar": false,
-        "observers": "-pruned-",
-        "closed": false,
-        "isStopped": false,
-        "hasError": false,
-        "thrownError": null,
-        "_value": "-pruned-"
-      },
-      "queryParams": {
-        "_isScalar": false,
-        "observers": "-pruned-",
-        "closed": false,
-        "isStopped": false,
-        "hasError": false,
-        "thrownError": null,
-        "_value": "-pruned-"
-      },
-      "fragment": {
-        "_isScalar": false,
-        "observers": "-pruned-",
-        "closed": false,
-        "isStopped": false,
-        "hasError": false,
-        "thrownError": null,
-        "_value": null
-      },
-      "data": {
-        "_isScalar": false,
-        "observers": "-pruned-",
-        "closed": false,
-        "isStopped": false,
-        "hasError": false,
-        "thrownError": null,
-        "_value": "-pruned-"
-      },
-      "outlet": "primary",
-      "_futureSnapshot": {
-        "url": "-pruned-",
-        "params": "-pruned-",
-        "queryParams": "-pruned-",
-        "fragment": null,
-        "data": "-pruned-",
-        "outlet": "primary",
-        "routeConfig": "-pruned-",
-        "_urlSegment": "-pruned-",
-        "_lastPathIndex": 2,
-        "_resolve": "-pruned-",
-        "_routerState": "-pruned-",
-        "_resolvedData": "-pruned-",
-        "_queryParamMap": "-pruned-"
-      },
-      "_routerState": {
-        "_root": "-pruned-",
-        "snapshot": "-pruned-"
-      },
-      "snapshot": "-pruned-"
-    },
-    "router": "-pruned-",
-    "constantsService": "-pruned-",
-    "serverService": "-pruned-",
-    "matDialog": {
-      "_overlay": {
-        "scrollStrategies": "-pruned-",
-        "_overlayContainer": "-pruned-",
-        "_componentFactoryResolver": "-pruned-",
-        "_positionBuilder": "-pruned-",
-        "_keyboardDispatcher": "-pruned-",
-        "_injector": "-pruned-",
-        "_ngZone": "-pruned-",
-        "_document": "-pruned-",
-        "_directionality": "-pruned-",
-        "_location": "-pruned-"
-      },
-      "_injector": {
-        "_parent": "-pruned-",
-        "_bootstrapComponents": "-pruned-",
-        "_def": "-pruned-",
-        "_destroyListeners": "-pruned-",
-        "_destroyed": false,
-        "injector": "-pruned-",
-        "_providers": "-pruned-"
-      },
-      "_location": {
-        "_subject": "-pruned-",
-        "_platformStrategy": "-pruned-",
-        "_baseHref": ""
-      },
-      "_defaultOptions": null,
-      "_parentDialog": {
-        "_overlay": "-pruned-",
-        "_injector": "-pruned-",
-        "_location": "-pruned-",
-        "_defaultOptions": null,
-        "_parentDialog": "-pruned-",
-        "_overlayContainer": "-pruned-",
-        "_openDialogsAtThisLevel": "-pruned-",
-        "_afterAllClosedAtThisLevel": "-pruned-",
-        "_afterOpenedAtThisLevel": "-pruned-",
-        "_ariaHiddenElements": "-pruned-",
-        "afterAllClosed": "-pruned-"
-      },
-      "_overlayContainer": {
-        "_document": "-pruned-",
-        "_containerElement": "-pruned-"
-      },
-      "_openDialogsAtThisLevel": [],
-      "_afterAllClosedAtThisLevel": {
-        "_isScalar": false,
-        "observers": "-pruned-",
-        "closed": false,
-        "isStopped": false,
-        "hasError": false,
-        "thrownError": null
-      },
-      "_afterOpenedAtThisLevel": {
-        "_isScalar": false,
-        "observers": "-pruned-",
-        "closed": false,
-        "isStopped": false,
-        "hasError": false,
-        "thrownError": null
-      },
-      "_ariaHiddenElements": {},
-      "afterAllClosed": {
-        "_isScalar": false
-      }
-    },
-    "store": "-pruned-",
-    "showLoader": false,
-    "doStartBlinking": false,
-    "myEAllActions": {
-      "Get Bots": "Get Bots",
-      "Create Bots": "Create Bots",
-      "Update Bots": "Update Bots",
-      "Delete Bots": "Delete Bots",
-      "Get Bots Anonymous": "Get Bots Anonymous",
-      "Get Enterprise Knowledge base": "Get Enterprise Knowledge base",
-      "Create Enterprise Knowledge base": "Create Enterprise Knowledge base",
-      "Update Enterprise Knowledge base": "Update Enterprise Knowledge base",
-      "Delete Enterprise Knowledge base": "Delete Enterprise Knowledge base",
-      "Create Bot Versioning": "Create Bot Versioning",
-      "GET Bot Versioning": "GET Bot Versioning",
-      "Update Bot Versioning": "Update Bot Versioning",
-      "Delete Bot Versioning": "Delete Bot Versioning",
-      "Create Role": "Create Role",
-      "Get Role": "Get Role",
-      "Update Role": "Update Role",
-      "Delete Role": "Delete Role",
-      "Create User": "Create User",
-      "Get User": "Get User",
-      "Update User": "Update User",
-      "Get Consumers": "Get Consumers",
-      "Get Sessions": "Get Sessions",
-      "Analytics": "Analytics",
-      "Get Bot Testcases": "Get Bot Testcases",
-      "Create Bot Testcases": "Create Bot Testcases",
-      "Update Bot Testcases": "Update Bot Testcases",
-      "Delete Bot Testcases": "Delete Bot Testcases",
-      "Get Integrations": "Get Integrations",
-      "Get Pipeline Module": "Get Pipeline Module",
-      "Create Reports": "Create Reports",
-      "Get Reports": "Get Reports",
-      "Update Reports": "Update Reports",
-      "Delete Reports": "Delete Reports",
-      "Get Report History": "Get Report History",
-      "Get Enterprise": "Get Enterprise",
-      "Update Enterprise": "Update Enterprise",
-      "Delete User": "Delete User",
-      "Get Report Types": "Get Report Types",
-      "Send API": "Send API",
-      "Get Messages": "Get Messages",
-      "Get Actions": "Get Actions",
-      "Close Room": "Close Room",
-      "agent_close": "agent_close",
-      "Anonymize Conversation": "Anonymize Conversation",
-      "Post dfRules Debug": "Post dfRules Debug",
-      "Post genRules Debug": "Post genRules Debug",
-      "Post genTemplate Debug": "Post genTemplate Debug",
-      "Post Workflow Debug": "Post Workflow Debug",
-      "Workflow Webhook": "Workflow Webhook",
-      "Facebook Webhook": "Facebook Webhook",
-      "Backward Compatible Message API": "Backward Compatible Message API",
-      "Intelligence API Webhook": "Intelligence API Webhook",
-      "Delete Consumer": "Delete Consumer",
-      "Create Decrypt Audit": "Create Decrypt Audit",
-      "erase consumer": "erase consumer",
-      "Exec Reports": "Exec Reports",
-      "Download Reports": "Download Reports",
-      "Skype API": "Skype API",
-      "Update Password": "Update Password",
-      "Get Bot Knowledge base": "Get Bot Knowledge base",
-      "Create Bot Knowledge base": "Create Bot Knowledge base",
-      "Update Bot Knowledge base": "Update Bot Knowledge base",
-      "Delete Bot Knowledge base": "Delete Bot Knowledge base",
-      "ModuleDetail": "ModuleDetail"
-    },
-    "menuOpened": false,
-    "bot": {
-      "active_version": {
-        "bot_id": 812,
-        "comment": "Default Active Version",
-        "id": 833,
-        "version": 1
-      },
-      "active_version_id": 833,
-      "advanced_data_protection": false,
-      "allow_agent_handover": false,
-      "allow_anonymization": false,
-      "allow_feedback": false,
-      "avatars": [
-        "-pruned-"
-      ],
-      "blanket_consent": false,
-      "bot_access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ODEyLCJyb2xlIjoiYm90In0.4yudf8vOsNZ0hlcW-F3Xu76b222LxN4u2Piwrp9b-lA",
-      "bot_metadata": {},
-      "bot_type": "chatbot",
-      "bot_unique_name": "testing bot new",
-      "child_bots": [],
-      "consent_categories": [
-        "data_retention",
-        "data_anonymization"
-      ],
-      "consent_message": "",
-      "created_at": 1553243538000,
-      "created_by": "Qwerty1 Parrot",
-      "data_persistence_period": 30,
-      "description": "Play Game and win Coupons",
-      "enterprise_id": 4,
-      "error_message": "",
-      "first_message": "Hi.. Welcome to test world. I am testing bot.",
-      "heading": "Welcome to the Game World",
-      "id": 812,
-      "integrations": {
-        "ccsp_details": "-pruned-",
-        "channels": "-pruned-"
-      },
-      "is_manager": false,
-      "latest_version": {
-        "_id": 812,
-        "bot_id": 812,
-        "comment": "Default Active Version",
-        "id": 833,
-        "version": 1
-      },
-      "logo": "https://cp-mlxprod-static.microsoft.com/013920-1003/en-us/thumbnail.png",
-      "name": "testing 004",
-      "old_id": "",
-      "parent_bots": [],
-      "pipelines": [
-        "-pruned-",
-        "-pruned-",
-        "-pruned-",
-        "-pruned-",
-        "-pruned-"
-      ],
-      "resource_uri": "/api/v1/bot/812/",
-      "room_close_callback": false,
-      "room_persistence_time": 240,
-      "transactions_per_pricing_unit": 0,
-      "updated_at": 1553243538000,
-      "updated_by": "Qwerty1 Parrot"
-    },
-    "parentRoute": "chatbot",
-    "__loggeduserenterpriseinfo$__selector": {
-      "_isScalar": false
-    },
-    "enterprise_unique_name": "ayeshreddy.k",
-    "__chatsessionstate$__selector": {
-      "_isScalar": false
-    },
-    "currentUid": null,
-    "customConsumerDetails": null,
-    "__loggeduser$__selector": {
-      "_isScalar": false
-    },
-    "role": "Admin"
-  };
-  fileData: any = 'Loading...';
+  circular = {hello: this.circular};
+  codeData: any = "No Code Data";
+  fileData: any = 'No Data';
   path: any = '';
   headerForm: FormGroup;
   headerFormData: IHeaderFormData = {};
-  constructor(private utilityService: UtilityService, private changeDetectorRef:ChangeDetectorRef) {}
+
+  constructor(private utilityService: UtilityService, private changeDetectorRef: ChangeDetectorRef) {
+  }
 
   ngOnInit() {
 
@@ -606,7 +182,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
 
   sidebarActionHandler(clickEvent: Event) {
 
-    setTimeout(()=>{
+    setTimeout(() => {
       this.changeDetectorRef.detectChanges();
       StoreService.patchStore(UtilityService.extractStoreData(this));
     });
@@ -729,7 +305,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
 
   openInIde(componentName: string, ext: string) {
     // this.openInIde$.emit({tagName: tag, ext});
-    this.openInIde$.emit({searchTerm: componentName+ext});
+    this.openInIde$.emit({searchTerm: componentName + ext});
   }
 
 
@@ -755,7 +331,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   initializeComponent(store: IStore) {
     Object.keys(store).forEach((key) => {
       if (typeof store[key] !== 'function') {
-        if(key !== 'selectedElXpath' && key !== 'hoveredElXpath'){/*TODO: use array*/
+        if (key !== 'selectedElXpath' && key !== 'hoveredElXpath') {/*TODO: use array*/
           this[key] = store[key];
         }
       }
@@ -767,11 +343,12 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     this._componentfiles = [fileData];
     this.keyOptions = [];
     this.patchForm(this.headerForm, {fileName: fileData.name});
+    this.showSearchPanel = false;
     this.changeDetectorRef.detectChanges();
   }
 
-  pathChangedHandler($event){
-    this.path=$event;
+  pathChangedHandler($event) {
+    this.path = $event;
     /*for some reason following detection doesnt trigger ngDoCheck
     * So patching store manually
     * */
@@ -779,9 +356,10 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     this.changeDetectorRef.detectChanges();
   }
 
-  patchForm(form:FormGroup, obj: IHeaderFormData) {
+  patchForm(form: FormGroup, obj: IHeaderFormData) {
     form.patchValue(obj);
   }
+
   //
   logCurrentData() {
     this.log$.emit({key: this.headerFormData.key, clone: this.componentObj});
@@ -791,14 +369,14 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     StoreService.patchStore(UtilityService.extractStoreData(this));
   }
 
-  addDoCheckHook(component){
+  addDoCheckHook(component) {
     let ngDoCheck = component.constructor.prototype.ngDoCheck;
-    if(ngDoCheck && !ngDoCheck.__NGBUBBLE_HOOK__){
+    if (ngDoCheck && !ngDoCheck.__NGBUBBLE_HOOK__) {
       component.constructor.prototype.ngDoCheck = this.ngDoCheckHook(component.constructor.prototype.ngDoCheck);
     }
   }
 
-  ngDoCheckHook(originalNgDoCheck:Function){
+  ngDoCheckHook(originalNgDoCheck: Function) {
     let self = this;
     return function () {
       self.codeData = {...self.componentObj};
@@ -808,33 +386,42 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
       // self.codeData = self.componentObj;
       // this.__NGBUBBLE_HOOK__ = true;
 
-      /**/ originalNgDoCheck && originalNgDoCheck();/*TODO: ng do check with arguments?*/
-    }
+      /**/
+      originalNgDoCheck && originalNgDoCheck();/*TODO: ng do check with arguments?*/
+    };
   }
 
-  hideSearchPanel(){
+  hideSearchPanel() {
     this.showSearchPanel = false;
+    StoreService.patchStore(UtilityService.extractStoreData(this));
     this.changeDetectorRef.detectChanges();
   }
 
   // @ViewChild('editorLeft', {read: ElementRef}) editor1:ElementRef;
   length = 0;
-  onResizeEnd($event, editorLeft, editorRight, editorWrapperBody:HTMLElement){
+
+  onResizeEnd($event, editorLeft, editorRight, editorWrapperBody: HTMLElement) {
     let left = Math.abs($event.rectangle.right - $event.rectangle.left);
-    let total:number = Number(editorWrapperBody.getBoundingClientRect().width);
-    editorLeft.style.width = `${left}px`;
-    editorRight.style.width = `${total-left}px`;
-    console.log(editorRight);
-    console.log(editorRight.style.width);
+    left = left < 100 ? 100 : left;/*left should be atleast 10px*/
+    let total: number = Number(editorWrapperBody.getBoundingClientRect().width);
+    editorLeft.style.width = `${left * 100 / total}%`;
+    editorRight.style.width = `${(total - left) * 100 / total}%`;
+    console.log('=======', editorRight.style.width);
 
     this.changeDetectorRef.detectChanges();
     // let editor = document.getElementById('test2');
     // editor.style.left = `${event.rectangle.left}px`;
   }
-  test(el){
 
+  test(el) {
     this.changeDetectorRef.detectChanges();
   }
 
+
+  maximize(doMaximize:boolean) {
+    this.minimize = !doMaximize;
+    this.changeDetectorRef.detectChanges();
+    StoreService.patchStore(UtilityService.extractStoreData(this));
+  }
 
 }

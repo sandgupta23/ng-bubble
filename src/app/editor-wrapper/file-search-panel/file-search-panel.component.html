@@ -1,21 +1,20 @@
-<form [formGroup]="searchForm" class="ng-bubble-autocomplete">
+<div (keydown)="changeSelectedRow($event)">
+  <form [formGroup]="searchForm" class="ng-bubble-autocomplete">
   <span class="ngb-input-search"><input
     class="ngb-input"
-    (keydown)="changeSelectedRow($event)"
     id="ng-bubble-search" autocomplete="off"
     formControlName="keyword" type="text" placeholder="Search project files" autofocus></span>
-  <div id="row-wrapper" style="position: absolute; top: 100%; left: 0; right: 0">
-  </div>
-</form>
+  </form>
 
-<ng-container *ngIf="searchForm.get('keyword').value">
-  <div *ngFor="let file of files| slice:0:10; let i=index"
-       [ngClass]="{'highlighted-row': selectedRow === i}"
-       class="row-wrapper-item" style="display: flex; align-content: center" (click)="getFileTrigger$.emit(file)">
-    <div [title]="file.path" style="display: flex; align-items: center">
-      <img [src]="file.name|imageByExtension" alt="">
-      <span>{{file.name}}</span>
+  <ng-container *ngIf="searchForm.get('keyword').value">
+    <div *ngFor="let file of files| slice:0:10; let i=index"
+         [ngClass]="{'highlighted-row': selectedRow === i}"
+         class="row-wrapper-item" (click)="openInIde(file)">
+      <div [title]="file.path" style="display: flex; align-items: center">
+        <img [src]="file.name|imageByExtension" alt="">
+        <span>{{file.name}}</span>
+      </div>
     </div>
-  </div>
 
-</ng-container>
+  </ng-container>
+</div>

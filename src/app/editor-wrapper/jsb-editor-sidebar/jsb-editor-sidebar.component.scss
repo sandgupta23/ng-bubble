@@ -40,5 +40,6 @@ $fa-font-path: "../../../../node_modules/font-awesome/fonts";
 .make-disable{
   pointer-events: none;
   filter: grayscale(100%) !important;
+  opacity: 0.2;
 }
 

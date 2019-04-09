@@ -65,34 +65,24 @@
     </div>
     <!--END: left editor-->
 
-    <!--START: right editor/trey-->
+    <!--START: right editor/json-viewer-->
     <div #editorRight style="background-color: #0a001f;overflow-y: scroll;width: 50%;">
       <ngx-json-viewer
         *ngIf="!headerForm.get('editorMode').value"
         class="jsb-json-viewer" (click)="test()" [json]="codeData|objectByProbablePath:keySearchKeyword" [expanded]="!shouldFoldCode"></ngx-json-viewer>
-      <!--<app-object-tray-->
-        <!--*ngIf="!headerForm.get('editorMode').value"-->
-        <!--[obj]="codeData"-->
-        <!--(path$)="pathChangedHandler($event);"-->
-        <!--[path]="path"-->
-        <!--[shouldFoldCode]="true"-->
-        <!--&gt;-->
-        <!--&lt;!&ndash;TODO: keeping should fold code always, true &ndash;&gt;-->
-      <!--</app-object-tray>-->
       <jsb-editor *ngIf="headerForm.get('editorMode').value"
-                  [level]="headerFormData.key==='All'?3:6"
+                  [level]="headerFormData.key==='All'?6:6"
                   [codeText]="codeData|objectByProbablePath:keySearchKeyword"
                   [shouldFoldCode]="shouldFoldCode"></jsb-editor>
     </div>
-    <!--END: right editor/trey-->
+    <!--END: right editor/json-viewer-->
 
     <div [hidden]="!showSearchPanel">
       <div class="file-search-panel" (click)="test()">
-        <!--<i>showSearchPanel: {{showSearchPanel}}</i>-->
         <jsb-file-search-panel
           (click)="$event.stopPropagation()"
+          (openInIde$)="openInIde$.emit({pathToOpen:$event.path})"
           (showSearchPanel$)="showSearchPanel=$event"
-
           (getFileTrigger$)="getFileTriggerHandler($event)"
           (searchEvent$)="searchTrigger$.emit($event);"></jsb-file-search-panel>
       </div>
@@ -100,10 +90,11 @@
   </div>
 </div>
 
+<!--START: Minimize placeholder-->
 <div *ngIf="minimize"
-     style="background-color: rgb(60, 60, 60); position: fixed; padding: 10px; cursor: pointer; bottom: 0; right: 10px"
-     (click)="minimize = false"
->
-  <i class="fa fa-window-maximize" style="color: white"></i>
+     class="minimize-placeholder"
+     (click)="maximize(true)">
+  <!--<i class="fa fa-window-maximize" style="color: white"></i>-->
+  <i></i>
 </div>
-<!--<div>this is editor</div>-->
+<!--END: Minimize placeholder-->
