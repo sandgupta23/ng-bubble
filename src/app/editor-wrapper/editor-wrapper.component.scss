@@ -16,6 +16,16 @@ $fa-font-path: "../../../node_modules/font-awesome/fonts";
   display: flex;
   flex-direction: column;
   overflow: hidden; /*TODO: hack*/
+
+  .key-search-input {
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+    z-index: 10000000000000;
+    max-width: 200px
+  }
+
+
   .jsb-editor-wrapper-body {
     background-color: black;
     display: flex;
@@ -48,8 +58,9 @@ $fa-font-path: "../../../node_modules/font-awesome/fonts";
     display: flex;
     cursor: pointer;
     justify-content: center;
-    align-items:flex-start;
-    jsb-file-search-panel{
+    align-items: flex-start;
+
+    jsb-file-search-panel {
       width: 80%;
       max-width: 400px;
     }
@@ -74,9 +85,11 @@ jsb-menu {
   justify-content: center;
   overflow: hidden;
   background-color: #aaa;
-  &:hover{
+
+  &:hover {
     background-color: white;
   }
+
   z-index: $z-resizer-bar;
 
   i {
@@ -89,8 +102,8 @@ jsb-menu {
 //  content: 'hello';
 //}
 
-::ng-deep{
-  .file-editor{
+::ng-deep {
+  .file-editor {
     *::-webkit-scrollbar {
       display: none;
     }
@@ -99,19 +112,23 @@ jsb-menu {
 
 
 //::ng-deep{
-  .jsb-json-viewer{
-    margin-left: 10px;
-    display: block;
-    *{
-      font-size: 10px;
-    }
-    .segment-key{
-      color: greenyellow !important;
-    }
-    .toggler{
-      margin-top: 1px !important;
-    }
+.jsb-json-viewer {
+  margin-left: 10px;
+  display: block;
+
+  * {
+    font-size: 10px;
   }
+
+  .segment-key {
+    color: greenyellow !important;
+  }
+
+  .toggler {
+    margin-top: 1px !important;
+  }
+}
+
 //}
 
 
@@ -119,11 +136,11 @@ jsb-menu {
 corresponding value from the list below*/
 
 
+.animation-slide-right {
+  transform: translateX(80%);
 
-.animation-slide-right{
-  right: -20% !important;
-  &:hover{
-    right: 0% !important;
+  &:hover {
+    transform: translateX(0);
     transition: 0.3s;
   }
 }

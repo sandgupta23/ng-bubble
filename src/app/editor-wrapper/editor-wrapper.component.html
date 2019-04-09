@@ -1,10 +1,3 @@
-<!--<i>{{keySearchKeyword}}</i>-->
-
-<!--<i>{{testObj|objectByProbablePath:keySearchKeyword|json}}</i>-->
-
-
-<!--<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>-->
-<!--<i>{{headerForm.value|json}}</i>-->
 <!--TODO: click-->
 <jsb-menu *ngIf="showTooltip"
           [coords]="_coords"
@@ -14,13 +7,14 @@
           (showTooltip$)="showTooltip = $event"></jsb-menu>
 
 <div class="jsb-editor-wrapper"
+     *ngIf="!minimize"
      (dblclick)="$event.stopPropagation()"
      (click)="hideSearchPanel()"
      (scroll)="$event.stopPropagation()"
-     [ngStyle]="{'top': top,left:left, right:right, bottom:bottom}"
-     *ngIf="!minimize">
+     [ngStyle]="{'top': top,left:left, right:right, bottom:bottom}">
+
   <!--START:Input-->
-  <span class="ngb-input-search animation-slide-right" style="position: absolute; bottom: 10px; right: 0; z-index: 10000000000000; max-width: 200px">
+  <span class="ngb-input-search key-search-input" [ngClass]="{'animation-slide-right':!keySearchKeyword}">
         <input type="text"
                class="ngb-input"
                [(ngModel)]="keySearchKeyword" (ngModelChange)="test()">
