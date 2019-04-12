@@ -1,9 +1,11 @@
 <div (keydown)="changeSelectedRow($event)">
   <form [formGroup]="searchForm" class="ng-bubble-autocomplete">
-  <span class="ngb-input-search"><input
-    class="ngb-input"
-    id="ng-bubble-search" autocomplete="off"
-    formControlName="keyword" type="text" placeholder="Search project files" autofocus></span>
+  <span class="ngb-input-search">
+    <input class="ngb-input"
+           id="ng-bubble-search" autocomplete="off"
+           formControlName="keyword" type="text" placeholder="Search project files" autofocus>
+          <img alt="warning logo" class="fa-image-svg" style="margin: 0" [src]="BACKEND_IMG_ROOT+ 'search.svg'"/>
+  </span>
   </form>
 
   <ng-container *ngIf="searchForm.get('keyword').value">

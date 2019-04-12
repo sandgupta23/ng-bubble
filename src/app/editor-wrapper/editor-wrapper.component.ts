@@ -74,7 +74,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     }
     //.constructor.prototype.ngDoCheck
     this.addDoCheckHook(ngProbeData.componentInstance);
-    console.log('====>', this.componentObj);
+
     let activeComponentKey = this.headerForm.value['key'];
     this.keyOptions = ['All', ...Object.keys(this.componentObj)];
     let isActiveComponentKeyPresent = this.keyOptions.findIndex((key) => key === activeComponentKey) !== -1;
@@ -89,7 +89,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   };
 
   @Input() coords = (coordsStr) => {
-    //console.log(coordsStr);
+    //
     let coords = coordsStr;
     let top = coords.top + 'px';
     let left = coords.left + 'px';
@@ -111,7 +111,12 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     this.changeDetectorRef.detectChanges();
   };
 
-  @Input() config;
+  _config;
+
+  @Input() config(val){
+    this._config = val;
+    StoreService.config = val;
+  }
   @ViewChild(JsbEditorComponent) appEditorComponent: JsbEditorComponent;
   @ViewChildren('menu') menu: QueryList<any>;
 
@@ -133,11 +138,12 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   keyOptions = ['All'];
   myObject = Object;
   circular = {hello: this.circular};
-  codeData: any = "No Code Data";
-  fileData: any = 'No Data';
+  codeData: any = {};
+  fileData: any = {};
   path: any = '';
   headerForm: FormGroup;
-  headerFormData: IHeaderFormData = {};
+  headerFormData: IHeaderFormData = {}
+  BACKEND_IMG_ROOT = 'http://localhost:11637/assets/imgs/';
 
   constructor(private utilityService: UtilityService, private changeDetectorRef: ChangeDetectorRef) {
   }
@@ -187,6 +193,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
       StoreService.patchStore(UtilityService.extractStoreData(this));
     });
 
+    debugger;
     let className = UtilityService.getClickedSideBarIcon(clickEvent);
     switch (className) {
       case 'vs-code-grey' : {
@@ -195,11 +202,13 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
         break;
       }
       case 'fa-search' : {
+        clickEvent.stopPropagation();
         setTimeout(() => {
           /*todo: hack...issues with clickoutside*/
           this.showSearchPanel = !this.showSearchPanel;
           this.changeDetectorRef.detectChanges();
           StoreService.patchStore(UtilityService.extractStoreData(this));
+
         });
         break;
       }
@@ -311,7 +320,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
 
   ngAfterViewInit(): void {
     setTimeout(() => {/*TODO: hack. @output events dont work without settimeout*/
-      console.log(this.menu);
+
       try {
         ClientService.init();
         window.onload = function () {
@@ -380,7 +389,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     let self = this;
     return function () {
       self.codeData = {...self.componentObj};
-      // console.log(self.codeData);
+      //
       // self.changeDetectorRef.detectChanges();
       // self.getHoveredComponentData$.emit();/*TODO: what about selected component via dblclick?*/
       // self.codeData = self.componentObj;
@@ -406,7 +415,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     let total: number = Number(editorWrapperBody.getBoundingClientRect().width);
     editorLeft.style.width = `${left * 100 / total}%`;
     editorRight.style.width = `${(total - left) * 100 / total}%`;
-    console.log('=======', editorRight.style.width);
+
 
     this.changeDetectorRef.detectChanges();
     // let editor = document.getElementById('test2');

@@ -16,7 +16,7 @@ const SCAN_EXCLUDED :string[] = [
 module.exports = function scan(dir:any, alias:string){
 
 	let walkRes =walk(dir, alias);
-    // console.log(walkRes);
+    // 
 	return {
 		name: alias,
 		type: 'folder',

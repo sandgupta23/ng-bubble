@@ -38,6 +38,7 @@ export class StoreService {
     StoreService.patchStore(JSON.parse(storeStr));
   }
 
+  public static config;
   private static store: IStore = {};
 
   static patchStore(state:IStore = {}){
@@ -46,7 +47,7 @@ export class StoreService {
     try{
       this.setInLocalStorage(StoreService.store);
     }catch (e) {
-      console.log("error trying to save=>", state);
+
     }
   }
 

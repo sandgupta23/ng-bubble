@@ -25,7 +25,7 @@ export function getLocalConfig() {
         try {
             return JSON.parse(data)
         }catch (e) {
-            console.log(e);
+            
         }
     }
     return {};
@@ -34,7 +34,7 @@ export async function updateLocalConfig(newLocalConfigData: ILocalConfig) {
     let oldLocalConfigData = await getLocalConfig();
     let newData = {...oldLocalConfigData, ...newLocalConfigData};
     let localConfigPath = getLocalConfigFilePath();
-    console.log(localConfigPath, newLocalConfigData);
+    
     return await writeFileAsync(localConfigPath, JSON.stringify(newData));
 }
 
@@ -47,7 +47,7 @@ export function getGlobalConfig() {
         try {
             return JSON.parse(data)
         }catch (e) {
-            console.log(e);
+            
         }
     }
     return {};

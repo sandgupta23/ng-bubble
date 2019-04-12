@@ -55,10 +55,10 @@ function getScore(htmlLine, lineFinderData) {
         + idScore(htmlLine, lineFinderData.id))
         + ""
         + classScore(htmlLine, lineFinderData.classList);
-    // console.log(tagScore(htmlLine, lineFinderData.targetTagName));
-    // console.log(idScore(htmlLine, lineFinderData.id));
-    // console.log(classScore(htmlLine, lineFinderData.classList));
-    // console.log(getInnerTextScore(htmlLine, lineFinderData.innerText));
+    // 
+    // 
+    // 
+    // 
     return Number(scoreStr);
 }
 function getInnerTextScore(htmlLine, innerText) {
@@ -98,7 +98,7 @@ function classScore(htmlStr, classList) {
         realClassArr = matchedGroup.split(" ");
     }
     catch (e) {
-        console.log(e);
+        
         return score;
     }
     classList.forEach((expectedClassName) => {

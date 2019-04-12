@@ -14,7 +14,7 @@ interface ILineSearchTextObj {
 //     lineReader.on('line', function (line:string) {
 //         let regex: RegExp = /class="(.*)"/g;
 //         let x = (<any>regex).exec(line)[1] as string;
-//         console.log(x);
+//         
 //         ++i;
 //     });
 // }

@@ -26,7 +26,7 @@ export async function inquirerInit() {
     }])).framework
   }
 
-  console.log('angularConfigDetails', angularConfigDetails);
+  
   /*if its angular project, detect or ask for component prefix*/
   if (angularConfigDetails) {
     let config:any = JSON.parse(fs.readFileSync(angularConfigDetails.path).toString());

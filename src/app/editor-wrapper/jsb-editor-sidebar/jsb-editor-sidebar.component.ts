@@ -5,6 +5,7 @@ import {ILocalConfig} from '../../interface';
 @Component({
   selector: 'jsb-editor-sidebar',
   template: `
+     
     <div class="editor-body-sidebar" (click)="action$.emit($event)">
       <div style="height:30px;" [title]="!isConnected? 'No connection':'Open in IDE'">
         <img *ngIf="!isLoading && isConnected"
@@ -16,12 +17,18 @@ import {ILocalConfig} from '../../interface';
       </div>
       
       <span [title]="!isConnected? 'No connection':'Search files'">
-        <i class="fa fa-search" [ngClass]="{'make-disable':!isConnected}"></i>
+        <img alt="warning logo" class="fa-image-svg fa-search" [src]="BACKEND_IMG_ROOT+ 'search.svg'"  [ngClass]="{'make-disable':!isConnected}"/>
       </span>
-      <i class="fa fa-repeat"></i>
-      <i class="fa fa-angle-double-right" title="Unfold code" *ngIf="shouldFoldCode"></i>
-      <i class="fa fa-angle-double-down" title="Fold code" *ngIf="!shouldFoldCode"></i>
-      <i class="fa fa-terminal" title="Log in console" *ngIf="activeHeaderTab === myEHeaderFormDataKeys.key"></i>
+      <img alt="warning logo" class="fa-image-svg fa-repeat" [src]="BACKEND_IMG_ROOT+ 'repeat.svg'" />
+      <img alt="warning logo" class="fa-image-svg fa-angle-double-right" [src]="BACKEND_IMG_ROOT+ 'angle-double-right.svg'" *ngIf="shouldFoldCode" />
+      <img alt="collapse" class="fa-image-svg fa-angle-double-down fa-angle-double-down" [src]="BACKEND_IMG_ROOT+ 'angle-double-down.svg'" title="Fold code" *ngIf="!shouldFoldCode"/>
+      <img alt="terminal" class="fa-image-svg fa-angle-double-down fa-terminal" [src]="BACKEND_IMG_ROOT+ 'terminal.svg'" title="Fold code"/>
+      <!--<i class="fa fa-angle-double-right" title="Unfold code" *ngIf="shouldFoldCode"></i>-->
+      <!--<img alt="warning logo" class="fa-image-svg fa-angle-double-right fa-angle-double-down" [src]="BACKEND_IMG_ROOT+ 'angle-double-right.svg'" title="Fold code" *ngIf="!shouldFoldCode"/>-->
+      <!--<i class="fa fa-angle-double-down" title="Fold code" *ngIf="!shouldFoldCode"></i>-->
+      <!--<i class="fa fa-terminal" title="Log in console" *ngIf="activeHeaderTab === myEHeaderFormDataKeys.key"></i>-->
+      <!--<img alt="expand" class="fa-image-svg fa-angle-double-down fa-angle-double-down" [src]="BACKEND_IMG_ROOT+ 'angle-double-down.svg'" title="Fold code" *ngIf="!shouldFoldCode"/>-->
+      <!--<i class="fa fa-terminal" title="Log in console" ></i>-->
       <!--<i class="fa fa-save" id="save-editor"></i>-->
     </div>
   `,
@@ -37,8 +44,10 @@ export class JsbEditorSidebarComponent implements OnInit {
   @Input() isLoading: boolean;
   @Input() isConnected: boolean;
 
-  vscodeImg = 'https://upload.wikimedia.org/wikipedia/commons/2/2d/Visual_Studio_Code_1.18_icon.svg';
-  webstormImg = 'https://seeklogo.com/images/W/webstorm-logo-691E749F21-seeklogo.com.png';
+  BACKEND_IMG_ROOT = 'http://localhost:11637/assets/imgs/';
+
+  vscodeImg = 'http://localhost:11637/assets/imgs/vscode.svg';
+  webstormImg = 'http://localhost:11637/assets/imgs/webstorm.png';
   right = true;
 
   constructor() {

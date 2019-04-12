@@ -13,7 +13,7 @@ const concat = require('concat');
 	try {
 		await fs.ensureDir('public/assets/js')
 	}catch (e) {
-		console.log("couldn't find files");
+		
 	}
 
 	await concat(files, 'public/assets/js/js-bubble.js')

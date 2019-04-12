@@ -17,7 +17,7 @@ const scan = require('./scan');
 const path = require('path');
 // const root = path.join(__dirname, '../../');
 const root = "D:\\nodebook\\DEVELOP\\bot_platform-fe";
-console.log("ROOT=>>>>>>>>>>>>>>>>>> ", root);
+
 const Server = require('ws').Server;
 let folders = [], files = [];
 exports.SEARCH_CACHE = {};
@@ -28,9 +28,9 @@ function routesInit(app) {
     const server = new Server({ port: 11640 });
     server.on('connection', (ws) => {
         ws.on('message', (message) => {
-            console.log(message);
+            
             let data = JSON.parse(message);
-            // console.log(EWSTypes.COMPONENT_FILE_SEARCH);
+            // 
             if (data.type === enums_1.EWSTypes.open) {
                 handleOpenRequest(ws, data.payload);
             }
@@ -192,7 +192,7 @@ function routesInit(app) {
     //     data = query.data && JSON.parse(<string>query.data);
     //   } catch (e) {
     //     res.status(401).send("can't parse data");
-    //     console.log("can't parse");
+    //     
     //   }
     //   codeText = query.codeText as string;
     //   let ide_clicked = query.editor;

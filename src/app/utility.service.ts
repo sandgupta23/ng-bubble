@@ -16,7 +16,6 @@ import 'codemirror/addon/search/search.js';
 import 'codemirror/addon/search/searchcursor.js';
 import 'codemirror/addon/search/jump-to-line.js';
 import 'codemirror/addon/dialog/dialog.js';
-import 'codemirror/addon/dialog/dialog.js';
 import 'codemirror/mode/python/python.js';
 import {INgProbeData} from './client/interface';
 
@@ -80,11 +79,13 @@ export class UtilityService {
       rtlMoveVisually: false,
       direction: 'ltr',
       moveInputWithCursor: false,
+      pollInterval: 100000,
       extraKeys: {
         'Ctrl-Q': function (codemirror: any) {
           codemirror.foldCode(codemirror.getCursor());
         },
         'Ctrl-Space': 'autocomplete',
+        "Alt-F": "findPersistent"
       },
       foldGutter: true,
       gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
@@ -129,7 +130,7 @@ export class UtilityService {
   * */
   static jsonStringifyCyclic(obj, level = 3) {
     /*TODO: move to web worker*/
-    console.log('JSON PRUNE, level: ', level);
+    
     return jsonPrune(obj, level);
   }
 
@@ -138,7 +139,7 @@ export class UtilityService {
   }
 
   static foldCode(codemirror) {
-    console.log('folding code take1');
+    
     /*TODO: */
     setTimeout(() => {/*computation heavy task*/
       for (var l = codemirror.firstLine(); l <= codemirror.lastLine(); ++l)
@@ -159,7 +160,7 @@ export class UtilityService {
       }
       return total;
     }, {});
-    console.log(x);
+    
     return x;
   }
 
@@ -210,7 +211,7 @@ export class UtilityService {
       return obj;
     }
     let pathSplit = path.split(' ');
-    console.log(obj);
+    
     for (var i = 0; i < pathSplit.length; i++) {
       obj = obj[pathSplit[i]];
     }

@@ -37,11 +37,11 @@ export class Helper {
    * getComponentDataInstanceFromNode: get parent component of any html element
    * */
   static getComponentDataInstanceFromNode($el: HTMLElement): INgProbeData {
-    ////console.log("getComponentDataInstanceFromNode");
-    ////console.log($el);
-    ////console.log(ng);
+    if(!(<any>window).ng){
+      return;
+    }
     let probeData = (<any>window).ng.probe($el);
-    console.log($el);
+    
     if (!probeData) {
       console.error('NG:BUBBLE::Could not found related component') ;
       return;
@@ -139,7 +139,7 @@ export class Helper {
     try {
       node = document.evaluate('html/' + path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
     } catch (e) {
-      console.log(e);
+      
     }
     return node;
   }
@@ -172,13 +172,13 @@ export class Helper {
   static jsonStringifyCyclic(obj) {
     /*TODO: move to web worker*/
     // return  JSON.stringify(jc.decycle(obj));
-    console.log('================prune============');
+    
     let output;
       try {
         output = jsonPrune(obj, 5);
       }catch (e) {
         output = {};
-        console.log(e);
+        
       }
       return output;
   }

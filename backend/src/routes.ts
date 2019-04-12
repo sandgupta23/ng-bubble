@@ -1,18 +1,19 @@
-import {Request, Response} from "express";
-import {exactMatchedFileIndex, getFileContent, openInIde, setFileContent} from "./utility";
-import {ILineFinderData, lineToOpen} from "./line-finder";
-import {getLocalConfig} from "./config";
-import {sendData} from "./ws";
-import {EIdeNames, EWSTypes} from "../enums";
-import {IFsItem, IWSData} from "../interfaces";
+import {Request, Response} from 'express';
+import {exactMatchedFileIndex, getFileContent, openInIde, setFileContent} from './utility';
+import {ILineFinderData, lineToOpen} from './line-finder';
+import {getLocalConfig} from './config';
+import {sendData} from './ws';
+import {EIdeNames, EWSTypes} from '../enums';
+import {IFsItem, IWSData} from '../interfaces';
 
 const scan = require('./scan');
 const path = require('path');
 // const root = path.join(__dirname, '../../');
-const root = "D:\\nodebook\\DEVELOP\\bot_platform-fe";
-console.log("ROOT=>>>>>>>>>>>>>>>>>> ", root);
-console.log("__dirname ", __dirname);
-console.log("process.cwd(); ", process.cwd());
+// const root = 'D:\\nodebook\\DEVELOP\\bot_platform-fe';
+const root = 'D:\\nodebook\\angular-prefix';
+console.log('root===>>', root);
+
+
 const Server = require('ws').Server;
 
 let folders: any[] = [], files: any = [];
@@ -29,10 +30,10 @@ export function routesInit(app: any) {
   server.on('connection', (ws: any) => {
     ws.on('message', (message: string) => {
 
-      console.log(message);
+
       let data: IWSData = JSON.parse(message);
 
-      // console.log(EWSTypes.COMPONENT_FILE_SEARCH);
+      //
       if (data.type === EWSTypes.open) {
         handleOpenRequest(ws, <ILineFinderData>data.payload);
       } else if (data.type === EWSTypes.SEARCH || data.type === EWSTypes.COMPONENT_FILE_SEARCH) {
@@ -54,7 +55,7 @@ export function routesInit(app: any) {
 
   let localConfig = getLocalConfig();
   let ide_user_input = localConfig && localConfig.preferredIde;
-  let tree = scan(root, "");
+  let tree = scan(root, '');
 
   app.get('/scan', function (req: Request, res: Response) {
     res.send(tree);
@@ -64,24 +65,26 @@ export function routesInit(app: any) {
 
   }
 
-  function searchData(data: any, searchTerms: string, exact:boolean) {
+  function searchData(data: any, searchTerms: string, exact: boolean) {
     /*TODO: make it a pure function*/
     for (let d of data) {
       if (d.type === 'folder') {
         searchData(d.items, searchTerms, exact);
-
-        if(exact){
+        if (exact) {
           if (d.name.toLowerCase().includes(searchTerms.toLowerCase())) {
             folders.push(d);
           }
-        }else {
+        } else {
           if (d.name.toLowerCase().match(searchTerms.toLowerCase())) {
             folders.push(d);
           }
         }
       } else if (d.type === 'file') {
         // if (d.name.toLowerCase().match(searchTerms)) {
-        if (d.name.replace(/\W/g, '').toLowerCase().includes(searchTerms.replace(/\W/g, '').toLowerCase())) {
+        // if (d.name.replace(/\W/g, '').toLowerCase().includes(searchTerms.replace(/\W/g, '').toLowerCase())) {
+        let target = searchTerms.toLowerCase().replace(/\W/g, '');
+        let mainStr = d.name.replace(/\W/g, '').toLowerCase();
+        if (mainStr.startsWith(target)) {
           files.push(d);
         }
       }
@@ -105,9 +108,9 @@ export function routesInit(app: any) {
       let searchTerm = payload.searchTerm; //.toLowerCase().replace('app-', '');
 
       let foundItems = SEARCH_CACHE[searchTerm] || searchData(tree.items, searchTerm);
-      if(!SEARCH_CACHE[searchTerm]) SEARCH_CACHE[searchTerm] = foundItems;
+      if (!SEARCH_CACHE[searchTerm]) SEARCH_CACHE[searchTerm] = foundItems;
       if (!(foundItems && foundItems.files && foundItems.files.length > 0)) {
-        sendData(ws, {error: 401, errorMessage: "ng-bubble: no matching file found", type: EWSTypes.open});
+        sendData(ws, {error: 401, errorMessage: 'ng-bubble: no matching file found', type: EWSTypes.open});
         return;
       }
       let exactMatchIndex = exactMatchedFileIndex(foundItems, searchTerm);
@@ -126,7 +129,7 @@ export function routesInit(app: any) {
   }
 
   async function handleOpenByPathRequest(ws: any, payload: ILineFinderData) {
-    await openInIde(payload.pathToOpen, payload.editor || ide_user_input, "");
+    await openInIde(payload.pathToOpen, payload.editor || ide_user_input, '');
     sendData(ws, {type: EWSTypes.openByPath, error: 200});
   }
 
@@ -145,7 +148,7 @@ export function routesInit(app: any) {
 
   async function handleReIndexRequest(ws: any) {
     // await openInIde(payload.pathToOpen, payload.editor || ide_user_input, "");
-    tree = scan(root, "");
+    tree = scan(root, '');
     setTimeout(() => {
       sendData(ws, {type: EWSTypes.ack, error: 200});
     }, 2000);
@@ -164,19 +167,19 @@ export function routesInit(app: any) {
         type: type,
         payload: {
           files: foundItems.files,
-          file: "",
-          tagName: "",
-          targetTagName: "",
-          innerText: "",
-          id: "",
+          file: '',
+          tagName: '',
+          targetTagName: '',
+          innerText: '',
+          id: '',
           classList: [],
-          codeText: "",
+          codeText: '',
           editor: EIdeNames.WEBSTORM,
           exact: false,
-          path: "",
-          pathToOpen: "",
-          searchTerm: "",
-          ext: ""
+          path: '',
+          pathToOpen: '',
+          searchTerm: '',
+          ext: ''
 
         }
       });
@@ -197,7 +200,7 @@ export function routesInit(app: any) {
   //     data = query.data && JSON.parse(<string>query.data);
   //   } catch (e) {
   //     res.status(401).send("can't parse data");
-  //     console.log("can't parse");
+  //
   //   }
   //   codeText = query.codeText as string;
   //   let ide_clicked = query.editor;

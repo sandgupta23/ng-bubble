@@ -85,10 +85,10 @@ function getScore(htmlLine: string, lineFinderData: ILineFinderData) {
     + ""
     + classScore(htmlLine, lineFinderData.classList);
 
-  // console.log(tagScore(htmlLine, lineFinderData.targetTagName));
-  // console.log(idScore(htmlLine, lineFinderData.id));
-  // console.log(classScore(htmlLine, lineFinderData.classList));
-  // console.log(getInnerTextScore(htmlLine, lineFinderData.innerText));
+  // 
+  // 
+  // 
+  // 
   return Number(scoreStr);
 }
 
@@ -132,7 +132,7 @@ function classScore(htmlStr: string, classList: string[]) {
     if (!matchedGroup) return score;
     realClassArr = matchedGroup.split(" ");
   } catch (e) {
-    console.log(e);
+    
     return score;
   }
   classList.forEach((expectedClassName) => {
@@ -140,4 +140,17 @@ function classScore(htmlStr: string, classList: string[]) {
     if (classFound) ++score;
   });
   return score;
+}
+
+let address  = {
+  country :{
+    name:'Japan',
+    city:{
+      name:'Tokyo',
+      town: {
+        name:'korushawa'
+      }
+    }
+  },
+  nearbyCountry:'Korea'
 }

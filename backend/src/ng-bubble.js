@@ -38,13 +38,13 @@ let options = program.ask;
 let ide_user_input = program.ide || 'vscode';
 if (!(ctrl === 'y' || ctrl === 'yes' || ctrl === 'n' || ctrl === 'no')) {
     // throw "ctrl can only have: y, yes, n, no";
-    console.log("ERROR: ctrl can only have: y, yes, n, no");
+    
     throw "error"; //todo
 }
 ctrl = ctrl === 'y' || ctrl === 'yes';
 let app = express();
 app.use(cors());
-console.log(path.join(__dirname, '/../../', 'public'));
+
 app.use('/', express.static(path.join(__dirname, '/../../', 'public')));
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, '/../../', 'public', 'assets', 'index.html'));
@@ -54,7 +54,7 @@ function beginInquirer() {
         // if (!localConfig.inputTaken || program.ask) {
         if (true) {
             let inquirerOutput = yield inquirer_1.inquirerInit();
-            console.log(inquirerOutput);
+            
             // let preferredIde: string = inquirerOutput.ide;
             // let guess: boolean = inquirerOutput.guess === 'Yes';
             // let ctrl: boolean = inquirerOutput.ctrl === 'Ctrl + Double click';
@@ -70,13 +70,13 @@ function beginInquirer() {
             //
             // };
             yield config_1.updateLocalConfig(newLocalConfigData);
-            console.log("Thanks. If in future you want to change these options, run: ng-bubble --ask");
+            
             routes_1.routesInit(app);
         }
         else {
-            console.log(`Your configurations are as follows. To change run ng-bubble --ask.`);
+            
             let { preferredIde, guess, componentSelector, ctrl } = localConfig;
-            console.log({ preferredIde, guess, componentSelector });
+            
             routes_1.routesInit(app);
         }
         utility_1.runAppOnFreePort(app, port, ctrl);

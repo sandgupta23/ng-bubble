@@ -33,6 +33,7 @@ export class EditorHeaderComponent implements OnInit {
   @Output() action$ = new EventEmitter();
   @Output() path$ = new EventEmitter();
   myEHeaderFormDataKeys = EHeaderFormDataKeys;
+  BACKEND_IMG_ROOT = 'http://localhost:11637/assets/imgs/';
   constructor(private changeDetectorRef:ChangeDetectorRef) { };
 
   ngOnInit() {
@@ -46,7 +47,7 @@ export class EditorHeaderComponent implements OnInit {
     this.changeDetectorRef.detectChanges();
   }
   log(){
-      //console.log(this.headerForm);
+      //
   }
 
   sendPath(index){

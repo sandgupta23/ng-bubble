@@ -54,7 +54,7 @@ export function createConfigJSonFileIfNotPresent() {
 }
 
 export function getLocalConfigFilePath() {
-  // console.log("local config path :", path.join(process.cwd(), 'ng-bubble-local.json') );
+  //
   return path.join(process.cwd(), '.ng-bubble-local');
 }
 
@@ -66,7 +66,7 @@ export async function runAppOnFreePort(app: any, port: number, ctrl: boolean) {
 
   // let inUse = await tcpPortUsed.check(port, '127.0.0.1');
   // while (inUse) {
-  //   console.log(`Port ${port} is in use, trying ${port + 1}`);
+  //
     // inUse = await tcpPortUsed.check(++port, '127.0.0.1');
   // }
   writeTemplate(port, ctrl);
@@ -93,7 +93,7 @@ export async function getFileContent(path: string) {
     fileContent = await readFile(path);
     return fileContent.toString();
   } catch (e) {
-    console.log(e);
+
   }
   return fileContent;
 }
@@ -103,7 +103,7 @@ export async function setFileContent(path: string, data: string) {
   try {
     return await writeFile(path, data);
   } catch (e) {
-    console.log(e);
+
   }
   return null;
 }
@@ -124,7 +124,7 @@ export function areTwoSetsEqual(a: Set<any>, b: Set<any>) {
 }
 
 export function getAngular2Prefix(config:any){
-  console.log(config.apps);
+
   return config.apps[0].prefix;
 }
 export function getAngular5Projects(config:any){

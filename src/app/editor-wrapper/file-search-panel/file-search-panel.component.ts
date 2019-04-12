@@ -27,7 +27,7 @@ export class FileSearchPanelComponent implements OnInit, OnDestroy {
   searchForm: FormGroup;
   selectedRow = 0;
   searchResultsFinishSub:Subscription;
-
+  BACKEND_IMG_ROOT = 'http://localhost:11637/assets/imgs/';
   constructor(private utilityService: UtilityService, private changeDetectorRef:ChangeDetectorRef) {}
 
 
@@ -76,7 +76,7 @@ export class FileSearchPanelComponent implements OnInit, OnDestroy {
     try {
       this.searchResultsFinishSub.unsubscribe();
     }catch (e) {
-      console.log(e);
+
     }
   }
 

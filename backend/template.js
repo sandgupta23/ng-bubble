@@ -20,7 +20,7 @@ function sendNgTag(tag) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            //console.log("success");
+            //
         }
     };
     xhttp.open("GET", \`http://localhost:${port}/open?file=\${tag}\`, true);

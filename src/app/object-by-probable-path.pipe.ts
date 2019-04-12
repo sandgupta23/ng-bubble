@@ -7,7 +7,6 @@ import {tap} from 'rxjs/operators';
 export class ObjectByProbablePathPipe implements PipeTransform {
 
   transform(object: object, path?: any): any {
-    debugger;
     if(!path || !path.trim()){
       return object;
     }

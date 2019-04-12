@@ -37,7 +37,7 @@
 // let ide = program.ide || 'vscode';
 // if (!(ctrl === 'y' || ctrl === 'yes' || ctrl === 'n' || ctrl === 'no')) {
 //     // throw "ctrl can only have: y, yes, n, no";
-//     console.log("ERROR: ctrl can only have: y, yes, n, no");
+//     
 //     return;
 // }
 // ctrl = ctrl === 'y' || ctrl === 'yes';
@@ -49,7 +49,7 @@
 // let root = process.cwd();
 // // let tree = scan('.', root);
 // let tree = scan(root, "");
-// // console.log(tree);
+// // 
 //
 //
 // // Ceate a new express app
@@ -147,7 +147,7 @@
 // }
 //
 // async function openInIde(path, editor) {
-//     console.log("opening file:",  path);
+//     
 //     let ideCmd, currentIde;
 //     currentIde = editor ? editor : ide;
 //     ideCmd = currentIde === 'ws' || currentIde === 'webstorm'? 'webstorm.exe': 'code -r';
@@ -176,14 +176,14 @@
 //
 //     let inUse = await tcpPortUsed.check(port, '127.0.0.1');
 //     while (inUse) {
-//         console.log(`Port ${port} is in use, trying ${port + 1}`);
+//         
 //         inUse = await tcpPortUsed.check(++port, '127.0.0.1');
 //     }
 //     writeTemplate(port, ctrl);
 //     app.listen(port, function () {
-//         console.log('ng-bubble is Running on port ' + port);
-//         console.log("Please make sure to add following script into your index.html");
-//         console.log(`
+//         
+//         
+//         
 //         <script async src="http://localhost:${port}/assets/js/client.js"></script>
 //     `)
 //     });

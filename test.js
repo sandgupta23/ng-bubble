@@ -16,7 +16,7 @@
 // // lineReader.on('line', function (line) {
 // //     let regex = /class="(.*)"/g;
 // //     let x = regex.exec(line)[1];
-// //     console.log(x);
+// //     
 // //     ++i;
 // // });
 //
@@ -49,14 +49,14 @@
 // //     tagName:"div",
 // //     classList : ["kumar", "gupta"]
 // // };
-// // console.log(getScore(htmlLine, data));
+// // 
 //
 //
 // function getScore(htmlLine, htmlData) {
 //     let scoreStr = tagScore(htmlLine, htmlData.tagName) + "" + idScore(htmlLine, htmlData.id) + "" + classScore(htmlLine, htmlData.classList);
-//     console.log(tagScore(htmlLine, htmlData.tagName));
-//     console.log(idScore(htmlLine, htmlData.id));
-//     console.log(classScore(htmlLine, htmlData.classList));
+//     
+//     
+//     
 //     return Number(scoreStr);
 // }
 //

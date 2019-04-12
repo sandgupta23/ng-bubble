@@ -24,7 +24,7 @@ export class JsConsoleComponent implements OnInit {
   executeCode(){
     // let x = eval(this.codeContent.nativeElement.textContent);
     let x =  eval("function hello(){}");
-    console.log(x);
+    
     this.results.push(x);
     this.codeContent.nativeElement.textContent = "";
   }

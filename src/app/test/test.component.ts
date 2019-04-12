@@ -14,7 +14,7 @@ export class TestComponent implements OnInit {
   }
 
   hello(){
-    //console.log("great!");
+    //
   }
 
 }

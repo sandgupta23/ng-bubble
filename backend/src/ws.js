@@ -6,7 +6,7 @@ function sendData(ws, data) {
         parsedData = JSON.stringify(data);
     }
     catch (e) {
-        console.log(e);
+        
     }
     ws.send(parsedData);
 }

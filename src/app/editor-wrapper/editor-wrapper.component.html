@@ -1,3 +1,5 @@
+<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">-->
+<i class="fa fa-search"></i>
 <!--TODO: click-->
 <jsb-menu *ngIf="showTooltip"
           [coords]="_coords"
@@ -10,7 +12,7 @@
      *ngIf="!minimize"
      (dblclick)="$event.stopPropagation()"
      (click)="hideSearchPanel()"
-     (scroll)="$event.stopPropagation()"
+     (scroll)="$event.stopPropagation()" (wheel)="$event.stopPropagation()"
      [ngStyle]="{'top': top,left:left, right:right, bottom:bottom}">
 
   <!--START:Input-->
@@ -18,6 +20,7 @@
         <input type="text"
                class="ngb-input"
                [(ngModel)]="keySearchKeyword" (ngModelChange)="test()">
+        <img alt="warning logo" class="fa-image-svg" style="margin: 0" [src]="BACKEND_IMG_ROOT+ 'search.svg'"/>
       </span>
   <!--START: Input-->
 
@@ -49,7 +52,7 @@
          mwlResizable
          class="no-scroll-bar"
          [enableGhostResize]="true"
-         [resizeEdges]="{bottom: true, right: true, top: true, left: true}"
+         [resizeEdges]="{right: true}"
          (resizeEnd)="onResizeEnd($event, editorLeft, editorRight, editorWrapperBody)"
          [resizeCursorPrecision]="5"
          style="display: flex; width: 50%">
@@ -58,7 +61,7 @@
         style="flex-grow: 1"
         [level]="headerFormData.key==='All'?3:6"
         [codeText]="fileData"
-        [shouldFoldCode]="shouldFoldCode"></jsb-editor>
+        [shouldFoldCode]="false"></jsb-editor>
       <div class="resizer-bar">
         <i class="fa fa-ellipsis-v"></i>
       </div>
@@ -66,14 +69,14 @@
     <!--END: left editor-->
 
     <!--START: right editor/json-viewer-->
-    <div #editorRight style="background-color: #0a001f;overflow-y: scroll;width: 50%;">
+    <div #editorRight style="background-color: #0a001f;width: 50%;">
       <ngx-json-viewer
         *ngIf="!headerForm.get('editorMode').value"
         class="jsb-json-viewer" (click)="test()" [json]="codeData|objectByProbablePath:keySearchKeyword" [expanded]="!shouldFoldCode"></ngx-json-viewer>
       <jsb-editor *ngIf="headerForm.get('editorMode').value"
                   [level]="headerFormData.key==='All'?6:6"
                   [codeText]="codeData|objectByProbablePath:keySearchKeyword"
-                  [shouldFoldCode]="shouldFoldCode"></jsb-editor>
+                  [shouldFoldCode]="false"></jsb-editor>
     </div>
     <!--END: right editor/json-viewer-->
 

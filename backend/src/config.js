@@ -34,7 +34,7 @@ function getLocalConfig() {
             return JSON.parse(data);
         }
         catch (e) {
-            console.log(e);
+            
         }
     }
     return {};
@@ -45,7 +45,7 @@ function updateLocalConfig(newLocalConfigData) {
         let oldLocalConfigData = yield getLocalConfig();
         let newData = Object.assign({}, oldLocalConfigData, newLocalConfigData);
         let localConfigPath = utility_1.getLocalConfigFilePath();
-        console.log(localConfigPath, newLocalConfigData);
+        
         return yield writeFileAsync(localConfigPath, JSON.stringify(newData));
     });
 }
@@ -58,7 +58,7 @@ function getGlobalConfig() {
             return JSON.parse(data);
         }
         catch (e) {
-            console.log(e);
+            
         }
     }
     return {};

@@ -10,7 +10,7 @@ export class ClientService {
   private static readonly $editorEl: Element = document.getElementsByTagName('js-bubble')[0];
   private static isConnected = false;
   static init = function () {
-    console.log('ClientService init');
+    
     NgBubbleSocket.init(
       ClientService.websocketInitCB,
       ClientService.websocketOnMessageCB,
@@ -70,7 +70,7 @@ export class ClientService {
       }
 
     } catch (e) {
-      console.log(e, key, value);
+      
     }
   }
 
@@ -80,13 +80,13 @@ export class ClientService {
       let key = event.detail.key;
       let clone = event.detail.clone;
       if (!NgBubbleDom.selectedComponent) {
-        //console.log('NG:BUBBLE:: IMPORTANT! This is a clone. Please select a component to get the real reference', clone);
+        //
         return;
       }
       if (!key || key == 'All') {
-        //console.log('NG:BUBBLE:: ', selectedComponent);
+        //
       } else {
-        //console.log('NG:BUBBLE:: ', selectedComponent[key]);
+        //
       }
     });
 
@@ -169,7 +169,7 @@ export class ClientService {
           ClientService.sendMessageToServer({type: EWSTypes.COMPONENT_FILE_SEARCH, payload});
         }
       } else {
-        //console.log('NG-BUBBLE:: COULDNT FIND COMPONENT');
+        //
       }
 
     });
@@ -178,15 +178,15 @@ export class ClientService {
     * mouseover: will be triggered when any element on the host application will be hovered.
     * The purpose here is to shouldFoldCode the menu, by finding the component parent
     * */
-    console.log('before: mouseover');
+    
     document.addEventListener('mouseover', ($event) => {
       if (!$event.shiftKey) {
         return;
       }
-      console.log($event);
+      
 
       let target = $event.target as HTMLElement;
-      ////console.log(target);
+      ////
       let $component: HTMLElement = Helper.getComponentDataInstanceFromNode(<HTMLElement>$event.target).componentNode;
       NgBubbleDom.$hoveredComponent = $component;
       if (!$component) return;
@@ -202,7 +202,7 @@ export class ClientService {
         componentName: Helper.getComponentDataInstanceFromNode($component).componentInstance.constructor.name,
         tagName: $component.tagName
       };
-      ////console.log(x);
+      ////
       return ClientService.setEditorAttribute(EEditorInput.coords, x);
     });
   }

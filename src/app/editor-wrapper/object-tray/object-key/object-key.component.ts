@@ -35,7 +35,7 @@ export class ObjectKeyComponent implements OnInit {
   }
 
   test(key:string){
-    // console.log(key + this.key);
+    // 
 
     // return key + this.key;
     this.pin$.emit(this.key + " " + key);
@@ -43,7 +43,7 @@ export class ObjectKeyComponent implements OnInit {
 
   trigger(key, $event){
     this.pin$.emit(key);
-    // console.log(key);
+    // 
     $event.stopPropagation();
   }
 

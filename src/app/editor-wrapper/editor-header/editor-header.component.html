@@ -10,12 +10,18 @@
   </ng-container>
 
   <span style="margin-left: auto"></span>
-  <label class="switch" style="margin-right: 10px">
+  <label class="switch">
     <input type="checkbox" checked formControlName="editorMode">
     <span class="slider round"></span>
   </label>
-  <i id="window-maximize" style="transform: rotate(90deg); margin-right: 10px" class="fa fa-expand" *ngIf="!expand"></i>
-  <i class="fa fa-compress" style="transform: rotate(90deg);margin-right: 10px" *ngIf="expand"></i>
-  <i id="window-minimize" *ngIf="!minimize" class=" fa fa-window-minimize"></i>
-  <i *ngIf="minimize" class="fa fa-window-maximize"></i>
+  <!--<i id="window-maximize" style="transform: rotate(90deg); margin-right: 10px" class="fa fa-expand" *ngIf="!expand"></i>-->
+
+  <!--<i id="window-maximize" style="transform: rotate(90deg); margin-right: 10px" class="fa fa-expand" *ngIf="!expand"></i>-->
+  <img alt="minimize" class="fa-image-svg fa-compress" [src]="BACKEND_IMG_ROOT+ 'compress.svg'" title="Minimize" *ngIf="expand" style="margin: 0px 10px"/>
+  <img alt="minimize" class="fa-image-svg fa-expand" [src]="BACKEND_IMG_ROOT+ 'expand.svg'" title="Minimize" *ngIf="!expand" style="margin: 0px 10px"/>
+  <img alt="minimize" class="fa-image-svg fa-window-minimize" [src]="BACKEND_IMG_ROOT+ 'window-minimize.svg'" title="Minimize" *ngIf="!minimize"/>
+  <!--<i class="fa fa-compress" style="transform: rotate(90deg);margin-right: 10px" *ngIf="expand"></i>-->
+  <!--<i id="window-minimize" *ngIf="!minimize" class=" fa fa-window-minimize"></i>-->
+  <!--<i *ngIf="minimize" class="fa fa-window-maximize"></i>-->
 </form>
+

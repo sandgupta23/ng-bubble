@@ -8,7 +8,7 @@ export class NgBubbleSocket {
       initCB(event);
     };
     socket.onclose = function (event) {
-      ////console.log(event);
+      ////
       setTimeout(() => {
         // location.reload();
       }, 5000);/*TODO: a better way of doing this?*/
@@ -24,7 +24,7 @@ export class NgBubbleSocket {
 
 
   static sendMessage(data: IWSData) {
-    console.log("sendMessage: sending data:", data);
+    
     try {
       this.socket.send(JSON.stringify(data));
     }catch (e) {

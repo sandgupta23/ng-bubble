@@ -1,5 +1,8 @@
 //@import "../node_modules/codemirror/lib/codemirror.css"; TODO: this import throws error
 
+//$fa-font-path: "/../node_modules/font-awesome/fonts";
+//@import "/../node_modules/font-awesome/scss/font-awesome.scss";
+//
 $z-too-high:10000000000000000; /*its over 9000!!!*/
 $z-editor-wrapper:1;
 $z-resizer-bar:3;
@@ -81,18 +84,26 @@ $color-object-trey-values: rgb(111, 179, 210);
 //}
 
 
-.ngb-input-search:before {
-  content: "\f002";
-  font-family: FontAwesome;
-  font-style: normal;
-  font-weight: normal;
-  text-decoration: inherit;
-  color: #ffffff9e;
-  font-size: 15px;
-  padding-right: 0.5em;
+.ngb-input-search img {
+  //content: "\f002";
+  //font-family: FontAwesome;
+  //font-style: normal;
+  //font-weight: normal;
+  //text-decoration: inherit;
+  //color: #ffffff9e;
+  //font-size: 15px;
+  //padding-right: 0.5em;
   position: absolute;
   top: 50%;
   left: 10px;
-  transform: translateY(-40%);
-  box-shadow: 0 0 black;
+  transform: translateY(-30%);
+  //box-shadow: 0 0 black;
 }
+
+.fa-image-svg{
+  height: 14px;
+  width: 14px;
+  margin-top: 16px;
+  cursor: pointer;
+}
+

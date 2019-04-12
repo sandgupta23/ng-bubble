@@ -27,11 +27,11 @@ export class AppComponent implements DoCheck{
   };
 
   constructor() {
-    console.log(this);
+    
   }
 
   ngDoCheck(): void {
-    console.log(this);
+    
   }
 
 

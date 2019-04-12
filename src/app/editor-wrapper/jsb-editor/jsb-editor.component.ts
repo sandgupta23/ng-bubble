@@ -29,7 +29,7 @@ export class JsbEditorComponent implements OnInit, AfterViewInit {
     try {
       output=  typeof val === 'function' || typeof val === 'object' ? JSON.stringify(JSON.parse(UtilityService.jsonStringifyCyclic(val, this.level)),null, '\t') : val;//val.toString();
     }catch (e) {
-      console.log('custom error:stringifyInput ', val, output);
+
     }
     return output;
   }
@@ -46,9 +46,9 @@ export class JsbEditorComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     EventService.foldCodeInCodemirror$.subscribe((shouldFoldCode)=>{
       if(shouldFoldCode){
-        UtilityService.foldCode(this.codemirror);
+        // UtilityService.foldCode(this.codemirror);
       }else {
-        UtilityService.unfoldCode(this.codemirror);
+        // UtilityService.unfoldCode(this.codemirror);
       }
     })
   }
@@ -58,9 +58,9 @@ export class JsbEditorComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.codemirror = UtilityService.codeMirrorInit(editorTextArea);
 
-      console.log(this.codemirror);
+
       this._codeText = this.stringifyInput(this._codeText, this.level);
-      // console.log(this._codeText);
+      //
       this.setValueInCodeMirror(this.codemirror, this._codeText);
     });
   }
@@ -68,7 +68,7 @@ export class JsbEditorComponent implements OnInit, AfterViewInit {
   @Input() shouldFoldCode = true;
 
   setValueInCodeMirror(codemirror, codeText: string) {
-    console.log("setValueInCodeMirror");
+
     if (!codemirror) {
       // codemirror.setValue('undefined value');
       return;
@@ -77,14 +77,14 @@ export class JsbEditorComponent implements OnInit, AfterViewInit {
     codemirror.operation(() => {
       setTimeout(()=>{
 
-        if (this.shouldFoldCode) UtilityService.foldCode(codemirror);
+        // if (this.shouldFoldCode) UtilityService.foldCode(codemirror);
       })
     });
   }
 
 
   unfoldCode(codemirror){
-    UtilityService.unfoldCode(codemirror);
+    // UtilityService.unfoldCode(codemirror);
   }
 
 }
