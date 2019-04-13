@@ -1,5 +1,7 @@
 # ng-bubble
 
+[![N|Solid](https://github.com/goodmite/ng-bubble/blob/master/final_5cb1a092030dcd0014ea1259_949617.gif?raw=true)](https://github.com/goodmite/ng-bubble/blob/master/final_5cb1a092030dcd0014ea1259_949617.gif?raw=true)
+
 ##  What is this?
 ng-bubble is a webcomponent that lives in your angular project (via index.html) and help you with debugging and stuff.
 
