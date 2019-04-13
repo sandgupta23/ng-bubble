@@ -24,4 +24,15 @@ Motivations behind ng-bubble are two-fold:
 
 # Video introduction
   [Youtube link](https://www.youtube.com/watch?v=ir5sYS9PyLM&feature=youtu.b)
+  
+  
+  ## Features (Current and Upcoming):
+	1. Navigating from component in website to component in IDE (Done in v0.1)
+	2. Display component files (for code review etc.) (Done in v0.2)
+	3. Display component state (Done in v0.2)
+	4. Search project file (Done in v0.2)
+	5. Saving edits in component files (Planned for v0.3)
+	6. Display component state (realtime) (Planned for v0.3)
+	7. Component method hooks (Planned for v0.4)
+
 
