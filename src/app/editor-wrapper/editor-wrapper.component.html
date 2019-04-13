@@ -11,7 +11,7 @@
 <div class="jsb-editor-wrapper"
      *ngIf="!minimize"
      (dblclick)="$event.stopPropagation()"
-     (click)="hideSearchPanel()"
+     (click)="hideSearchPanel(); $event.stopPropagation()"
      (scroll)="$event.stopPropagation()" (wheel)="$event.stopPropagation()"
      [ngStyle]="{'top': top,left:left, right:right, bottom:bottom}">
 

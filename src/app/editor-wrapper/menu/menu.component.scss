@@ -11,9 +11,13 @@
 
   .menu-wrapper__title {
     display: flex;
+    align-items: center;
     padding: 1px 3px;
     background-color: $color-pitch-black;
     font-size: 9px !important;
+    span{
+      margin-right: 4px;
+    }
   }
 
   .menu {

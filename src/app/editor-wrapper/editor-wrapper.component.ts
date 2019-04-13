@@ -73,7 +73,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
       this.path = '';
     }
     //.constructor.prototype.ngDoCheck
-    this.addDoCheckHook(ngProbeData.componentInstance);
+    // this.addDoCheckHook(ngProbeData.componentInstance);/*TODO: Don't delete */
 
     let activeComponentKey = this.headerForm.value['key'];
     this.keyOptions = ['All', ...Object.keys(this.componentObj)];
@@ -104,6 +104,10 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     EventService.searchResultsFinish$.emit(val);
   };
 
+  @Input() showTooltipAttr =  (val: boolean) => {
+    this.showTooltip = val;
+    this.changeDetectorRef.detectChanges();
+  }
   @Input() filecontent = (val: string) => {
 
     this.fileData = val;
@@ -111,7 +115,6 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     this.changeDetectorRef.detectChanges();
   };
 
-  _config;
 
   @Input() config  =  (val) => {
     this._config = val;
@@ -120,6 +123,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   }
   @ViewChild(JsbEditorComponent) appEditorComponent: JsbEditorComponent;
   @ViewChildren('menu') menu: QueryList<any>;
+  _config;
 
   minimize = false;
   expand = false;

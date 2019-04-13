@@ -1,6 +1,6 @@
 {
   "name": "ng-bubble",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "scripts": {
     "ng": "ng",
     "start": "node lib/backend/src/ng-bubble.js",
@@ -15,7 +15,6 @@
     "name": "Sandeep Gupta",
     "email": "sandeepkgupta007@gmail.com"
   },
-  "private": true,
   "keywords": [
     "angular",
     "ng",

@@ -51,6 +51,7 @@ export enum EEditorInput {
   filecontent = 'filecontent',
   config = 'config',
   componentstr = 'componentstr',
+  showTooltipAttr= 'showTooltipAttr',
   searchfiles = 'searchfiles',
   coords = 'coords',
   status = 'status',

@@ -10,7 +10,7 @@ export class ClientService {
   private static readonly $editorEl: Element = document.getElementsByTagName('js-bubble')[0];
   private static isConnected = false;
   static init = function () {
-    
+
     NgBubbleSocket.init(
       ClientService.websocketInitCB,
       ClientService.websocketOnMessageCB,
@@ -70,7 +70,7 @@ export class ClientService {
       }
 
     } catch (e) {
-      
+
     }
   }
 
@@ -144,6 +144,9 @@ export class ClientService {
 
     });
 
+    document.addEventListener('click', ($event) => {
+      ClientService.setEditorAttribute(EEditorInput.showTooltipAttr, false);
+    });
     document.addEventListener('dblclick', ($event) => {
       let target = $event.target as HTMLElement;
       let ngProbeData = Helper.getComponentDataInstanceFromNode(target);
@@ -178,12 +181,12 @@ export class ClientService {
     * mouseover: will be triggered when any element on the host application will be hovered.
     * The purpose here is to shouldFoldCode the menu, by finding the component parent
     * */
-    
+
     document.addEventListener('mouseover', ($event) => {
       if (!$event.shiftKey) {
         return;
       }
-      
+
 
       let target = $event.target as HTMLElement;
       ////

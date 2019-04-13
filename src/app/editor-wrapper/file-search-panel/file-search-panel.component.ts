@@ -3,7 +3,6 @@ import {UtilityService} from '../../utility.service';
 import {FormGroup} from '@angular/forms';
 import {EventService} from '../../event.service';
 import {Subscription} from 'rxjs';
-import {file} from '../../../../node_modules1/@babel/types/lib';
 
 export interface IFileData {
   'name': string,
