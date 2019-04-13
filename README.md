@@ -7,10 +7,8 @@ ng-bubble is a webcomponent that lives in your angular project (via index.html) 
 
 ## Motivation
 Motivations behind ng-bubble are two-fold:
-  - **"Automating" trivial tasks** : When my junior joined our frontend team, he struggled to find right component code in IDE (among 1000+ files) for a section of website. He said:
-    >There should be a tool which takes me to component file when I double click on component in website.
+  - **"Automating" trivial tasks** : When my junior joined our frontend team, he struggled to find right component code in IDE (among 1000+ files) for a section of website. I realized that there should be a way to navigate from component in website to component file in IDE.
   - **Making ng-bubble single point of reference for debugging**: We love debugging with ```console.log```, `debugger` and `network tab` as well. But these tools are slow and have very strict behaviour. *What if you need to replay same ajax request with different params? How do you hook into change Angular change detection? How do you see state of a component?*
-
 
 ## Usage
 1. Install with npm: `npm install -g ng-bubble`
