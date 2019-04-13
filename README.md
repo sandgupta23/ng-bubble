@@ -1,27 +1,38 @@
-# NgBubbleElements
+# ng-bubble
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.3.
+[![N|Solid](https://github.com/goodmite/ng-bubble/blob/master/final_5cb1a092030dcd0014ea1259_949617.gif?raw=true)](https://github.com/goodmite/ng-bubble/blob/master/final_5cb1a092030dcd0014ea1259_949617.gif?raw=true)
 
-## Development server
+##  What is this?
+ng-bubble is a webcomponent that lives in your angular project (via index.html) and help you with debugging and stuff.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Motivation
+Motivations behind ng-bubble are two-fold:
+  - **"Automating" trivial tasks** : When my junior joined our frontend team, he struggled to find right component code in IDE (among 1000+ files) for a section of website. I realized that there should be a way to navigate from component in website to component file in IDE.
+  - **Making ng-bubble single point of reference for debugging**: We love debugging with ```console.log```, `debugger` and `network tab` as well. But these tools are slow and have very strict behaviour. *What if you need to replay same ajax request with different params? How do you hook into change Angular change detection? How do you see state of a component?*
 
-## Code scaffolding
+## Usage
+1. Install with npm: `npm install -g ng-bubble`
+2. Open your angular project in *VScode* or *Webstorm*.
+3. Run this command at the root of your project: `ng-bubble`
+4. Above command will give you a script, copy and paste that in `<body>` your **index.html**
+   ```
+   //paste this in body tag your index.html 
+   <js-bubble></js-bubble>
+   <script src="http://localhost:11637/assets/js/js-bubble.js"></script>
+    ```
+5. Run your angular project in another terminal (ex: ng serve)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Video introduction
+  [Youtube link](https://www.youtube.com/watch?v=ir5sYS9PyLM&feature=youtu.b)
+  
+  
+  ## Features (Current and Upcoming):
+	1. Navigating from component in website to component in IDE (Done in v0.1)
+	2. Display component files (for code review etc.) (Done in v0.2)
+	3. Display component state (Done in v0.2)
+	4. Search project file (Done in v0.2)
+	5. Saving edits in component files (Planned for v0.3)
+	6. Display component state (realtime) (Planned for v0.3)
+	7. Component method hooks (Planned for v0.4)
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
