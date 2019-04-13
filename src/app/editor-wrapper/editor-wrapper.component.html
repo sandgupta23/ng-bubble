@@ -40,7 +40,7 @@
 
     <!--START: side bar-->
     <jsb-editor-sidebar (action$)="sidebarActionHandler($event)"
-                        [config]="config"
+                        [config]="_config"
                         [isLoading]="isLoading"
                         [isConnected]="_status?.connection"
                         [shouldFoldCode]="shouldFoldCode"
@@ -69,7 +69,7 @@
     <!--END: left editor-->
 
     <!--START: right editor/json-viewer-->
-    <div #editorRight style="background-color: #0a001f;width: 50%;">
+    <div #editorRight style="background-color: #0a001f;width: 50%; overflow-y: scroll">
       <ngx-json-viewer
         *ngIf="!headerForm.get('editorMode').value"
         class="jsb-json-viewer" (click)="test()" [json]="codeData|objectByProbablePath:keySearchKeyword" [expanded]="!shouldFoldCode"></ngx-json-viewer>

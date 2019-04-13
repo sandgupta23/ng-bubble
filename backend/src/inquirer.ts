@@ -26,7 +26,7 @@ export async function inquirerInit() {
     }])).framework
   }
 
-  
+
   /*if its angular project, detect or ask for component prefix*/
   if (angularConfigDetails) {
     let config:any = JSON.parse(fs.readFileSync(angularConfigDetails.path).toString());
@@ -55,8 +55,8 @@ export async function inquirerInit() {
 
 
   /*try to figure out IDE else prompt if not sure*/
-  let isVscode = checkIfVscode();
-  let isWebstorm = checkIfWebstorm();
+  let isVscode = false;//checkIfVscode();
+  let isWebstorm = false;//checkIfWebstorm();
   if (isVscode && isWebstorm || (!isVscode && !isWebstorm)) {
     answerObj.preferredIde =  (await inquirer.prompt([{
       type: 'list',

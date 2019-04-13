@@ -8,9 +8,10 @@ import {IFsItem, IWSData} from '../interfaces';
 
 const scan = require('./scan');
 const path = require('path');
+const  root = process.cwd();
 // const root = path.join(__dirname, '../../');
 // const root = 'D:\\nodebook\\DEVELOP\\bot_platform-fe';
-const root = 'D:\\nodebook\\angular-prefix';
+// const root = 'D:\\nodebook\\angular-prefix';
 console.log('root===>>', root);
 
 

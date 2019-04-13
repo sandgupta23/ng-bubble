@@ -46,13 +46,14 @@ $color-object-trey-values: rgb(111, 179, 210);
 }
 
 .ngb-input{
-  height: 30px; width: 100%;
+  //height: 30px;
+  width: 100%;
   outline: none;
   border: 1px solid transparent;
   font-size: 11px;
   color: white;
   padding-left: 30px;
-  background-color: rgba(60, 60, 60, 0.90)!important;
+  background-color: transparent!important;
   ::placeholder{
     padding-left: 50px;
     margin-left: 50px;
@@ -83,7 +84,12 @@ $color-object-trey-values: rgb(111, 179, 210);
 //
 //}
 
-
+.ngb-input-search{
+  height: 30px;
+  display: flex;
+  //padding-left: 30px;
+  background-color: rgba(60, 60, 60, 0.90)!important;
+}
 .ngb-input-search img {
   //content: "\f002";
   //font-family: FontAwesome;
@@ -96,7 +102,7 @@ $color-object-trey-values: rgb(111, 179, 210);
   position: absolute;
   top: 50%;
   left: 10px;
-  transform: translateY(-30%);
+  transform: translateY(-50%);
   //box-shadow: 0 0 black;
 }
 

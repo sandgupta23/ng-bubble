@@ -10,10 +10,10 @@
   }
 
   .menu-wrapper__title {
-    display: inline-block;
+    display: flex;
+    padding: 1px 3px;
     background-color: $color-pitch-black;
     font-size: 9px !important;
-    padding-left: 4px
   }
 
   .menu {
@@ -40,4 +40,10 @@
     }
   }
 
+}
+
+
+.test:after {
+  content: '\2807';
+  //font-size: 100px;
 }

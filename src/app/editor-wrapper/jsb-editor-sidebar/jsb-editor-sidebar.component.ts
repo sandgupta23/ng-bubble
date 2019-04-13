@@ -7,12 +7,13 @@ import {ILocalConfig} from '../../interface';
   template: `
      
     <div class="editor-body-sidebar" (click)="action$.emit($event)">
-      <div style="height:30px;" [title]="!isConnected? 'No connection':'Open in IDE'">
+      <div style="height:30px; margin-top: 10px" [title]="!isConnected? 'No connection':'Open in IDE'">
         <img *ngIf="!isLoading && isConnected"
              [ngClass]="{'make-disable':!isConnected}"
              class="vs-code-grey"
              [src]="(config && config.preferredIde) === 'VSCODE'? vscodeImg: webstormImg">
-        <i *ngIf="isLoading" class="fa fa-spinner fa-spin"></i>
+        <!--<i  class="fa fa-spinner fa-spin"></i>//-->
+        <img *ngIf="isLoading" alt="Loading" class="fa-image-svg" style="width: 28px; height: 28px; margin: 0" [src]="BACKEND_IMG_ROOT+ 'loader.svg'"  [ngClass]="{'make-disable':!isConnected}"/>
         <i *ngIf="!isLoading && !isConnected" class="fa fa-warning"></i>
       </div>
       
@@ -54,6 +55,8 @@ export class JsbEditorSidebarComponent implements OnInit {
   }
 
   ngOnInit() {
+    debugger;
+    console.log(this.config);
   }
 
 }

@@ -113,9 +113,10 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
 
   _config;
 
-  @Input() config(val){
+  @Input() config  =  (val) => {
     this._config = val;
     StoreService.config = val;
+    this.changeDetectorRef.detectChanges();
   }
   @ViewChild(JsbEditorComponent) appEditorComponent: JsbEditorComponent;
   @ViewChildren('menu') menu: QueryList<any>;

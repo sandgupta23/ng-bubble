@@ -74,8 +74,8 @@ export async function runAppOnFreePort(app: any, port: number, ctrl: boolean) {
     console.log('ng-bubble is Running on port ' + port);
     console.log("Please make sure to add following script into your index.html");
     console.log(`
-        <script async src="http://localhost:${port}/assets/js/init.js"></script>
-    `)
+        <js-bubble></js-bubble>
+        <script src="http://localhost:11637/assets/js/js-bubble.js"></script>    `)
   });
 }
 
