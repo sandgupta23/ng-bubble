@@ -1,27 +1,27 @@
-# NgBubbleElements
+# ng-bubble
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.3.
+##  What is this?
+ng-bubble is a webcomponent that lives in your angular project (via index.html) and help you with debugging and stuff.
 
-## Development server
+## Motivation
+Motivations behind ng-bubble are two-fold:
+  - **"Automating" trivial tasks** : When my junior joined our frontend team, he struggled to find right component code in IDE (among 1000+ files) for a section of website. He said:
+    >There should be a tool which takes me to component file when I double click on component in website.
+  - **Making ng-bubble single point of reference for debugging**: We love debugging with ```console.log```, `debugger` and `network tab` as well. But these tools are slow and have very strict behaviour. *What if you need to replay same ajax request with different params? How do you hook into change Angular change detection? How do you see state of a component?*
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Usage
+1. Install with npm: `npm install -g ng-bubble`
+2. Open your angular project in *VScode* or *Webstorm*.
+3. Run this command at the root of your project: `ng-bubble`
+4. Above command will give you a script, copy and paste that in `<body>` your **index.html**
+   ```
+   //paste this in body tag your index.html 
+   <js-bubble></js-bubble>
+   <script src="http://localhost:11637/assets/js/js-bubble.js"></script>
+    ```
+5. Run your angular project in another terminal (ex: ng serve)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Video introduction
+  [Youtube link](https://www.youtube.com/watch?v=ir5sYS9PyLM&feature=youtu.b)
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
