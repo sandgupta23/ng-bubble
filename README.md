@@ -16,13 +16,16 @@ Motivations behind ng-bubble are two-fold:
 3. Run this command at the root of your project: `ng-bubble`
 4. Above command will give you a script, copy and paste that in `<body>` your **index.html**
    ```
-   //paste this in body tag your index.html 
-   <js-bubble></js-bubble>
-   <script src="http://localhost:11637/assets/js/js-bubble.js"></script>
+   <body>
+   ...
+       <js-bubble></js-bubble>
+       <script src="http://localhost:11637/assets/js/js-bubble.js"></script>
+   ...
+   </body>
     ```
 5. Run your angular project in another terminal (ex: ng serve)
 
-# Video introduction
+## Video introduction
   [Youtube link](https://www.youtube.com/watch?v=ir5sYS9PyLM&feature=youtu.b)
   
   
@@ -34,5 +37,7 @@ Motivations behind ng-bubble are two-fold:
 	5. Saving edits in component files (Planned for v0.3)
 	6. Display component state (realtime) (Planned for v0.3)
 	7. Component method hooks (Planned for v0.4)
+  8. Network panel (Planned for v0.4)
+  9. console panel (Planned for v0.4)
 
 
