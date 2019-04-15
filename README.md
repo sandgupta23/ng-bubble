@@ -37,7 +37,7 @@ Motivations behind ng-bubble are two-fold:
 	5. Saving edits in component files (Planned for v0.3)
 	6. Display component state (realtime) (Planned for v0.3)
 	7. Component method hooks (Planned for v0.4)
-  8. Network panel (Planned for v0.4)
-  9. console panel (Planned for v0.4)
+	8. Network panel (Planned for v0.4)
+	9. console panel (Planned for v0.4)
 
 
