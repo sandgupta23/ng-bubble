@@ -11,7 +11,7 @@ export class ObjectByProbablePathPipe implements PipeTransform {
       return object;
     }
     // let paths = path.trim().split('.');
-    let x = this.getSubObjectWithMatchedkey(object, path);
+    let x = this.getParts(object, path);
 
     let obj = {};
     // let x = paths.reduce((total, path)=>{
@@ -34,6 +34,20 @@ export class ObjectByProbablePathPipe implements PipeTransform {
       }
       return total
     },{});
+  }
+
+  getParts(object, fragments) {
+    var [part, ...rest] = fragments.split('.');
+
+    return Object.assign({}, ...Object
+      .entries(object)
+      .filter(([key]) => key.toLowerCase().includes(part.toLowerCase()))
+      .map(([k, v]) => {
+        if (!rest.length) return { [k]: v };
+        var parts = v && typeof v === 'object' && this.getParts(v, rest.join('.'));
+        if (parts) return { [k]: parts };
+      })
+    );
   }
 
 }
