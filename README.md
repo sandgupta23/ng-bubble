@@ -16,9 +16,12 @@ Motivations behind ng-bubble are two-fold:
 3. Run this command at the root of your project: `ng-bubble`
 4. Above command will give you a script, copy and paste that in `<body>` your **index.html**
    ```
-   //paste this in body tag your index.html 
-   <js-bubble></js-bubble>
-   <script src="http://localhost:11637/assets/js/js-bubble.js"></script>
+   <body>
+   ...
+       <js-bubble></js-bubble>
+       <script src="http://localhost:11637/assets/js/js-bubble.js"></script>
+   ...
+   </body>
     ```
 5. Run your angular project in another terminal (ex: ng serve)
 
