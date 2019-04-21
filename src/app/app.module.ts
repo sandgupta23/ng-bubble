@@ -27,6 +27,9 @@ import {ResizableModule} from 'angular-resizable-element';
 import {NgxJsonViewerModule} from 'ngx-json-viewer';
 import {ObjectByProbablePathPipe} from './object-by-probable-path.pipe';
 import {APP_BASE_HREF} from '@angular/common';
+import {environment} from '../environments/environment';
+
+const bootstrapComponents = !environment.production? [AppComponent]:[];
 
 @NgModule({
   declarations: [
@@ -70,19 +73,21 @@ import {APP_BASE_HREF} from '@angular/common';
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'}
   ],
-  // bootstrap: [AppComponent]
+  bootstrap: bootstrapComponents
 })
 export class AppModule {
   constructor(private injector: Injector) {
-    // const el = createCustomElement(EditorWrapperComponent, { injector: this.injector });
-    // customElements.define('js-bubble', el);
+    if(!environment.production){
+      const el = createCustomElement(EditorWrapperComponent, { injector: this.injector });
+      customElements.define('js-bubble', el);
+    }
   }
 
   ngDoBootstrap() {
-    const el = createCustomElement(EditorWrapperComponent, {injector: this.injector});
-    customElements.define('js-bubble', el);
-    // const el = createCustomElement(EditorWrapperComponent, { injector: this.injector });
-    // customElements.define('js-bubble', el);
+    if(environment.production){
+      const el = createCustomElement(EditorWrapperComponent, { injector: this.injector });
+      customElements.define('js-bubble', el);
+    }
   }
 
 }

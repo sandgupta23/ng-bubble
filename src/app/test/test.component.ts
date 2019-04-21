@@ -1,20 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component} from '@angular/core';
 
 @Component({
   selector: 'jsb-test',
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.scss']
 })
-export class TestComponent implements OnInit {
+export class TestComponent{
   counter = 0;
-  constructor() { }
-  name  = "sandeep";
+  constructor(private changeDetectorRef: ChangeDetectorRef) { }
+  name  = "test1";
 
-  ngOnInit() {
-  }
-
-  hello(){
-    //
+  counterButtonHandler(){
+    ++this.counter;
+    this.changeDetectorRef.detectChanges();
   }
 
 }

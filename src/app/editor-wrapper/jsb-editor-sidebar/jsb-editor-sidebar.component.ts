@@ -5,7 +5,7 @@ import {ILocalConfig} from '../../interface';
 @Component({
   selector: 'jsb-editor-sidebar',
   template: `
-     
+
     <div class="editor-body-sidebar" (click)="action$.emit($event)">
       <div style="height:30px; margin-top: 10px" [title]="!isConnected? 'No connection':'Open in IDE'">
         <img *ngIf="!isLoading && isConnected"
@@ -13,17 +13,24 @@ import {ILocalConfig} from '../../interface';
              class="vs-code-grey"
              [src]="(config && config.preferredIde) === 'VSCODE'? vscodeImg: webstormImg">
         <!--<i  class="fa fa-spinner fa-spin"></i>//-->
-        <img *ngIf="isLoading" alt="Loading" class="fa-image-svg" style="width: 28px; height: 28px; margin: 0" [src]="BACKEND_IMG_ROOT+ 'loader.svg'"  [ngClass]="{'make-disable':!isConnected}"/>
+        <img *ngIf="isLoading" class="fa-image-svg" style="width: 28px; height: 28px; margin: 0" [src]="BACKEND_IMG_ROOT+ 'loader.svg'"
+             [ngClass]="{'make-disable':!isConnected}"/>
         <i *ngIf="!isLoading && !isConnected" class="fa fa-warning"></i>
       </div>
-      
+
       <span [title]="!isConnected? 'No connection':'Search files'">
-        <img alt="warning logo" class="fa-image-svg fa-search" [src]="BACKEND_IMG_ROOT+ 'search.svg'"  [ngClass]="{'make-disable':!isConnected}"/>
+        <img class="fa-image-svg fa-search" [src]="BACKEND_IMG_ROOT+ 'search.svg'" [ngClass]="{'make-disable':!isConnected}"/>
       </span>
-      <img alt="warning logo" class="fa-image-svg fa-repeat" [src]="BACKEND_IMG_ROOT+ 'repeat.svg'" />
-      <img alt="warning logo" class="fa-image-svg fa-angle-double-right" [src]="BACKEND_IMG_ROOT+ 'angle-double-right.svg'" *ngIf="shouldFoldCode" />
-      <img alt="collapse" class="fa-image-svg fa-angle-double-down fa-angle-double-down" [src]="BACKEND_IMG_ROOT+ 'angle-double-down.svg'" title="Fold code" *ngIf="!shouldFoldCode"/>
-      <img alt="terminal" class="fa-image-svg fa-angle-double-down fa-terminal" [src]="BACKEND_IMG_ROOT+ 'terminal.svg'" title="Fold code"/>
+      <span title="Refresh component data"><img class="fa-image-svg fa-repeat" [src]="BACKEND_IMG_ROOT+ 'repeat.svg'"/></span>
+      <span title="Unfold code">
+        <img class="fa-image-svg fa-angle-double-right" [src]="BACKEND_IMG_ROOT+ 'angle-double-right.svg'" *ngIf="shouldFoldCode"/>
+      </span>
+      <span title="Fold code">
+        <img class="fa-image-svg fa-angle-double-down fa-angle-double-down" [src]="BACKEND_IMG_ROOT+ 'angle-double-down.svg'"
+             *ngIf="!shouldFoldCode"/>
+      </span>
+      <span title="Log component data in console"><img class="fa-image-svg fa-angle-double-down fa-terminal"
+                                                       [src]="BACKEND_IMG_ROOT+ 'terminal.svg'"/></span>
       <!--<i class="fa fa-angle-double-right" title="Unfold code" *ngIf="shouldFoldCode"></i>-->
       <!--<img alt="warning logo" class="fa-image-svg fa-angle-double-right fa-angle-double-down" [src]="BACKEND_IMG_ROOT+ 'angle-double-right.svg'" title="Fold code" *ngIf="!shouldFoldCode"/>-->
       <!--<i class="fa fa-angle-double-down" title="Fold code" *ngIf="!shouldFoldCode"></i>-->

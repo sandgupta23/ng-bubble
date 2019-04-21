@@ -18,9 +18,10 @@
   <!--START:Input-->
   <span class="ngb-input-search key-search-input" [ngClass]="{'animation-slide-right':!keySearchKeyword}">
         <input type="text"
+               placeholder="Filter object by path"
                class="ngb-input"
                ngModel (ngModelChange)="keySearchKeywordChanged$.emit($event)">
-        <img alt="warning logo" class="fa-image-svg" style="margin: 0" [src]="BACKEND_IMG_ROOT+ 'search.svg'"/>
+        <img class="fa-image-svg" style="margin: 0" [src]="BACKEND_IMG_ROOT+ 'search.svg'"/>
       </span>
   <!--START: Input-->
 
