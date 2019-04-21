@@ -62,8 +62,8 @@ export class JsbEditorSidebarComponent implements OnInit {
   }
 
   ngOnInit() {
-    debugger;
-    console.log(this.config);
+
+    //console.log(this.config);
   }
 
 }

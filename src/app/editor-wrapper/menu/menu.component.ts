@@ -9,9 +9,6 @@ export class MenuComponent implements OnInit {
 
   @Output() showTooltip$ = new EventEmitter();
   @Output() action$ = new EventEmitter();
-  top:string = "0";
-  left:string = "0";
-  _coords;
   @Input() set coords(val:{top:string, left:string}){
 
     this._coords = val;
@@ -20,8 +17,11 @@ export class MenuComponent implements OnInit {
     this.left = val.left;
     this.showMenu = false;
   }
-
+  @Input() showFilesOptions = true;
   showMenu = false;
+  top:string = "0";
+  left:string = "0";
+  _coords;
   constructor() { }
 
   ngOnInit() {

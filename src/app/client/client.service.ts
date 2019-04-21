@@ -21,7 +21,7 @@ export class ClientService {
     ClientService.eventInit();
 
     if ((<any>window).NG_BUBBLE_IMPORTED) {
-      console.error('Error: ng-bubble has been imported more than once');
+      //console.error('Error: ng-bubble has been imported more than once');
     }
   };
 
@@ -51,7 +51,7 @@ export class ClientService {
       let payload = Helper.createLineFinderPayload(componentInstance, null);
       ClientService.sendMessageToServer({type: EWSTypes.COMPONENT_FILE_SEARCH, payload});
     } catch (e) {
-      console.error(e);
+      //console.error(e);
     }
   }
 
@@ -187,10 +187,15 @@ export class ClientService {
         return;
       }
 
-
       let target = $event.target as HTMLElement;
       ////
-      let $component: HTMLElement = Helper.getComponentDataInstanceFromNode(<HTMLElement>$event.target).componentNode;
+      let $component: HTMLElement;
+      let componentData = Helper.getComponentDataInstanceFromNode(<HTMLElement>$event.target);
+      if(!componentData){
+        return;
+      }
+      $component = componentData.componentNode;
+      //console.log($component);
       NgBubbleDom.$hoveredComponent = $component;
       if (!$component) return;
 
@@ -203,9 +208,9 @@ export class ClientService {
         left: rect.left,
         top: rect.top,
         componentName: Helper.getComponentDataInstanceFromNode($component).componentInstance.constructor.name,
-        tagName: $component.tagName
+        tagName: $component.tagName,
+        // componentTagNamezzzzz
       };
-      ////
       return ClientService.setEditorAttribute(EEditorInput.coords, x);
     });
   }

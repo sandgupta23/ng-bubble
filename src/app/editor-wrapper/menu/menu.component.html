@@ -8,8 +8,8 @@
   </div>
   <ul class="menu" *ngIf="showMenu" (click)="showMenu = false">
     <li class="menu__item menu__item-name">{{_coords.componentName}}</li>
-    <li class="menu__item menu__item-html">Open html</li>
-    <li class="menu__item menu__item-ts">Open TS</li>
+    <li class="menu__item menu__item-html" *ngIf="showFilesOptions">Open html</li>
+    <li class="menu__item menu__item-ts" *ngIf="showFilesOptions">Open TS</li>
     <li class="menu__item menu__item-data">Display Data</li>
     <!--<li class="menu__item menu__item-ide">Open Parent in IDE</li>-->
   </ul>

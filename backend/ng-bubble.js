@@ -37,7 +37,7 @@
 // let ide = program.ide || 'vscode';
 // if (!(ctrl === 'y' || ctrl === 'yes' || ctrl === 'n' || ctrl === 'no')) {
 //     // throw "ctrl can only have: y, yes, n, no";
-//     
+//
 //     return;
 // }
 // ctrl = ctrl === 'y' || ctrl === 'yes';
@@ -49,7 +49,7 @@
 // let root = process.cwd();
 // // let tree = scan('.', root);
 // let tree = scan(root, "");
-// // 
+// //
 //
 //
 // // Ceate a new express app
@@ -94,7 +94,7 @@
 //         // openInIde(pathToBeOpened);
 //         res.status(200).json(foundItems);
 //     } catch (e) {
-//         console.error(e);
+//         //console.error(e);
 //         res.status(422).send(e);
 //     }
 // });
@@ -121,7 +121,7 @@
 //         await openInIde(pathToBeOpened, editor);
 //         res.status(200).json("ng-bubble: success");
 //     } catch (e) {
-//         console.error(e);
+//         //console.error(e);
 //         res.status(422).send(e);
 //     }
 // });
@@ -147,7 +147,7 @@
 // }
 //
 // async function openInIde(path, editor) {
-//     
+//
 //     let ideCmd, currentIde;
 //     currentIde = editor ? editor : ide;
 //     ideCmd = currentIde === 'ws' || currentIde === 'webstorm'? 'webstorm.exe': 'code -r';
@@ -176,14 +176,14 @@
 //
 //     let inUse = await tcpPortUsed.check(port, '127.0.0.1');
 //     while (inUse) {
-//         
+//
 //         inUse = await tcpPortUsed.check(++port, '127.0.0.1');
 //     }
 //     writeTemplate(port, ctrl);
 //     app.listen(port, function () {
-//         
-//         
-//         
+//
+//
+//
 //         <script async src="http://localhost:${port}/assets/js/client.js"></script>
 //     `)
 //     });

@@ -11,7 +11,7 @@ export class JsonParsePipe implements PipeTransform {
       val = JSON.parse(value);
 
     } catch (e) {
-      console.error(e);
+      //console.error(e);
     }
     return val;
 

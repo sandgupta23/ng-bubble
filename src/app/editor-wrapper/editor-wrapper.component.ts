@@ -110,7 +110,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   @Input() showTooltipAttr =  (val: boolean) => {
     this.showTooltip = val;
     this.changeDetectorRef.detectChanges();
-  }
+  };
   @Input() filecontent = (val: string) => {
 
     this.fileData = val;
@@ -136,7 +136,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   showTooltip = false;
   top = '50vh';
   left = '50vw';
-  _coords: { top: string, left: string, componentName: string, tagName: string };
+  _coords: { top: string, left: string, componentName: string, tagName: string, componentTagName:string };
   right = '0';
   bottom = '0';
   activeHeaderTab: EHeaderFormDataKeys = null;
@@ -205,7 +205,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
       StoreService.patchStore(UtilityService.extractStoreData(this));
     });
 
-    debugger;
+
     let className = UtilityService.getClickedSideBarIcon(clickEvent);
     switch (className) {
       case 'vs-code-grey' : {
@@ -343,7 +343,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
           this.getHoveredComponentData$.emit();
         }
       } catch (e) {
-        console.error(e);
+        //console.error(e);
       }
     }, 1000);
   }

@@ -1,8 +1,8 @@
-<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">-->
 <i class="fa fa-search"></i>
-<!--TODO: click-->
+
 <jsb-menu *ngIf="showTooltip"
           [coords]="_coords"
+          [showFilesOptions]="true"
           (dblclick)="$event.stopPropagation()"
           (mouseover)="$event.stopPropagation()"
           (action$)="sidebarActionHandler($event)"
@@ -12,7 +12,8 @@
      *ngIf="!minimize"
      (dblclick)="$event.stopPropagation()"
      (click)="hideSearchPanel(); $event.stopPropagation()"
-     (scroll)="$event.stopPropagation()" (wheel)="$event.stopPropagation()"
+     (scroll)="$event.stopPropagation()"
+     (wheel)="$event.stopPropagation()"
      [ngStyle]="{'top': top,left:left, right:right, bottom:bottom}">
 
   <!--START:Input-->
@@ -96,8 +97,12 @@
 
 <!--START: Minimize placeholder-->
 <div *ngIf="minimize"
+     style="z-index: 10000000000000;"
      class="minimize-placeholder"
-     (click)="maximize(true)">
+     (dblclick)="$event.stopPropagation()"
+     (scroll)="$event.stopPropagation()"
+     (wheel)="$event.stopPropagation()"
+     (click)="maximize(true);$event.stopPropagation()">
   <!--<i class="fa fa-window-maximize" style="color: white"></i>-->
   <i></i>
 </div>

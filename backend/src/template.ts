@@ -25,6 +25,6 @@ module.exports = function writeTemplate(port: number, shouldUseMouseClick: boole
   try {
     fs.writeFileSync(path.join(__dirname, '../../../' ,'public/assets/js/init.js'), getTemplate(port, shouldUseMouseClick), {flag:'w'});
   } catch (e) {
-    console.error(e);
+    //console.error(e);
   }
 };

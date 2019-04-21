@@ -124,7 +124,7 @@ export function routesInit(app: any) {
       await openInIde(pathToBeOpened, currentIde, codeText, payload, lineToOpenInIde);
       sendData(ws, {error: 200, type: EWSTypes.ack});
     } catch (e) {
-      console.error(e);
+      //console.error(e);
       sendData(ws, {error: 422, type: EWSTypes.ack});
     }
   }
@@ -185,7 +185,7 @@ export function routesInit(app: any) {
         }
       });
     } catch (e) {
-      console.error(e);
+      //console.error(e);
       sendData(ws, {error: 422, type: EWSTypes.SEARCH});
     }
   }
@@ -225,7 +225,7 @@ export function routesInit(app: any) {
   //     // res.status(200).json("ng-bubble: success");
   //
   //   } catch (e) {
-  //     console.error(e);
+  //     //console.error(e);
   //     res.status(422).send(e);
   //   }
   // });
@@ -241,7 +241,7 @@ export function routesInit(app: any) {
   //     let foundItems = searchData(tree.items, file);
   //     res.status(200).json(foundItems);
   //   } catch (e) {
-  //     console.error(e);
+  //     //console.error(e);
   //     res.status(422).send(e);
   //   }
   // });

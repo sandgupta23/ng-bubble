@@ -33,6 +33,13 @@ export class Helper {
     }
   }
 
+
+  // static getComponentFromNode($node: HTMLElement){
+  //   while (!$node(element.tagName)){
+  //     element = element.parentElement;
+  //   }
+  // }
+
   /*
    * getComponentDataInstanceFromNode: get parent component of any html element
    * */
@@ -41,12 +48,13 @@ export class Helper {
       return;
     }
     let probeData = (<any>window).ng.probe($el);
-    
+
     if (!probeData) {
-      console.error('NG:BUBBLE::Could not found related component') ;
+      //console.error('NG:BUBBLE::Could not found related component') ;
       return;
     }
     let componentInstance = probeData.componentInstance;
+    // console.log('probeData.parent', probeData.parent);
     let componentNode = probeData.parent && probeData.parent.nativeElement;
     let injector = probeData.injector;
     if (!componentInstance) {
@@ -139,7 +147,7 @@ export class Helper {
     try {
       node = document.evaluate('html/' + path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
     } catch (e) {
-      
+
     }
     return node;
   }
@@ -172,13 +180,13 @@ export class Helper {
   static jsonStringifyCyclic(obj) {
     /*TODO: move to web worker*/
     // return  JSON.stringify(jc.decycle(obj));
-    
+
     let output;
       try {
         output = jsonPrune(obj, 5);
       }catch (e) {
         output = {};
-        
+
       }
       return output;
   }

@@ -23,7 +23,7 @@ export class ObjectKeyComponent implements OnInit {
       try {
         this.keys = Object.keys(this.val);
       }catch (e) {
-        console.error('custom error:', e, 'this.val:', this.val, 'this.key', this.key, 'this.obj', this.obj);
+        //console.error('custom error:', e, 'this.val:', this.val, 'this.key', this.key, 'this.obj', this.obj);
       }
     }
   }
@@ -35,7 +35,7 @@ export class ObjectKeyComponent implements OnInit {
   }
 
   test(key:string){
-    // 
+    //
 
     // return key + this.key;
     this.pin$.emit(this.key + " " + key);
@@ -43,7 +43,7 @@ export class ObjectKeyComponent implements OnInit {
 
   trigger(key, $event){
     this.pin$.emit(key);
-    // 
+    //
     $event.stopPropagation();
   }
 
