@@ -16,15 +16,17 @@ export async function inquirerInit() {
 
   let answerObj: ILocalConfig = {};
   let angularConfigDetails = getAngularConfig();
-  if (angularConfigDetails) answerObj.framework = EFramework.ANGULAR;
-  else {
-    answerObj.framework = (await inquirer.prompt([{
-      type: 'list',
-      message: 'Please select your framework.',
-      name: 'framework',
-      choices: [EFramework.ANGULAR, EFramework.REACT]
-    }])).framework
-  }
+  answerObj.framework = EFramework.ANGULAR;//temp
+  /*TODO: use following for react support*/
+  // if (angularConfigDetails) answerObj.framework = EFramework.ANGULAR;
+  // else {
+  //   answerObj.framework = (await inquirer.prompt([{
+  //     type: 'list',
+  //     message: 'Please select your framework.',
+  //     name: 'framework',
+  //     choices: [EFramework.ANGULAR, EFramework.REACT]
+  //   }])).framework
+  // }
 
 
   /*if its angular project, detect or ask for component prefix*/

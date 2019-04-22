@@ -5,6 +5,7 @@ import {getLocalConfig} from './config';
 import {sendData} from './ws';
 import {EIdeNames, EWSTypes} from '../enums';
 import {IFsItem, IWSData} from '../interfaces';
+const json = require('../../../package.json');
 
 const scan = require('./scan');
 const path = require('path');
@@ -12,7 +13,8 @@ const  root = process.cwd();
 // const root = path.join(__dirname, '../../');
 // const root = 'D:\\nodebook\\DEVELOP\\bot_platform-fe';
 // const root = 'D:\\nodebook\\angular-prefix';
-console.log('root===>>', root);
+console.info('NG-BUBBLE:: version',json.version);
+console.info('root:', root);
 
 
 const Server = require('ws').Server;

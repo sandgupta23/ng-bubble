@@ -11,6 +11,11 @@ export class ClientService {
   private static isConnected = false;
   static init = function () {
 
+    if(!ClientService.$editorEl){
+      alert("ng-bubble:: Did you forget to add <js-bubble></js-bubble> before script?")
+      return;
+    }
+
     NgBubbleSocket.init(
       ClientService.websocketInitCB,
       ClientService.websocketOnMessageCB,
