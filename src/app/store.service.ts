@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import {IStore} from './interface';
+import {LoggingService} from './editor-wrapper/logging.service';
+import {ELocalStorageKey} from '../../enum';
 
 /**
- * storeKeys
- * keys from EditorWrapperComponent, to store in localstorage
+ * storeKeys:
+ * keys from EditorWrapperComponent, to be stored in localstorage
  * */
 export const storeKeys = [
   'minimize',
@@ -34,7 +36,7 @@ export const storeKeys = [
 export class StoreService {
 
   static init() {
-    let storeStr = localStorage.getItem('NG_BUBBLE_STATE');
+    let storeStr = localStorage.getItem(ELocalStorageKey.NG_BUBBLE_STATE);
     StoreService.patchStore(JSON.parse(storeStr));
   }
 
@@ -47,14 +49,14 @@ export class StoreService {
     try{
       this.setInLocalStorage(StoreService.store);
     }catch (e) {
-
+      LoggingService.log(e);
     }
   }
 
   static setInLocalStorage(state:IStore){
 
-    let oldState = JSON.parse(localStorage.getItem("NG_BUBBLE_STATE"))||{};
-    localStorage.setItem('NG_BUBBLE_STATE', JSON.stringify({...oldState, ...state}));
+    let oldState = JSON.parse(localStorage.getItem(ELocalStorageKey.NG_BUBBLE_STATE))||{};
+    localStorage.setItem(ELocalStorageKey.NG_BUBBLE_STATE, JSON.stringify({...oldState, ...state}));
   }
 
   static getStoreValue(){

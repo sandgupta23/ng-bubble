@@ -5,7 +5,7 @@
           [showFilesOptions]="true"
           (dblclick)="$event.stopPropagation()"
           (mouseover)="$event.stopPropagation()"
-          (action$)="sidebarActionHandler($event)"
+          (action$)="miscEventHandler($event)"
           (showTooltip$)="showTooltip = $event"></jsb-menu>
 
 <div class="jsb-editor-wrapper"
@@ -35,13 +35,13 @@
     (path$)="pathChangedHandler($event);"
     [expand]="expand"
     [activeTab]="activeHeaderTab"
-    (action$)="sidebarActionHandler($event)"
+    (action$)="miscEventHandler($event)"
     (headerDataChanged$)="headerDataChangedHandler($event)"></jsb-editor-header>
 
   <div class="jsb-editor-wrapper-body" #editorWrapperBody *ngIf="!minimize">
 
     <!--START: side bar-->
-    <jsb-editor-sidebar (action$)="sidebarActionHandler($event)"
+    <jsb-editor-sidebar (action$)="miscEventHandler($event)"
                         [config]="_config"
                         [isLoading]="isLoading"
                         [isConnected]="_status?.connection"
@@ -97,13 +97,12 @@
 
 <!--START: Minimize placeholder-->
 <div *ngIf="minimize"
-     style="z-index: 10000000000000;"
+
      class="minimize-placeholder"
      (dblclick)="$event.stopPropagation()"
      (scroll)="$event.stopPropagation()"
      (wheel)="$event.stopPropagation()"
      (click)="maximize(true);$event.stopPropagation()">
-  <!--<i class="fa fa-window-maximize" style="color: white"></i>-->
   <i></i>
 </div>
 <!--END: Minimize placeholder-->

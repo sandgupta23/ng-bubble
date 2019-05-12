@@ -1,6 +1,6 @@
 # ng-bubble
 
-[![N|Solid](https://github.com/goodmite/ng-bubble/blob/master/final_5cb1a092030dcd0014ea1259_949617.gif?raw=true)](https://github.com/goodmite/ng-bubble/blob/master/final_5cb1a092030dcd0014ea1259_949617.gif?raw=true)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ir5sYS9PyLM/0.jpg)](https://www.youtube.com/watch?v=ir5sYS9PyLM)
 
 ##  What is this?
 ng-bubble is a WebComponent that lives in your angular project (via index.html) and help you with debugging and stuff.
@@ -32,7 +32,7 @@ Motivations behind ng-bubble are two-fold:
   [Youtube link](https://www.youtube.com/watch?v=ir5sYS9PyLM&feature=youtu.b)
   
   
-  ## Features (Current and Upcoming):
+## Features (Current and Upcoming):
   
 	1. Navigating from component view (in website) to component code (in IDE) (Done in v0.1): [Hotkeys: double click on component] 
 	2. Display component files (for code review etc.) (Done in v0.1): [Hotkeys: shift + mousehover on component]

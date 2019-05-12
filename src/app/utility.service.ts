@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {ChangeDetectorRef, Injectable} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 
 import jc from 'json-cycle';
@@ -18,6 +18,7 @@ import 'codemirror/addon/search/jump-to-line.js';
 import 'codemirror/addon/dialog/dialog.js';
 import 'codemirror/mode/python/python.js';
 import {INgProbeData} from './client/interface';
+import {LoggingService} from './editor-wrapper/logging.service';
 
 const COMPONENT_SELECTOR = 'app';
 
@@ -130,8 +131,20 @@ export class UtilityService {
   * */
   static jsonStringifyCyclic(obj, level = 3) {
     /*TODO: move to web worker*/
-    
-    return jsonPrune(obj, level);
+
+    // obj = {...obj, ...Object.getPrototypeOf(obj)};
+    console.log(Object.getPrototypeOf(obj));
+    var options = {replacer:function(value, defaultValue, circular){
+        if (circular) return '"-circular-"';
+        if (value === undefined) return '"-undefined-"';
+        if (typeof value === "function") return '"-method-"';
+        return defaultValue;
+      }};
+    // if(obj.changeDetectorRef instanceof ChangeDetectorRef){
+    //   alert();
+    // }
+    let x= jsonPrune(obj,options,6 );
+    return x;
   }
 
   static unfoldCode(codemirror) {
@@ -139,7 +152,7 @@ export class UtilityService {
   }
 
   static foldCode(codemirror) {
-    
+
     /*TODO: */
     setTimeout(() => {/*computation heavy task*/
       for (var l = codemirror.firstLine(); l <= codemirror.lastLine(); ++l)
@@ -160,7 +173,7 @@ export class UtilityService {
       }
       return total;
     }, {});
-    
+
     return x;
   }
 
@@ -187,6 +200,7 @@ export class UtilityService {
     } else {
       codeText = {[val]: componentObj[val]};
     }
+    LoggingService.log('getCodeText:json parse');
     return JSON.parse(this.jsonStringifyCyclic(codeText, 6));
   }
 
@@ -211,7 +225,7 @@ export class UtilityService {
       return obj;
     }
     let pathSplit = path.split(' ');
-    
+
     for (var i = 0; i < pathSplit.length; i++) {
       obj = obj[pathSplit[i]];
     }

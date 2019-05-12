@@ -21,5 +21,6 @@ export interface ILocalConfig {
   'inputTaken': boolean;
   'guess': boolean;
   'componentSelector': string;
+  'angularPrefix': string;
   'ctrl': boolean;
 }

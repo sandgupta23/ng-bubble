@@ -16,6 +16,7 @@ export class ClientService {
       return;
     }
 
+
     NgBubbleSocket.init(
       ClientService.websocketInitCB,
       ClientService.websocketOnMessageCB,
@@ -80,6 +81,35 @@ export class ClientService {
   }
 
 
+  private static openInIdeByNode(node:HTMLElement){
+    let target = node;
+    let $componentNode: HTMLElement | null = Helper.getParentComponentNode(target);
+    let ngProbeData = Helper.getComponentDataInstanceFromNode($componentNode);
+    console.info($componentNode);
+    // let $componentNode: HTMLElement | null = ngProbeData.componentNode;
+    let componentInstance = ngProbeData.componentInstance;
+    let componentXPath = Helper.getXPathByElement($componentNode);
+    if ($componentNode) {
+      NgBubbleDom.selectedComponent = componentInstance;
+      NgBubbleDom.$selectedComponent = $componentNode;
+      NgBubbleDom.selectedElXpath = componentXPath;
+      Helper.setState({selectedElXpath: componentXPath});
+      let payload = Helper.createLineFinderPayload(componentInstance, target);
+
+      /**
+       * If ctrl === true, double click on any component will open component file in IDE
+       * User can toggle behaviour using --ask
+       * */
+      // if (($event.ctrlKey && NgBubbleConstant.LOCAL_CONFIG.ctrl) || !($event.ctrlKey || NgBubbleConstant.LOCAL_CONFIG.ctrl)) {
+        ClientService.openComponentFileInIde(payload);
+      // } else {
+      //   ClientService.setEditorAttribute(EEditorInput.componentstr, ngProbeData);
+      //   ClientService.sendMessageToServer({type: EWSTypes.COMPONENT_FILE_SEARCH, payload});
+      // }
+    }
+  }
+
+
   static eventInit() {
     ClientService.$editorEl.addEventListener('log$', (event: CustomEvent) => {
       let key = event.detail.key;
@@ -116,10 +146,19 @@ export class ClientService {
       ClientService.sendMessageToServer({type: EWSTypes.getFileByPath, payload: {pathToOpen: keyword}});
     });
     ClientService.$editorEl.addEventListener('openInIde$', (event: CustomEvent) => {
+
       let data = event.detail;
+      console.log('prod check');
+      if(data.pathToOpen){
+        ClientService.openComponentFileInIde(data);
+      }
+      if(data.node){
+        ClientService.openInIdeByNode(data.node);
+      }
+
       // if (data.tagName && data.ext)
       //   data.searchTerm = tagToFileName(data.tagName, data.ext);
-      ClientService.openComponentFileInIde(data);
+
     });
     ClientService.$editorEl.addEventListener('getSelectedComponentFiles$', (event: CustomEvent) => {
       ClientService.emitSelectedComponentData(NgBubbleDom.$hoveredComponent);
@@ -154,8 +193,10 @@ export class ClientService {
     });
     document.addEventListener('dblclick', ($event) => {
       let target = $event.target as HTMLElement;
-      let ngProbeData = Helper.getComponentDataInstanceFromNode(target);
-      let $componentNode: HTMLElement | null = ngProbeData.componentNode;
+      let $componentNode: HTMLElement | null = Helper.getParentComponentNode(target);
+      let ngProbeData = Helper.getComponentDataInstanceFromNode($componentNode);
+      console.info($componentNode);
+      // let $componentNode: HTMLElement | null = ngProbeData.componentNode;
       let componentInstance = ngProbeData.componentInstance;
       let componentXPath = Helper.getXPathByElement($componentNode);
       if ($componentNode) {
@@ -163,7 +204,6 @@ export class ClientService {
         NgBubbleDom.$selectedComponent = $componentNode;
         NgBubbleDom.selectedElXpath = componentXPath;
         Helper.setState({selectedElXpath: componentXPath});
-
         let payload = Helper.createLineFinderPayload(componentInstance, target);
 
         /**
@@ -214,6 +254,7 @@ export class ClientService {
         top: rect.top,
         componentName: Helper.getComponentDataInstanceFromNode($component).componentInstance.constructor.name,
         tagName: $component.tagName,
+        componentNode: Helper.getComponentDataInstanceFromNode($component).componentNode
         // componentTagNamezzzzz
       };
       return ClientService.setEditorAttribute(EEditorInput.coords, x);

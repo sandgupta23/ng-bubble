@@ -152,6 +152,7 @@ corresponding value from the list below*/
   cursor: pointer;
   bottom: 0;
   right: 10px;
+  z-index: $z-too-high;
   i {
     display: block;
     width: 24px;

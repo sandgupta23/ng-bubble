@@ -32,6 +32,7 @@ export interface IHeaderFormData {
   editorMode?: string,
 }
 
+// @ts-ignore
 @Component({
   selector: 'jsb-editor-wrapper',
   templateUrl: './editor-wrapper.component.html',
@@ -56,12 +57,13 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   @Input() set status(status: { connection: boolean }) {
     this._status = status;
     if (!status.connection) {
-      this.fileData = 'No connection with server. Please restart server using command `ng-bubble` in project root';
+      this.fileData = 'NG:BUBBLE:: No connection with server. Please restart server using command `ng-bubble` in project root';
     }
   };
 
   @Input() isLoading = true;
   @Input() componentfiles = (val: IFileData[]) => {
+    debugger;
     this._componentfiles = val;
     if (Array.isArray(this._componentfiles) && this._componentfiles.length > 0 && !this._componentfiles.find((key) => key === this.headerForm.value['fileName'])) {
       setTimeout(() => this.patchForm(this.headerForm, {fileName: this._componentfiles[0].name}));
@@ -69,24 +71,22 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   };
 
   @Input() componentstr = (ngProbeData: INgProbeData, isInit: boolean = false) => {
-    // this._componentstr = val;
-    // this.componentObj = UtilityService.getComponentWithoutInjectedMembers(ngProbeData) || {};
-    this.componentObj = ngProbeData.componentInstance;
+    this.componentObj = {...ngProbeData.componentInstance, ...Object.getPrototypeOf(ngProbeData.componentInstance)};
     if (!isInit) {
       this.path = '';
     }
     //.constructor.prototype.ngDoCheck
     // this.addDoCheckHook(ngProbeData.componentInstance);/*TODO: Don't delete */
 
-    let activeComponentKey = this.headerForm.value['key'];
-    this.keyOptions = ['All', ...Object.keys(this.componentObj)];
-    let isActiveComponentKeyPresent = this.keyOptions.findIndex((key) => key === activeComponentKey) !== -1;
-    if (!isActiveComponentKeyPresent || 'All' === activeComponentKey) {
-      setTimeout(() => this.patchForm(this.headerForm, {key: 'All'}));
-      this.codeData = this.componentObj;
-    } else {
-      this.codeData = {[activeComponentKey]: this.componentObj [activeComponentKey]};
-    }
+    // let activeComponentKey = this.headerForm.value['key'];
+    // this.keyOptions = ['All', ...Object.keys(this.componentObj)];
+    // let isActiveComponentKeyPresent = this.keyOptions.findIndex((key) => key === activeComponentKey) !== -1;
+    // if (!isActiveComponentKeyPresent || 'All' === activeComponentKey) {
+    //   setTimeout(() => this.patchForm(this.headerForm, {key: 'All'}));
+      this.codeData = JSON.parse(UtilityService.jsonStringifyCyclic(this.componentObj));
+    // } else {
+    //   this.codeData = {[activeComponentKey]: this.componentObj [activeComponentKey]};
+    // }
     StoreService.patchStore(UtilityService.extractStoreData(this));//TODO: bad!
     this.changeDetectorRef.detectChanges();
   };
@@ -112,7 +112,8 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     this.changeDetectorRef.detectChanges();
   };
   @Input() filecontent = (val: string) => {
-
+    console.log(val);
+    debugger;
     this.fileData = val;
     // this.headerForm.patchValue({editorMode:true});
     this.changeDetectorRef.detectChanges();
@@ -123,7 +124,8 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     this._config = val;
     StoreService.config = val;
     this.changeDetectorRef.detectChanges();
-  }
+  };
+
   @ViewChild(JsbEditorComponent) appEditorComponent: JsbEditorComponent;
   @ViewChildren('menu') menu: QueryList<any>;
   _config;
@@ -136,7 +138,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   showTooltip = false;
   top = '50vh';
   left = '50vw';
-  _coords: { top: string, left: string, componentName: string, tagName: string, componentTagName:string };
+  _coords: { top: string, left: string, componentName: string, tagName: string, componentTagName:string, componentNode:HTMLElement };
   right = '0';
   bottom = '0';
   activeHeaderTab: EHeaderFormDataKeys = null;
@@ -149,8 +151,11 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   fileData: any = {};
   path: any = '';
   headerForm: FormGroup;
-  headerFormData: IHeaderFormData = {}
+  headerFormData: IHeaderFormData = {};
   BACKEND_IMG_ROOT = 'http://localhost:11637/assets/imgs/';
+  length = 0;
+  a={a:{b:{c:{d:this.a}}}};
+
 
   constructor(private utilityService: UtilityService, private changeDetectorRef: ChangeDetectorRef) {
   }
@@ -169,20 +174,21 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
 
     this.patchForm(this.headerForm, this.headerFormData);
     this.headerForm.valueChanges.subscribe((value) => {
-      // let changedKeys = <EHeaderFormDataKeys[]>UtilityService.getChangedKey(value, this.headerFormData);
-      //
-      // if (changedKeys[0]!==EHeaderFormDataKeys.editorMode && !(changedKeys.length == 0 || changedKeys.length > 2)) {
-      //   this.activeHeaderTab = changedKeys[0];
-      // }
+      debugger;
       this.headerFormData = value;
       this.editorMode = this.headerFormData.editorMode;
-
       StoreService.patchStore(UtilityService.extractStoreData(this));
       this.changeDetectorRef.detectChanges();
     });
     this.changeDetectorRef.detectChanges();
   }
 
+
+  /*
+  * headerDataChangedHandler:
+  * is called when form header files select are changed by (headerDataChanged$)
+  * Will trigger an event to get selected file
+  * */
   headerDataChangedHandler(headerData: IHeaderFormData) {
     let key = Object.keys(headerData)[0];
     if ('key' === key) this.codeData = UtilityService.getCodeText(headerData, this.componentObj);
@@ -198,7 +204,15 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     return componentfiles.find((file) => file.name === fileName).path;
   }
 
-  sidebarActionHandler(clickEvent: Event) {
+  /*
+  * miscEventHandler:
+  * Handles events from various places like:
+  * 1. jsb-menu component
+  * 2. jsb-editor-header component
+  * 3. jsb-editor-sidebar component
+  *
+  * */
+  miscEventHandler(event: Event) {
 
     setTimeout(() => {
       this.changeDetectorRef.detectChanges();
@@ -206,7 +220,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     });
 
 
-    let className = UtilityService.getClickedSideBarIcon(clickEvent);
+    let className = UtilityService.getClickedSideBarIcon(event);
     switch (className) {
       case 'vs-code-grey' : {
         let path = this.getFilePathByName(this._componentfiles, this.headerForm.get('fileName').value);
@@ -214,13 +228,12 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
         break;
       }
       case 'fa-search' : {
-        clickEvent.stopPropagation();
+        event.stopPropagation();
         setTimeout(() => {
           /*todo: hack...issues with clickoutside*/
           this.showSearchPanel = !this.showSearchPanel;
           this.changeDetectorRef.detectChanges();
           StoreService.patchStore(UtilityService.extractStoreData(this));
-
         });
         break;
       }
@@ -279,17 +292,17 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
         EventService.foldCodeInCodemirror$.emit(this.shouldFoldCode);
         break;
       }
-      case 'fa-file' : {
-        this.activeHeaderTab = EHeaderFormDataKeys.fileName;
-        this.headerDataChangedHandler({fileName: this.headerFormData.fileName});
-        break;
-      }
-      case 'fa-code' : {
-
-        this.headerDataChangedHandler({key: this.headerFormData.key});
-        this.activeHeaderTab = EHeaderFormDataKeys.key;
-        break;
-      }
+      // case 'fa-file' : {
+      //   this.activeHeaderTab = EHeaderFormDataKeys.fileName;
+      //   this.headerDataChangedHandler({fileName: this.headerFormData.fileName});
+      //   break;
+      // }
+      // case 'fa-code' : {
+      //
+      //   this.headerDataChangedHandler({key: this.headerFormData.key});
+      //   this.activeHeaderTab = EHeaderFormDataKeys.key;
+      //   break;
+      // }
       case 'fa-compress' : {
 
         this.left = '50vw';
@@ -303,18 +316,21 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
         this.minimize = true;
         break;
       }
+
+      /*menu items*/
       case 'menu__item-html' : {
-        this.openInIde(this._coords.componentName, 'html');
+        this.openInIde(this._coords.componentName, 'html', this._coords.componentNode);
         break;
       }
       case 'menu__item-ts' : {
-        this.openInIde(this._coords.componentName, 'ts');
+        this.openInIde(this._coords.componentName, 'ts', this._coords.componentNode,);
         break;
       }
       case 'menu__item-data' : {
-
+        debugger;
         this.getSelectedComponentFiles$.emit();
         this.getHoveredComponentData$.emit();
+        this.minimize = false;
         break;
       }
       case 'menu__item-ide' : {
@@ -324,9 +340,8 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     }
   }
 
-  openInIde(componentName: string, ext: string) {
-    // this.openInIde$.emit({tagName: tag, ext});
-    this.openInIde$.emit({searchTerm: componentName + ext});
+  openInIde(componentName: string, ext: string, $node:EventTarget) {
+    this.openInIde$.emit({node:$node});
   }
 
 
@@ -378,12 +393,11 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   }
 
   patchForm(form: FormGroup, obj: IHeaderFormData) {
+    debugger;
     form.patchValue(obj);
   }
 
-  //
   logCurrentData() {
-    // this.log$.emit({key: this.headerFormData.key, clone: this.componentObj});
     console.log(this.componentObj);
   }
 
@@ -419,20 +433,13 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     this.changeDetectorRef.detectChanges();
   }
 
-  // @ViewChild('editorLeft', {read: ElementRef}) editor1:ElementRef;
-  length = 0;
-
   onResizeEnd($event, editorLeft, editorRight, editorWrapperBody: HTMLElement) {
     let left = Math.abs($event.rectangle.right - $event.rectangle.left);
     left = left < 100 ? 100 : left;/*left should be atleast 10px*/
     let total: number = Number(editorWrapperBody.getBoundingClientRect().width);
     editorLeft.style.width = `${left * 100 / total}%`;
     editorRight.style.width = `${(total - left) * 100 / total}%`;
-
-
     this.changeDetectorRef.detectChanges();
-    // let editor = document.getElementById('test2');
-    // editor.style.left = `${event.rectangle.left}px`;
   }
 
   test(el) {

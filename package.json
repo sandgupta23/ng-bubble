@@ -1,6 +1,6 @@
 {
   "name": "ng-bubble",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "scripts": {
     "ng": "ng",
     "start": "node lib/backend/src/ng-bubble.js",
@@ -10,7 +10,7 @@
     "build": "ng build --prod --output-hashing none && node build-script.js",
     "hmr": "ng serve --configuration hmr",
     "build-be": "tsc -w",
-    "kill": "for /f \"tokens=5\" %a in ('netstat -aon ^| find \":11640\" ^| find \"LISTENING\"') do taskkill /f /pid %a",
+    "kill": "for /f \"tokens=5\" %a in ('netstat -aon ^| find \":11638\" ^| find \"LISTENING\"') do taskkill /f /pid %a",
     "publish-npm": "cd backend && tsc && npm publish"
   },
   "author": {
@@ -82,7 +82,7 @@
   },
   "preferGlobal": true,
   "bin": {
-    "ng-bubble": "lib/backend/src/ng-bubble.js"
+    "ng-bubble-test": "lib/backend/src/ng-bubble.js"
   },
   "readmeFilename": "Readme.md",
   "engines": {

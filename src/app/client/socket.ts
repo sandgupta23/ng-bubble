@@ -1,9 +1,10 @@
 import {EEditorInput, EWSTypes, IWSData} from './interface';
+import {LoggingService} from '../editor-wrapper/logging.service';
 
 export class NgBubbleSocket {
   private static socket;
   static init(initCB, onmessagecb, errCB){
-    let socket = this.socket = new WebSocket('ws://localhost:11640');
+    let socket = this.socket = new WebSocket('ws://localhost:11638');
     socket.onopen = (event) => {
       initCB(event);
     };
@@ -18,13 +19,16 @@ export class NgBubbleSocket {
       errCB(err);
     };
     socket.onmessage = function (event) {
+      LoggingService.log('websocket request:' );
+      LoggingService.log(event);
       onmessagecb(event)
     };
   }
 
 
   static sendMessage(data: IWSData) {
-    
+    LoggingService.log('websocket request:' );
+    LoggingService.log(data);
     try {
       this.socket.send(JSON.stringify(data));
     }catch (e) {

@@ -2,7 +2,11 @@
 
 //$fa-font-path: "/../node_modules/font-awesome/fonts";
 //@import "/../node_modules/font-awesome/scss/font-awesome.scss";
-//
+
+/**
+*common:scss: this scss file is shared across all components
+*/
+
 $z-too-high:10000000000000000; /*its over 9000!!!*/
 $z-editor-wrapper:1;
 $z-resizer-bar:3;
@@ -60,50 +64,16 @@ $color-object-trey-values: rgb(111, 179, 210);
   }
 }
 
-//.ngb-input-search{
-//  height: 30px; width: 100%;
-//  outline: none;
-//  border: 1px solid transparent;
-//  font-size: 11px;
-//  color: white;
-//  padding-left: 10px;
-//  background-color: rgba(60, 60, 60, 0.90)!important;
-//  ::placeholder{
-//    padding-left: 50px;
-//    margin-left: 50px;
-//  }
-//
-//  &::after{
-//    content: 'hello';
-//    //content: "\25AE";  /* this is your text. You can also use UTF-8 character codes as I do here */
-//    //font-family: FontAwesome;
-//    //left:-5px;
-//    //position:absolute;
-//    //top:0;
-//  }
-//
-//}
-
 .ngb-input-search{
   height: 30px;
   display: flex;
-  //padding-left: 30px;
   background-color: rgba(60, 60, 60, 0.90)!important;
 }
 .ngb-input-search img {
-  //content: "\f002";
-  //font-family: FontAwesome;
-  //font-style: normal;
-  //font-weight: normal;
-  //text-decoration: inherit;
-  //color: #ffffff9e;
-  //font-size: 15px;
-  //padding-right: 0.5em;
   position: absolute;
   top: 50%;
   left: 10px;
   transform: translateY(-50%);
-  //box-shadow: 0 0 black;
 }
 
 .fa-image-svg{

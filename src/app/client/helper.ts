@@ -1,5 +1,6 @@
 import {ILineFinderData, INgProbeData} from './interface';
 import jsonPrune from 'json-prune';
+import {NgBubbleConstant} from './constant';
 // declare let ng: any;
 export class Helper {
   static camelCaseToDotCase(camel: string) {
@@ -31,6 +32,37 @@ export class Helper {
         return elements[0];
       }
     }
+  }
+
+
+  static getParentComponentNode($node:HTMLElement):HTMLElement{
+    let $temp = $node;
+    if(!$temp){
+      return;
+    }
+
+    do{
+      if(Helper.isNodeCustomComponent($temp)){
+        return $temp;
+      }
+      $temp = $temp.parentElement;
+    }
+    while (!this.isNodeBody($temp));
+    return null;
+  }
+
+  private static isNodeBody($node){
+    if(!$node){
+      return false;
+    }
+    if($node.tagName.startsWith('BODY') || $node.tagName.startsWith('HTML')) return true;
+  }
+
+  private static isNodeCustomComponent($node:HTMLElement){
+    if(!$node){
+      return false;
+    }
+    if($node.tagName.startsWith(NgBubbleConstant.LOCAL_CONFIG.angularPrefix.toUpperCase() + '-')) return true;
   }
 
 
@@ -75,7 +107,6 @@ export class Helper {
       searchTerm: componentName,
       file: componentName
     };
-
 
     if (target$) {
       payload = {

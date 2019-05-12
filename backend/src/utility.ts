@@ -71,11 +71,11 @@ export async function runAppOnFreePort(app: any, port: number, ctrl: boolean) {
   // }
   writeTemplate(port, ctrl);
   app.listen(port, function () {
-    console.log('ng-bubble is Running on port ' + port);
+    console.log("ng-bubble is Running on port 11637 and 11638");
     console.log("Please make sure to add following script into your index.html");
     console.log(`
         <js-bubble></js-bubble>
-        <script src="http://localhost:11637/assets/js/js-bubble.js"></script>    `)
+        <script src='http://localhost:11637/assets/js/js-bubble.js'></script>    `)
   });
 }
 

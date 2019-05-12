@@ -1,6 +1,12 @@
-<!--<jsb-editor-wrapper></jsb-editor-wrapper>-->
-<p>this is app component1</p>
+
+<p>this is app component to test ng-bubble</p>
+
 <app1-changed-prefix></app1-changed-prefix>
 
-<button (click)="val = val+1">{{val}}</button>
-<!--<js-bubble></js-bubble>-->
+<button (click)="add()">{{val}}</button>
+
+<form #form="ngForm">
+  <input type="text" ngModel name="ng-bubble">
+</form>
+
+

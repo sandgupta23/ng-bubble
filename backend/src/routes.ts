@@ -29,7 +29,7 @@ export function routesInit(app: any) {
     sendData(ws, {type: EWSTypes.ack});
   }
 
-  const server = new Server({port: 11640});
+  const server = new Server({port: 11638});
   server.on('connection', (ws: any) => {
     ws.on('message', (message: string) => {
 

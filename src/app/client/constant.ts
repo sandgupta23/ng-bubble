@@ -6,7 +6,9 @@ export class NgBubbleConstant {
     preferredIde: 'WEBSTORM',
     guess: false,
     inputTaken: false,
-    componentSelector: 'app'
+    componentSelector: 'app',
+    angularPrefix: 'app',
+
   };
 
   static readonly possibleRootTags = ['my-app', 'app-root', 'root'];
