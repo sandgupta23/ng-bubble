@@ -29,6 +29,7 @@
     "url": "https://github.com/sangupta007/ng-bubble"
   },
   "dependencies": {
+    "chokidar": "^3.0.0",
     "commander": "^2.3.0",
     "cors": "^2.8.5",
     "express": "^4.9.4",

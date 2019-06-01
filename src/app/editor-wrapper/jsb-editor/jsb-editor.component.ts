@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {UtilityService} from '../../utility.service';
 import {EventService} from '../../event.service';
+import {LoggingService} from '../logging.service';
 
 
 @Component({
@@ -22,14 +23,14 @@ export class JsbEditorComponent implements OnInit, AfterViewInit {
 
   stringifyInput(val: any, level:number): string {
 
-    if (val === null) return 'UNDEFINED_VALUE';/*undef*/
-    if (val === '') return 'EPMTY_STRING';/*undef*/
-    if (val === undefined) return 'UNDEFINED_VALUE';/*undef*/
+    if (val === null) return '';/*undef*/
+    if (val === '') return '';/*undef*/
+    if (val === undefined) return '';/*undef*/
     let output;
     try {
       output=  typeof val === 'function' || typeof val === 'object' ? JSON.stringify(JSON.parse(UtilityService.jsonStringifyCyclic(val, this.level)),null, '\t') : val;//val.toString();
     }catch (e) {
-
+      LoggingService.log(e);
     }
     return output;
   }

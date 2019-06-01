@@ -1,0 +1,32 @@
+@import "../../../common.scss";
+.minimize-placeholder {
+  background-color: rgb(60, 60, 60);
+  position: fixed;
+  padding: 5px;
+  cursor: pointer;
+  bottom: 0;
+  right: 10px;
+  z-index: $z-too-high;
+
+  i {
+    display: block;
+    width: 24px;
+    height: 18px;
+    border: 1px solid white;
+    border-top: 12px solid white;
+    border-radius: 3px;
+  }
+
+  .loader-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    background-color: rgb(60, 60, 60);
+  }
+}

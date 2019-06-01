@@ -63,7 +63,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
 
   @Input() isLoading = true;
   @Input() componentfiles = (val: IFileData[]) => {
-    debugger;
+
     this._componentfiles = val;
     if (Array.isArray(this._componentfiles) && this._componentfiles.length > 0 && !this._componentfiles.find((key) => key === this.headerForm.value['fileName'])) {
       setTimeout(() => this.patchForm(this.headerForm, {fileName: this._componentfiles[0].name}));
@@ -113,7 +113,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   };
   @Input() filecontent = (val: string) => {
     console.log(val);
-    debugger;
+
     this.fileData = val;
     // this.headerForm.patchValue({editorMode:true});
     this.changeDetectorRef.detectChanges();
@@ -148,7 +148,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   keyOptions = ['All'];
   myObject = Object;
   codeData: any = MockDataService.codeData;
-  fileData: any = {};
+  fileData: any;
   path: any = '';
   headerForm: FormGroup;
   headerFormData: IHeaderFormData = {};
@@ -174,7 +174,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
 
     this.patchForm(this.headerForm, this.headerFormData);
     this.headerForm.valueChanges.subscribe((value) => {
-      debugger;
+
       this.headerFormData = value;
       this.editorMode = this.headerFormData.editorMode;
       StoreService.patchStore(UtilityService.extractStoreData(this));
@@ -327,7 +327,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
         break;
       }
       case 'menu__item-data' : {
-        debugger;
+
         this.getSelectedComponentFiles$.emit();
         this.getHoveredComponentData$.emit();
         this.minimize = false;
@@ -393,7 +393,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   }
 
   patchForm(form: FormGroup, obj: IHeaderFormData) {
-    debugger;
+
     form.patchValue(obj);
   }
 

@@ -15,15 +15,20 @@
      (scroll)="$event.stopPropagation()"
      (wheel)="$event.stopPropagation()"
      [ngStyle]="{'top': top,left:left, right:right, bottom:bottom}">
-
+  <!--<i>{{_status.connection}}</i>-->
+  <div *ngIf="_status && _status.connection === false" class="server-disconnect-banner">
+    SERVER NOT CONNECTED
+  </div>
   <!--START:Input-->
-  <span class="ngb-input-search key-search-input" [ngClass]="{'animation-slide-right':!keySearchKeyword}">
+  <ng-container *ngIf="!(_status && _status.connection === false)">
+    <span class="ngb-input-search key-search-input" [ngClass]="{'animation-slide-right':!keySearchKeyword}">
         <input type="text"
                placeholder="Filter object by path"
                class="ngb-input"
                ngModel (ngModelChange)="keySearchKeywordChanged$.emit($event)">
         <img class="fa-image-svg" style="margin: 0" [src]="BACKEND_IMG_ROOT+ 'search.svg'"/>
       </span>
+  </ng-container>
   <!--START: Input-->
 
   <jsb-editor-header
@@ -74,7 +79,8 @@
     <div #editorRight style="background-color: #0a001f;width: 50%; overflow-y: scroll">
       <ngx-json-viewer
         *ngIf="!headerForm.get('editorMode').value"
-        class="jsb-json-viewer" (click)="test()" [json]="codeData|objectByProbablePath:keySearchKeyword" [expanded]="!shouldFoldCode"></ngx-json-viewer>
+        class="jsb-json-viewer" (click)="test()" [json]="codeData|objectByProbablePath:keySearchKeyword|sortObject"
+        [expanded]="!shouldFoldCode"></ngx-json-viewer>
       <jsb-editor *ngIf="headerForm.get('editorMode').value"
                   [level]="headerFormData.key==='All'?6:6"
                   [codeText]="codeData|objectByProbablePath:keySearchKeyword"
@@ -96,13 +102,9 @@
 </div>
 
 <!--START: Minimize placeholder-->
-<div *ngIf="minimize"
-
-     class="minimize-placeholder"
-     (dblclick)="$event.stopPropagation()"
-     (scroll)="$event.stopPropagation()"
-     (wheel)="$event.stopPropagation()"
-     (click)="maximize(true);$event.stopPropagation()">
-  <i></i>
-</div>
+<app-minimize-placeholder
+  *ngIf="minimize"
+  [isLoading]="isLoading"
+  (maximize$)="maximize($event)"
+></app-minimize-placeholder>
 <!--END: Minimize placeholder-->

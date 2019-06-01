@@ -12,7 +12,7 @@ export function commanderInit () {
 
   let port = program.port || 11637;
   let ctrl = program.ctrl || 'n';
-  let options = program.ask;
+  let askAll = program.ask;
   let ide_user_input = program.ide || 'vscode';
   if (!(ctrl === 'y' || ctrl === 'yes' || ctrl === 'n' || ctrl === 'no')) {
     throw "ERROR: ctrl can only have: y, yes, n, no";//todo
@@ -22,7 +22,7 @@ export function commanderInit () {
   return {
     port,
     ctrl,
-    options,
+    askAll: askAll,
     ide_user_input
   }
 

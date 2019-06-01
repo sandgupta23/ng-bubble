@@ -143,6 +143,7 @@ export class UtilityService {
     // if(obj.changeDetectorRef instanceof ChangeDetectorRef){
     //   alert();
     // }
+    (window as any).jsonPrune = jsonPrune
     let x= jsonPrune(obj,options,6 );
     return x;
   }

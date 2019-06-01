@@ -29,6 +29,8 @@ import {ObjectByProbablePathPipe} from './object-by-probable-path.pipe';
 import {APP_BASE_HREF} from '@angular/common';
 import {environment} from '../environments/environment';
 import { ChangedPrefixComponent } from './changed-prefix/changed-prefix.component';
+import { MinimizePlaceholderComponent } from './editor-wrapper/minimize-placeholder/minimize-placeholder.component';
+import {sortObject} from './sort-object.pipe';
 
 const bootstrapComponents = !environment.production? [AppComponent]:[];
 
@@ -52,7 +54,9 @@ const bootstrapComponents = !environment.production? [AppComponent]:[];
     JsConsoleComponent,
     DataTypePipe,
     ObjectByProbablePathPipe,
+    sortObject,
     ChangedPrefixComponent,
+    MinimizePlaceholderComponent,
   ],
   entryComponents: [
     EditorWrapperComponent,

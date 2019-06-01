@@ -9,7 +9,6 @@ export class NgBubbleSocket {
       initCB(event);
     };
     socket.onclose = function (event) {
-      ////
       setTimeout(() => {
         // location.reload();
       }, 5000);/*TODO: a better way of doing this?*/

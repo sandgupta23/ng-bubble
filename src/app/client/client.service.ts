@@ -148,7 +148,6 @@ export class ClientService {
     ClientService.$editorEl.addEventListener('openInIde$', (event: CustomEvent) => {
 
       let data = event.detail;
-      console.log('prod check');
       if(data.pathToOpen){
         ClientService.openComponentFileInIde(data);
       }
@@ -231,7 +230,7 @@ export class ClientService {
       if (!$event.shiftKey) {
         return;
       }
-
+        debugger;
       let target = $event.target as HTMLElement;
       ////
       let $component: HTMLElement;

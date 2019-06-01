@@ -1,7 +1,10 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import {ILineFinderData, lineToOpen} from "./line-finder";
-import {EIdeNames} from "../enums";
+import {ILineFinderData, lineToOpen} from './line-finder';
+import {EIdeNames} from '../enums';
+import {SERVER_PORT, WEBSOCKET_PORT} from './constants';
+import {Utils} from 'tslint';
+import {UtilityService} from '../../src/app/utility.service';
 
 const util = require('util');
 const tcpPortUsed = require('tcp-port-used');
@@ -9,6 +12,7 @@ const writeTemplate = require('./template');
 const exec = util.promisify(require('child_process').exec);
 const readFile = util.promisify(require('fs').readFile);
 const writeFile = util.promisify(require('fs').writeFile);
+export const root = process.cwd();
 
 export function getAngular2JsonPath() {
   return path.join(process.cwd(), 'angular-cli.json');
@@ -33,9 +37,9 @@ export function getWebstormPath() {
  * */
 export function getAngularConfig() {
   let path = fs.existsSync(getAngular5JsonPath()) && getAngular5JsonPath();
-  if(path) return {path, version: 5}
+  if (path) return {path, version: 5};
   path = path || (fs.existsSync(getAngular2JsonPath()) && getAngular2JsonPath());
-  if(path) return {path, version: 2}
+  if (path) return {path, version: 2};
   else return null;
 }
 
@@ -50,40 +54,49 @@ export function checkIfWebstorm() {
 export function createConfigJSonFileIfNotPresent() {
   let localConfigPath = getLocalConfigFilePath();
   let isPresent = fs.existsSync(localConfigPath);
-  if (!isPresent) fs.writeFileSync(localConfigPath, "");
+  if (!isPresent) fs.writeFileSync(localConfigPath, '');
 }
 
 export function getLocalConfigFilePath() {
-  //
   return path.join(process.cwd(), '.ng-bubble-local');
 }
 
 export function getGlobalConfigFilePath() {
-  return path.join(__dirname, "/../../", '.ng-bubble-global.json');
+  return path.join(__dirname, '/../../', '.ng-bubble-global.json');
 }
 
-export async function runAppOnFreePort(app: any, port: number, ctrl: boolean) {
+export function runAppOnFreePort(app: any, port: number, ctrl: boolean) {
+  return new Promise((resolve, reject) => {
+    /*
+  let inUse = await tcpPortUsed.check(port, '127.0.0.1');
+  while (inUse) {
+    inUse = await tcpPortUsed.check(++port, '127.0.0.1');
+  }
+  */
+    writeTemplate(port, ctrl);
 
-  // let inUse = await tcpPortUsed.check(port, '127.0.0.1');
-  // while (inUse) {
-  //
-    // inUse = await tcpPortUsed.check(++port, '127.0.0.1');
-  // }
-  writeTemplate(port, ctrl);
-  app.listen(port, function () {
-    console.log("ng-bubble is Running on port 11637 and 11638");
-    console.log("Please make sure to add following script into your index.html");
-    console.log(`
-        <js-bubble></js-bubble>
-        <script src='http://localhost:11637/assets/js/js-bubble.js'></script>    `)
+    app.listen(port, function (error: any) {
+
+      console.log(`ng-bubble is Running on port ${SERVER_PORT} and ${WEBSOCKET_PORT}`);
+      console.log('Please make sure to add following script into your index.html');
+      logDanger(`
+        <js-bubble></js-bubble>                                              
+        <script src="http://localhost:${SERVER_PORT}/assets/js/js-bubble.js"></script>
+`);
+      resolve();
+    }).on('error', function (error: any) {
+      if (error) {
+        logServerBusyError();
+        reject();
+      }
+    });
   });
 }
 
 /*todo: redundant arguments*/
 export async function openInIde(path: string, currentIde: EIdeNames, codeText: string, data?: ILineFinderData, lineNumber: number = 0) {
-  // if (data) lineNumber = await lineToOpen(path, data);
   let ideCmd = currentIde === EIdeNames.WEBSTORM ? 'webstorm.exe' : `code -g`;
-  await exec(`${ideCmd} ${path}:${lineNumber ? lineNumber : ""}`);
+  await exec(`${ideCmd} ${path}:${lineNumber ? lineNumber : ''}`);
 }
 
 
@@ -123,11 +136,29 @@ export function areTwoSetsEqual(a: Set<any>, b: Set<any>) {
   return a.size === b.size && [...a].every(value => b.has(value));
 }
 
-export function getAngular2Prefix(config:any){
-
+export function getAngular2Prefix(config: any) {
   return config.apps[0].prefix;
 }
-export function getAngular5Projects(config:any){
+
+export function getHtmlOrTsFile(items: { path: '' }[]) {
+  return (items.find((item) => item.path.endsWith('.html'))
+    || items.find((item) => item.path.endsWith('.ts'))
+    || items[0]).path;
+}
+
+export function getAngular5Projects(config: any) {
   return Object.keys(config.projects);
+}
+
+export function logDanger(message: string) {
+  console.log('\x1b[31m', message, '\x1b[0m');
+}
+
+export function logInfo(message: string) {
+  console.log('\x1b[33m%s\x1b[0m', message, '\x1b[0m');
+}
+
+export function logServerBusyError() {
+  logDanger(`ERROR: ng-bubble is already running. Please make sure ports ${SERVER_PORT} and ${WEBSOCKET_PORT} are free.`);
 }
 
