@@ -24,3 +24,8 @@ export interface ILocalConfig {
   'angularPrefix': string;
   'ctrl': boolean;
 }
+
+export interface IDependency {
+  name:string,
+  decorators:any[]
+}

@@ -160,6 +160,7 @@ export class ClientService {
 
     });
     ClientService.$editorEl.addEventListener('getSelectedComponentFiles$', (event: CustomEvent) => {
+
       ClientService.emitSelectedComponentData(NgBubbleDom.$hoveredComponent);
       // if ($hoveredComponent) {
       //   let componentInstance = Helper.getComponentDataInstanceFromNode($hoveredComponent).componentInstance;
@@ -169,6 +170,12 @@ export class ClientService {
       //   ClientService.sendMessageToServer({type: EWSTypes.COMPONENT_FILE_SEARCH, payload});
       // }
     });
+
+    ClientService.$editorEl.addEventListener('shutDown$', (event: CustomEvent) => {
+      this.sendMessageToServer({type:EWSTypes.shutDown});
+      location.reload();
+    });
+
     ClientService.$editorEl.addEventListener('getHoveredComponentData$', (event: CustomEvent) => {
 
       let $selectedComponentNode: any = NgBubbleDom.$hoveredComponent || (NgBubbleDom.selectedElXpath && Helper.getElementByXpath(NgBubbleDom.selectedElXpath));
@@ -230,7 +237,7 @@ export class ClientService {
       if (!$event.shiftKey) {
         return;
       }
-        debugger;
+
       let target = $event.target as HTMLElement;
       ////
       let $component: HTMLElement;

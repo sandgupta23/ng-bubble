@@ -25,12 +25,12 @@ import {ILocalConfig} from '../../interface';
       <span title="Unfold code">
         <img class="fa-image-svg fa-angle-double-right" [src]="BACKEND_IMG_ROOT+ 'angle-double-right.svg'" *ngIf="shouldFoldCode"/>
       </span>
-      <span title="Fold code">
-        <img class="fa-image-svg fa-angle-double-down fa-angle-double-down" [src]="BACKEND_IMG_ROOT+ 'angle-double-down.svg'"
-             *ngIf="!shouldFoldCode"/>
-      </span>
-      <span title="Log component data in console"><img class="fa-image-svg fa-angle-double-down fa-terminal"
-                                                       [src]="BACKEND_IMG_ROOT+ 'terminal.svg'"/></span>
+      <!--<span title="Fold code">-->
+        <!--<img class="fa-image-svg fa-angle-double-down fa-angle-double-down" [src]="BACKEND_IMG_ROOT+ 'angle-double-down.svg'"-->
+             <!--*ngIf="!shouldFoldCode"/>-->
+      <!--</span>-->
+      <span title="Shut down server"><img class="fa-image-svg fa-power-off"
+                                                       [src]="BACKEND_IMG_ROOT+ 'power-off-solid.svg'"/></span>
       <!--<i class="fa fa-angle-double-right" title="Unfold code" *ngIf="shouldFoldCode"></i>-->
       <!--<img alt="warning logo" class="fa-image-svg fa-angle-double-right fa-angle-double-down" [src]="BACKEND_IMG_ROOT+ 'angle-double-right.svg'" title="Fold code" *ngIf="!shouldFoldCode"/>-->
       <!--<i class="fa fa-angle-double-down" title="Fold code" *ngIf="!shouldFoldCode"></i>-->

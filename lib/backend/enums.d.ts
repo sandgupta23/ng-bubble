@@ -7,6 +7,7 @@ export declare enum EWSTypes {
     COMPONENT_FILE_SEARCH = "COMPONENT_FILE_SEARCH",
     open = "open",
     getConfig = "getConfig",
+    shutDown = "shutDown",
     openByPath = "openByPath",
     getFileByPath = "getFileByPath",
     setFileByPath = "setFileByPath",

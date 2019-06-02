@@ -81,6 +81,7 @@
         *ngIf="!headerForm.get('editorMode').value"
         class="jsb-json-viewer" (click)="test()" [json]="codeData|objectByProbablePath:keySearchKeyword|sortObject"
         [expanded]="!shouldFoldCode"></ngx-json-viewer>
+      <!---->
       <jsb-editor *ngIf="headerForm.get('editorMode').value"
                   [level]="headerFormData.key==='All'?6:6"
                   [codeText]="codeData|objectByProbablePath:keySearchKeyword"

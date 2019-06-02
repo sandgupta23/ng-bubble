@@ -7,7 +7,8 @@ import {
   logServerBusyError,
   openInIde,
   root,
-  setFileContent
+  setFileContent,
+
 } from './utility';
 import {ILineFinderData, lineToOpen} from './line-finder';
 import {getLocalConfig} from './config';
@@ -52,6 +53,8 @@ export function websocketInit(server: any) {
           handleReIndexRequest(ws);
         } else if (data.type === EWSTypes.getConfig) {
           handleConfigRequest(ws);
+        } else if (data.type === EWSTypes.shutDown) {
+          handleShutDOwnRequest(ws);
         }
       });
     });
@@ -86,6 +89,14 @@ export function websocketInit(server: any) {
         }
       }
       return {folders: folders, files: files};
+    }
+
+
+
+
+    async function handleShutDOwnRequest(ws: any) {
+      sendAck(ws, {ext:""} as ILineFinderData);
+      process.exit();
     }
 
     async function handleConfigRequest(ws: any) {

@@ -1,6 +1,8 @@
 import {ChangeDetectorRef, Component, DoCheck, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
 import {UtilityService} from './utility.service';
-import {NgForm} from '@angular/forms';
+import {FormBuilder, NgForm} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +15,8 @@ export class AppComponent implements DoCheck {
   @ViewChild('form') form:NgForm;
 
   val = 0;
+  x  = [1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,];
+  y = undefined;
   obj = {
     // name:"Sandeep Gupta",
     address: {
@@ -30,7 +34,12 @@ export class AppComponent implements DoCheck {
     }
   };
 
-  constructor(private changeDetectorRef:ChangeDetectorRef){}
+  constructor(private changeDetectorRef:ChangeDetectorRef,
+              private formBuilder:FormBuilder,
+              private activatedRoute:ActivatedRoute,
+              private s:HttpClient,
+              private router:Router
+              ){}
 
   add() {
     this.val = this.val + 1;

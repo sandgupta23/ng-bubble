@@ -36,6 +36,13 @@ export class Helper {
 
 
   static getParentComponentNode($node:HTMLElement):HTMLElement{
+    debugger;
+    /*hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    *
+    *
+    *
+    *look at utility
+    * */
     let $temp = $node;
     if(!$temp){
       return;
@@ -72,6 +79,14 @@ export class Helper {
   //   }
   // }
 
+  static isComponentNode(node$:HTMLElement, component:any ){
+    let tagNameSplits:string[] = node$.tagName.split("-");
+    tagNameSplits.shift();
+    return tagNameSplits.join('').toLowerCase() === component.constructor.name.toLowerCase()
+      || tagNameSplits.join('').toLowerCase() + 'component' === component.constructor.name.toLowerCase()
+      ;
+  }
+
   /*
    * getComponentDataInstanceFromNode: get parent component of any html element
    * */
@@ -86,8 +101,8 @@ export class Helper {
       return;
     }
     let componentInstance = probeData.componentInstance;
-    // console.log('probeData.parent', probeData.parent);
-    let componentNode = probeData.parent && probeData.parent.nativeElement;
+
+    let componentNode = this.isComponentNode($el, componentInstance)? $el: probeData.parent && probeData.parent.nativeElement;
     let injector = probeData.injector;
     if (!componentInstance) {
       return null;

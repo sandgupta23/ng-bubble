@@ -14,7 +14,8 @@ export class JsbEditorComponent implements OnInit, AfterViewInit {
   @ViewChild('textEditorPlaceholder') textEditorPlaceholder: ElementRef;
 
   @Input() level = 3;
-  @Input() set codeText(val: string) {
+  @Input() set codeText(val: object|string) {
+
     setTimeout(()=>{
       this._codeText = this.stringifyInput(val, this.level);
       this.setValueInCodeMirror(this.codemirror, this._codeText);
@@ -28,7 +29,7 @@ export class JsbEditorComponent implements OnInit, AfterViewInit {
     if (val === undefined) return '';/*undef*/
     let output;
     try {
-      output=  typeof val === 'function' || typeof val === 'object' ? JSON.stringify(JSON.parse(UtilityService.jsonStringifyCyclic(val, this.level)),null, '\t') : val;//val.toString();
+      output=  typeof val === 'function' || typeof val === 'object' ? JSON.stringify(val,null, '\t') : val;//val.toString();
     }catch (e) {
       LoggingService.log(e);
     }

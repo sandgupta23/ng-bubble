@@ -84,6 +84,7 @@ export enum EWSTypes {
   setFileByPath = 'setFileByPath',
   reIndex = 'reIndex',
   ack = 'ack',
+  shutDown = 'shutDown',
 }
 
 export interface ILineFinderData {

@@ -31,6 +31,7 @@ import {environment} from '../environments/environment';
 import { ChangedPrefixComponent } from './changed-prefix/changed-prefix.component';
 import { MinimizePlaceholderComponent } from './editor-wrapper/minimize-placeholder/minimize-placeholder.component';
 import {sortObject} from './sort-object.pipe';
+import {HttpClientModule} from '@angular/common/http';
 
 const bootstrapComponents = !environment.production? [AppComponent]:[];
 
@@ -74,7 +75,8 @@ const bootstrapComponents = !environment.production? [AppComponent]:[];
     ReactiveFormsModule,
     ClickOutsideModule,
     ResizableModule,
-    NgxJsonViewerModule
+    NgxJsonViewerModule,
+    HttpClientModule
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'}

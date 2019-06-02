@@ -33,7 +33,9 @@
     "commander": "^2.3.0",
     "cors": "^2.8.5",
     "express": "^4.9.4",
+    "flatted": "^2.0.0",
     "inquirer": "^6.2.1",
+    "json-stringify-safe": "^5.0.1",
     "tcp-port-used": "^1.0.1",
     "ws": "^6.1.3"
   },

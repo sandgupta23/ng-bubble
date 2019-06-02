@@ -1,5 +1,8 @@
 import {ChangeDetectorRef, Injectable} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
+// import { parse, stringify } from 'flatted';
+import * as JSON_STRIGIFY_SAFE from 'json-stringify-safe';
+
 
 import jc from 'json-cycle';
 import jsonPrune from 'json-prune';
@@ -19,8 +22,11 @@ import 'codemirror/addon/dialog/dialog.js';
 import 'codemirror/mode/python/python.js';
 import {INgProbeData} from './client/interface';
 import {LoggingService} from './editor-wrapper/logging.service';
+import {ComponentInstanceService} from './component-instance.service';
 
 const COMPONENT_SELECTOR = 'app';
+
+const EXCLUDED_CONSTRUCTIONS = ['ViewRef_','ViewRef'];
 
 export const sideBaseClasses = [
   'vs-code-grey',
@@ -42,6 +48,7 @@ export const sideBaseClasses = [
   'fa-angle-double-down',
   'fa-file',
   'fa-code',
+  'fa-power-off',
   'menu__item-html',
   'menu__item-ts',
   'menu__item-data',
@@ -86,7 +93,7 @@ export class UtilityService {
           codemirror.foldCode(codemirror.getCursor());
         },
         'Ctrl-Space': 'autocomplete',
-        "Alt-F": "findPersistent"
+        'Alt-F': 'findPersistent'
       },
       foldGutter: true,
       gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
@@ -134,19 +141,59 @@ export class UtilityService {
 
     // obj = {...obj, ...Object.getPrototypeOf(obj)};
     console.log(Object.getPrototypeOf(obj));
-    var options = {replacer:function(value, defaultValue, circular){
-        if (circular) return '"-circular-"';
+    var options = {
+      replacer: function (value, defaultValue, circular) {
+        // if (circular) return '"-circular-"';
+        if (circular) {
+          if (value && value.value) {
+            try {
+              return JSON.stringify({value: value.value, '-other-': '-circular-'});
+            } catch (e) {
+              return '--circular--';
+            }
+          }
+        }
+        // if (circular) return JSON_STRIGIFY_SAFE(value);
         if (value === undefined) return '"-undefined-"';
-        if (typeof value === "function") return '"-method-"';
+        if (typeof value === 'function') return '"-method-"';
+        if (Array.isArray(value)) {
+          return JSON.stringify(value);
+        }
+        if (value === undefined || value === null) {
+          return `-${value}-`;
+        }
         return defaultValue;
-      }};
+      }
+    };
     // if(obj.changeDetectorRef instanceof ChangeDetectorRef){
     //   alert();
     // }
-    (window as any).jsonPrune = jsonPrune
-    let x= jsonPrune(obj,options,6 );
+    (window as any).jsonPrune = jsonPrune;
+    let x = jsonPrune(obj, options, 4);
+
+
+    (window as any).JSON_STRIGIFY_SAFE = JSON_STRIGIFY_SAFE;
+    // console.log(JSON_STRIGIFY_SAFE);
+    // console.log(JSON_STRIGIFY_SAFE(obj));
+    // return stringify(obj);
+    // return JSON.parse(stringify(obj));
+    // return JSON_STRIGIFY_SAFE(obj);
     return x;
   }
+
+  static parseCircular(obj) {
+    // return parse(obj)
+  }
+
+  // addPojoPropsCircularKey(obj){
+  //     Object.keys(obj).forEach((key)=>{
+  //       if(obj[key]==='-circular-'){
+  //         Object.keys(obj[key]).forEach((circularKeys)=>{
+  //           if
+  //         })
+  //       }
+  //     })
+  // }
 
   static unfoldCode(codemirror) {
     CodeMirror.commands.unfoldAll(codemirror);
@@ -201,9 +248,11 @@ export class UtilityService {
     } else {
       codeText = {[val]: componentObj[val]};
     }
-    LoggingService.log('getCodeText:json parse');
+
+
     return JSON.parse(this.jsonStringifyCyclic(codeText, 6));
   }
+
 
   static getChangedKey(obj1: object, obj2: object): EHeaderFormDataKeys[] {
     let keysChanged = [];
@@ -222,7 +271,7 @@ export class UtilityService {
    * returned obj["address"]["country"]
    * */
   static getChildObjectByPath(obj, path) {
-    if(!path || !obj || typeof obj !== 'object'){
+    if (!path || !obj || typeof obj !== 'object') {
       return obj;
     }
     let pathSplit = path.split(' ');
@@ -233,4 +282,29 @@ export class UtilityService {
     return obj;
   }
 
+
+  /*
+  * removeDependeciesFromInstance:
+  * A component class is called dependencies if its provided via injector
+  * via constructor
+  *
+  * Why are we removing it:
+  * From my experience people aren't interested in dependencies when they
+  * are browsing the component state. These dependencies are huge and cause performance issues.
+  * Better to not to have them.
+  * */
+  pruneDependenciesFromInstance(instance) {
+
+    let dependencies = ComponentInstanceService.getDependencies(instance).map(e=>e.name);
+    let tempInstance = {...instance};
+    let excludedKeys = [...dependencies, ...EXCLUDED_CONSTRUCTIONS];
+    Object.keys(tempInstance).forEach((key) => {
+      excludedKeys.forEach((dependency)=>{
+        if (tempInstance[key] && tempInstance[key].constructor && tempInstance[key].constructor.name === dependency) {
+          tempInstance[key] = `-dependency pruned: ${dependency}-`;
+        }
+      })
+    });
+    return tempInstance;
+  }
 }

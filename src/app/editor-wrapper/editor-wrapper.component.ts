@@ -53,6 +53,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   @Output() getHoveredComponentData$ = new EventEmitter();
   @Output() log$ = new EventEmitter();
   @Output() openInIde$ = new EventEmitter();
+  @Output() shutDown$ = new EventEmitter();
 
   @Input() set status(status: { connection: boolean }) {
     this._status = status;
@@ -71,28 +72,19 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   };
 
   @Input() componentstr = (ngProbeData: INgProbeData, isInit: boolean = false) => {
-    this.componentObj = {...ngProbeData.componentInstance, ...Object.getPrototypeOf(ngProbeData.componentInstance)};
+    // this.componentObj = {...ngProbeData.componentInstance};
+    let instance_without_dependency = this.utilityService.pruneDependenciesFromInstance(ngProbeData.componentInstance);
     if (!isInit) {
       this.path = '';
     }
-    //.constructor.prototype.ngDoCheck
-    // this.addDoCheckHook(ngProbeData.componentInstance);/*TODO: Don't delete */
 
-    // let activeComponentKey = this.headerForm.value['key'];
-    // this.keyOptions = ['All', ...Object.keys(this.componentObj)];
-    // let isActiveComponentKeyPresent = this.keyOptions.findIndex((key) => key === activeComponentKey) !== -1;
-    // if (!isActiveComponentKeyPresent || 'All' === activeComponentKey) {
-    //   setTimeout(() => this.patchForm(this.headerForm, {key: 'All'}));
-      this.codeData = JSON.parse(UtilityService.jsonStringifyCyclic(this.componentObj));
-    // } else {
-    //   this.codeData = {[activeComponentKey]: this.componentObj [activeComponentKey]};
-    // }
+    this.codeData = JSON.parse(UtilityService.jsonStringifyCyclic({...instance_without_dependency, ...Object.getPrototypeOf(ngProbeData.componentInstance)}));
     StoreService.patchStore(UtilityService.extractStoreData(this));//TODO: bad!
     this.changeDetectorRef.detectChanges();
   };
 
   @Input() coords = (coordsStr) => {
-    //
+
     let coords = coordsStr;
     let top = coords.top + 'px';
     let left = coords.left + 'px';
@@ -107,7 +99,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     EventService.searchResultsFinish$.emit(val);
   };
 
-  @Input() showTooltipAttr =  (val: boolean) => {
+  @Input() showTooltipAttr = (val: boolean) => {
     this.showTooltip = val;
     this.changeDetectorRef.detectChanges();
   };
@@ -120,7 +112,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   };
 
 
-  @Input() config  =  (val) => {
+  @Input() config = (val) => {
     this._config = val;
     StoreService.config = val;
     this.changeDetectorRef.detectChanges();
@@ -138,7 +130,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   showTooltip = false;
   top = '50vh';
   left = '50vw';
-  _coords: { top: string, left: string, componentName: string, tagName: string, componentTagName:string, componentNode:HTMLElement };
+  _coords: { top: string, left: string, componentName: string, tagName: string, componentTagName: string, componentNode: HTMLElement };
   right = '0';
   bottom = '0';
   activeHeaderTab: EHeaderFormDataKeys = null;
@@ -154,16 +146,15 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   headerFormData: IHeaderFormData = {};
   BACKEND_IMG_ROOT = 'http://localhost:11637/assets/imgs/';
   length = 0;
-  a={a:{b:{c:{d:this.a}}}};
+  a = {a: {b: {c: {d: this.a}}}};
 
 
   constructor(private utilityService: UtilityService, private changeDetectorRef: ChangeDetectorRef) {
   }
 
 
-
   ngOnInit() {
-    this.keySearchKeywordChanged$.pipe(debounceTime(500)).subscribe((keySearchKeyword:string)=>{
+    this.keySearchKeywordChanged$.pipe(debounceTime(500)).subscribe((keySearchKeyword: string) => {
       this.keySearchKeyword = keySearchKeyword;
       this.changeDetectorRef.detectChanges();
     });
@@ -282,6 +273,11 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
         this.expand = true;
         break;
       }
+
+      case 'fa-power-off' : {
+        this.shutDown$.emit();
+        break;
+      }
       case 'fa-angle-double-right' : {
         this.shouldFoldCode = false;
         EventService.foldCodeInCodemirror$.emit(this.shouldFoldCode);
@@ -323,6 +319,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
         break;
       }
       case 'menu__item-ts' : {
+        debugger;
         this.openInIde(this._coords.componentName, 'ts', this._coords.componentNode,);
         break;
       }
@@ -340,8 +337,8 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     }
   }
 
-  openInIde(componentName: string, ext: string, $node:EventTarget) {
-    this.openInIde$.emit({node:$node});
+  openInIde(componentName: string, ext: string, $node: EventTarget) {
+    this.openInIde$.emit({node: $node});
   }
 
 
@@ -447,7 +444,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   }
 
 
-  maximize(doMaximize:boolean) {
+  maximize(doMaximize: boolean) {
     this.minimize = !doMaximize;
     this.changeDetectorRef.detectChanges();
     StoreService.patchStore(UtilityService.extractStoreData(this));
