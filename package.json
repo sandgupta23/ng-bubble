@@ -3,19 +3,21 @@
   "version": "0.0.8",
   "scripts": {
     "ng": "ng",
-    "start": "node lib/backend/src/ng-bubble.js",
+    "start": "nodemon lib/backend/src/ng-bubble.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "add": "git add --all && git status",
     "build": "ng build --prod --output-hashing none && node build-script.js",
     "hmr": "ng serve --configuration hmr",
-    "build-be": "tsc -w",
+    "watch-be": "cd backend && tsc -w",
+    "run-be": "nodemon --ignore src/ --ignore public/ lib/backend/src/ng-bubble.js",
     "kill": "for /f \"tokens=5\" %a in ('netstat -aon ^| find \":11638\" ^| find \"LISTENING\"') do taskkill /f /pid %a",
     "publish-npm": "cd backend && tsc && npm publish",
     "lintfix": "tslint --fix -c ./tslint.json 'src/**/*{.ts,.tsx}'",
-    "dev": "concurrently --kill-others \"npm run start\" \"ng s --port 4500\""
+    "dev": "concurrently --kill-others \"ng s --port 4500\" \"npm run watch-be\" \"npm run run-be\""
   },
+
   "author": {
     "name": "Sandeep Gupta",
     "email": "sandeepkgupta007@gmail.com"
@@ -94,5 +96,8 @@
   "readmeFilename": "Readme.md",
   "engines": {
     "node": ">= 0.10.x"
+  },
+  "nodemonConfig": {
+    "ignore": ["backend/.ng-bubble-local", "backend/src/template.ts", "public/assets/js/init.js"]
   }
 }

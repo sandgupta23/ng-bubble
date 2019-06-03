@@ -16,28 +16,31 @@ import {sendData} from './ws';
 import {EIdeNames, EWSTypes} from '../enums';
 import {IFsItem, IWSData} from '../interfaces';
 import {SERVER_PORT, WEBSOCKET_PORT} from './constants';
+
 const scan = require('./scan');
 const path = require('path');
 
 
 let folders: any[] = [], files: any = [];
 export let SEARCH_CACHE: { [index: string]: any } = {};
-let tree:any;
+let tree: any;
 
 export function websocketInit(server: any) {
 
-  return new Promise((resolve, reject)=>{
+  return new Promise((resolve, reject) => {
     function sendAck(ws: any, data: ILineFinderData) {
       sendData(ws, {type: EWSTypes.ack});
     }
 
-    server.on('error', function (error:any) {
+    server.on('error', function (error: any) {
       logServerBusyError();
     });
     server.on('connection', (ws: any) => {
+      console.log('Client connected');
+
       resolve(server);
       ws.on('message', (message: string) => {
-        let data: IWSData = JSON.parse(message);
+        const data: IWSData = JSON.parse(message);
 
         if (data.type === EWSTypes.open) {
           handleOpenRequest(ws, <ILineFinderData>data.payload);
@@ -92,10 +95,8 @@ export function websocketInit(server: any) {
     }
 
 
-
-
     async function handleShutDOwnRequest(ws: any) {
-      sendAck(ws, {ext:""} as ILineFinderData);
+      sendAck(ws, {ext: ''} as ILineFinderData);
       process.exit();
     }
 
@@ -117,7 +118,7 @@ export function websocketInit(server: any) {
         let foundItems = SEARCH_CACHE[searchTerm] || searchData(tree.items, searchTerm);
         if (!SEARCH_CACHE[searchTerm]) SEARCH_CACHE[searchTerm] = foundItems;
         if (!(foundItems && foundItems.files && foundItems.files.length > 0)) {
-          console.log('Could not file anything for :'+ searchTerm);
+          console.log('Could not file anything for :' + searchTerm);
           sendData(ws, {error: 401, errorMessage: 'ng-bubble: no matching file found', type: EWSTypes.open});
           return;
         }
@@ -198,7 +199,7 @@ export function websocketInit(server: any) {
         sendData(ws, {error: 422, type: EWSTypes.SEARCH});
       }
     }
-  })
+  });
 }
 
 
