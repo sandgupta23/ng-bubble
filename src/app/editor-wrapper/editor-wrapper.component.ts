@@ -146,7 +146,6 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   headerFormData: IHeaderFormData = {};
   BACKEND_IMG_ROOT = 'http://localhost:11637/assets/imgs/';
   length = 0;
-  a = {a: {b: {c: {d: this.a}}}};
 
 
   constructor(private utilityService: UtilityService, private changeDetectorRef: ChangeDetectorRef) {

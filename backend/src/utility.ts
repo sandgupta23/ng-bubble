@@ -142,6 +142,7 @@ export function getAngular2Prefix(config: any) {
 }
 
 export function getHtmlOrTsFile(items: { path: '' }[]) {
+  items = items.filter((item) => !item.path.endsWith('.spec.ts'));
   return (items.find((item) => item.path.endsWith('.html'))
     || items.find((item) => item.path.endsWith('.ts'))
     || items[0]).path;

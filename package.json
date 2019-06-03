@@ -7,6 +7,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "add": "git add --all && git status",
     "build": "ng build --prod --output-hashing none && node build-script.js",
     "hmr": "ng serve --configuration hmr",
     "build-be": "tsc -w",
