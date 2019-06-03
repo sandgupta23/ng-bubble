@@ -37,10 +37,10 @@ export function getWebstormPath() {
  * */
 export function getAngularConfig() {
   let path = fs.existsSync(getAngular5JsonPath()) && getAngular5JsonPath();
-  if (path) return {path, version: 5};
+  if (path) { return {path, version: 5}; }
   path = path || (fs.existsSync(getAngular2JsonPath()) && getAngular2JsonPath());
-  if (path) return {path, version: 2};
-  else return null;
+  if (path) { return {path, version: 2}; }
+  else { return null; }
 }
 
 export function checkIfVscode() {
@@ -52,9 +52,9 @@ export function checkIfWebstorm() {
 }
 
 export function createConfigJSonFileIfNotPresent() {
-  let localConfigPath = getLocalConfigFilePath();
-  let isPresent = fs.existsSync(localConfigPath);
-  if (!isPresent) fs.writeFileSync(localConfigPath, '');
+  const localConfigPath = getLocalConfigFilePath();
+  const isPresent = fs.existsSync(localConfigPath);
+  if (!isPresent) { fs.writeFileSync(localConfigPath, ''); }
 }
 
 export function getLocalConfigFilePath() {
@@ -80,7 +80,7 @@ export function runAppOnFreePort(app: any, port: number, ctrl: boolean) {
       console.log(`ng-bubble is Running on port ${SERVER_PORT} and ${WEBSOCKET_PORT}`);
       console.log('Please make sure to add following script into your index.html');
       logDanger(`
-        <js-bubble></js-bubble>                                              
+        <js-bubble></js-bubble>
         <script src="http://localhost:${SERVER_PORT}/assets/js/js-bubble.js"></script>
 `);
       resolve();
@@ -95,7 +95,7 @@ export function runAppOnFreePort(app: any, port: number, ctrl: boolean) {
 
 /*todo: redundant arguments*/
 export async function openInIde(path: string, currentIde: EIdeNames, codeText: string, data?: ILineFinderData, lineNumber: number = 0) {
-  let ideCmd = currentIde === EIdeNames.WEBSTORM ? 'webstorm.exe' : `code -g`;
+  const ideCmd = currentIde === EIdeNames.WEBSTORM ? 'webstorm.exe' : `code -g`;
   console.log(`Opening: Line ${lineNumber} in ${path}`);
   await exec(`${ideCmd} ${path}:${lineNumber ? lineNumber : ''}`);
 }
@@ -128,8 +128,8 @@ function getLineNumberOfTextInFile(path: string, codeText: string) {
 
 export function exactMatchedFileIndex(foundItems: any, searchTerm: string) {
   // {folders: folders, files: files}
-  let angularSuffix = '.component.html';
-  let ionicSuffix = '.page.html';
+  const angularSuffix = '.component.html';
+  const ionicSuffix = '.page.html';
   return foundItems.files.findIndex((file: any) => file.name === searchTerm + angularSuffix || file.name === searchTerm + ionicSuffix);
 }
 
