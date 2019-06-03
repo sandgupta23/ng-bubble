@@ -1,10 +1,8 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import {ILineFinderData, lineToOpen} from './line-finder';
+import {ILineFinderData} from './line-finder';
 import {EIdeNames} from '../enums';
 import {SERVER_PORT, WEBSOCKET_PORT} from './constants';
-import {Utils} from 'tslint';
-import {UtilityService} from '../../src/app/utility.service';
 
 const util = require('util');
 const tcpPortUsed = require('tcp-port-used');
@@ -39,8 +37,7 @@ export function getAngularConfig() {
   let path = fs.existsSync(getAngular5JsonPath()) && getAngular5JsonPath();
   if (path) { return {path, version: 5}; }
   path = path || (fs.existsSync(getAngular2JsonPath()) && getAngular2JsonPath());
-  if (path) { return {path, version: 2}; }
-  else { return null; }
+  if (path) { return {path, version: 2}; } else { return null; }
 }
 
 export function checkIfVscode() {
@@ -113,11 +110,10 @@ export async function getFileContent(path: string) {
 }
 
 export async function setFileContent(path: string, data: string) {
-  let fileContent;
   try {
     return await writeFile(path, data);
   } catch (e) {
-
+    console.log(e);
   }
   return null;
 }
