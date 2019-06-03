@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, DoCheck, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, DoCheck, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {UtilityService} from './utility.service';
 import {FormBuilder, NgForm} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -10,7 +10,8 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements DoCheck {
-  title = 'ng-bubble-elements';
+  @Input() title = 'ng-bubble-elements';
+  @Output() test = new EventEmitter();
   testForm: NgForm;
   @ViewChild('form') form:NgForm;
 

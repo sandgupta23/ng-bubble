@@ -66,4 +66,25 @@ export class ComponentInstanceService {
 
     return name;
   };
+
+  public static iteratePropertyDecorators(instance, fn: (key: string, decorator) => void){
+    debugger;
+    if (instance == null) {
+      return;
+    }
+
+    const decorators = this.propertyDecorators(instance);
+      debugger;
+    // for (const key of Object.keys(decorators)) {
+    //   for (const meta of decorators[key]) {
+    //     fn(key, meta);
+    //   }
+    // }
+  };
+
+  private static propertyDecorators(instance): Array<any>{
+    return Reflect.getOwnMetadata('propMetadata', instance.constructor) || [];
+  }
+
+
 }
