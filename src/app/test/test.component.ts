@@ -5,12 +5,12 @@ import {ChangeDetectorRef, Component} from '@angular/core';
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.scss']
 })
-export class TestComponent{
+export class TestComponent {
   counter = 0;
   constructor(private changeDetectorRef: ChangeDetectorRef) { }
-  name  = "test1";
+  name  = 'test1';
 
-  counterButtonHandler(){
+  counterButtonHandler() {
     ++this.counter;
     this.changeDetectorRef.detectChanges();
   }

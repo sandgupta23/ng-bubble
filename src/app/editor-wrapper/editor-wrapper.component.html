@@ -79,7 +79,7 @@
     <div #editorRight style="background-color: #0a001f;width: 50%; overflow-y: scroll">
       <ngx-json-viewer
         *ngIf="!headerForm.get('editorMode').value"
-        class="jsb-json-viewer" (click)="test()" [json]="codeData|objectByProbablePath:keySearchKeyword|sortObject"
+        class="jsb-json-viewer" (click)="test()" [json]="codeData|objectByProbablePath:keySearchKeyword|SortObject"
         [expanded]="!shouldFoldCode"></ngx-json-viewer>
       <!---->
       <jsb-editor *ngIf="headerForm.get('editorMode').value"

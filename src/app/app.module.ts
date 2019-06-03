@@ -30,10 +30,10 @@ import {APP_BASE_HREF} from '@angular/common';
 import {environment} from '../environments/environment';
 import { ChangedPrefixComponent } from './changed-prefix/changed-prefix.component';
 import { MinimizePlaceholderComponent } from './editor-wrapper/minimize-placeholder/minimize-placeholder.component';
-import {sortObject} from './sort-object.pipe';
+import {SortObjectPipe} from './sort-object.pipe';
 import {HttpClientModule} from '@angular/common/http';
 
-const bootstrapComponents = !environment.production? [AppComponent]:[];
+const bootstrapComponents = !environment.production ? [AppComponent] : [];
 
 @NgModule({
   declarations: [
@@ -55,7 +55,7 @@ const bootstrapComponents = !environment.production? [AppComponent]:[];
     JsConsoleComponent,
     DataTypePipe,
     ObjectByProbablePathPipe,
-    sortObject,
+    SortObjectPipe,
     ChangedPrefixComponent,
     MinimizePlaceholderComponent,
   ],
@@ -85,14 +85,14 @@ const bootstrapComponents = !environment.production? [AppComponent]:[];
 })
 export class AppModule {
   constructor(private injector: Injector) {
-    if(!environment.production){
+    if (!environment.production) {
       const el = createCustomElement(EditorWrapperComponent, { injector: this.injector });
       customElements.define('js-bubble', el);
     }
   }
 
   ngDoBootstrap() {
-    if(environment.production){
+    if (environment.production) {
       const el = createCustomElement(EditorWrapperComponent, { injector: this.injector });
       customElements.define('js-bubble', el);
     }

@@ -9,17 +9,17 @@ declare const Reflect: any;
 @Injectable()
 export class ComponentInstanceService {
   private static injectedParameterDecorators(instance) {
-    let x=  Reflect.getOwnMetadata('parameters', instance.constructor)
+    const x =  Reflect.getOwnMetadata('parameters', instance.constructor)
       || instance.constructor.__parameters__
       || instance.constructor.__paramaters__; // angular 5.1 has a typo
     return x;
   }
 
   private static parameterTypes(instance): Array<any> {
-    let x =  (Reflect.getOwnMetadata('design:paramtypes', instance.constructor) || [])
+    const x =  (Reflect.getOwnMetadata('design:paramtypes', instance.constructor) || [])
       .map(param => typeof param !== 'function' || param.name === 'Object' ? null : param);
     return x;
-  };
+  }
 
   public static getDependencies(instance) {
     const parameterDecorators = this.injectedParameterDecorators(instance) || [];
@@ -34,14 +34,14 @@ export class ComponentInstanceService {
           : 'unknown'
       );
 
-    let x = normalizedParamTypes
+    const x = normalizedParamTypes
       .filter(paramType => typeof paramType === 'function')
       .map((paramType, i) => ({
         name: this.functionName(paramType) || paramType.toString(),
         decorators: parameterDecorators[i] ? parameterDecorators[i].map(d => d.toString()) : [],
       }));
     return x;
-  };
+  }
 
   private static functionName(fn: Function): string {
     const extract = (value: string) => value.match(/^function ([^\(]*)\(/);
@@ -65,24 +65,24 @@ export class ComponentInstanceService {
     }
 
     return name;
-  };
+  }
 
-  public static iteratePropertyDecorators(instance, fn: (key: string, decorator) => void){
-    debugger;
+  public static iteratePropertyDecorators(instance, fn: (key: string, decorator) => void) {
+
     if (instance == null) {
       return;
     }
 
     const decorators = this.propertyDecorators(instance);
-      debugger;
+
     // for (const key of Object.keys(decorators)) {
     //   for (const meta of decorators[key]) {
     //     fn(key, meta);
     //   }
     // }
-  };
+  }
 
-  private static propertyDecorators(instance): Array<any>{
+  private static propertyDecorators(instance): Array<any> {
     return Reflect.getOwnMetadata('propMetadata', instance.constructor) || [];
   }
 

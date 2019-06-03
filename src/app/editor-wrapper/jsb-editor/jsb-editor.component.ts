@@ -10,31 +10,20 @@ import {LoggingService} from '../logging.service';
   styleUrls: ['./jsb-editor.component.scss']
 })
 export class JsbEditorComponent implements OnInit, AfterViewInit {
+  @Input() set codeText(val: object|string) {
+
+    setTimeout(() => {
+      this._codeText = this.stringifyInput(val, this.level);
+      this.setValueInCodeMirror(this.codemirror, this._codeText);
+    });
+  }
+
+  constructor() {
+  }
 
   @ViewChild('textEditorPlaceholder') textEditorPlaceholder: ElementRef;
 
   @Input() level = 3;
-  @Input() set codeText(val: object|string) {
-
-    setTimeout(()=>{
-      this._codeText = this.stringifyInput(val, this.level);
-      this.setValueInCodeMirror(this.codemirror, this._codeText);
-    })
-  }
-
-  stringifyInput(val: any, level:number): string {
-
-    if (val === null) return '';/*undef*/
-    if (val === '') return '';/*undef*/
-    if (val === undefined) return '';/*undef*/
-    let output;
-    try {
-      output=  typeof val === 'function' || typeof val === 'object' ? JSON.stringify(val,null, '\t') : val;//val.toString();
-    }catch (e) {
-      LoggingService.log(e);
-    }
-    return output;
-  }
 
 
   _codeText: string;
@@ -42,17 +31,30 @@ export class JsbEditorComponent implements OnInit, AfterViewInit {
 
   codemirror;
 
-  constructor() {
+  @Input() shouldFoldCode = true;
+
+  stringifyInput(val: any, level: number): string {
+
+    if (val === null) { return ''; }/*undef*/
+    if (val === '') { return ''; }/*undef*/
+    if (val === undefined) { return ''; }/*undef*/
+    let output;
+    try {
+      output =  typeof val === 'function' || typeof val === 'object' ? JSON.stringify(val, null, '\t') : val; // val.toString();
+    } catch (e) {
+      LoggingService.log(e);
+    }
+    return output;
   }
 
   ngOnInit() {
-    EventService.foldCodeInCodemirror$.subscribe((shouldFoldCode)=>{
-      if(shouldFoldCode){
+    EventService.foldCodeInCodemirror$.subscribe((shouldFoldCode) => {
+      if (shouldFoldCode) {
         // UtilityService.foldCode(this.codemirror);
-      }else {
+      } else {
         // UtilityService.unfoldCode(this.codemirror);
       }
-    })
+    });
   }
 
   ngAfterViewInit(): void {
@@ -67,8 +69,6 @@ export class JsbEditorComponent implements OnInit, AfterViewInit {
     });
   }
 
-  @Input() shouldFoldCode = true;
-
   setValueInCodeMirror(codemirror, codeText: string) {
 
     if (!codemirror) {
@@ -77,15 +77,15 @@ export class JsbEditorComponent implements OnInit, AfterViewInit {
     }
     codemirror.setValue(codeText);
     codemirror.operation(() => {
-      setTimeout(()=>{
+      setTimeout(() => {
 
         // if (this.shouldFoldCode) UtilityService.foldCode(codemirror);
-      })
+      });
     });
   }
 
 
-  unfoldCode(codemirror){
+  unfoldCode(codemirror) {
     // UtilityService.unfoldCode(codemirror);
   }
 

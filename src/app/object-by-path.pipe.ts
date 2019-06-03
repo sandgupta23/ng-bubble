@@ -10,7 +10,7 @@ export class ObjectByPathPipe implements PipeTransform {
     let output;
     try {
       output = UtilityService.getChildObjectByPath(obj, path);
-    }catch (e) {
+    } catch (e) {
       output = {};
     }
     return output;

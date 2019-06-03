@@ -63,7 +63,7 @@ export class JsbEditorSidebarComponent implements OnInit {
 
   ngOnInit() {
 
-    //console.log(this.config);
+    // console.log(this.config);
   }
 
 }

@@ -5,28 +5,28 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
   templateUrl: './js-console.component.html',
   styleUrls: ['./js-console.component.scss']
 })
-export class JsConsoleComponent implements OnInit {
+export class JsConsoleComponent /*implements OnInit*/ {
 
-  rowCount = 2;
-  name="1+1";
-  editable = true;
-  constructor() { }
-  results = [];
-  @ViewChild('codeContent') codeContent: ElementRef;
-
-  ngOnInit() {
-  }
-  test($event){
-    this.rowCount++;
-    $event.stopPropagation();
-  }
-
-  executeCode(){
-    // let x = eval(this.codeContent.nativeElement.textContent);
-    let x =  eval("function hello(){}");
-    
-    this.results.push(x);
-    this.codeContent.nativeElement.textContent = "";
-  }
+  // rowCount = 2;
+  // name = '1+1';
+  // editable = true;
+  // constructor() { }
+  // results = [];
+  // @ViewChild('codeContent') codeContent: ElementRef;
+  //
+  // ngOnInit() {
+  // }
+  // test($event) {
+  //   this.rowCount++;
+  //   $event.stopPropagation();
+  // }
+  //
+  // executeCode() {
+  //   // let x = eval(this.codeContent.nativeElement.textContent);
+  //   const x =  eval('function hello(){}');
+  //
+  //   this.results.push(x);
+  //   this.codeContent.nativeElement.textContent = '';
+  // }
 
 }

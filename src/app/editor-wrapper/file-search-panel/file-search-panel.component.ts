@@ -5,10 +5,10 @@ import {EventService} from '../../event.service';
 import {Subscription} from 'rxjs';
 
 export interface IFileData {
-  'name': string,
-  'type': string,
-  'path': string,
-  'size': number,
+  'name': string;
+  'type': string;
+  'path': string;
+  'size': number;
 }
 
 @Component({
@@ -25,9 +25,9 @@ export class FileSearchPanelComponent implements OnInit, OnDestroy {
   files: IFileData[];
   searchForm: FormGroup;
   selectedRow = 0;
-  searchResultsFinishSub:Subscription;
+  searchResultsFinishSub: Subscription;
   BACKEND_IMG_ROOT = 'http://localhost:11637/assets/imgs/';
-  constructor(private utilityService: UtilityService, private changeDetectorRef:ChangeDetectorRef) {}
+  constructor(private utilityService: UtilityService, private changeDetectorRef: ChangeDetectorRef) {}
 
 
   ngOnInit() {
@@ -53,7 +53,7 @@ export class FileSearchPanelComponent implements OnInit, OnDestroy {
       if (this.selectedRow > 0) {
         --this.selectedRow;
       } else {
-        this.selectedRow = Math.min(this.files.length, 10) -1;
+        this.selectedRow = Math.min(this.files.length, 10) - 1;
       }
     }
     if (event.key === 'Enter') {
@@ -63,18 +63,18 @@ export class FileSearchPanelComponent implements OnInit, OnDestroy {
     this.changeDetectorRef.detectChanges();
   }
 
-  inputClickHandler(){
+  inputClickHandler() {
 
   }
 
-  openInIde(file:IFileData){
+  openInIde(file: IFileData) {
     this.openInIde$.emit(file);
   }
 
   ngOnDestroy(): void {
     try {
       this.searchResultsFinishSub.unsubscribe();
-    }catch (e) {
+    } catch (e) {
 
     }
   }

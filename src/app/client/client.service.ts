@@ -11,8 +11,8 @@ export class ClientService {
   private static isConnected = false;
   static init = function () {
 
-    if(!ClientService.$editorEl){
-      alert("ng-bubble:: Did you forget to add <js-bubble></js-bubble> before script?")
+    if (!ClientService.$editorEl) {
+      alert('ng-bubble:: Did you forget to add <js-bubble></js-bubble> before script?');
       return;
     }
 
@@ -27,12 +27,12 @@ export class ClientService {
     ClientService.eventInit();
 
     if ((<any>window).NG_BUBBLE_IMPORTED) {
-      //console.error('Error: ng-bubble has been imported more than once');
+      // console.error('Error: ng-bubble has been imported more than once');
     }
   };
 
   static emitHoveredComponentData(component: object) {
-    let ngProbeData: INgProbeData = Helper.getComponentDataInstanceFromNode(NgBubbleDom.$selectedComponent);
+    const ngProbeData: INgProbeData = Helper.getComponentDataInstanceFromNode(NgBubbleDom.$selectedComponent);
     NgBubbleDom.selectedComponent = ngProbeData.componentInstance;
     // let codeStr = stringify1(componentInstance);
     // ClientService.$editorEl.setAttribute(EEditorInput.componentstr, codeStr);
@@ -50,14 +50,14 @@ export class ClientService {
       return;
     }
     try {
-      let ngProbeData: INgProbeData = Helper.getComponentDataInstanceFromNode($selectedComponent);
-      let componentInstance = ngProbeData.componentInstance;
+      const ngProbeData: INgProbeData = Helper.getComponentDataInstanceFromNode($selectedComponent);
+      const componentInstance = ngProbeData.componentInstance;
       NgBubbleDom.selectedComponent = componentInstance;
       ClientService.setEditorAttribute(EEditorInput.componentstr, ngProbeData);
-      let payload = Helper.createLineFinderPayload(componentInstance, null);
+      const payload = Helper.createLineFinderPayload(componentInstance, null);
       ClientService.sendMessageToServer({type: EWSTypes.COMPONENT_FILE_SEARCH, payload});
     } catch (e) {
-      //console.error(e);
+      // console.error(e);
     }
   }
 
@@ -68,7 +68,7 @@ export class ClientService {
   static setEditorAttribute(key: EEditorInput, value: any) {
     // ClientService.$editorEl.setAttribute(key, value);
     try {
-      let editorMember = ClientService.$editorEl[key];
+      const editorMember = ClientService.$editorEl[key];
       if (typeof editorMember === 'function') {
         editorMember(value);
       } else {
@@ -81,20 +81,20 @@ export class ClientService {
   }
 
 
-  private static openInIdeByNode(node:HTMLElement){
-    let target = node;
-    let $componentNode: HTMLElement | null = Helper.getParentComponentNode(target);
-    let ngProbeData = Helper.getComponentDataInstanceFromNode($componentNode);
+  private static openInIdeByNode(node: HTMLElement) {
+    const target = node;
+    const $componentNode: HTMLElement | null = Helper.getParentComponentNode(target);
+    const ngProbeData = Helper.getComponentDataInstanceFromNode($componentNode);
     console.info($componentNode);
     // let $componentNode: HTMLElement | null = ngProbeData.componentNode;
-    let componentInstance = ngProbeData.componentInstance;
-    let componentXPath = Helper.getXPathByElement($componentNode);
+    const componentInstance = ngProbeData.componentInstance;
+    const componentXPath = Helper.getXPathByElement($componentNode);
     if ($componentNode) {
       NgBubbleDom.selectedComponent = componentInstance;
       NgBubbleDom.$selectedComponent = $componentNode;
       NgBubbleDom.selectedElXpath = componentXPath;
       Helper.setState({selectedElXpath: componentXPath});
-      let payload = Helper.createLineFinderPayload(componentInstance, target);
+      const payload = Helper.createLineFinderPayload(componentInstance, target);
 
       /**
        * If ctrl === true, double click on any component will open component file in IDE
@@ -112,13 +112,13 @@ export class ClientService {
 
   static eventInit() {
     ClientService.$editorEl.addEventListener('log$', (event: CustomEvent) => {
-      let key = event.detail.key;
-      let clone = event.detail.clone;
+      const key = event.detail.key;
+      const clone = event.detail.clone;
       if (!NgBubbleDom.selectedComponent) {
         //
         return;
       }
-      if (!key || key == 'All') {
+      if (!key || key === 'All') {
         //
       } else {
         //
@@ -127,8 +127,8 @@ export class ClientService {
 
     ClientService.$editorEl.addEventListener(EEditor_EVENTS.file_save_start$, (event: CustomEvent) => {
 
-      let fileContent = event.detail.fileContent;
-      let pathToOpen = event.detail.pathToOpen;
+      const fileContent = event.detail.fileContent;
+      const pathToOpen = event.detail.pathToOpen;
       ClientService.sendMessageToServer({
         type: EWSTypes.setFileByPath, payload: {
           file: fileContent,
@@ -138,20 +138,20 @@ export class ClientService {
     });
 
     ClientService.$editorEl.addEventListener('searchTrigger$', (event: CustomEvent) => {
-      let keyword = event.detail;
+      const keyword = event.detail;
       ClientService.sendMessageToServer({type: EWSTypes.SEARCH, payload: {file: keyword}});
     });
     ClientService.$editorEl.addEventListener('getFileTrigger$', (event: CustomEvent) => {
-      let keyword = event.detail;
+      const keyword = event.detail;
       ClientService.sendMessageToServer({type: EWSTypes.getFileByPath, payload: {pathToOpen: keyword}});
     });
     ClientService.$editorEl.addEventListener('openInIde$', (event: CustomEvent) => {
 
-      let data = event.detail;
-      if(data.pathToOpen){
+      const data = event.detail;
+      if (data.pathToOpen) {
         ClientService.openComponentFileInIde(data);
       }
-      if(data.node){
+      if (data.node) {
         ClientService.openInIdeByNode(data.node);
       }
 
@@ -172,21 +172,21 @@ export class ClientService {
     });
 
     ClientService.$editorEl.addEventListener('shutDown$', (event: CustomEvent) => {
-      this.sendMessageToServer({type:EWSTypes.shutDown});
+      this.sendMessageToServer({type: EWSTypes.shutDown});
       location.reload();
     });
 
     ClientService.$editorEl.addEventListener('getHoveredComponentData$', (event: CustomEvent) => {
 
-      let $selectedComponentNode: any = NgBubbleDom.$hoveredComponent || (NgBubbleDom.selectedElXpath && Helper.getElementByXpath(NgBubbleDom.selectedElXpath));
-      if (!$selectedComponentNode) return;
+      const $selectedComponentNode: any = NgBubbleDom.$hoveredComponent || (NgBubbleDom.selectedElXpath && Helper.getElementByXpath(NgBubbleDom.selectedElXpath));
+      if (!$selectedComponentNode) { return; }
       ClientService.emitSelectedComponentData($selectedComponentNode);
       /*
       * Only if no selectedElXpath is present, initiate it. This is because hovered components have
       * lower priority.
       * */
 
-      let componentXPath = Helper.getXPathByElement($selectedComponentNode);
+      const componentXPath = Helper.getXPathByElement($selectedComponentNode);
       NgBubbleDom.selectedElXpath = componentXPath;
 
       Helper.setState({selectedElXpath: componentXPath});
@@ -198,19 +198,19 @@ export class ClientService {
       ClientService.setEditorAttribute(EEditorInput.showTooltipAttr, false);
     });
     document.addEventListener('dblclick', ($event) => {
-      let target = $event.target as HTMLElement;
-      let $componentNode: HTMLElement | null = Helper.getParentComponentNode(target);
-      let ngProbeData = Helper.getComponentDataInstanceFromNode($componentNode);
+      const target = $event.target as HTMLElement;
+      const $componentNode: HTMLElement | null = Helper.getParentComponentNode(target);
+      const ngProbeData = Helper.getComponentDataInstanceFromNode($componentNode);
       console.info($componentNode);
       // let $componentNode: HTMLElement | null = ngProbeData.componentNode;
-      let componentInstance = ngProbeData.componentInstance;
-      let componentXPath = Helper.getXPathByElement($componentNode);
+      const componentInstance = ngProbeData.componentInstance;
+      const componentXPath = Helper.getXPathByElement($componentNode);
       if ($componentNode) {
         NgBubbleDom.selectedComponent = componentInstance;
         NgBubbleDom.$selectedComponent = $componentNode;
         NgBubbleDom.selectedElXpath = componentXPath;
         Helper.setState({selectedElXpath: componentXPath});
-        let payload = Helper.createLineFinderPayload(componentInstance, target);
+        const payload = Helper.createLineFinderPayload(componentInstance, target);
 
         /**
          * If ctrl === true, double click on any component will open component file in IDE
@@ -238,24 +238,24 @@ export class ClientService {
         return;
       }
 
-      let target = $event.target as HTMLElement;
+      const target = $event.target as HTMLElement;
       ////
       let $component: HTMLElement;
-      let componentData = Helper.getComponentDataInstanceFromNode(<HTMLElement>$event.target);
-      if(!componentData){
+      const componentData = Helper.getComponentDataInstanceFromNode(<HTMLElement>$event.target);
+      if (!componentData) {
         return;
       }
       $component = componentData.componentNode;
-      //console.log($component);
+      // console.log($component);
       NgBubbleDom.$hoveredComponent = $component;
-      if (!$component) return;
+      if (!$component) { return; }
 
-      let componentXPath = Helper.getXPathByElement($component);
+      const componentXPath = Helper.getXPathByElement($component);
 
 
       NgBubbleDom.hoveredElXpath = componentXPath;
-      let rect = $component.getBoundingClientRect();
-      let x = {
+      const rect = $component.getBoundingClientRect();
+      const x = {
         left: rect.left,
         top: rect.top,
         componentName: Helper.getComponentDataInstanceFromNode($component).componentInstance.constructor.name,
@@ -270,7 +270,7 @@ export class ClientService {
 
 
 
-  static sendMessageToServer(data: { type: EWSTypes, payload?:ILineFinderData }) {
+  static sendMessageToServer(data: { type: EWSTypes, payload?: ILineFinderData }) {
     ClientService.setEditorAttribute(EEditorInput.isLoading, true);
     NgBubbleSocket.sendMessage(data);
   }
@@ -285,25 +285,25 @@ export class ClientService {
     ClientService.setEditorAttribute(EEditorInput.isLoading, false);
     ClientService.setEditorAttribute(EEditorInput.status, {connection: true});
     ClientService.sendMessageToServer({type: EWSTypes.getConfig});
-  };
+  }
 
   static websocketOnMessageCB = function (event) {
     ClientService.setEditorAttribute(EEditorInput.isLoading, false);
     ClientService.setEditorAttribute(EEditorInput.isLoading, false);
-    if (!event) return;
-    let data: IWSData = JSON.parse(event.data);
-    let payload: any = data.payload;
+    if (!event) { return; }
+    const data: IWSData = JSON.parse(event.data);
+    const payload: any = data.payload;
     if (data.type === EWSTypes.SEARCH) {
-      let files = payload.files || [];
+      const files = payload.files || [];
       ClientService.setEditorAttribute(EEditorInput.searchfiles, files);
     }
     if (data.type === EWSTypes.COMPONENT_FILE_SEARCH) {
-      let files = payload.files || [];
+      const files = payload.files || [];
       ClientService.setEditorAttribute(EEditorInput.componentfiles, files);
     }
     if (data.type === EWSTypes.getFileByPath) {
       /*TODO: unfortunate key naming here*/
-      let fileContent = payload.file || [];
+      const fileContent = payload.file || [];
       ClientService.setEditorAttribute(EEditorInput.filecontent, fileContent);
     }
     if (data.type === EWSTypes.getConfig) {
@@ -315,7 +315,7 @@ export class ClientService {
   static websocketOnErrorCB = (err) => {
     ClientService.setEditorAttribute(EEditorInput.isLoading, false);
     ClientService.setEditorAttribute(EEditorInput.status, {connection: false});
-  };
+  }
 
 
 }

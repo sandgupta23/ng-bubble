@@ -3,9 +3,9 @@ import {FormGroup} from '@angular/forms';
 import {IFileData} from '../file-search-panel/file-search-panel.component';
 
 export enum EHeaderFormDataKeys {
-  key="key",
-  fileName="fileName",
-  editorMode="editorMode",
+  key= 'key',
+  fileName= 'fileName',
+  editorMode= 'editorMode',
 }
 
 @Component({
@@ -15,17 +15,17 @@ export enum EHeaderFormDataKeys {
 })
 export class EditorHeaderComponent implements OnInit {
 
-  subpaths:string[] = [];
+  subpaths: string[] = [];
 
   @Input() componentFiles: IFileData[];
   @Input() componentKeys: string[];
   @Input() headerForm: FormGroup;
   @Input() minimize = false;
   @Input() expand = false;
-  @Input() activeTab:EHeaderFormDataKeys;
-  @Input() set path(val:string){
+  @Input() activeTab: EHeaderFormDataKeys;
+  @Input() set path(val: string) {
 
-    if(!val) this.subpaths = [];
+    if (!val) { this.subpaths = []; }
     this.subpaths = val.split(' ');
   }
 
@@ -34,29 +34,29 @@ export class EditorHeaderComponent implements OnInit {
   @Output() path$ = new EventEmitter();
   myEHeaderFormDataKeys = EHeaderFormDataKeys;
   BACKEND_IMG_ROOT = 'http://localhost:11637/assets/imgs/';
-  constructor(private changeDetectorRef:ChangeDetectorRef) { };
+  constructor(private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     /*todo: do this in parent component*/
-    this.headerForm.get('key').valueChanges.subscribe((value)=>{
-      this.headerDataChanged$.emit({key:value});
+    this.headerForm.get('key').valueChanges.subscribe((value) => {
+      this.headerDataChanged$.emit({key: value});
     });
-    this.headerForm.get('fileName').valueChanges.subscribe((value)=>{
-      this.headerDataChanged$.emit({fileName:value});
-    })
+    this.headerForm.get('fileName').valueChanges.subscribe((value) => {
+      this.headerDataChanged$.emit({fileName: value});
+    });
     this.changeDetectorRef.detectChanges();
   }
-  log(){
+  log() {
       //
   }
 
-  sendPath(index){
+  sendPath(index) {
 
-    if(index === -1){
+    if (index === -1) {
       this.path$.emit('');
     }
-    this.subpaths = this.subpaths.slice(0, index+1);
-    this.path$.emit(this.subpaths.join(" "))
+    this.subpaths = this.subpaths.slice(0, index + 1);
+    this.path$.emit(this.subpaths.join(' '));
   }
 
 }

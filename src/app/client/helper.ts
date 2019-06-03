@@ -1,6 +1,7 @@
 import {ILineFinderData, INgProbeData} from './interface';
 import jsonPrune from 'json-prune';
 import {NgBubbleConstant} from './constant';
+
 // declare let ng: any;
 export class Helper {
   static camelCaseToDotCase(camel: string) {
@@ -9,25 +10,27 @@ export class Helper {
 
   static tagToFileName(tag: string, ext: string = '') {
     if (!ext) {
-      throw 'no extension provided';
+      throw new Error('no extension provided');
     }
     if (!tag) {
-      throw 'no tagName provided';
+      throw new Error('no tagName provided');
     }
     // return tag.replace(COMPONENT_PREFIX, '') + '.component.' + ext;
     return this.removeComponentPrefix(tag) + '.component.' + ext;
   }
 
   static removeComponentPrefix(tag: string) {
-    if (!tag) throw 'removeComponentPrefix: no tag in removeComponentPrefix';
-    let tagSplits: string[] = tag.split('-');
+    if (!tag) {
+      throw new Error('removeComponentPrefix: no tag in removeComponentPrefix');
+    }
+    const tagSplits: string[] = tag.split('-');
     tagSplits.shift();
     return tagSplits.join('.');
   }
 
   static getRootEl(possibleTags: string[]) {
-    for (let tag of possibleTags) {
-      let elements = document.getElementsByTagName(tag);
+    for (const tag of possibleTags) {
+      const elements = document.getElementsByTagName(tag);
       if (elements && elements[0]) {
         return elements[0];
       }
@@ -35,21 +38,15 @@ export class Helper {
   }
 
 
-  static getParentComponentNode($node:HTMLElement):HTMLElement{
-    debugger;
-    /*hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-    *
-    *
-    *
-    *look at utility
-    * */
+  static getParentComponentNode($node: HTMLElement): HTMLElement {
+
     let $temp = $node;
-    if(!$temp){
+    if (!$temp) {
       return;
     }
 
-    do{
-      if(Helper.isNodeCustomComponent($temp)){
+    do {
+      if (Helper.isNodeCustomComponent($temp)) {
         return $temp;
       }
       $temp = $temp.parentElement;
@@ -58,18 +55,22 @@ export class Helper {
     return null;
   }
 
-  private static isNodeBody($node){
-    if(!$node){
+  private static isNodeBody($node) {
+    if (!$node) {
       return false;
     }
-    if($node.tagName.startsWith('BODY') || $node.tagName.startsWith('HTML')) return true;
+    if ($node.tagName.startsWith('BODY') || $node.tagName.startsWith('HTML')) {
+      return true;
+    }
   }
 
-  private static isNodeCustomComponent($node:HTMLElement){
-    if(!$node){
+  private static isNodeCustomComponent($node: HTMLElement) {
+    if (!$node) {
       return false;
     }
-    if($node.tagName.startsWith(NgBubbleConstant.LOCAL_CONFIG.angularPrefix.toUpperCase() + '-')) return true;
+    if ($node.tagName.startsWith(NgBubbleConstant.LOCAL_CONFIG.angularPrefix.toUpperCase() + '-')) {
+      return true;
+    }
   }
 
 
@@ -79,8 +80,8 @@ export class Helper {
   //   }
   // }
 
-  static isComponentNode(node$:HTMLElement, component:any ){
-    let tagNameSplits:string[] = node$.tagName.split("-");
+  static isComponentNode(node$: HTMLElement, component: any) {
+    const tagNameSplits: string[] = node$.tagName.split('-');
     tagNameSplits.shift();
     return tagNameSplits.join('').toLowerCase() === component.constructor.name.toLowerCase()
       || tagNameSplits.join('').toLowerCase() + 'component' === component.constructor.name.toLowerCase()
@@ -91,19 +92,19 @@ export class Helper {
    * getComponentDataInstanceFromNode: get parent component of any html element
    * */
   static getComponentDataInstanceFromNode($el: HTMLElement): INgProbeData {
-    if(!(<any>window).ng){
+    if (!(<any>window).ng) {
       return;
     }
-    let probeData = (<any>window).ng.probe($el);
+    const probeData = (<any>window).ng.probe($el);
 
     if (!probeData) {
-      //console.error('NG:BUBBLE::Could not found related component') ;
+      // console.error('NG:BUBBLE::Could not found related component') ;
       return;
     }
-    let componentInstance = probeData.componentInstance;
+    const componentInstance = probeData.componentInstance;
 
-    let componentNode = this.isComponentNode($el, componentInstance)? $el: probeData.parent && probeData.parent.nativeElement;
-    let injector = probeData.injector;
+    const componentNode = this.isComponentNode($el, componentInstance) ? $el : probeData.parent && probeData.parent.nativeElement;
+    const injector = probeData.injector;
     if (!componentInstance) {
       return null;
     }
@@ -115,7 +116,7 @@ export class Helper {
   }
 
   static createLineFinderPayload(componentInstance: object, target$) {
-    let componentName = componentInstance.constructor.name;
+    const componentName = componentInstance.constructor.name;
     // let dashNameSplits = dashedName.split(" ");
     let payload: ILineFinderData = {
       // tagName: componentTag,
@@ -153,8 +154,8 @@ export class Helper {
     * keys: keys which are to be stringified
     * */
   static stringify1(obj: object, keys?: string[]) {
-    let newObj: any = {};
-    let keysToStringify: string[] = (Array.isArray(keys) && keys.length > 0 && keys) || Object.keys(obj);
+    const newObj: any = {};
+    const keysToStringify: string[] = (Array.isArray(keys) && keys.length > 0 && keys) || Object.keys(obj);
     keysToStringify.forEach((key) => {
       newObj[key] = obj[key];
     });
@@ -168,19 +169,23 @@ export class Helper {
   static getXPathByElement(element) {
 
 
-    if (element.id !== '')
+    if (element.id !== '') {
       return 'id("' + element.id + '")';
-    if (element === document.body)
+    }
+    if (element === document.body) {
       return element.tagName;
+    }
 
-    var ix = 0;
-    var siblings = element.parentNode.childNodes;
-    for (var i = 0; i < siblings.length; i++) {
-      var sibling = siblings[i];
-      if (sibling === element)
+    let ix = 0;
+    const siblings = element.parentNode.childNodes;
+    for (let i = 0; i < siblings.length; i++) {
+      const sibling = siblings[i];
+      if (sibling === element) {
         return this.getXPathByElement(element.parentNode) + '/' + element.tagName + '[' + (ix + 1) + ']';
-      if (sibling.nodeType === 1 && sibling.tagName === element.tagName)
+      }
+      if (sibling.nodeType === 1 && sibling.tagName === element.tagName) {
         ix++;
+      }
     }
   }
 
@@ -209,9 +214,9 @@ export class Helper {
 
 
   static setState(data: object = {}) {
-    let stateStr: any = localStorage.getItem('NG_BUBBLE_STATE');
-    let state = JSON.parse(stateStr);
-    let x = this.jsonStringifyCyclic({...state, ...data});
+    const stateStr: any = localStorage.getItem('NG_BUBBLE_STATE');
+    const state = JSON.parse(stateStr);
+    const x = this.jsonStringifyCyclic({...state, ...data});
     localStorage.setItem('NG_BUBBLE_STATE', x);
   }
 
@@ -228,24 +233,26 @@ export class Helper {
     // return  JSON.stringify(jc.decycle(obj));
 
     let output;
-      try {
-        output = jsonPrune(obj, 5);
-      }catch (e) {
-        output = {};
+    try {
+      output = jsonPrune(obj, 5);
+    } catch (e) {
+      output = {};
 
-      }
-      return output;
+    }
+    return output;
   }
 
   static removeChildFromParent($el: HTMLElement) {
-    let parent = $el.parentElement;
+    const parent = $el.parentElement;
     // if(parent) parent.removeChild($el);
   }
 
   static removeChildrenWithClassName(className: string) {
-    let elements = Array.from(document.getElementsByClassName(className));
+    const elements = Array.from(document.getElementsByClassName(className));
     elements.forEach((el) => {
-      el.parentNode && el.parentNode.removeChild(el);
+      if (el.parentNode) {
+        el.parentNode.removeChild(el);
+      }
     });
   }
 }

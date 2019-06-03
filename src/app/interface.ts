@@ -11,13 +11,13 @@ export interface IStore {
   HeaderFormValue?: object;
   minimize?: boolean;
   expand?: boolean;
-  editorDisplayState?: EEditorDisplayState,
-  codeText?: string,
-  selectedElXpath?:string
+  editorDisplayState?: EEditorDisplayState;
+  codeText?: string;
+  selectedElXpath?: string;
 }
 
 export interface ILocalConfig {
-  'preferredIde': string;//'WEBSTORM' || "VSCODE";
+  'preferredIde': string; // 'WEBSTORM' || "VSCODE";
   'inputTaken': boolean;
   'guess': boolean;
   'componentSelector': string;
@@ -26,6 +26,6 @@ export interface ILocalConfig {
 }
 
 export interface IDependency {
-  name:string,
-  decorators:any[]
+  name: string;
+  decorators: any[];
 }

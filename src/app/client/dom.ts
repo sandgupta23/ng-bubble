@@ -15,7 +15,7 @@ export class NgBubbleDom {
 
   static init() {
     /*state initialization from localstorage*/
-    let stateStr: any = localStorage.getItem('NG_BUBBLE_STATE');
+    const stateStr: any = localStorage.getItem('NG_BUBBLE_STATE');
     let state;
     if (stateStr) {
       try {
@@ -38,19 +38,19 @@ export class NgBubbleDom {
     this.$selectedComponent = <HTMLElement>Helper.getRootEl(NgBubbleConstant.possibleRootTags);
     if (this.$selectedComponent) {
       this.$hoveredComponent = this.$selectedComponent;
-      let componentData = Helper.getComponentDataInstanceFromNode(this.$selectedComponent);
+      const componentData = Helper.getComponentDataInstanceFromNode(this.$selectedComponent);
       this.selectedComponent = componentData ? componentData.componentInstance : null;
     }
     // selectedElXpath = $selectedComponent && getXPathByElement($selectedComponent);
   }
 
   static stateInitialization() {
-    let selectedElXpath = this.state.selectedElXpath;
+    const selectedElXpath = this.state.selectedElXpath;
     // let hoveredElXpath = state.hoveredElXpath;//
     // selectedElXpath = $selectedComponent && getXPathByElement($selectedComponent);
     this.$selectedComponent = <HTMLElement>Helper.getElementByXpath(selectedElXpath);
     // this.selectedComponent = Helper.getComponentDataInstanceFromNode(this.$selectedComponent).componentInstance;
-    let componentData = Helper.getComponentDataInstanceFromNode(this.$selectedComponent);
+    const componentData = Helper.getComponentDataInstanceFromNode(this.$selectedComponent);
     this.selectedComponent = componentData ? componentData.componentInstance : null;
     // $hoveredComponent = <HTMLElement>getElementByXpath(hoveredElXpath);
     // hoveredComponent = Helper.getComponentDataInstanceFromNode($hoveredComponent).componentInstance;

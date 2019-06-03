@@ -10,21 +10,21 @@ import {UtilityService} from '../../utility.service';
 export class ObjectTrayComponent implements OnInit {
 
   @Input() obj: object;
-  keys:string[];
+  keys: string[];
   myObject = Object;
   pinnedFieldStr;
   constructor() { }
-  @Input() path:string = "";
-  @Input() shouldFoldCode:boolean;
+  @Input() path = '';
+  @Input() shouldFoldCode: boolean;
   @Output() path$ = new EventEmitter();
   ngOnInit() {
     // this.keys = this.obj && Object.keys(this.obj)
-    
+
   }
 
-  finalPrint(path){
-    
-    this.path = this.path + " " + path;
+  finalPrint(path) {
+
+    this.path = this.path + ' ' + path;
     this.path = this.path.trim();
     this.path$.emit(this.path);
   }

@@ -9,18 +9,18 @@ export class MenuComponent implements OnInit {
 
   @Output() showTooltip$ = new EventEmitter();
   @Output() action$ = new EventEmitter();
-  @Input() set coords(val:{top:string, left:string}){
+  @Input() set coords(val: {top: string, left: string}) {
 
     this._coords = val;
-    if(!val) return;
+    if (!val) { return; }
     this.top = val.top;
     this.left = val.left;
     this.showMenu = false;
   }
   @Input() showFilesOptions = true;
   showMenu = false;
-  top:string = "0";
-  left:string = "0";
+  top = '0';
+  left = '0';
   _coords;
   constructor() { }
 

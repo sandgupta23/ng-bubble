@@ -26,7 +26,7 @@ import {ComponentInstanceService} from './component-instance.service';
 
 const COMPONENT_SELECTOR = 'app';
 
-const EXCLUDED_CONSTRUCTIONS = ['ViewRef_','ViewRef'];
+const EXCLUDED_CONSTRUCTIONS = ['ViewRef_', 'ViewRef'];
 
 export const sideBaseClasses = [
   'vs-code-grey',
@@ -64,23 +64,9 @@ export class UtilityService {
   constructor(private formBuilder: FormBuilder) {
   }
 
-  getHeaderForm() {
-    return this.formBuilder.group({
-      fileName: [''],
-      key: [''],
-      editorMode: [false],
-    });
-  }
-
-  getSearchForm() {
-    return this.formBuilder.group({
-      keyword: [''],
-    });
-  }
-
 
   static codeMirrorInit(editorTextArea) {
-    let codemirror = CodeMirror.fromTextArea(editorTextArea, {
+    const codemirror = CodeMirror.fromTextArea(editorTextArea, {
       lineNumbers: true,
       lineWrapping: true,
       theme: 'night',
@@ -89,8 +75,8 @@ export class UtilityService {
       moveInputWithCursor: false,
       pollInterval: 100000,
       extraKeys: {
-        'Ctrl-Q': function (codemirror: any) {
-          codemirror.foldCode(codemirror.getCursor());
+        'Ctrl-Q': function (cm: any) {
+          cm.foldCode(cm.getCursor());
         },
         'Ctrl-Space': 'autocomplete',
         'Alt-F': 'findPersistent'
@@ -122,7 +108,7 @@ export class UtilityService {
 
   static extractStoreData(obj) {
 
-    let x = storeKeys.reduce((total, key) => {
+    const x = storeKeys.reduce((total, key) => {
       return {...total, [key]: obj[key]};
     }, {});
     return x;
@@ -141,7 +127,7 @@ export class UtilityService {
 
     // obj = {...obj, ...Object.getPrototypeOf(obj)};
     console.log(Object.getPrototypeOf(obj));
-    var options = {
+    const options = {
       replacer: function (value, defaultValue, circular) {
         // if (circular) return '"-circular-"';
         if (circular) {
@@ -154,8 +140,8 @@ export class UtilityService {
           }
         }
         // if (circular) return JSON_STRIGIFY_SAFE(value);
-        if (value === undefined) return '"-undefined-"';
-        if (typeof value === 'function') return '"-method-"';
+        if (value === undefined) { return '"-undefined-"'; }
+        if (typeof value === 'function') { return '"-method-"'; }
         if (Array.isArray(value)) {
           return JSON.stringify(value);
         }
@@ -169,7 +155,7 @@ export class UtilityService {
     //   alert();
     // }
     (window as any).jsonPrune = jsonPrune;
-    let x = jsonPrune(obj, options, 4);
+    const x = jsonPrune(obj, options, 4);
 
 
     (window as any).JSON_STRIGIFY_SAFE = JSON_STRIGIFY_SAFE;
@@ -203,19 +189,20 @@ export class UtilityService {
 
     /*TODO: */
     setTimeout(() => {/*computation heavy task*/
-      for (var l = codemirror.firstLine(); l <= codemirror.lastLine(); ++l)
+      for (let l = codemirror.firstLine(); l <= codemirror.lastLine(); ++l) {
         if (l > 1) {
           codemirror.foldCode({line: l, ch: 0}, null, 'fold');
         }
+      }
     });
   }
 
   static getComponentWithoutInjectedMembers(ngProbeData: INgProbeData) {
-    let injector = ngProbeData.injector;
-    let componentInstance = ngProbeData.componentInstance;
-    let providers: any[] = injector['view']['root']['ngModule']['_providers'];
-    let x = Object.keys(componentInstance).reduce((total, key) => {
-      let val = componentInstance[key];
+    const injector = ngProbeData.injector;
+    const componentInstance = ngProbeData.componentInstance;
+    const providers: any[] = injector['view']['root']['ngModule']['_providers'];
+    const x = Object.keys(componentInstance).reduce((total, key) => {
+      const val = componentInstance[key];
       if (typeof val !== 'object' || !providers.find(e => e === val)) {
         return {...total, [key]: componentInstance[key]};
       }
@@ -226,8 +213,8 @@ export class UtilityService {
   }
 
   static getClickedSideBarIcon(clickEvent: Event) {
-    let target = clickEvent.target;
-    for (let className of sideBaseClasses) {
+    const target = clickEvent.target;
+    for (const className of sideBaseClasses) {
       if (UtilityService.hasClass(<HTMLElement>target, className)) {
         return className;
       }
@@ -240,9 +227,9 @@ export class UtilityService {
    * newData: Header form data after user interaction
    * */
   static getCodeText(headerData: IHeaderFormData, componentObj: object): string {
-    let key = Object.keys(headerData)[0];
+    const key = Object.keys(headerData)[0];
     let codeText: any;
-    let val = headerData[key];
+    const val = headerData[key];
     if (!val || val === 'All') {
       codeText = componentObj;
     } else {
@@ -255,8 +242,8 @@ export class UtilityService {
 
 
   static getChangedKey(obj1: object, obj2: object): EHeaderFormDataKeys[] {
-    let keysChanged = [];
-    for (let key of Object.keys(obj1)) {
+    const keysChanged = [];
+    for (const key of Object.keys(obj1)) {
       if (obj1[key] !== obj2[key]) {
         keysChanged.push(key);
       }
@@ -274,12 +261,26 @@ export class UtilityService {
     if (!path || !obj || typeof obj !== 'object') {
       return obj;
     }
-    let pathSplit = path.split(' ');
+    const pathSplit = path.split(' ');
 
-    for (var i = 0; i < pathSplit.length; i++) {
+    for (let i = 0; i < pathSplit.length; i++) {
       obj = obj[pathSplit[i]];
     }
     return obj;
+  }
+
+  getHeaderForm() {
+    return this.formBuilder.group({
+      fileName: [''],
+      key: [''],
+      editorMode: [false],
+    });
+  }
+
+  getSearchForm() {
+    return this.formBuilder.group({
+      keyword: [''],
+    });
   }
 
 
@@ -295,15 +296,15 @@ export class UtilityService {
   * */
   pruneDependenciesFromInstance(instance) {
 
-    let dependencies = ComponentInstanceService.getDependencies(instance).map(e=>e.name);
-    let tempInstance = {...instance};
-    let excludedKeys = [...dependencies, ...EXCLUDED_CONSTRUCTIONS];
+    const dependencies = ComponentInstanceService.getDependencies(instance).map(e => e.name);
+    const tempInstance = {...instance};
+    const excludedKeys = [...dependencies, ...EXCLUDED_CONSTRUCTIONS];
     Object.keys(tempInstance).forEach((key) => {
-      excludedKeys.forEach((dependency)=>{
+      excludedKeys.forEach((dependency) => {
         if (tempInstance[key] && tempInstance[key].constructor && tempInstance[key].constructor.name === dependency) {
           tempInstance[key] = `-dependency pruned: ${dependency}-`;
         }
-      })
+      });
     });
     return tempInstance;
   }

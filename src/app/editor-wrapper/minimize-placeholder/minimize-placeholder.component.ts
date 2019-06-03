@@ -3,7 +3,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 @Component({
   selector: 'app-minimize-placeholder',
   template: `
-    <div 
+    <div
          class="minimize-placeholder"
          (dblclick)="$event.stopPropagation()"
          (scroll)="$event.stopPropagation()"

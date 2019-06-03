@@ -25,7 +25,7 @@ export const storeKeys = [
   'headerFormData',
   'activeHeaderTab',
   'expand',
-  "shouldFoldCode",
+  'shouldFoldCode',
   'path',
   'editorMode'
 ];
@@ -35,31 +35,31 @@ export const storeKeys = [
 })
 export class StoreService {
 
-  static init() {
-    let storeStr = localStorage.getItem(ELocalStorageKey.NG_BUBBLE_STATE);
-    StoreService.patchStore(JSON.parse(storeStr));
-  }
-
   public static config;
   private static store: IStore = {};
 
-  static patchStore(state:IStore = {}){
+  static init() {
+    const storeStr = localStorage.getItem(ELocalStorageKey.NG_BUBBLE_STATE);
+    StoreService.patchStore(JSON.parse(storeStr));
+  }
+
+  static patchStore(state: IStore = {}) {
     StoreService.store = {...StoreService.store, ...state};
-    delete StoreService.store.selectedElXpath;/*todo*/
-    try{
+    delete StoreService.store.selectedElXpath; /*todo*/
+    try {
       this.setInLocalStorage(StoreService.store);
-    }catch (e) {
+    } catch (e) {
       LoggingService.log(e);
     }
   }
 
-  static setInLocalStorage(state:IStore){
+  static setInLocalStorage(state: IStore) {
 
-    let oldState = JSON.parse(localStorage.getItem(ELocalStorageKey.NG_BUBBLE_STATE))||{};
+    const oldState = JSON.parse(localStorage.getItem(ELocalStorageKey.NG_BUBBLE_STATE)) || {};
     localStorage.setItem(ELocalStorageKey.NG_BUBBLE_STATE, JSON.stringify({...oldState, ...state}));
   }
 
-  static getStoreValue(){
+  static getStoreValue() {
     return StoreService.store;
   }
 }

@@ -56,22 +56,22 @@ export enum EEditorInput {
   coords = 'coords',
   status = 'status',
   isLoading = 'isLoading',
-};
+}
 
 /*TODO: this should not be needed*/
 export interface IWSData {
-  type: EWSTypes,
-  error?: number,
-  errorMessage?: string,
-  payload?: ILineFinderData
+  type: EWSTypes;
+  error?: number;
+  errorMessage?: string;
+  payload?: ILineFinderData;
 }
 
-//TODO: duplicate interfaces and enums
+// TODO: duplicate interfaces and enums
 
 export interface INgProbeData {
-  componentInstance: object,
-  componentNode: HTMLElement,
-  injector?: object
+  componentInstance: object;
+  componentNode: HTMLElement;
+  injector?: object;
 }
 
 export enum EWSTypes {
@@ -88,14 +88,14 @@ export enum EWSTypes {
 }
 
 export interface ILineFinderData {
-  id?: string,
-  tagName?: string,
-  searchTerm?: string,
-  targetTagName?: string,
-  classList?: string[],
-  innerText?: string,
-  file?: string,
-  pathToOpen?: string
-  editor?: string,
-  action?: string,
+  id?: string;
+  tagName?: string;
+  searchTerm?: string;
+  targetTagName?: string;
+  classList?: string[];
+  innerText?: string;
+  file?: string;
+  pathToOpen?: string;
+  editor?: string;
+  action?: string;
 }

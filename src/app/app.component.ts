@@ -13,10 +13,10 @@ export class AppComponent implements DoCheck {
   @Input() title = 'ng-bubble-elements';
   @Output() test = new EventEmitter();
   testForm: NgForm;
-  @ViewChild('form') form:NgForm;
+  @ViewChild('form') form: NgForm;
 
   val = 0;
-  x  = [1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,];
+  x  = [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, ];
   y = undefined;
   obj = {
     // name:"Sandeep Gupta",
@@ -35,12 +35,12 @@ export class AppComponent implements DoCheck {
     }
   };
 
-  constructor(private changeDetectorRef:ChangeDetectorRef,
-              private formBuilder:FormBuilder,
-              private activatedRoute:ActivatedRoute,
-              private s:HttpClient,
-              private router:Router
-              ){}
+  constructor(private changeDetectorRef: ChangeDetectorRef,
+              private formBuilder: FormBuilder,
+              private activatedRoute: ActivatedRoute,
+              private s: HttpClient,
+              private router: Router
+              ) {}
 
   add() {
     this.val = this.val + 1;

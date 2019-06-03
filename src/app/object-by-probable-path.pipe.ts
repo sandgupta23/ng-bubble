@@ -7,13 +7,13 @@ import {tap} from 'rxjs/operators';
 export class ObjectByProbablePathPipe implements PipeTransform {
 
   transform(object: object, path?: any): any {
-    if(!path || !path.trim()){
+    if (!path || !path.trim()) {
       return object;
     }
     // let paths = path.trim().split('.');
-    let x = this.getParts(object, path);
+    const x = this.getParts(object, path);
 
-    let obj = {};
+    const obj = {};
     // let x = paths.reduce((total, path)=>{
     //   let subTree = this.getSubObjectWithMatchedkey(total,path);
     //   return {
@@ -24,28 +24,28 @@ export class ObjectByProbablePathPipe implements PipeTransform {
     return x;
   }
 
-  getSubObjectWithMatchedkey(object, key){
-    return Object.keys(object).reduce((total:object, currentKey)=>{
-      if(currentKey.toLowerCase().includes(key.toLowerCase())){
+  getSubObjectWithMatchedkey(object, key) {
+    return Object.keys(object).reduce((total: object, currentKey) => {
+      if (currentKey.toLowerCase().includes(key.toLowerCase())) {
         total = {
           ...total,
-          [currentKey]:object[currentKey]
+          [currentKey]: object[currentKey]
         };
       }
-      return total
-    },{});
+      return total;
+    }, {});
   }
 
   getParts(object, fragments) {
-    var [part, ...rest] = fragments.split('.');
+    const [part, ...rest] = fragments.split('.');
 
     return Object.assign({}, ...Object
       .entries(object)
       .filter(([key]) => key.toLowerCase().includes(part.toLowerCase()))
       .map(([k, v]) => {
-        if (!rest.length) return { [k]: v };
-        var parts = v && typeof v === 'object' && this.getParts(v, rest.join('.'));
-        if (parts) return { [k]: parts };
+        if (!rest.length) { return { [k]: v }; }
+        const parts = v && typeof v === 'object' && this.getParts(v, rest.join('.'));
+        if (parts) { return { [k]: parts }; }
       })
     );
   }

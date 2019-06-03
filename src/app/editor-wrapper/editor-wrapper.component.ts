@@ -16,20 +16,21 @@ import {UtilityService} from '../utility.service';
 import {FormGroup} from '@angular/forms';
 import {EventService} from '../event.service';
 import {IFileData} from './file-search-panel/file-search-panel.component';
-import {ClientService,} from '../client/client.service';
+import {ClientService, } from '../client/client.service';
 import {JsbEditorComponent} from './jsb-editor/jsb-editor.component';
 import {StoreService} from '../store.service';
 import {IStore} from '../interface';
 import {EHeaderFormDataKeys} from './editor-header/editor-header.component';
 import {INgProbeData} from '../client/interface';
 import {debounce, debounceTime} from 'rxjs/operators';
-import {MockDataService} from './mockDataService';
+
+// import {MockDataService} from './mockDataService';
 
 
 export interface IHeaderFormData {
-  fileName?: string,
-  key?: string,
-  editorMode?: string,
+  fileName?: string;
+  key?: string;
+  editorMode?: string;
 }
 
 // @ts-ignore
@@ -40,6 +41,18 @@ export interface IHeaderFormData {
   encapsulation: ViewEncapsulation.ShadowDom
 })
 export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
+
+  @Input() set status(status: { connection: boolean }) {
+    this._status = status;
+    if (!status.connection) {
+      this.fileData = 'NG:BUBBLE:: No connection with server. Please restart server using command `ng-bubble` in project root';
+    }
+  }
+
+
+  constructor(private utilityService: UtilityService, private changeDetectorRef: ChangeDetectorRef) {
+  }
+
   obj;
   editorMode;
   testObj = {name: 'sandeep', place: {city: {landmark: {name: 'up'}}}};
@@ -55,68 +68,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   @Output() openInIde$ = new EventEmitter();
   @Output() shutDown$ = new EventEmitter();
 
-  @Input() set status(status: { connection: boolean }) {
-    this._status = status;
-    if (!status.connection) {
-      this.fileData = 'NG:BUBBLE:: No connection with server. Please restart server using command `ng-bubble` in project root';
-    }
-  };
-
   @Input() isLoading = true;
-  @Input() componentfiles = (val: IFileData[]) => {
-
-    this._componentfiles = val;
-    if (Array.isArray(this._componentfiles) && this._componentfiles.length > 0 && !this._componentfiles.find((key) => key === this.headerForm.value['fileName'])) {
-      setTimeout(() => this.patchForm(this.headerForm, {fileName: this._componentfiles[0].name}));
-    }
-  };
-
-  @Input() componentstr = (ngProbeData: INgProbeData, isInit: boolean = false) => {
-    // this.componentObj = {...ngProbeData.componentInstance};
-    let instance_without_dependency = this.utilityService.pruneDependenciesFromInstance(ngProbeData.componentInstance);
-    if (!isInit) {
-      this.path = '';
-    }
-
-    this.codeData = JSON.parse(UtilityService.jsonStringifyCyclic({...instance_without_dependency, ...Object.getPrototypeOf(ngProbeData.componentInstance)}));
-    StoreService.patchStore(UtilityService.extractStoreData(this));//TODO: bad!
-    this.changeDetectorRef.detectChanges();
-  };
-
-  @Input() coords = (coordsStr) => {
-
-    let coords = coordsStr;
-    let top = coords.top + 'px';
-    let left = coords.left + 'px';
-    this._coords = {...coords, left, top};
-
-    this.showTooltip = true;
-    StoreService.patchStore(UtilityService.extractStoreData(this));//TODO: bad!
-    this.changeDetectorRef.detectChanges();
-  };
-
-  @Input() searchfiles = (val: string) => {
-    EventService.searchResultsFinish$.emit(val);
-  };
-
-  @Input() showTooltipAttr = (val: boolean) => {
-    this.showTooltip = val;
-    this.changeDetectorRef.detectChanges();
-  };
-  @Input() filecontent = (val: string) => {
-    console.log(val);
-
-    this.fileData = val;
-    // this.headerForm.patchValue({editorMode:true});
-    this.changeDetectorRef.detectChanges();
-  };
-
-
-  @Input() config = (val) => {
-    this._config = val;
-    StoreService.config = val;
-    this.changeDetectorRef.detectChanges();
-  };
 
   @ViewChild(JsbEditorComponent) appEditorComponent: JsbEditorComponent;
   @ViewChildren('menu') menu: QueryList<any>;
@@ -139,16 +91,66 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   componentObj: object = {};
   keyOptions = ['All'];
   myObject = Object;
-  codeData: any = MockDataService.codeData;
+  codeData: any; // = MockDataService.codeData;
   fileData: any;
   path: any = '';
   headerForm: FormGroup;
   headerFormData: IHeaderFormData = {};
   BACKEND_IMG_ROOT = 'http://localhost:11637/assets/imgs/';
   length = 0;
+  @Input() componentfiles = (val: IFileData[]) => {
+
+    this._componentfiles = val;
+    if (Array.isArray(this._componentfiles) && this._componentfiles.length > 0 && !this._componentfiles.find((key) => key === this.headerForm.value['fileName'])) {
+      setTimeout(() => this.patchForm(this.headerForm, {fileName: this._componentfiles[0].name}));
+    }
+  }
+
+  @Input() componentstr = (ngProbeData: INgProbeData, isInit: boolean = false) => {
+    // this.componentObj = {...ngProbeData.componentInstance};
+    const instance_without_dependency = this.utilityService.pruneDependenciesFromInstance(ngProbeData.componentInstance);
+    if (!isInit) {
+      this.path = '';
+    }
+
+    this.codeData = JSON.parse(UtilityService.jsonStringifyCyclic({...instance_without_dependency, ...Object.getPrototypeOf(ngProbeData.componentInstance)}));
+    StoreService.patchStore(UtilityService.extractStoreData(this)); // TODO: bad!
+    this.changeDetectorRef.detectChanges();
+  }
+
+  @Input() coords = (coordsStr) => {
+
+    const coords = coordsStr;
+    const top = coords.top + 'px';
+    const left = coords.left + 'px';
+    this._coords = {...coords, left, top};
+
+    this.showTooltip = true;
+    StoreService.patchStore(UtilityService.extractStoreData(this)); // TODO: bad!
+    this.changeDetectorRef.detectChanges();
+  }
+
+  @Input() searchfiles = (val: string) => {
+    EventService.searchResultsFinish$.emit(val);
+  }
+
+  @Input() showTooltipAttr = (val: boolean) => {
+    this.showTooltip = val;
+    this.changeDetectorRef.detectChanges();
+  }
+  @Input() filecontent = (val: string) => {
+    console.log(val);
+
+    this.fileData = val;
+    // this.headerForm.patchValue({editorMode:true});
+    this.changeDetectorRef.detectChanges();
+  }
 
 
-  constructor(private utilityService: UtilityService, private changeDetectorRef: ChangeDetectorRef) {
+  @Input() config = (val) => {
+    this._config = val;
+    StoreService.config = val;
+    this.changeDetectorRef.detectChanges();
   }
 
 
@@ -158,7 +160,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
       this.changeDetectorRef.detectChanges();
     });
     StoreService.init();
-    let store = StoreService.getStoreValue();
+    const store = StoreService.getStoreValue();
     this.initializeComponent(store);
     this.headerForm = this.utilityService.getHeaderForm();
 
@@ -180,11 +182,12 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   * Will trigger an event to get selected file
   * */
   headerDataChangedHandler(headerData: IHeaderFormData) {
-    let key = Object.keys(headerData)[0];
-    if ('key' === key) this.codeData = UtilityService.getCodeText(headerData, this.componentObj);
-    else {
-      let fileName = headerData[key];
-      let filePath = this._componentfiles.find((file) => file.name === fileName).path;
+    const key = Object.keys(headerData)[0];
+    if ('key' === key) {
+      this.codeData = UtilityService.getCodeText(headerData, this.componentObj);
+    } else {
+      const fileName = headerData[key];
+      const filePath = this._componentfiles.find((file) => file.name === fileName).path;
       this.getFileTrigger$.emit(filePath);
     }
     this.changeDetectorRef.detectChanges();
@@ -210,10 +213,10 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     });
 
 
-    let className = UtilityService.getClickedSideBarIcon(event);
+    const className = UtilityService.getClickedSideBarIcon(event);
     switch (className) {
       case 'vs-code-grey' : {
-        let path = this.getFilePathByName(this._componentfiles, this.headerForm.get('fileName').value);
+        const path = this.getFilePathByName(this._componentfiles, this.headerForm.get('fileName').value);
         this.openInIde$.emit({pathToOpen: path});
         break;
       }
@@ -228,9 +231,9 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
         break;
       }
       case 'fa-save' : {
-        let codeText = this.appEditorComponent.codemirror.getValue();
+        const codeText = this.appEditorComponent.codemirror.getValue();
         this.codeData = codeText;
-        let path = this.getFilePathByName(this._componentfiles, this.headerForm.get('fileName').value);
+        const path = this.getFilePathByName(this._componentfiles, this.headerForm.get('fileName').value);
         this.file_save_start$.emit({fileContent: codeText, pathToOpen: path});
         break;
       }
@@ -318,8 +321,8 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
         break;
       }
       case 'menu__item-ts' : {
-        debugger;
-        this.openInIde(this._coords.componentName, 'ts', this._coords.componentNode,);
+
+        this.openInIde(this._coords.componentName, 'ts', this._coords.componentNode, );
         break;
       }
       case 'menu__item-data' : {
@@ -354,7 +357,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
           this.getHoveredComponentData$.emit();
         }
       } catch (e) {
-        //console.error(e);
+        // console.error(e);
       }
     }, 1000);
   }
@@ -402,14 +405,14 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   }
 
   addDoCheckHook(component) {
-    let ngDoCheck = component.constructor.prototype.ngDoCheck;
+    const ngDoCheck = component.constructor.prototype.ngDoCheck;
     if (ngDoCheck && !ngDoCheck.__NGBUBBLE_HOOK__) {
       component.constructor.prototype.ngDoCheck = this.ngDoCheckHook(component.constructor.prototype.ngDoCheck);
     }
   }
 
   ngDoCheckHook(originalNgDoCheck: Function) {
-    let self = this;
+    const self = this;
     return function () {
       self.codeData = {...self.componentObj};
       //
@@ -419,7 +422,9 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
       // this.__NGBUBBLE_HOOK__ = true;
 
       /**/
-      originalNgDoCheck && originalNgDoCheck();/*TODO: ng do check with arguments?*/
+      if (originalNgDoCheck) {
+        originalNgDoCheck();
+      } /*TODO: ng do check with arguments?*/
     };
   }
 
@@ -431,8 +436,8 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
 
   onResizeEnd($event, editorLeft, editorRight, editorWrapperBody: HTMLElement) {
     let left = Math.abs($event.rectangle.right - $event.rectangle.left);
-    left = left < 100 ? 100 : left;/*left should be atleast 10px*/
-    let total: number = Number(editorWrapperBody.getBoundingClientRect().width);
+    left = left < 100 ? 100 : left; /*left should be atleast 10px*/
+    const total: number = Number(editorWrapperBody.getBoundingClientRect().width);
     editorLeft.style.width = `${left * 100 / total}%`;
     editorRight.style.width = `${(total - left) * 100 / total}%`;
     this.changeDetectorRef.detectChanges();

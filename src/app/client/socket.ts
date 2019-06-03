@@ -3,15 +3,15 @@ import {LoggingService} from '../editor-wrapper/logging.service';
 
 export class NgBubbleSocket {
   private static socket;
-  static init(initCB, onmessagecb, errCB){
-    let socket = this.socket = new WebSocket('ws://localhost:11638');
+  static init(initCB, onmessagecb, errCB) {
+    const socket = this.socket = new WebSocket('ws://localhost:11638');
     socket.onopen = (event) => {
       initCB(event);
     };
     socket.onclose = function (event) {
       setTimeout(() => {
         // location.reload();
-      }, 5000);/*TODO: a better way of doing this?*/
+      }, 5000); /*TODO: a better way of doing this?*/
     };
 
     socket.onerror = function (err) {
@@ -20,7 +20,7 @@ export class NgBubbleSocket {
     socket.onmessage = function (event) {
       LoggingService.log('websocket request:' );
       LoggingService.log(event);
-      onmessagecb(event)
+      onmessagecb(event);
     };
   }
 
@@ -30,7 +30,7 @@ export class NgBubbleSocket {
     LoggingService.log(data);
     try {
       this.socket.send(JSON.stringify(data));
-    }catch (e) {
+    } catch (e) {
 
     }
   }
