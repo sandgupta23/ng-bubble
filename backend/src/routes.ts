@@ -124,7 +124,7 @@ export function websocketInit(server: any) {
         let exactMatchIndex = exactMatchedFileIndex(foundItems, searchTerm);
 
         pathToBeOpened = exactMatchIndex !== -1 ? foundItems.files[exactMatchIndex].path : getHtmlOrTsFile(foundItems.files)/*foundItems.files[0].path*/;
-        console.log(pathToBeOpened)
+
       }
 
       try {
