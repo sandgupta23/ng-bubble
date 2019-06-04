@@ -8,7 +8,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "add": "git add --all && git status",
-    "build": "ng build --prod --output-hashing none && node build-script.js",
+    "build-el": "ng build --prod --output-hashing none && node build-script.js",
     "hmr": "ng serve --configuration hmr",
     "watch-be": "cd backend && tsc -w",
     "run-be": "nodemon --ignore src/ --ignore public/ lib/backend/src/ng-bubble.js",

@@ -16,13 +16,14 @@ import {UtilityService} from '../utility.service';
 import {FormGroup} from '@angular/forms';
 import {EventService} from '../event.service';
 import {IFileData} from './file-search-panel/file-search-panel.component';
-import {ClientService, } from '../client/client.service';
+import {ClientService} from '../client/client.service';
 import {JsbEditorComponent} from './jsb-editor/jsb-editor.component';
 import {StoreService} from '../store.service';
 import {IStore} from '../interface';
 import {EHeaderFormDataKeys} from './editor-header/editor-header.component';
 import {INgProbeData} from '../client/interface';
 import {debounce, debounceTime} from 'rxjs/operators';
+import {LoggingService} from './logging.service';
 
 // import {MockDataService} from './mockDataService';
 
@@ -107,7 +108,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   }
 
   @Input() componentstr = (ngProbeData: INgProbeData, isInit: boolean = false) => {
-    // this.componentObj = {...ngProbeData.componentInstance};
+    this.componentObj = ngProbeData.componentInstance;
     const instance_without_dependency = this.utilityService.pruneDependenciesFromInstance(ngProbeData.componentInstance);
     if (!isInit) {
       this.path = '';
@@ -139,8 +140,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     this.changeDetectorRef.detectChanges();
   }
   @Input() filecontent = (val: string) => {
-    console.log(val);
-
+    // LoggingService.log(val);
     this.fileData = val;
     // this.headerForm.patchValue({editorMode:true});
     this.changeDetectorRef.detectChanges();
@@ -321,8 +321,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
         break;
       }
       case 'menu__item-ts' : {
-
-        this.openInIde(this._coords.componentName, 'ts', this._coords.componentNode, );
+        this.openInIde(this._coords.componentName, 'ts', this._coords.componentNode);
         break;
       }
       case 'menu__item-data' : {

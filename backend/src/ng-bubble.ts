@@ -25,9 +25,9 @@ console.info('root:', root);
 let wsServer: any;
 createConfigJSonFileIfNotPresent();
 const localConfig: ILocalConfig = getLocalConfig() || {};
-let commanderOutput = commanderInit();
+const commanderOutput = commanderInit();
 
-let app = express();
+const app = express();
 const httpServer = require('http').createServer(app);
 app.use(cors());
 
@@ -36,12 +36,12 @@ app.use('/', express.static(PUBLIC_DIR_PATH));
 
 
 async function init(askAll: boolean) {
-  wsServer = new Server({port: WEBSOCKET_PORT});/*TODO: share http server*/
+  wsServer = new Server({port: WEBSOCKET_PORT}); /*TODO: share http server*/
   wsServer.on('error', function (error: any) {/*todo: there is no wat to know if wsServer created succesfully?*/
     logServerBusyError();
   });
-  let localConfig = getLocalConfig();
-  let inquirerOutput: ILocalConfig = await inquirerInit(localConfig, askAll);
+  const localConfig = getLocalConfig();
+  const inquirerOutput: ILocalConfig = await inquirerInit(localConfig, askAll);
   await updateLocalConfig(inquirerOutput);
   logInfo(`Your configurations: , ${JSON.stringify(getLocalConfig())}`);
   Promise.all([
@@ -78,4 +78,4 @@ function closeAndClean() {
   });
 }
 
-init(commanderOutput.askAll);
+init(commanderOutput.askAll).then();

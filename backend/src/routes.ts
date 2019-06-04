@@ -63,13 +63,13 @@ export function websocketInit(server: any) {
     });
 
 
-    let localConfig = getLocalConfig();
-    let ide_user_input = localConfig && localConfig.preferredIde;
+    const localConfig = getLocalConfig();
+    const ide_user_input = localConfig && localConfig.preferredIde;
     reIndex();
 
     function searchData(data: any, searchTerms: string, exact?: boolean) {
       /*TODO: make it a pure function*/
-      for (let d of data) {
+      for (const d of data) {
         if (d.type === 'folder') {
           searchData(d.items, searchTerms, exact);
           if (exact) {
@@ -84,8 +84,8 @@ export function websocketInit(server: any) {
         } else if (d.type === 'file') {
           // if (d.name.toLowerCase().match(searchTerms)) {
           // if (d.name.replace(/\W/g, '').toLowerCase().includes(searchTerms.replace(/\W/g, '').toLowerCase())) {
-          let target = searchTerms.toLowerCase().replace(/\W/g, '');
-          let mainStr = d.name.replace(/\W/g, '').toLowerCase();
+          const target = searchTerms.toLowerCase().replace(/\W/g, '');
+          const mainStr = d.name.replace(/\W/g, '').toLowerCase();
           if (mainStr.startsWith(target)) {
             files.push(d);
           }
@@ -111,30 +111,30 @@ export function websocketInit(server: any) {
       let pathToBeOpened, codeText;
       pathToBeOpened = payload.pathToOpen;
       codeText = payload.codeText;
-      let ide_clicked = payload.editor;
+      const ide_clicked = payload.editor;
       if (!pathToBeOpened && payload.searchTerm) {
-        let searchTerm = payload.searchTerm; //.toLowerCase().replace('app-', '');
+        const searchTerm = payload.searchTerm; // .toLowerCase().replace('app-', '');
 
-        let foundItems = SEARCH_CACHE[searchTerm] || searchData(tree.items, searchTerm);
-        if (!SEARCH_CACHE[searchTerm]) SEARCH_CACHE[searchTerm] = foundItems;
+        const foundItems = SEARCH_CACHE[searchTerm] || searchData(tree.items, searchTerm);
+        if (!SEARCH_CACHE[searchTerm]) { SEARCH_CACHE[searchTerm] = foundItems; }
         if (!(foundItems && foundItems.files && foundItems.files.length > 0)) {
           console.log('Could not file anything for :' + searchTerm);
           sendData(ws, {error: 401, errorMessage: 'ng-bubble: no matching file found', type: EWSTypes.open});
           return;
         }
-        let exactMatchIndex = exactMatchedFileIndex(foundItems, searchTerm);
+        const exactMatchIndex = exactMatchedFileIndex(foundItems, searchTerm);
 
         pathToBeOpened = exactMatchIndex !== -1 ? foundItems.files[exactMatchIndex].path : getHtmlOrTsFile(foundItems.files)/*foundItems.files[0].path*/;
 
       }
 
       try {
-        let lineToOpenInIde: number = (await lineToOpen(pathToBeOpened, payload)) || 0;
-        let currentIde = ide_clicked ? ide_clicked : ide_user_input;
+        const lineToOpenInIde: number = (await lineToOpen(pathToBeOpened, payload)) || 0;
+        const currentIde = ide_clicked ? ide_clicked : ide_user_input;
         await openInIde(pathToBeOpened, currentIde, codeText, payload, lineToOpenInIde);
         sendData(ws, {error: 200, type: EWSTypes.ack});
       } catch (e) {
-        //console.error(e);
+        // console.error(e);
         sendData(ws, {error: 422, type: EWSTypes.ack});
       }
     }
@@ -147,13 +147,13 @@ export function websocketInit(server: any) {
     async function handleGetFileByPathRequest(ws: any, payload: ILineFinderData) {
       /*TODO: should have used ajax here*/
       /*TODO: pathToOpen => unfortunate name really*/
-      let data: string = await getFileContent(payload.pathToOpen);
+      const data: string = await getFileContent(payload.pathToOpen);
       sendData(ws, <any>{type: EWSTypes.getFileByPath, payload: {file: data}});
     }
 
     async function handleSetFileByPathRequest(ws: any, payload: ILineFinderData) {
       /*TODO: should have used ajax here*/
-      let data: string = await setFileContent(payload.pathToOpen, payload.file);
+      const data: string = await setFileContent(payload.pathToOpen, payload.file);
       sendData(ws, <any>{type: EWSTypes.getFileByPath, payload: {file: data}});
     }
 
@@ -168,10 +168,9 @@ export function websocketInit(server: any) {
     function handleSearchRequest(ws: any, payload: ILineFinderData, type: EWSTypes) {
       files = [];
       folders = [];
-      let file = (payload.file as string).toLowerCase();
-      let pathToBeOpened;
+      const file = (payload.file as string).toLowerCase();
       try {
-        let foundItems = searchData(tree.items, file, false);
+        const foundItems = searchData(tree.items, file, false);
         /*todo: just to avoid ts error*/
         sendData(ws, {
           error: 200,
@@ -195,7 +194,7 @@ export function websocketInit(server: any) {
           }
         });
       } catch (e) {
-        //console.error(e);
+        // console.error(e);
         sendData(ws, {error: 422, type: EWSTypes.SEARCH});
       }
     }

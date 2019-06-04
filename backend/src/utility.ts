@@ -93,7 +93,7 @@ export function runAppOnFreePort(app: any, port: number, ctrl: boolean) {
 /*todo: redundant arguments*/
 export async function openInIde(path: string, currentIde: EIdeNames, codeText: string, data?: ILineFinderData, lineNumber: number = 0) {
   const ideCmd = currentIde === EIdeNames.WEBSTORM ? 'webstorm.exe' : `code -g`;
-  console.log(`Opening: Line ${lineNumber} in ${path}`);
+  console.log(`Opening ${path}(${lineNumber}:0)`);
   await exec(`${ideCmd} ${path}:${lineNumber ? lineNumber : ''}`);
 }
 

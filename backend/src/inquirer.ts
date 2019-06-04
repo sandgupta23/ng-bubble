@@ -1,22 +1,22 @@
-import {EIdeNames} from "../enums";
+import {EIdeNames} from '../enums';
 import {
   getAngularConfig,
   checkIfVscode,
   checkIfWebstorm,
   getAngular2Prefix,
   getAngular5Projects
-} from "./utility";
-import {ILocalConfig} from "../interfaces";
-import {EFramework} from "../../enum";
+} from './utility';
+import {ILocalConfig} from '../interfaces';
+import {EFramework} from '../../enum';
 import * as fs from 'fs';
 
 const inquirer: any = require('inquirer');
 
-export async function inquirerInit(localconfig:ILocalConfig, askAll:boolean) {
+export async function inquirerInit(localconfig: ILocalConfig, askAll: boolean) {
 
-  let answerObj: ILocalConfig = {};
-  let angularConfigDetails = getAngularConfig();
-  answerObj.framework = EFramework.ANGULAR;//temp
+  const answerObj: ILocalConfig = {};
+  const angularConfigDetails = getAngularConfig();
+  answerObj.framework = EFramework.ANGULAR; // temp
 
   /*
   //TODO: use following for react support
@@ -37,11 +37,11 @@ export async function inquirerInit(localconfig:ILocalConfig, askAll:boolean) {
    * */
   answerObj.componentSelector = localconfig.componentSelector;
   if (!answerObj.angularPrefix && angularConfigDetails) {
-    let config:any = JSON.parse(fs.readFileSync(angularConfigDetails.path).toString());
+    const config: any = JSON.parse(fs.readFileSync(angularConfigDetails.path).toString());
     if (angularConfigDetails.version >= 5) {
       let projectName: string = config['defaultProject'];
       if (!projectName) {
-        let projects: string[] = getAngular5Projects(config);
+        const projects: string[] = getAngular5Projects(config);
         projectName = (await inquirer.prompt([{
           type: 'list',
           message: 'Please select your Project.',
@@ -55,12 +55,16 @@ export async function inquirerInit(localconfig:ILocalConfig, askAll:boolean) {
     }
   }
 
-  if(askAll || !answerObj.angularPrefix){
+  if (askAll || !answerObj.angularPrefix) {
     answerObj.angularPrefix = (await inquirer.prompt([{
       type: 'input',
       message: 'What is your component selector prefix (default = app)?',
       name: 'angularPrefix',
     }])).angularPrefix;
+  }
+
+  if (!answerObj.angularPrefix) {
+    answerObj.angularPrefix = 'app';
   }
 
 
@@ -69,17 +73,17 @@ export async function inquirerInit(localconfig:ILocalConfig, askAll:boolean) {
    * Problem: auto detection of ide isnt always accurate.
    * As of now we have to ask manually, if ide info doesnt exist
    * */
-  let isVscode = false;//checkIfVscode();
-  let isWebstorm = false;//checkIfWebstorm();
-  if (askAll || localconfig.preferredIde!==EIdeNames.WEBSTORM && localconfig.preferredIde!==EIdeNames.VSCODE) {
-    answerObj.preferredIde =  (await inquirer.prompt([{
+  const isVscode = false; // checkIfVscode();
+  const isWebstorm = false; // checkIfWebstorm();
+  if (askAll || localconfig.preferredIde !== EIdeNames.WEBSTORM && localconfig.preferredIde !== EIdeNames.VSCODE) {
+    answerObj.preferredIde = (await inquirer.prompt([{
       type: 'list',
       message: 'Please select your IDE?',
       name: 'preferredIde',
-      choices: [EIdeNames.WEBSTORM, EIdeNames.VSCODE]
-    }])).preferredIde
+      choices: [EIdeNames.VSCODE, EIdeNames.WEBSTORM]
+    }])).preferredIde;
   } else {
-    answerObj.preferredIde = localconfig.preferredIde
+    answerObj.preferredIde = localconfig.preferredIde;
   }
 
   return answerObj;

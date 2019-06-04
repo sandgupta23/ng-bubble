@@ -24,12 +24,12 @@ export class AppComponent implements DoCheck {
       country: {
         state: {
           city: {
-            name: 'ghaziabad',
+            name: 'city big',
             landMark: 'Near Mango tree',
-            pincode: 201009
+            pincode: 2132131
           },
-          alias: 'UP',
-          name: 'Uttar Pradesh'
+          alias: 'CN',
+          name: 'Gloea longer'
         }
       }
     }

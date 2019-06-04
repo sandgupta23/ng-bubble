@@ -4,6 +4,7 @@ import {Helper} from './helper';
 import {NgBubbleDom} from './dom';
 import {NgBubbleSocket} from './socket';
 import {NgBubbleConstant} from './constant';
+import {LoggingService} from '../editor-wrapper/logging.service';
 
 export class ClientService {
 
@@ -85,7 +86,7 @@ export class ClientService {
     const target = node;
     const $componentNode: HTMLElement | null = Helper.getParentComponentNode(target);
     const ngProbeData = Helper.getComponentDataInstanceFromNode($componentNode);
-    console.info($componentNode);
+    // console.info($componentNode);
     // let $componentNode: HTMLElement | null = ngProbeData.componentNode;
     const componentInstance = ngProbeData.componentInstance;
     const componentXPath = Helper.getXPathByElement($componentNode);
@@ -197,11 +198,13 @@ export class ClientService {
     document.addEventListener('click', ($event) => {
       ClientService.setEditorAttribute(EEditorInput.showTooltipAttr, false);
     });
-    document.addEventListener('dblclick', ($event) => {
+
+    const dblClickHandler = ($event) => {
+      LoggingService.log('test');
       const target = $event.target as HTMLElement;
       const $componentNode: HTMLElement | null = Helper.getParentComponentNode(target);
       const ngProbeData = Helper.getComponentDataInstanceFromNode($componentNode);
-      console.info($componentNode);
+      // console.info($componentNode);
       // let $componentNode: HTMLElement | null = ngProbeData.componentNode;
       const componentInstance = ngProbeData.componentInstance;
       const componentXPath = Helper.getXPathByElement($componentNode);
@@ -226,7 +229,9 @@ export class ClientService {
         //
       }
 
-    });
+    };
+
+    document.addEventListener('dblclick', Helper.debounce(dblClickHandler, 400));
 
     /*
     * mouseover: will be triggered when any element on the host application will be hovered.

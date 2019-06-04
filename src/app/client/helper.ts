@@ -73,6 +73,26 @@ export class Helper {
     }
   }
 
+  public static debounce(func, wait: number, immediate?) {
+    let timeout;
+    return function() {
+      const context = this,
+        args = arguments;
+      const later = function() {
+        timeout = null;
+        if ( !immediate ) {
+          func.apply(context, args);
+        }
+      };
+      const callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait || 200);
+      if ( callNow ) {
+        func.apply(context, args);
+      }
+    };
+  }
+
 
   // static getComponentFromNode($node: HTMLElement){
   //   while (!$node(element.tagName)){
