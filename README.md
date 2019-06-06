@@ -1,6 +1,6 @@
 # ng-bubble
 
-[![NG-BUBBLE PREVIEW GIF]](https://github.com/goodmite/ng-bubble/blob/master/public/assets/imgs/ngbubbleIntroductionvideo.gif)
+![NG-BUBBLE PREVIEW GIF](https://github.com/goodmite/ng-bubble/blob/master/public/assets/imgs/ngbubbleIntroductionvideo.gif)
 
 ##  What is this?
 ng-bubble is a WebComponent that lives in your angular project (via index.html) and help you with debugging and stuff.
