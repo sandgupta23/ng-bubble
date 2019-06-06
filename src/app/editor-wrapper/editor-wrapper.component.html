@@ -15,7 +15,6 @@
      (scroll)="$event.stopPropagation()"
      (wheel)="$event.stopPropagation()"
      [ngStyle]="{'top': top,left:left, right:right, bottom:bottom}">
-  <!--<i>{{_status.connection}}</i>-->
   <div *ngIf="_status && _status.connection === false" class="server-disconnect-banner">
     SERVER NOT CONNECTED
   </div>
@@ -57,15 +56,14 @@
     <!--START: left editor-->
     <div #editorLeft
          mwlResizable
+         id="file-editor-wrapper"
          class="no-scroll-bar"
          [enableGhostResize]="true"
          [resizeEdges]="{right: true}"
          (resizeEnd)="onResizeEnd($event, editorLeft, editorRight, editorWrapperBody)"
-         [resizeCursorPrecision]="5"
-         style="display: flex; width: 50%">
+         [resizeCursorPrecision]="5">
       <jsb-editor
-        id="test1"
-        style="flex-grow: 1"
+        class="file-editor"
         [level]="headerFormData.key==='All'?3:6"
         [codeText]="fileData"
         [shouldFoldCode]="false"></jsb-editor>
@@ -76,13 +74,11 @@
     <!--END: left editor-->
 
     <!--START: right editor/json-viewer-->
-    <div #editorRight style="background-color: #0a001f;width: 50%; overflow-y: scroll">
+    <div #editorRight id="data-editor-wrapper">
       <ngx-json-viewer
         *ngIf="!headerForm.get('editorMode').value"
         class="jsb-json-viewer" (click)="test()" [json]="codeData|objectByProbablePath:keySearchKeyword|SortObject"
         [expanded]="!shouldFoldCode"></ngx-json-viewer>
-      <!---->
-      <!---->
       <jsb-editor *ngIf="headerForm.get('editorMode').value"
                   [level]="headerFormData.key==='All'?6:6"
                   [codeText]="codeData|objectByProbablePath:keySearchKeyword"
@@ -91,7 +87,7 @@
     <!--END: right editor/json-viewer-->
 
     <div [hidden]="!showSearchPanel">
-      <div class="file-search-panel" (click)="test()">
+      <div class="file-search-panel">
         <jsb-file-search-panel
           (click)="$event.stopPropagation()"
           (openInIde$)="openInIde$.emit({pathToOpen:$event.path})"

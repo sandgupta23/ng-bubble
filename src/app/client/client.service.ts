@@ -148,6 +148,7 @@ export class ClientService {
     });
     ClientService.$editorEl.addEventListener('openInIde$', (event: CustomEvent) => {
 
+      console.log(event);
       const data = event.detail;
       if (data.pathToOpen) {
         ClientService.openComponentFileInIde(data);
@@ -155,6 +156,7 @@ export class ClientService {
       if (data.node) {
         ClientService.openInIdeByNode(data.node);
       }
+
 
       // if (data.tagName && data.ext)
       //   data.searchTerm = tagToFileName(data.tagName, data.ext);
@@ -178,7 +180,6 @@ export class ClientService {
     });
 
     ClientService.$editorEl.addEventListener('getHoveredComponentData$', (event: CustomEvent) => {
-
       const $selectedComponentNode: any = NgBubbleDom.$hoveredComponent || (NgBubbleDom.selectedElXpath && Helper.getElementByXpath(NgBubbleDom.selectedElXpath));
       if (!$selectedComponentNode) { return; }
       ClientService.emitSelectedComponentData($selectedComponentNode);
@@ -239,10 +240,11 @@ export class ClientService {
     * */
 
     document.addEventListener('mouseover', ($event) => {
+
       if (!$event.shiftKey) {
         return;
       }
-
+      debugger;
       const target = $event.target as HTMLElement;
       ////
       let $component: HTMLElement;
@@ -265,7 +267,7 @@ export class ClientService {
         top: rect.top,
         componentName: Helper.getComponentDataInstanceFromNode($component).componentInstance.constructor.name,
         tagName: $component.tagName,
-        componentNode: Helper.getComponentDataInstanceFromNode($component).componentNode
+        componentNode: $component
         // componentTagNamezzzzz
       };
       return ClientService.setEditorAttribute(EEditorInput.coords, x);

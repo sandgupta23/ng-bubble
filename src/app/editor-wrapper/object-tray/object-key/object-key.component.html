@@ -1,30 +1,30 @@
-<ul class="objectkeywrapper">
-  <li>
-    <div class="code-fold-handler" (click)="toggleFoldCodeFlag()" style="">
-      <div style="flex-shrink: 0;align-self: center;display: flex;align-items: center;">
-        <i class="fa" style="margin-right: 5px"
-           [ngClass]="{'fa-caret-down': shouldFoldCode, 'fa-caret-right': !shouldFoldCode}"></i>
-        <span style="font-size: 11px; color: greenyellow">{{key}}</span>
-        <a *ngIf="type === 'object'" class="pin" (click)="trigger(key, $event);"
-           style="font-size: 9px; margin-left: 3px;">(pin)</a>
-        <span style="margin-left: 3px; font-size: 9px">:</span>
-        <i *ngIf="!shouldFoldCode" style="margin-left: 10px;font-size: 10px; margin-top: 0px">{{obj[key]|json}}</i>
-      </div>
-    </div>
-    <ng-container *ngIf="shouldFoldCode && obj && type === 'object'">
-      <ng-container *ngFor="let key_temp of keys">
-        <app-object-key
-          *ngIf="obj && obj[key] && obj[key][key_temp]"
-          style="margin-top: 5px; display: block; border-left: 1px solid rgb(111, 179, 210); cursor: pointer"
-          (pin$)="test($event)"
-          [shouldFoldCode]="shouldFoldCode"
-          [obj]="obj[key]"
-          [key]="key_temp"
-          [val]="obj[key][key_temp]"></app-object-key>
-      </ng-container>
-    </ng-container>
-    <ng-container *ngIf="shouldFoldCode && obj && type !== 'object'">
-      <i style="margin-left: 14px;font-size: 12px; margin-top: 5px">{{obj[key]}}</i>
-    </ng-container>
-  </li>
-</ul>
+<!--<ul class="objectkeywrapper">-->
+  <!--<li>-->
+    <!--<div class="code-fold-handler" (click)="toggleFoldCodeFlag()" style="">-->
+      <!--<div style="flex-shrink: 0;align-self: center;display: flex;align-items: center;">-->
+        <!--<i class="fa" style="margin-right: 5px"-->
+           <!--[ngClass]="{'fa-caret-down': shouldFoldCode, 'fa-caret-right': !shouldFoldCode}"></i>-->
+        <!--<span style="font-size: 11px; color: greenyellow">{{key}}</span>-->
+        <!--<a *ngIf="type === 'object'" class="pin" (click)="trigger(key, $event);"-->
+           <!--style="font-size: 9px; margin-left: 3px;">(pin)</a>-->
+        <!--<span style="margin-left: 3px; font-size: 9px">:</span>-->
+        <!--<i *ngIf="!shouldFoldCode" style="margin-left: 10px;font-size: 10px; margin-top: 0px">{{obj[key]|json}}</i>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<ng-container *ngIf="shouldFoldCode && obj && type === 'object'">-->
+      <!--<ng-container *ngFor="let key_temp of keys">-->
+        <!--<app-object-key-->
+          <!--*ngIf="obj && obj[key] && obj[key][key_temp]"-->
+          <!--style="margin-top: 5px; display: block; border-left: 1px solid rgb(111, 179, 210); cursor: pointer"-->
+          <!--(pin$)="test($event)"-->
+          <!--[shouldFoldCode]="shouldFoldCode"-->
+          <!--[obj]="obj[key]"-->
+          <!--[key]="key_temp"-->
+          <!--[val]="obj[key][key_temp]"></app-object-key>-->
+      <!--</ng-container>-->
+    <!--</ng-container>-->
+    <!--<ng-container *ngIf="shouldFoldCode && obj && type !== 'object'">-->
+      <!--<i style="margin-left: 14px;font-size: 12px; margin-top: 5px">{{obj[key]}}</i>-->
+    <!--</ng-container>-->
+  <!--</li>-->
+<!--</ul>-->

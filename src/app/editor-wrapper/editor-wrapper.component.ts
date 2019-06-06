@@ -108,14 +108,20 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   }
 
   @Input() componentstr = (ngProbeData: INgProbeData, isInit: boolean = false) => {
+    console.log('componentstr')
     this.componentObj = ngProbeData.componentInstance;
-    const instance_without_dependency = this.utilityService.pruneDependenciesFromInstance(ngProbeData.componentInstance);
-    if (!isInit) {
-      this.path = '';
-    }
+    try {
+      const instance_without_dependency = this.utilityService.pruneDependenciesFromInstance(ngProbeData.componentInstance);
+      if (!isInit) {
+        this.path = '';
+      }
 
-    this.codeData = JSON.parse(UtilityService.jsonStringifyCyclic({...instance_without_dependency, ...Object.getPrototypeOf(ngProbeData.componentInstance)}));
-    StoreService.patchStore(UtilityService.extractStoreData(this)); // TODO: bad!
+      const s = UtilityService.jsonStringifyCyclic({...instance_without_dependency, ...Object.getPrototypeOf(ngProbeData.componentInstance)});
+      this.codeData = JSON.parse(s);
+      StoreService.patchStore(UtilityService.extractStoreData(this)); // TODO: bad!
+    } catch (e) {
+      console.log(e);
+    }
     this.changeDetectorRef.detectChanges();
   }
 

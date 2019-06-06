@@ -131,17 +131,22 @@ export class UtilityService {
       replacer: function (value, defaultValue, circular) {
         // if (circular) return '"-circular-"';
         if (circular) {
-          if (value && value.value) {
+          if (value && value.value && value.constructor && (value.constructor.name === 'FormGroup' || value.constructor.name === 'NgForm')) {
             try {
               return JSON.stringify({value: value.value, '-other-': '-circular-'});
+                // return '--circular--'; // todo
             } catch (e) {
               return '--circular--';
             }
           }
         }
         // if (circular) return JSON_STRIGIFY_SAFE(value);
-        if (value === undefined) { return '"-undefined-"'; }
-        if (typeof value === 'function') { return '"-method-"'; }
+        if (value === undefined) {
+          return '"-undefined-"';
+        }
+        if (typeof value === 'function') {
+          return '"-method-"';
+        }
         if (Array.isArray(value)) {
           return JSON.stringify(value);
         }

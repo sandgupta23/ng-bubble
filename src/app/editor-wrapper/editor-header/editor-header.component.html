@@ -1,6 +1,7 @@
 <form [formGroup]="headerForm" id="ng-bubble-editor-controls-1"
       class="jsb-editor-wrapper-header" (click)="action$.emit($event)">
 
+  <i style="font-size: 9px" *ngIf="!componentFiles || componentFiles.length <1">No Files</i>
   <ng-container *ngIf="componentFiles && componentFiles.length >=1">
     <i class="fa fa-file" style="font-size: 13px" title="File Mode"></i>
     <select class="jsb-editor-wrapper-header__files"
@@ -14,14 +15,9 @@
     <input type="checkbox" checked formControlName="editorMode">
     <span class="slider round"></span>
   </label>
-  <!--<i id="window-maximize" style="transform: rotate(90deg); margin-right: 10px" class="fa fa-expand" *ngIf="!expand"></i>-->
 
-  <!--<i id="window-maximize" style="transform: rotate(90deg); margin-right: 10px" class="fa fa-expand" *ngIf="!expand"></i>-->
   <img class="fa-image-svg fa-compress" [src]="BACKEND_IMG_ROOT+ 'compress.svg'" title="Minimize" *ngIf="expand" style="margin: 0px 10px"/>
   <img class="fa-image-svg fa-expand" [src]="BACKEND_IMG_ROOT+ 'expand.svg'" title="Minimize" *ngIf="!expand" style="margin: 0px 10px"/>
   <img class="fa-image-svg fa-window-minimize" [src]="BACKEND_IMG_ROOT+ 'window-minimize.svg'" title="Minimize" *ngIf="!minimize"/>
-  <!--<i class="fa fa-compress" style="transform: rotate(90deg);margin-right: 10px" *ngIf="expand"></i>-->
-  <!--<i id="window-minimize" *ngIf="!minimize" class=" fa fa-window-minimize"></i>-->
-  <!--<i *ngIf="minimize" class="fa fa-window-maximize"></i>-->
 </form>
 

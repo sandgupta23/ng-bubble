@@ -15,7 +15,7 @@
     "kill": "for /f \"tokens=5\" %a in ('netstat -aon ^| find \":11638\" ^| find \"LISTENING\"') do taskkill /f /pid %a",
     "publish-npm": "cd backend && tsc && npm publish",
     "lintfix": "tslint --fix -c ./tslint.json 'src/**/*{.ts,.tsx}'",
-    "dev": "concurrently --kill-others \"ng s --port 4500\" \"npm run watch-be\" \"npm run run-be\""
+    "dev": "concurrently --kill-others \"ng s --port 4201\" \"npm run watch-be\" \"npm run run-be\""
   },
 
   "author": {

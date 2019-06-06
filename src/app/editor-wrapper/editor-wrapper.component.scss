@@ -21,7 +21,7 @@
     position: absolute;
     bottom: 10px;
     right: 0;
-    z-index: 10000000000000;
+    z-index: $z-data-search-panel;
     max-width: 200px
   }
 
@@ -44,6 +44,21 @@
     jsb-editor {
       width: 100%;
     }
+  }
+
+  #file-editor-wrapper {
+    display: flex;
+    width: 50%;
+
+    .file-editor {
+      flex-grow: 1
+    }
+  }
+
+  #data-editor-wrapper {
+    background-color: #0a001f;
+    width: 50%;
+    overflow-y: scroll;
   }
 
   .file-search-panel {
