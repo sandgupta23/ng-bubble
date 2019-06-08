@@ -1,11 +1,9 @@
 # ng-bubble
+ng-bubble is a WebComponent that lives in your angular project (via index.html) and help you with debugging.
 
 ![NG-BUBBLE PREVIEW GIF](public/assets/imgs/ngbubbleIntroductionvideo.gif)
 
 A tool to help you with debugging and code review in an angular app
- 
-##  What is this?
-ng-bubble is a WebComponent that lives in your angular project (via index.html) and help you with debugging and stuff.
 
 ## Motivation
 Motivations behind ng-bubble are two-fold:
@@ -16,7 +14,7 @@ Motivations behind ng-bubble are two-fold:
 1. Install with npm: `npm install -g ng-bubble`
 2. Open your angular project in *VScode* or *Webstorm*.
 3. Run this command at the root of your project: `ng-bubble`
-4. Above command will give you a script, copy and paste that in `<body>` your **index.html**
+4. Above command will give you a script, copy and paste that **right after** `<body>` your **index.html**
    ```
    <body>
        <js-bubble></js-bubble>
@@ -28,10 +26,16 @@ Motivations behind ng-bubble are two-fold:
 6. After ng-bubble is started, you can use following hot keys:
     1. To get menu: ```shift + hover``` on a component
     2. To open component in IDE: ```Double click```
+    
+## Prerequisites
+1. Please make sure you have respective cli tools install for your IDEs
+   If you are using vscode: ```code --version``` should work.
+   If you are using webstorm: ```webstorm <file path>``` should open that file path in webstorm.
+2. Works on Angular cli  project. Angular 1 is not supported.
 
 
 ## Video introduction
-  [Youtube link](https://www.youtube.com/watch?v=ir5sYS9PyLM&feature=youtu.b)
+  [Youtube link](https://www.youtube.com/watch?v=-HyZ1aOV46k)
   
   
 ## Features (Current and Upcoming):
