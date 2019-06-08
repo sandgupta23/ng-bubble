@@ -126,7 +126,7 @@ export class UtilityService {
     /*TODO: move to web worker*/
 
     // obj = {...obj, ...Object.getPrototypeOf(obj)};
-    console.log(Object.getPrototypeOf(obj));
+    // console.log(Object.getPrototypeOf(obj));
     const options = {
       replacer: function (value, defaultValue, circular) {
         // if (circular) return '"-circular-"';

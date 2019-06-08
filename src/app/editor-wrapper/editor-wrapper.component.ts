@@ -108,7 +108,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   }
 
   @Input() componentstr = (ngProbeData: INgProbeData, isInit: boolean = false) => {
-    console.log('componentstr')
+    // console.log('componentstr')
     this.componentObj = ngProbeData.componentInstance;
     try {
       const instance_without_dependency = this.utilityService.pruneDependenciesFromInstance(ngProbeData.componentInstance);
@@ -402,7 +402,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   }
 
   logCurrentData() {
-    console.log(this.componentObj);
+    console.info(this.componentObj);
   }
 
   ngDoCheck(): void {

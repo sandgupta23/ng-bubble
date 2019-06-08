@@ -76,7 +76,7 @@ export function runAppOnFreePort(app: any, port: number, ctrl: boolean) {
 
       console.log(`ng-bubble is Running on port ${SERVER_PORT} and ${WEBSOCKET_PORT}`);
       console.log('Please make sure to add following script into your index.html');
-      logDanger(`
+      logInfo(`
         <js-bubble></js-bubble>
         <script src="http://localhost:${SERVER_PORT}/assets/js/js-bubble.js"></script>
 `);
@@ -92,9 +92,13 @@ export function runAppOnFreePort(app: any, port: number, ctrl: boolean) {
 
 /*todo: redundant arguments*/
 export async function openInIde(path: string, currentIde: EIdeNames, codeText: string, data?: ILineFinderData, lineNumber: number = 0) {
-  const ideCmd = currentIde === EIdeNames.WEBSTORM ? 'webstorm.exe' : `code -g`;
-  console.log(`Opening ${path}(${lineNumber}:0)`);
-  await exec(`${ideCmd} ${path}:${lineNumber ? lineNumber : ''}`);
+  try {
+    const ideCmd = currentIde === EIdeNames.WEBSTORM ? 'webstorm.exe' : `code -g`;
+    console.log(`Opening ${path}(${lineNumber}:0)`);
+    await exec(`${ideCmd} ${path}:${lineNumber ? lineNumber : ''}`);
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 

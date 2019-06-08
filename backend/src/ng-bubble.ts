@@ -19,7 +19,6 @@ const fs = require('fs');
 const chokidar = require('chokidar');
 const ANGULAR_SRC_PATH = path.join(root, 'src');
 const watcher = chokidar.watch(ANGULAR_SRC_PATH, {ignored: /^\./, persistent: true});
-console.log('test');
 console.info('NG-BUBBLE:: version', json.version);
 console.info('root:', root);
 let wsServer: any;

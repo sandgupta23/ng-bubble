@@ -3,20 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="f2cfb048-ce33-455d-bed6-78addd447d99" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/ng-bubble.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/ng-bubble.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/utility.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/utility.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/assets/js/js-bubble.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/js-bubble.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/client/client.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/client/client.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/editor-header/editor-header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/editor-header/editor-header.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/jsb-editor-sidebar/jsb-editor-sidebar.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/jsb-editor-sidebar/jsb-editor-sidebar.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/jsb-editor-sidebar/jsb-editor-sidebar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/jsb-editor-sidebar/jsb-editor-sidebar.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/editor-wrapper/object-tray/object-key/object-key.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/editor-wrapper/object-tray/object-key/object-key.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/test/test.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/test/test.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/utility.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utility.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/common.scss" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -36,8 +31,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/client/client.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="188" column="10" lean-forward="true" selection-start-line="188" selection-start-column="10" selection-end-line="188" selection-end-column="10" />
+            <state relative-caret-position="121">
+              <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -45,37 +40,35 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="20" column="13" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+            <state relative-caret-position="34">
+              <caret line="2" column="21" lean-forward="true" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/file-search-panel/file-search-panel.component.html">
+        <entry file="file://$PROJECT_DIR$/backend/src/ng-bubble.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="17" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+            <state relative-caret-position="357">
+              <caret line="21" column="50" selection-start-line="21" selection-start-column="50" selection-end-line="21" selection-end-column="50" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#ng-container#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="e#21#133#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.ng-bubble-local">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/file-search-panel/file-search-panel.component.scss">
+        <entry file="file://$PROJECT_DIR$/backend/src/utility.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="22" lean-forward="true" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
+            <state relative-caret-position="1683">
+              <caret line="99" column="21" selection-start-line="99" selection-start-column="21" selection-end-line="99" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -84,7 +77,7 @@
         <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
-              <caret line="7" column="31" lean-forward="true" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+              <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
               <folding>
                 <element signature="n#style#0;n#img#0;n#span#0;n#ng-container#0;n#div#0;n#!!top" expanded="true" />
               </folding>
@@ -98,10 +91,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/src/routes.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2278">
+              <caret line="134" column="49" selection-start-line="134" selection-start-column="49" selection-end-line="134" selection-end-column="49" />
+              <folding>
+                <element signature="e#0#42#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="118" column="48" selection-start-line="118" selection-start-column="48" selection-end-line="118" selection-end-column="48" />
+            <state relative-caret-position="6868">
+              <caret line="404" column="17" selection-start-line="404" selection-start-column="17" selection-end-line="404" selection-end-column="17" />
               <folding>
                 <element signature="e#0#213#0" expanded="true" />
               </folding>
@@ -109,23 +114,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/app/utility.service.ts">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/assets/imgs/js-bubble.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="133" column="22" selection-start-line="133" selection-start-column="22" selection-end-line="133" selection-end-column="22" />
+            <state relative-caret-position="2975">
+              <caret line="3" column="158932" selection-start-line="3" selection-start-column="158932" selection-end-line="3" selection-end-column="158932" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/src/inquirer.ts">
+        <entry file="file://$PROJECT_DIR$/src/app/utility.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="89" selection-start-line="89" selection-end-line="89" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="1581">
+              <caret line="115" selection-start-line="115" selection-end-line="115" />
             </state>
           </provider>
         </entry>
@@ -143,17 +145,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>open</find>
-      <find>dblclick</find>
-      <find>dblcli</find>
-      <find>click</find>
-      <find>console.inf</find>
-      <find>500</find>
-      <find>Unfold co</find>
-      <find>shut</find>
-      <find>openinide</find>
-      <find>openin</find>
-      <find>reload</find>
       <find>location.reload();</find>
       <find>Opening: Line  in</find>
       <find>SEARCH_CACHE</find>
@@ -171,8 +162,19 @@
       <find>style</find>
       <find>style=</find>
       <find>Please select your ID</find>
-      <find>getHoveredComponentData$</find>
       <find>componentS</find>
+      <find>getHoveredComponentData$</find>
+      <find>&lt;js-bubble&gt;&lt;/js-bubble&gt;</find>
+      <find>console.l</find>
+      <find>ng-bub</find>
+      <find>sandeepkgupta007@gmail.com</find>
+      <find>is able to update bot code version</find>
+      <find>json</find>
+      <find>bot code version</find>
+      <find>openInIde(</find>
+      <find>test'</find>
+      <find>conc</find>
+      <find>concurrently</find>
     </findStrings>
     <replaceStrings>
       <replace>req :Request, res: Response</replace>
@@ -195,7 +197,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="D:/src/app/editor-wrapper/editor-wrapper.component.html" />
         <option value="D:/backend/src/routes.ts" />
         <option value="$PROJECT_DIR$/public/assets/imgs/loader.svg" />
         <option value="$PROJECT_DIR$/src/app/editor-wrapper/minimize-placeholder/minimize-placeholder.component.ts" />
@@ -225,11 +226,9 @@
         <option value="$PROJECT_DIR$/backend/src/file-reader.ts" />
         <option value="$PROJECT_DIR$/src/app/editor-wrapper/js-console/js-console.component.html" />
         <option value="$PROJECT_DIR$/src/app/app.component.ts" />
-        <option value="$PROJECT_DIR$/backend/src/ng-bubble.ts" />
         <option value="$PROJECT_DIR$/src/app/client/helper.ts" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/backend/src/line-finder.ts" />
-        <option value="$PROJECT_DIR$/backend/src/utility.ts" />
         <option value="$PROJECT_DIR$/backend/src/inquirer.ts" />
         <option value="$PROJECT_DIR$/backend/src/routes.ts" />
         <option value="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.html" />
@@ -242,18 +241,20 @@
         <option value="$PROJECT_DIR$/src/app/editor-wrapper/object-tray/object-key/object-key.component.html" />
         <option value="$PROJECT_DIR$/src/app/test/test.component.html" />
         <option value="$PROJECT_DIR$/.ng-bubble-local" />
-        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/backend/src/ng-bubble.ts" />
+        <option value="$PROJECT_DIR$/src/app/utility.service.ts" />
         <option value="$PROJECT_DIR$/src/app/client/client.service.ts" />
         <option value="$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.ts" />
-        <option value="$PROJECT_DIR$/src/app/utility.service.ts" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/backend/src/utility.ts" />
+        <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="69" />
-    <option name="y" value="-12" />
-    <option name="width" value="1473" />
-    <option name="height" value="1164" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-12" />
+    <option name="width" value="981" />
+    <option name="height" value="1044" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -264,6 +265,85 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="routes.ts" type="620a8d5e:NestingTreeNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="utility.ts" type="620a8d5e:NestingTreeNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="imgs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="editor-wrapper" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -316,174 +396,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="inquirer.ts" type="620a8d5e:NestingTreeNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="line-finder.ts" type="620a8d5e:NestingTreeNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="ng-bubble.ts" type="620a8d5e:NestingTreeNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="routes.ts" type="620a8d5e:NestingTreeNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="template.ts" type="620a8d5e:NestingTreeNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="utility.ts" type="620a8d5e:NestingTreeNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="imgs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="editor-wrapper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="editor-wrapper" type="462c0819:PsiDirectoryNode" />
-              <item name="editor-header" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="editor-wrapper" type="462c0819:PsiDirectoryNode" />
-              <item name="file-search-panel" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="editor-wrapper" type="462c0819:PsiDirectoryNode" />
-              <item name="js-console" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="editor-wrapper" type="462c0819:PsiDirectoryNode" />
-              <item name="jsb-editor-sidebar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="editor-wrapper" type="462c0819:PsiDirectoryNode" />
-              <item name="object-tray" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="editor-wrapper" type="462c0819:PsiDirectoryNode" />
-              <item name="object-tray" type="462c0819:PsiDirectoryNode" />
-              <item name="object-key" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ng-bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="test.ts" type="620a8d5e:NestingTreeNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -498,18 +410,18 @@
     <property name="ts.rename.search.for.js.occurrences" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\nodebook\ng-bubble\public\assets\imgs" />
+      <recent name="D:\nodebook\ng-bubble\src\app" />
+      <recent name="D:\nodebook\ng-bubble\src\environments" />
+      <recent name="D:\nodebook\ng-bubble\public\assets" />
+      <recent name="D:\nodebook\ng-bubble\src" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\nodebook\ng-bubble\src\assets" />
       <recent name="D:\nodebook\ng-bubble\public\assets\imgs" />
       <recent name="D:\nodebook\ng-bubble\src\app\client" />
       <recent name="D:\nodebook\ng-bubble\src\app\editor-wrapper" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\nodebook\ng-bubble\src\app" />
-      <recent name="D:\nodebook\ng-bubble\src\environments" />
-      <recent name="D:\nodebook\ng-bubble\public\assets\imgs" />
-      <recent name="D:\nodebook\ng-bubble\public\assets" />
-      <recent name="D:\nodebook\ng-bubble\src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -641,12 +553,21 @@
       <workItem from="1559021635493" duration="22000" />
       <workItem from="1559352173982" duration="6148000" />
       <workItem from="1559519176942" duration="349000" />
-      <workItem from="1559602909779" duration="18074000" />
+      <workItem from="1559602909779" duration="19881000" />
+      <workItem from="1559806209440" duration="2457000" />
+      <workItem from="1559815297682" duration="594000" />
+      <workItem from="1559818948621" duration="22000" />
+      <workItem from="1559819001764" duration="35000" />
+      <workItem from="1559819076864" duration="2960000" />
+      <workItem from="1559906515260" duration="281000" />
+      <workItem from="1560033701085" duration="1473000" />
+      <workItem from="1560036412875" duration="71000" />
+      <workItem from="1560036502852" duration="38000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="364407000" />
+    <option name="totallyTimeSpent" value="374145000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -659,6 +580,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="704" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4861111" visible="true" weight="0.21860096" />
       <window_info id="Structure" order="1" sideWeight="0.5138889" side_tool="true" weight="0.30127186" />
@@ -672,9 +594,9 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32692307" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.36013985" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.28321677" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50397456" side_tool="true" weight="0.43006992" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49602544" visible="true" weight="0.26223776" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49602544" visible="true" weight="0.32692307" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="12" weight="0.32867134" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -745,26 +667,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/app/component-instance.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="72" column="13" lean-forward="true" selection-start-line="72" selection-start-column="13" selection-end-line="72" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tslint.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.spec.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-          <folding>
-            <element signature="e#0#73#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -906,16 +808,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/src/ng-bubble.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="45" column="59" selection-start-line="45" selection-start-column="59" selection-end-line="45" selection-end-column="59" />
-          <folding>
-            <element signature="e#21#133#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/file-search-panel/file-search-panel.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
@@ -923,34 +815,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="34" column="12" lean-forward="true" selection-start-line="23" selection-start-column="10" selection-end-line="34" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/src/utility.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="95" column="50" lean-forward="true" selection-start-line="95" selection-start-column="50" selection-end-line="95" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/src/line-finder.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
           <caret line="34" column="8" lean-forward="true" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/src/routes.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="7" lean-forward="true" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -1042,6 +910,16 @@
     <entry file="file://$PROJECT_DIR$/.ng-bubble-local">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/imgs/angle-double-right.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" column="19" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/file-search-panel/file-search-panel.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -1055,14 +933,54 @@
     <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/file-search-panel/file-search-panel.component.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="14" column="22" lean-forward="true" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
+          <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="102">
+            <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/client/client.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/src/ng-bubble.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="50" selection-start-line="21" selection-start-column="50" selection-end-line="21" selection-end-column="50" />
+          <folding>
+            <element signature="e#21#133#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/src/utility.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1683">
+          <caret line="99" column="21" selection-start-line="99" selection-start-column="21" selection-end-line="99" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="7" column="31" lean-forward="true" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
           <folding>
             <element signature="n#style#0;n#img#0;n#span#0;n#ng-container#0;n#div#0;n#!!top" expanded="true" />
           </folding>
@@ -1072,37 +990,44 @@
     <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/logging.service.ts">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
+    <entry file="file://$PROJECT_DIR$/backend/src/routes.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="20" column="13" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/client/client.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="188" column="10" lean-forward="true" selection-start-line="188" selection-start-column="10" selection-end-line="188" selection-end-column="10" />
+        <state relative-caret-position="2278">
+          <caret line="134" column="49" selection-start-line="134" selection-start-column="49" selection-end-line="134" selection-end-column="49" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/editor-wrapper/editor-wrapper.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="118" column="48" selection-start-line="118" selection-start-column="48" selection-end-line="118" selection-end-column="48" />
+        <state relative-caret-position="6868">
+          <caret line="404" column="17" selection-start-line="404" selection-start-column="17" selection-end-line="404" selection-end-column="17" />
           <folding>
             <element signature="e#0#213#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/imgs/js-bubble.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2975">
+          <caret line="3" column="158932" selection-start-line="3" selection-start-column="158932" selection-end-line="3" selection-end-column="158932" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/utility.service.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="133" column="22" selection-start-line="133" selection-start-column="22" selection-end-line="133" selection-end-column="22" />
+        <state relative-caret-position="1581">
+          <caret line="115" selection-start-line="115" selection-end-line="115" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="21" lean-forward="true" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
         </state>
       </provider>
     </entry>

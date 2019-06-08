@@ -148,7 +148,7 @@ export class ClientService {
     });
     ClientService.$editorEl.addEventListener('openInIde$', (event: CustomEvent) => {
 
-      console.log(event);
+      // console.log(event);
       const data = event.detail;
       if (data.pathToOpen) {
         ClientService.openComponentFileInIde(data);
