@@ -28,7 +28,9 @@ Motivations behind ng-bubble are two-fold:
     
 ## Prerequisites
 1. Please make sure you have respective cli tools install for your IDEs
+
    If you are using vscode: ```code --version``` should work.
+   
    If you are using webstorm: ```webstorm <file path>``` should open that file path in webstorm.
 2. Works on Angular cli  project. Angular 1 is not supported.
 
