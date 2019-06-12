@@ -18,6 +18,11 @@
   <div *ngIf="_status && _status.connection === false" class="server-disconnect-banner">
     SERVER NOT CONNECTED
   </div>
+  <div *ngIf="!fileData && !codeData && threeSecPassed" class="banner">
+    <h1 class="heading">No Data</h1>
+    <p class="description">please <strong>shift + hover</strong>
+      or <strong>double-click</strong> any angular component to begin</p>
+  </div>
   <!--START:Input-->
   <ng-container *ngIf="!(_status && _status.connection === false)">
     <span class="ngb-input-search key-search-input" [ngClass]="{'animation-slide-right':!keySearchKeyword}">

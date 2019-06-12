@@ -3,7 +3,7 @@
 # ng-bubble
 ng-bubble is a WebComponent that lives in your angular project (via index.html) and help you with debugging.
 
-![NG-BUBBLE PREVIEW GIF](public/assets/imgs/ngbubbleIntroductionvideo.gif)
+[![npm version](https://badge.fury.io/js/ng-bubble.svg)](https://badge.fury.io/js/ng-bubble)
 
 
 ## Motivation ([Medium link](https://medium.com/@sandeepkgupta007/introducing-ng-bubble-your-angular-companion-f25dda56492))
@@ -40,6 +40,7 @@ Motivations behind ng-bubble are two-fold:
    If you are using VS CODE: ```code <file path>``` should open that file path in VS CODE.
    
    If you are using Webstorm: ```webstorm <file path>``` should open that file path in Webstorm.
+   
    If you are using any other IDE, enter your IDE's CLI/exe name when prompted.
 2. Works on Angular cli project. Angular 1 is not supported.
 

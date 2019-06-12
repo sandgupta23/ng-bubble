@@ -86,6 +86,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   _coords: { top: string, left: string, componentName: string, tagName: string, componentTagName: string, componentNode: HTMLElement };
   right = '0';
   bottom = '0';
+  threeSecPassed = false;
   activeHeaderTab: EHeaderFormDataKeys = null;
   myEHeaderFormDataKeys = EHeaderFormDataKeys;
   shouldFoldCode = true;
@@ -179,6 +180,10 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
       this.changeDetectorRef.detectChanges();
     });
     this.changeDetectorRef.detectChanges();
+    setTimeout(()=>{
+      this.threeSecPassed = true;
+      this.changeDetectorRef.detectChanges();
+    },3000)
   }
 
 
