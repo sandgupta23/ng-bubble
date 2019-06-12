@@ -35,9 +35,15 @@ export function getWebstormPath() {
  * */
 export function getAngularConfig() {
   let path = fs.existsSync(getAngular5JsonPath()) && getAngular5JsonPath();
-  if (path) { return {path, version: 5}; }
+  if (path) {
+    return {path, version: 5};
+  }
   path = path || (fs.existsSync(getAngular2JsonPath()) && getAngular2JsonPath());
-  if (path) { return {path, version: 2}; } else { return null; }
+  if (path) {
+    return {path, version: 2};
+  } else {
+    return null;
+  }
 }
 
 export function checkIfVscode() {
@@ -51,7 +57,9 @@ export function checkIfWebstorm() {
 export function createConfigJSonFileIfNotPresent() {
   const localConfigPath = getLocalConfigFilePath();
   const isPresent = fs.existsSync(localConfigPath);
-  if (!isPresent) { fs.writeFileSync(localConfigPath, ''); }
+  if (!isPresent) {
+    fs.writeFileSync(localConfigPath, '');
+  }
 }
 
 export function getLocalConfigFilePath() {
@@ -93,7 +101,16 @@ export function runAppOnFreePort(app: any, port: number, ctrl: boolean) {
 /*todo: redundant arguments*/
 export async function openInIde(path: string, currentIde: EIdeNames, codeText: string, data?: ILineFinderData, lineNumber: number = 0) {
   try {
-    const ideCmd = currentIde === EIdeNames.WEBSTORM ? 'webstorm.exe' : `code -g`;
+    let ideCmd = currentIde === EIdeNames.WEBSTORM ? 'webstorm.exe' : `code -g`;
+    if (currentIde === EIdeNames.WEBSTORM) {
+      ideCmd = 'webstorm.exe';
+    } else if (currentIde === EIdeNames.VSCODE) {
+      ideCmd = 'code -g';
+    } else {
+      ideCmd = currentIde; /*user provided cli*/
+    }
+
+
     console.log(`Opening ${path}(${lineNumber}:0)`);
     await exec(`${ideCmd} ${path}:${lineNumber ? lineNumber : ''}`);
   } catch (e) {
