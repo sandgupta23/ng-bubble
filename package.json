@@ -1,6 +1,6 @@
 {
   "name": "ng-bubble",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "ng": "ng",
     "start": "nodemon lib/backend/src/ng-bubble.js",
@@ -17,7 +17,8 @@
     "publish-npm": "cd backend && tsc && npm publish",
     "lintfix": "tslint --fix -c ./tslint.json 'src/**/*{.ts,.tsx}'",
     "dev": "concurrently --kill-others \"ng s --port 4201\" \"npm run watch-be\" \"npm run run-be\"",
-    "npm-publish": "npm run build-el && npm publish"
+    "npm-publish": "npm run build-el && npm publish",
+    "version": "auto-changelog --tag-prefix version-"
   },
   "author": {
     "name": "Sandeep Gupta",
@@ -45,8 +46,6 @@
     "ws": "^6.1.3"
   },
   "devDependencies": {
-    "json-stringify-safe": "^5.0.1",
-    "flatted": "^2.0.0",
     "@angular-devkit/build-angular": "~0.11.0",
     "@angular/animations": "~7.1.0",
     "@angular/cli": "~7.1.3",
@@ -66,17 +65,20 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^10.12.18",
     "angular-resizable-element": "^3.2.4",
+    "auto-changelog": "^1.13.0",
     "codelyzer": "^4.5.0",
     "codemirror": "^5.39.2",
     "concat": "^1.0.3",
     "concurrently": "^4.1.0",
     "core-js": "^2.5.4",
     "document-register-element": "^1.8.1",
+    "flatted": "^2.0.0",
     "fs-extra": "^7.0.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "json-cycle": "^1.3.0",
     "json-prune": "^1.1.0",
+    "json-stringify-safe": "^5.0.1",
     "karma": "~3.1.1",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
@@ -105,5 +107,11 @@
       "backend/src/template.ts",
       "public/assets/js/init.js"
     ]
+  },
+  "auto-changelog": {
+    "output": "HISTORY.md",
+    "template": "keepachangelog",
+    "unreleased": true,
+    "commitLimit": false
   }
 }
