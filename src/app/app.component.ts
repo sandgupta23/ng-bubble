@@ -13,7 +13,7 @@ export class AppComponent implements DoCheck {
   @Input() title = 'ng-bubble-elements';
   @Output() test = new EventEmitter();
   testForm: NgForm;
-  @ViewChild('form') form: NgForm;
+  @ViewChild('form', {static: false}) form: NgForm;
 
   val = 0;
   x  = [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, ];

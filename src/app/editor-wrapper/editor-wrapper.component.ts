@@ -71,7 +71,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
 
   @Input() isLoading = true;
 
-  @ViewChild(JsbEditorComponent) appEditorComponent: JsbEditorComponent;
+  @ViewChild(JsbEditorComponent,{static: false}) appEditorComponent: JsbEditorComponent;
   @ViewChildren('menu') menu: QueryList<any>;
   _config;
 

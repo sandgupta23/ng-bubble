@@ -283,16 +283,16 @@ export class ClientService {
     NgBubbleSocket.sendMessage(data);
     /*TODO: implement it better using retry...are we allowed to use rxjs here??*/
     /*if message is not recieved within 5 sec, re-init connection and send data*/
-    setTimeout(()=>{
-      debugger;
-      if(!ClientService.messageRecieved){
-        ClientService.init();
-        setTimeout(()=>{
-          ClientService.setEditorAttribute(EEditorInput.isLoading, true);
-          NgBubbleSocket.sendMessage(data);
-        },1000);
-      }
-    }, 5000)
+    // setTimeout(()=>{
+    //   debugger;
+    //   if(!ClientService.messageRecieved){
+    //     ClientService.init();
+    //     setTimeout(()=>{
+    //       ClientService.setEditorAttribute(EEditorInput.isLoading, true);
+    //       NgBubbleSocket.sendMessage(data);
+    //     },1000);
+    //   }
+    // }, 5000)
 
   }
 

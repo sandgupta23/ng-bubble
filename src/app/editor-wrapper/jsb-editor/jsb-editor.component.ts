@@ -21,7 +21,7 @@ export class JsbEditorComponent implements OnInit, AfterViewInit {
   constructor() {
   }
 
-  @ViewChild('textEditorPlaceholder') textEditorPlaceholder: ElementRef;
+  @ViewChild('textEditorPlaceholder',{static: false}) textEditorPlaceholder: ElementRef;
 
   @Input() level = 3;
 

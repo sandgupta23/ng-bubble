@@ -84,6 +84,13 @@ export async function inquirerInit(localconfig: ILocalConfig, askAll: boolean) {
         message: 'Please type the cli for your ide',
         name: 'preferredIde',
       }])).preferredIde;
+    }else {
+
+      if(preferredIde === EIdeNames.VSCODE + ' (cli: code)'){
+        answerObj.preferredIde = EIdeNames.VSCODE;
+      }else if(preferredIde === EIdeNames.WEBSTORM + ' (cli: webstorm)'){
+        answerObj.preferredIde = EIdeNames.WEBSTORM;
+      }
     }
   } else {
     answerObj.preferredIde = localconfig.preferredIde;
