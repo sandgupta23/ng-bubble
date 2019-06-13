@@ -11,7 +11,7 @@ import {ILocalConfig} from '../../interface';
         <img *ngIf="!isLoading && isConnected"
              [ngClass]="{'make-disable':!isConnected}"
              class="vs-code-grey"
-             [src]="(config && config.preferredIde) === 'VSCODE'? vscodeImg: webstormImg">
+             [src]="ideImage">
         <img *ngIf="isLoading" class="fa-image-svg loader" [src]="BACKEND_IMG_ROOT+ 'loader.svg'"
              [ngClass]="{'make-disable':!isConnected}"/>
         <i *ngIf="!isLoading && !isConnected" class="fa fa-warning"></i>
@@ -51,7 +51,16 @@ export class JsbEditorSidebarComponent implements OnInit {
   @Output() action$ = new EventEmitter();
   @Input() activeHeaderTab: EHeaderFormDataKeys;
   @Input() shouldFoldCode;
-  @Input() config: ILocalConfig;
+  @Input() set config (_config: ILocalConfig){
+    if(!_config) return;
+    if(_config.preferredIde === 'VSCODE'){
+      this.ideImage = this.vscodeImg;
+    }else if(_config.preferredIde === 'WEBSTORM'){
+      this.ideImage = this.webstormImg;
+    }else{
+      this.ideImage = this.genericIDEImg;
+    }
+  }
   @Input() isLoading: boolean;
   @Input() isConnected: boolean;
 
@@ -59,12 +68,14 @@ export class JsbEditorSidebarComponent implements OnInit {
 
   vscodeImg = 'http://localhost:11637/assets/imgs/vscode.svg';
   webstormImg = 'http://localhost:11637/assets/imgs/webstorm.png';
+  genericIDEImg = 'http://localhost:11637/assets/imgs/generic_ide.svg';
   right = true;
-
+  ideImage:string;
   constructor() {
   }
 
   ngOnInit() {
+
 
     // console.log(this.config);
   }

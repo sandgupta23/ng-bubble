@@ -2,7 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  DoCheck, ElementRef,
+  DoCheck,
   EventEmitter,
   Input,
   OnInit,
@@ -22,8 +22,7 @@ import {StoreService} from '../store.service';
 import {IStore} from '../interface';
 import {EHeaderFormDataKeys} from './editor-header/editor-header.component';
 import {INgProbeData} from '../client/interface';
-import {debounce, debounceTime} from 'rxjs/operators';
-import {LoggingService} from './logging.service';
+import {debounceTime} from 'rxjs/operators';
 
 // import {MockDataService} from './mockDataService';
 
@@ -71,7 +70,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
 
   @Input() isLoading = true;
 
-  @ViewChild(JsbEditorComponent) appEditorComponent: JsbEditorComponent;
+  @ViewChild(JsbEditorComponent, {static: false}) appEditorComponent: JsbEditorComponent;
   @ViewChildren('menu') menu: QueryList<any>;
   _config;
 
@@ -86,6 +85,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   _coords: { top: string, left: string, componentName: string, tagName: string, componentTagName: string, componentNode: HTMLElement };
   right = '0';
   bottom = '0';
+  threeSecPassed = false;
   activeHeaderTab: EHeaderFormDataKeys = null;
   myEHeaderFormDataKeys = EHeaderFormDataKeys;
   shouldFoldCode = true;
@@ -105,7 +105,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     if (Array.isArray(this._componentfiles) && this._componentfiles.length > 0 && !this._componentfiles.find((key) => key === this.headerForm.value['fileName'])) {
       setTimeout(() => this.patchForm(this.headerForm, {fileName: this._componentfiles[0].name}));
     }
-  }
+  };
 
   @Input() componentstr = (ngProbeData: INgProbeData, isInit: boolean = false) => {
     // console.log('componentstr')
@@ -123,7 +123,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
       console.log(e);
     }
     this.changeDetectorRef.detectChanges();
-  }
+  };
 
   @Input() coords = (coordsStr) => {
 
@@ -135,29 +135,29 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     this.showTooltip = true;
     StoreService.patchStore(UtilityService.extractStoreData(this)); // TODO: bad!
     this.changeDetectorRef.detectChanges();
-  }
+  };
 
   @Input() searchfiles = (val: string) => {
     EventService.searchResultsFinish$.emit(val);
-  }
+  };
 
   @Input() showTooltipAttr = (val: boolean) => {
     this.showTooltip = val;
     this.changeDetectorRef.detectChanges();
-  }
+  };
   @Input() filecontent = (val: string) => {
     // LoggingService.log(val);
     this.fileData = val;
     // this.headerForm.patchValue({editorMode:true});
     this.changeDetectorRef.detectChanges();
-  }
+  };
 
 
   @Input() config = (val) => {
     this._config = val;
     StoreService.config = val;
     this.changeDetectorRef.detectChanges();
-  }
+  };
 
 
   ngOnInit() {
@@ -179,6 +179,10 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
       this.changeDetectorRef.detectChanges();
     });
     this.changeDetectorRef.detectChanges();
+    setTimeout(() => {
+      this.threeSecPassed = true;
+      this.changeDetectorRef.detectChanges();
+    }, 3000);
   }
 
 

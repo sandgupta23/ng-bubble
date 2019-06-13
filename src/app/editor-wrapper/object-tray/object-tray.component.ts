@@ -1,6 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {computeStyle} from '@angular/animations/browser/src/util';
-import {UtilityService} from '../../utility.service';
 
 @Component({
   selector: 'app-object-tray',

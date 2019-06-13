@@ -1,11 +1,5 @@
 import {EIdeNames} from '../enums';
-import {
-  getAngularConfig,
-  checkIfVscode,
-  checkIfWebstorm,
-  getAngular2Prefix,
-  getAngular5Projects
-} from './utility';
+import {getAngular2Prefix, getAngular5Projects, getAngularConfig} from './utility';
 import {ILocalConfig} from '../interfaces';
 import {EFramework} from '../../enum';
 import * as fs from 'fs';
@@ -76,12 +70,28 @@ export async function inquirerInit(localconfig: ILocalConfig, askAll: boolean) {
   const isVscode = false; // checkIfVscode();
   const isWebstorm = false; // checkIfWebstorm();
   if (askAll || localconfig.preferredIde !== EIdeNames.WEBSTORM && localconfig.preferredIde !== EIdeNames.VSCODE) {
-    answerObj.preferredIde = (await inquirer.prompt([{
+    // answerObj.preferredIde = (await inquirer.prompt([{
+    const preferredIde = (await inquirer.prompt([{
       type: 'list',
       message: 'Please select your IDE?',
       name: 'preferredIde',
-      choices: [EIdeNames.VSCODE, EIdeNames.WEBSTORM]
+      choices: [EIdeNames.VSCODE + ' (cli: code)', EIdeNames.WEBSTORM + ' (cli: webstorm)', EIdeNames.Other]
     }])).preferredIde;
+
+    if (preferredIde === EIdeNames.Other) {
+      answerObj.preferredIde = (await inquirer.prompt([{
+        type: 'input',
+        message: 'Please type the cli for your ide',
+        name: 'preferredIde',
+      }])).preferredIde;
+    }else {
+
+      if(preferredIde === EIdeNames.VSCODE + ' (cli: code)'){
+        answerObj.preferredIde = EIdeNames.VSCODE;
+      }else if(preferredIde === EIdeNames.WEBSTORM + ' (cli: webstorm)'){
+        answerObj.preferredIde = EIdeNames.WEBSTORM;
+      }
+    }
   } else {
     answerObj.preferredIde = localconfig.preferredIde;
   }

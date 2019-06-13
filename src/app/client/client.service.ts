@@ -10,6 +10,7 @@ export class ClientService {
 
   private static readonly $editorEl: Element = document.getElementsByTagName('js-bubble')[0];
   private static isConnected = false;
+  private static messageRecieved:boolean = false;
   static init = function () {
 
     if (!ClientService.$editorEl) {
@@ -244,7 +245,6 @@ export class ClientService {
       if (!$event.shiftKey) {
         return;
       }
-      debugger;
       const target = $event.target as HTMLElement;
       ////
       let $component: HTMLElement;
@@ -279,7 +279,21 @@ export class ClientService {
 
   static sendMessageToServer(data: { type: EWSTypes, payload?: ILineFinderData }) {
     ClientService.setEditorAttribute(EEditorInput.isLoading, true);
+    ClientService.messageRecieved = false;
     NgBubbleSocket.sendMessage(data);
+    /*TODO: implement it better using retry...are we allowed to use rxjs here??*/
+    /*if message is not recieved within 5 sec, re-init connection and send data*/
+    // setTimeout(()=>{
+    //   debugger;
+    //   if(!ClientService.messageRecieved){
+    //     ClientService.init();
+    //     setTimeout(()=>{
+    //       ClientService.setEditorAttribute(EEditorInput.isLoading, true);
+    //       NgBubbleSocket.sendMessage(data);
+    //     },1000);
+    //   }
+    // }, 5000)
+
   }
 
 
@@ -295,6 +309,7 @@ export class ClientService {
   }
 
   static websocketOnMessageCB = function (event) {
+    ClientService.messageRecieved = true;
     ClientService.setEditorAttribute(EEditorInput.isLoading, false);
     ClientService.setEditorAttribute(EEditorInput.isLoading, false);
     if (!event) { return; }

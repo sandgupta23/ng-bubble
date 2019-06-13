@@ -8,7 +8,7 @@
   </div>
   </form>
 
-  <ng-container *ngIf="searchForm.get('keyword').value">
+  <ng-container *ngIf="searchForm?.get('keyword')?.value">
     <div *ngFor="let file of files| slice:0:10; let i=index"
          [ngClass]="{'highlighted-row': selectedRow === i}"
          class="row-wrapper-item" (click)="openInIde(file)">

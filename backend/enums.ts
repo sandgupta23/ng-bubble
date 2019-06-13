@@ -1,6 +1,7 @@
 export enum EIdeNames {
   VSCODE = 'VSCODE',
-  WEBSTORM = 'WEBSTORM'
+  WEBSTORM = 'WEBSTORM',
+  Other = 'Other'
 }
 
 export enum EWSTypes {
