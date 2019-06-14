@@ -1,10 +1,7 @@
-import {ChangeDetectorRef, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 // import { parse, stringify } from 'flatted';
 import * as JSON_STRIGIFY_SAFE from 'json-stringify-safe';
-
-
-import jc from 'json-cycle';
 import jsonPrune from 'json-prune';
 import {storeKeys} from './store.service';
 import {IHeaderFormData} from './editor-wrapper/editor-wrapper.component';
@@ -21,8 +18,8 @@ import 'codemirror/addon/search/jump-to-line.js';
 import 'codemirror/addon/dialog/dialog.js';
 import 'codemirror/mode/python/python.js';
 import {INgProbeData} from './client/interface';
-import {LoggingService} from './editor-wrapper/logging.service';
 import {ComponentInstanceService} from './component-instance.service';
+import {EDataCy} from './data-cy';
 
 const COMPONENT_SELECTOR = 'app';
 
@@ -134,7 +131,7 @@ export class UtilityService {
           if (value && value.value && value.constructor && (value.constructor.name === 'FormGroup' || value.constructor.name === 'NgForm')) {
             try {
               return JSON.stringify({value: value.value, '-other-': '-circular-'});
-                // return '--circular--'; // todo
+              // return '--circular--'; // todo
             } catch (e) {
               return '--circular--';
             }
@@ -224,6 +221,11 @@ export class UtilityService {
         return className;
       }
     }
+  }
+
+  static getDataCyVal(clickEvent: Event) {
+    const target = clickEvent.target as HTMLElement;
+    return target.getAttribute('data-cy') as EDataCy;
   }
 
   /**

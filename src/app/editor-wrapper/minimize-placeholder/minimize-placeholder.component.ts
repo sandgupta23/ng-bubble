@@ -5,6 +5,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   template: `
     <div
          class="minimize-placeholder"
+         data-cy="minimize-placeholder"
          (dblclick)="$event.stopPropagation()"
          (scroll)="$event.stopPropagation()"
          (wheel)="$event.stopPropagation()"

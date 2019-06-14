@@ -8,8 +8,14 @@
   </div>
   <ul class="menu" *ngIf="showMenu" (click)="showMenu = false">
     <li class="menu__item menu__item-name">{{_coords.componentName}}</li>
-    <li class="menu__item menu__item-ts" *ngIf="showFilesOptions">Open In IDE</li>
-    <li class="menu__item menu__item-data">Display Data</li>
+    <li class="menu__item menu__item-ts"
+        *ngIf="showFilesOptions"
+        [attr.data-cy]="myEDataCy.menu_ide"
+    >Open In IDE
+    </li>
+    <li
+      [attr.data-cy]="myEDataCy.menu_show_data"
+      class="menu__item menu__item-data">Display Data</li>
     <!--<li class="menu__item menu__item-parent">Show parent</li>-->
     <!--<li class="menu__item menu__item-ide">Open Parent in IDE</li>-->
   </ul>

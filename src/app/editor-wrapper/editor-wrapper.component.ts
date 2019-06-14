@@ -19,10 +19,11 @@ import {IFileData} from './file-search-panel/file-search-panel.component';
 import {ClientService} from '../client/client.service';
 import {JsbEditorComponent} from './jsb-editor/jsb-editor.component';
 import {StoreService} from '../store.service';
-import {IStore} from '../interface';
+import {ICoords, IStore} from '../interface';
 import {EHeaderFormDataKeys} from './editor-header/editor-header.component';
 import {INgProbeData} from '../client/interface';
 import {debounceTime} from 'rxjs/operators';
+import {EDataCy} from '../data-cy';
 
 // import {MockDataService} from './mockDataService';
 
@@ -48,6 +49,8 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
       this.fileData = 'NG:BUBBLE:: No connection with server. Please restart server using command `ng-bubble` in project root';
     }
   }
+
+  myDataCy = EDataCy;
 
 
   constructor(private utilityService: UtilityService, private changeDetectorRef: ChangeDetectorRef) {
@@ -82,7 +85,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
   showTooltip = false;
   top = '50vh';
   left = '50vw';
-  _coords: { top: string, left: string, componentName: string, tagName: string, componentTagName: string, componentNode: HTMLElement };
+  _coords: ICoords;
   right = '0';
   bottom = '0';
   threeSecPassed = false;
@@ -105,7 +108,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
     if (Array.isArray(this._componentfiles) && this._componentfiles.length > 0 && !this._componentfiles.find((key) => key === this.headerForm.value['fileName'])) {
       setTimeout(() => this.patchForm(this.headerForm, {fileName: this._componentfiles[0].name}));
     }
-  };
+  }
 
   @Input() componentstr = (ngProbeData: INgProbeData, isInit: boolean = false) => {
     // console.log('componentstr')
@@ -222,15 +225,16 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
       StoreService.patchStore(UtilityService.extractStoreData(this));
     });
 
-
-    const className = UtilityService.getClickedSideBarIcon(event);
-    switch (className) {
-      case 'vs-code-grey' : {
+    debugger;
+    const dataCyVal: EDataCy = UtilityService.getDataCyVal(event);
+    switch (dataCyVal) {
+      case EDataCy.sidebar_ide : {
         const path = this.getFilePathByName(this._componentfiles, this.headerForm.get('fileName').value);
+        console.log("=====================================");
         this.openInIde$.emit({pathToOpen: path});
         break;
       }
-      case 'fa-search' : {
+      case EDataCy.sidebar_search : {
         event.stopPropagation();
         setTimeout(() => {
           /*todo: hack...issues with clickoutside*/
@@ -240,43 +244,16 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
         });
         break;
       }
-      case 'fa-save' : {
-        const codeText = this.appEditorComponent.codemirror.getValue();
-        this.codeData = codeText;
-        const path = this.getFilePathByName(this._componentfiles, this.headerForm.get('fileName').value);
-        this.file_save_start$.emit({fileContent: codeText, pathToOpen: path});
-        break;
-      }
-      case 'fa-repeat' : {
+      case EDataCy.sidebar_refresh : {
         this.getSelectedComponentFiles$.emit();
         this.getHoveredComponentData$.emit();
         break;
       }
-      case 'fa-terminal' : {
+      case EDataCy.sidebar_log : {
         this.logCurrentData();
         break;
       }
-      case 'fa-angle-left' : {
-        this.left = '0';
-        this.right = 'auto';
-        break;
-      }
-      case 'fa-angle-right' : {
-        this.left = 'auto';
-        this.right = '0';
-        break;
-      }
-      case 'fa-angle-down' : {
-        this.top = 'auto';
-        this.bottom = '0';
-        break;
-      }
-      case 'fa-angle-up' : {
-        this.top = '0';
-        this.bottom = 'auto';
-        break;
-      }
-      case 'fa-expand' : {
+      case EDataCy.header_toggle_expand : {
         this.left = '15vw';
         this.top = '15vh';
         this.right = '0';
@@ -286,32 +263,21 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
         break;
       }
 
-      case 'fa-power-off' : {
+      case EDataCy.sidebar_off : {
         this.shutDown$.emit();
         break;
       }
-      case 'fa-angle-double-right' : {
+      case EDataCy.sidebar_unfold : {
         this.shouldFoldCode = false;
         EventService.foldCodeInCodemirror$.emit(this.shouldFoldCode);
         break;
       }
-      case 'fa-angle-double-down' : {
+      case EDataCy.sidebar_fold : {
         this.shouldFoldCode = true;
         EventService.foldCodeInCodemirror$.emit(this.shouldFoldCode);
         break;
       }
-      // case 'fa-file' : {
-      //   this.activeHeaderTab = EHeaderFormDataKeys.fileName;
-      //   this.headerDataChangedHandler({fileName: this.headerFormData.fileName});
-      //   break;
-      // }
-      // case 'fa-code' : {
-      //
-      //   this.headerDataChangedHandler({key: this.headerFormData.key});
-      //   this.activeHeaderTab = EHeaderFormDataKeys.key;
-      //   break;
-      // }
-      case 'fa-compress' : {
+      case EDataCy.header_toggle_reset : {
 
         this.left = '50vw';
         this.top = '50vh';
@@ -320,29 +286,21 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
         this.expand = false;
         break;
       }
-      case 'fa-window-minimize' : {
+      case EDataCy.app_minimize : {
         this.minimize = true;
         break;
       }
 
       /*menu items*/
-      case 'menu__item-html' : {
-        this.openInIde(this._coords.componentName, 'html', this._coords.componentNode);
-        break;
-      }
-      case 'menu__item-ts' : {
+      case EDataCy.menu_ts : {
         this.openInIde(this._coords.componentName, 'ts', this._coords.componentNode);
         break;
       }
-      case 'menu__item-data' : {
+      case EDataCy.menu_show_data : {
 
         this.getSelectedComponentFiles$.emit();
         this.getHoveredComponentData$.emit();
         this.minimize = false;
-        break;
-      }
-      case 'menu__item-ide' : {
-        alert('ide');
         break;
       }
     }

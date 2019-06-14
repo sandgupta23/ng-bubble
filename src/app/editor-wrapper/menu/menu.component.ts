@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {EDataCy} from '../../data-cy';
 
 @Component({
   selector: 'jsb-menu',
@@ -7,6 +8,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
+  myEDataCy = EDataCy;
   @Output() showTooltip$ = new EventEmitter();
   @Output() action$ = new EventEmitter();
   @Input() set coords(val: {top: string, left: string}) {

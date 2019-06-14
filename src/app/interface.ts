@@ -29,3 +29,12 @@ export interface IDependency {
   name: string;
   decorators: any[];
 }
+
+export interface ICoords {
+  top: string;
+  left: string;
+  componentName: string;
+  tagName: string;
+  componentTagName: string;
+  componentNode?: HTMLElement;
+}

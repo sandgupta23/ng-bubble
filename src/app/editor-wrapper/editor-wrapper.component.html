@@ -6,7 +6,9 @@
           (dblclick)="$event.stopPropagation()"
           (mouseover)="$event.stopPropagation()"
           (action$)="miscEventHandler($event)"
-          (showTooltip$)="showTooltip = $event"></jsb-menu>
+          (showTooltip$)="showTooltip = $event"
+          [attr.data-cy]="myDataCy.menu"
+></jsb-menu>
 
 <div class="jsb-editor-wrapper"
      *ngIf="!minimize"
@@ -14,11 +16,16 @@
      (click)="hideSearchPanel(); $event.stopPropagation()"
      (scroll)="$event.stopPropagation()"
      (wheel)="$event.stopPropagation()"
+     [attr.data-cy]="myDataCy.editor_wrapper"
      [ngStyle]="{'top': top,left:left, right:right, bottom:bottom}">
-  <div *ngIf="_status && _status.connection === false" class="server-disconnect-banner">
+  <div *ngIf="_status && _status.connection === false"
+       [attr.data-cy]="myDataCy.server_disconnect_banner"
+       class="server-disconnect-banner">
     SERVER NOT CONNECTED
   </div>
-  <div *ngIf="!fileData && !codeData && threeSecPassed" class="banner">
+  <div *ngIf="!fileData && !codeData && threeSecPassed"
+       [attr.data-cy]="myDataCy.no_data_banner"
+       class="banner">
     <h1 class="heading">No Data</h1>
     <p class="description">please <strong>shift + hover</strong>
       or <strong>double-click</strong> any angular component to begin</p>
@@ -45,6 +52,7 @@
     [expand]="expand"
     [activeTab]="activeHeaderTab"
     (action$)="miscEventHandler($event)"
+    [attr.data-cy]="myDataCy.editor_wrapper_header"
     (headerDataChanged$)="headerDataChangedHandler($event)"></jsb-editor-header>
 
   <div class="jsb-editor-wrapper-body" #editorWrapperBody *ngIf="!minimize">
@@ -55,6 +63,7 @@
                         [isLoading]="isLoading"
                         [isConnected]="_status?.connection"
                         [shouldFoldCode]="shouldFoldCode"
+                        [attr.data-cy]="myDataCy.editor_sidebar"
                         [activeHeaderTab]="activeHeaderTab"></jsb-editor-sidebar>
     <!--END: side bar-->
 
@@ -68,6 +77,7 @@
          (resizeEnd)="onResizeEnd($event, editorLeft, editorRight, editorWrapperBody)"
          [resizeCursorPrecision]="5">
       <jsb-editor
+        [attr.data-cy]="myDataCy.editor_file"
         class="file-editor"
         [level]="headerFormData.key==='All'?3:6"
         [codeText]="fileData"
@@ -81,17 +91,19 @@
     <!--START: right editor/json-viewer-->
     <div #editorRight id="data-editor-wrapper">
       <ngx-json-viewer
+        [attr.data-cy]="myDataCy.editor_json_viewer"
         *ngIf="!headerForm.get('editorMode').value"
         class="jsb-json-viewer" (click)="test()" [json]="codeData|objectByProbablePath:keySearchKeyword|SortObject"
         [expanded]="!shouldFoldCode"></ngx-json-viewer>
       <jsb-editor *ngIf="headerForm.get('editorMode').value"
+                  [attr.data-cy]="myDataCy.editor_object"
                   [level]="headerFormData.key==='All'?6:6"
                   [codeText]="codeData|objectByProbablePath:keySearchKeyword"
                   [shouldFoldCode]="false"></jsb-editor>
     </div>
     <!--END: right editor/json-viewer-->
 
-    <div [hidden]="!showSearchPanel">
+    <div [hidden]="!showSearchPanel" [attr.data-cy]="myDataCy.search_panel">
       <div class="file-search-panel">
         <jsb-file-search-panel
           (click)="$event.stopPropagation()"
@@ -109,5 +121,6 @@
   *ngIf="minimize"
   [isLoading]="isLoading"
   (maximize$)="maximize($event)"
+  [attr.data-cy]="myDataCy.app_minimize"
 ></app-minimize-placeholder>
 <!--END: Minimize placeholder-->
