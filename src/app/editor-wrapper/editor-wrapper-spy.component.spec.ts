@@ -32,47 +32,13 @@ import {PageSpec} from '../testing-utils1/page.spec';
 import {checkSpyOnClick} from '../testing-utils1/utility.spec';
 import {EDataCy} from '../data-cy';
 import {FakeDataSpec} from '../testing-utils1/fake-data.spec';
+import {configureEditorWrapper} from './editor-wrapper-config.spec';
 
-fdescribe('EditorWrapperComponent existence', () => {
+fdescribe('EditorWrapperComponent spy', () => {
   // let component: EditorWrapperComponent;
   let fixture: ComponentFixture<EditorWrapperComponent>;
   let page;
-  configure({
-    declarations: [
-      AppComponent,
-      EditorWrapperComponent,
-      JsbEditorComponent,
-      JsbEditorSidebarComponent,
-      EditorHeaderComponent,
-      JsonParsePipe,
-      GetObjectKeyPipe,
-      FileSearchPanelComponent,
-      ImageByExtensionPipe,
-      TestComponent,
-      MenuComponent,
-      ObjectTrayComponent,
-      ObjectKeyComponent,
-      ObjectDetailComponent,
-      ObjectByPathPipe,
-      JsConsoleComponent,
-      DataTypePipe,
-      ObjectByProbablePathPipe,
-      SortObjectPipe,
-      ChangedPrefixComponent,
-      MinimizePlaceholderComponent,
-      JsbEditorSidebarComponent,
-      EditorHeaderComponent,
-    ],
-    imports: [
-      AppRoutingModule,
-      FormsModule,
-      ReactiveFormsModule,
-      ClickOutsideModule,
-      ResizableModule,
-      NgxJsonViewerModule,
-      HttpClientModule
-    ],
-  });
+  configureEditorWrapper();
   const oldResetTestingModule = TestBed.resetTestingModule;
 
   beforeEach(() => {
@@ -87,20 +53,20 @@ fdescribe('EditorWrapperComponent existence', () => {
     }
   });
 
-  fit('should call logCurrentData method when console_log(sidebar) is clicked', fakeAsync(() => {
+  it('should call logCurrentData method when console_log(sidebar) is clicked', fakeAsync(() => {
     fixture.componentInstance.minimize = false;
     fixture.detectChanges();
     const source = EDataCy.sidebar_log;
     checkSpyOnClick(fixture, page, source, 'logCurrentData');
   }));
-  fit('should call shutDown$.emit method when console_log(sidebar) is clicked', fakeAsync(() => {
+  it('should call shutDown$.emit method when console_log(sidebar) is clicked', fakeAsync(() => {
     fixture.componentInstance.minimize = false;
     fixture.detectChanges();
     const source = EDataCy.sidebar_off;
     checkSpyOnClick(fixture, page, source, 'shutDown$.emit');
   }));
 
-  fit(`should call openInIde$.emit method when ${EDataCy.sidebar_ide} is clicked`, fakeAsync(() => {
+  it(`should call openInIde$.emit method when ${EDataCy.sidebar_ide} is clicked`, fakeAsync(() => {
     fixture.componentInstance.minimize = false;
     fixture.componentInstance._status = {connection: true};
     fixture.componentInstance.isLoading = false;

@@ -4,6 +4,10 @@ export function checkExistenceOnClick(fixture, page, source, target, visiblility
   fixture.detectChanges();
   const attr = source;
   const el = page.queryAllBody(`[data-cy="${attr}"]`);
+  if(!el){
+    console.log(fixture.componentInstance);
+  }
+  debugger;
   el.click();
   flushMicrotasks();
   fixture.detectChanges();
@@ -17,7 +21,7 @@ export function checkExistenceOnClick(fixture, page, source, target, visiblility
     console.log(page.queryAllBody(`[data-cy="${attr1}"]`));
     expect(page.queryAllBody(`[data-cy="${attr1}"]`)).toBeFalsy();
   } else if (attribute) {
-    page.queryAllBody(`[data-cy="${attr}"]`).hasAttribute('hidden');
+    expect(page.queryAllBody(`[data-cy="${attr1}"]`).hasAttribute(attribute)).toBeTruthy();
   }
   flush();
 }

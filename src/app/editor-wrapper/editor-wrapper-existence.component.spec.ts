@@ -31,47 +31,13 @@ import {configure} from '../testing-utils1/configure.spec';
 import {FakeDataSpec} from '../testing-utils1/fake-data.spec';
 import {PageSpec} from '../testing-utils1/page.spec';
 import {EDataCy} from '../data-cy';
+import {configureEditorWrapper} from './editor-wrapper-config.spec';
 
-describe('EditorWrapperComponent existence', () => {
+fdescribe('EditorWrapperComponent existence', () => {
   // let component: EditorWrapperComponent;
   let fixture: ComponentFixture<EditorWrapperComponent>;
   let page;
-  configure({
-    declarations: [
-      AppComponent,
-      EditorWrapperComponent,
-      JsbEditorComponent,
-      JsbEditorSidebarComponent,
-      EditorHeaderComponent,
-      JsonParsePipe,
-      GetObjectKeyPipe,
-      FileSearchPanelComponent,
-      ImageByExtensionPipe,
-      TestComponent,
-      MenuComponent,
-      ObjectTrayComponent,
-      ObjectKeyComponent,
-      ObjectDetailComponent,
-      ObjectByPathPipe,
-      JsConsoleComponent,
-      DataTypePipe,
-      ObjectByProbablePathPipe,
-      SortObjectPipe,
-      ChangedPrefixComponent,
-      MinimizePlaceholderComponent,
-      JsbEditorSidebarComponent,
-      EditorHeaderComponent,
-    ],
-    imports: [
-      AppRoutingModule,
-      FormsModule,
-      ReactiveFormsModule,
-      ClickOutsideModule,
-      ResizableModule,
-      NgxJsonViewerModule,
-      HttpClientModule
-    ],
-  });
+  configureEditorWrapper();
   const oldResetTestingModule = TestBed.resetTestingModule;
 
   beforeEach(() => {

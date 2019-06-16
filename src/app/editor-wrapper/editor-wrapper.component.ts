@@ -225,7 +225,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
       StoreService.patchStore(UtilityService.extractStoreData(this));
     });
 
-    debugger;
+
     const dataCyVal: EDataCy = UtilityService.getDataCyVal(event);
     switch (dataCyVal) {
       case EDataCy.sidebar_ide : {
@@ -286,7 +286,7 @@ export class EditorWrapperComponent implements OnInit, AfterViewInit, DoCheck {
         this.expand = false;
         break;
       }
-      case EDataCy.app_minimize : {
+      case EDataCy.header_toggle_minimize : {
         this.minimize = true;
         break;
       }

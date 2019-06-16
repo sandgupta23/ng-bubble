@@ -31,49 +31,15 @@ import {configure} from '../testing-utils1/configure.spec';
 import {PageSpec} from '../testing-utils1/page.spec';
 import {checkExistenceOnClick} from '../testing-utils1/utility.spec';
 import {EDataCy} from '../data-cy';
+import {configureEditorWrapper} from './editor-wrapper-config.spec';
 
-describe('EditorWrapperComponent functional', () => {
+fdescribe('EditorWrapperComponent functional', () => {
   // let component: EditorWrapperComponent;
   let fixture: ComponentFixture<EditorWrapperComponent>;
   let page;
-  configure({
-    declarations: [
-      AppComponent,
-      EditorWrapperComponent,
-      JsbEditorComponent,
-      JsbEditorSidebarComponent,
-      EditorHeaderComponent,
-      JsonParsePipe,
-      GetObjectKeyPipe,
-      FileSearchPanelComponent,
-      ImageByExtensionPipe,
-      TestComponent,
-      MenuComponent,
-      ObjectTrayComponent,
-      ObjectKeyComponent,
-      ObjectDetailComponent,
-      ObjectByPathPipe,
-      JsConsoleComponent,
-      DataTypePipe,
-      ObjectByProbablePathPipe,
-      SortObjectPipe,
-      ChangedPrefixComponent,
-      MinimizePlaceholderComponent,
-      JsbEditorSidebarComponent,
-      EditorHeaderComponent,
-    ],
-    imports: [
-      AppRoutingModule,
-      FormsModule,
-      ReactiveFormsModule,
-      ClickOutsideModule,
-      ResizableModule,
-      NgxJsonViewerModule,
-      HttpClientModule
-    ],
-  });
-  const oldResetTestingModule = TestBed.resetTestingModule;
-
+  configureEditorWrapper();
+  // const oldResetTestingModule = TestBed.resetTestingModule;
+  //
   beforeEach(() => {
     fixture = TestBed.createComponent(EditorWrapperComponent);
     page = new PageSpec(fixture);
@@ -90,37 +56,38 @@ describe('EditorWrapperComponent functional', () => {
   it('should minimize editor when minimise button is clicked', fakeAsync(() => {
     fixture.componentInstance.minimize = false;
     const source = EDataCy.header_toggle_minimize;
-    const target = 'minimize';
+    const target = EDataCy.app_minimize;
     checkExistenceOnClick(fixture, page, source, target, {shouldExist: true});
   }));
 
 
   it('should reset window to default when minimize icon is clicked', fakeAsync(() => {
     fixture.componentInstance.minimize = true;
-    const source = 'minimize-placeholder';
-    const target = 'editor-wrapper';
+    const source = EDataCy.app_minimize;
+    const target = EDataCy.editor_wrapper;
     checkExistenceOnClick(fixture, page, source, target, {shouldExist: true});
   }));
 
-  it('should show search panel when search icon (sidebar) is clicked', fakeAsync(() => {
-    fixture.componentInstance.status = {connection: true};
-    const source = EDataCy.sidebar_search;
-    const target = 'search-panel';
-    checkExistenceOnClick(fixture, page, source, target, {shouldExist: true});
-  }));
+  // it('should show search panel when search icon (sidebar) is clicked', fakeAsync(() => {
+  //   fixture.componentInstance.status = {connection: true};
+  //   const source = EDataCy.sidebar_search;
+  //   const target = EDataCy.search_panel;
+  //   checkExistenceOnClick(fixture, page, source, target, {shouldExist: true});
+  // }));
 
-  it('should hide search panel when outside', fakeAsync(() => {
+  it('should hide search panel when outside is clicked', fakeAsync(() => {
     fixture.componentInstance.showSearchPanel = true;
+    fixture.componentInstance.minimize = false; /*if uncommented test fails...*/
     fixture.detectChanges();
-    const source = 'editor-wrapper-header';
-    const target = 'search-panel';
+    const source = EDataCy.editor_wrapper_header;
+    const target = EDataCy.search_panel;
     checkExistenceOnClick(fixture, page, source, target, {attribute: 'hidden'});
   }));
 
   afterAll((
     () => {
-      TestBed.resetTestingModule = oldResetTestingModule;
-      TestBed.resetTestingModule();
+      // TestBed.resetTestingModule = oldResetTestingModule;
+      // TestBed.resetTestingModule();
     }
   ));
 });

@@ -284,7 +284,7 @@ export class ClientService {
     /*TODO: implement it better using retry...are we allowed to use rxjs here??*/
     /*if message is not recieved within 5 sec, re-init connection and send data*/
     // setTimeout(()=>{
-    //   debugger;
+    //
     //   if(!ClientService.messageRecieved){
     //     ClientService.init();
     //     setTimeout(()=>{

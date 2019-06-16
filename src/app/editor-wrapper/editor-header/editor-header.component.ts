@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {IFileData} from '../file-search-panel/file-search-panel.component';
+import {EDataCy} from '../../data-cy';
 
 export enum EHeaderFormDataKeys {
   key= 'key',
@@ -16,7 +17,7 @@ export enum EHeaderFormDataKeys {
 export class EditorHeaderComponent implements OnInit {
 
   subpaths: string[] = [];
-
+  myEDataCy = EDataCy;
   @Input() componentFiles: IFileData[];
   @Input() componentKeys: string[];
   @Input() headerForm: FormGroup;
@@ -24,7 +25,6 @@ export class EditorHeaderComponent implements OnInit {
   @Input() expand = false;
   @Input() activeTab: EHeaderFormDataKeys;
   @Input() set path(val: string) {
-
     if (!val) { this.subpaths = []; }
     this.subpaths = val.split(' ');
   }
