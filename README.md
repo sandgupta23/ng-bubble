@@ -3,8 +3,6 @@
 # ng-bubble
 ng-bubble is a WebComponent that lives in your angular project (via index.html) and help you with debugging.
 
-[![npm version](https://badge.fury.io/js/ng-bubble.svg)](https://badge.fury.io/js/ng-bubble)
-
 
 ## Motivation ([Medium link](https://medium.com/@sandeepkgupta007/introducing-ng-bubble-your-angular-companion-f25dda56492))
 Motivations behind ng-bubble are two-fold:
