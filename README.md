@@ -1,3 +1,6 @@
+<img src="https://github.com/goodmite/ng-bubble/blob/master/public/assets/imgs/ngbubbleIntroductionvideo.gif?raw=true">
+
+
 [![npm version](https://badge.fury.io/js/ng-bubble.svg)](https://badge.fury.io/js/ng-bubble)
 
 # ng-bubble
