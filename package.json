@@ -68,7 +68,7 @@
     "angular-resizable-element": "^3.2.4",
     "auto-changelog": "^1.13.0",
     "codelyzer": "^5.1.0",
-    "codemirror": "^5.47.0",
+    "codemirror": "^5.58.2",
     "concat": "^1.0.3",
     "concurrently": "^4.1.0",
     "core-js": "^3.1.3",
